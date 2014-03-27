@@ -14,6 +14,9 @@ class rtbCustomPostTypes {
 		// Call when plugin is initialized on every page load
 		add_action( 'init', array( $this, 'load_cpts' ) );
 
+		// Register new post status
+		add_action( 'init', array( $this, 'register_post_status' ) );
+
 	}
 
 	/**
@@ -61,6 +64,38 @@ class rtbCustomPostTypes {
 
 		// Add an action so addons can hook in after the post type is registered
 		do_action( 'rtb_booking_post_register' );
+
+	}
+
+	/**
+	 * Register custom post status
+	 * @since 0.0.1
+	 */
+	public function register_post_status() {
+
+		register_post_status(
+			'confirmed',
+			array(
+				'label'                     => _x( 'Confirmed', 'Confirmed bookings', RTB_TEXTDOMAIN ),
+				'public'                    => false,
+				'exclude_from_search'       => true,
+				'show_in_admin_all_list'    => true,
+				'show_in_admin_status_list' => true,
+				'label_count'               => _n_noop( 'Confirmed <span class="count">(%s)</span>', 'Confirmed <span class="count">(%s)</span>', RTB_TEXTDOMAIN )
+			)
+		);
+
+		register_post_status(
+			'closed',
+			array(
+				'label'                     => _x( 'Closed', 'Closed bookings', RTB_TEXTDOMAIN ),
+				'public'                    => false,
+				'exclude_from_search'       => true,
+				'show_in_admin_all_list'    => true,
+				'show_in_admin_status_list' => true,
+				'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>', RTB_TEXTDOMAIN )
+			)
+		);
 
 	}
 
