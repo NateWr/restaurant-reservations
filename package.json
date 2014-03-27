@@ -1,0 +1,19 @@
+{
+  "name": "restaurant-table-bookings",
+  "description": "Accept online table bookings and reservations for your restaurant.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Theme of the Crop",
+    "url": "http://themeofthecrop.com"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-sync": "~0.0.5",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.4.3"
+  }
+}
