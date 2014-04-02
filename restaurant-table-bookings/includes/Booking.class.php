@@ -116,14 +116,9 @@ class rtbBooking {
 			return false;
 		}
 
-		echo 'booking(';
-
 		if ( $this->insert_post_data() === false ) {
-			echo 'false)';
 			return false;
 		}
-
-		echo 'true)';
 
 		do_action( 'rtb_insert_booking', $this );
 	}
