@@ -24,7 +24,7 @@
  */
 if ( ! defined( 'ABSPATH' ) )
 	exit;
-
+	
 if ( !class_exists( 'rtbInit' ) ) {
 class rtbInit {
 
@@ -40,18 +40,37 @@ class rtbInit {
 		define( 'RTB_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
 		define( 'RTB_BOOKING_POST_TYPE', 'rtb-booking' );
 		define( 'RTB_BOOKING_POST_TYPE_SLUG', 'booking' );
-		define( 'RTB_BOOKING_ARCHIVE_SLUG', 'bookings' );
 
 		// Initialize the plugin
 		add_action( 'init', array( $this, 'load_config' ) );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		// Load custom post types
-		require_once( 'custom-post-types.php' );
+		require_once( RTB_PLUGIN_DIR . '/includes/CustomPostTypes.class.php' );
 		$this->cpts = new rtbCustomPostTypes();
+
+		// Add the admin menu
+		add_action( 'admin_menu', array( $this, 'add_menu_page' ) );
 
 		// Flush the rewrite rules for the custom post types
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
+
+		// Load admin assets
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+
+		// Handle booking request submission
+		// @todo this should only be called when a page is rendered with the
+		//	booking submission response shortcode, or called directly in the
+		//	admin interface. Eventually this will be split off to its own class
+		add_action( 'init', array( $this, 'make_booking_request' ) );
+
+		// Handle notifications
+		require_once( RTB_PLUGIN_DIR . '/includes/Notifications.class.php' );
+		$this->notifications = new rtbNotifications();
+
+		// Development tool
+		// @todo maybe split off this sort of thing to another file
+		add_action( 'init', array( $this, 'dev_add_bookings_data' ) );
 
 	}
 
@@ -79,6 +98,146 @@ class rtbInit {
 		load_plugin_textdomain( RTB_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . "/languages" );
 	}
 
+	/**
+	 * Add the top-level admin menu page
+	 * @since 0.0.1
+	 */
+	public function add_menu_page() {
+
+		add_menu_page(
+			_x( 'Bookings', 'Title of admin page that lists bookings', RTB_TEXTDOMAIN ),
+			_x( 'Bookings', 'Title of bookings admin menu item', RTB_TEXTDOMAIN ),
+			'edit_others_posts', // @todo this should be a custom capability attached to a custom role maybe?
+			'rtb-bookings',
+			array( $this, 'show_admin_bookings_page' ),
+			'dashicons-calendar',
+			'26.2987'
+		);
+
+	}
+
+	/**
+	 * Display the admin bookings page
+	 * @since 0.0.1
+	 */
+	public function show_admin_bookings_page() {
+
+		require_once( RTB_PLUGIN_DIR . '/includes/WP_List_Table.BookingsTable.class.php' );
+		$bookings_table = new rtbBookingsTable();
+		$bookings_table->prepare_items();
+		?>
+
+		<div class="wrap">
+			<h2><?php _e( 'Restaurant Bookings', RTB_TEXTDOMAIN ); ?></h2>
+			<?php do_action( 'rtb_bookings_table_top' ); ?>
+			<form id="rtb-bookings-table" method="POST" action="">
+				<input type="hidden" name="post_type" value="<?php echo RTB_BOOKING_POST_TYPE; ?>" />
+				<input type="hidden" name="page" value="rtb-bookings">
+
+				<?php $bookings_table->views(); ?>
+				<?php $bookings_table->advanced_filters(); ?>
+				<?php $bookings_table->display(); ?>
+			</form>
+			<?php do_action( 'rtb_bookings_table_btm' ); ?>
+		</div>
+
+		<?php
+	}
+
+	/**
+	 * Add a new booking post type when user submits the form
+	 * @since 0.0.1
+	 * @todo maybe this should be added as a part of a shortcode that is included
+	 *	on the booking confirmation page? ie - when this shortcode is executed,
+	 *	call this function to check for valid booking request.
+	 * @todo add support for nonce
+	 */
+	public function make_booking_request() {
+
+		if ( empty( $_POST['action'] ) || $_POST['action'] !== 'booking_request' ) {
+			return null;
+		}
+
+		require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
+		$booking = new rtbBooking();
+		if ( $booking->insert_booking() === true ) {
+			// @todo success
+		} else {
+			// @todo failure
+		}
+	}
+
+	/**
+	 * Development tool to populate the database with lots of bookings
+	 * @since 0.0.1
+	 */
+	public function dev_add_bookings_data() {
+
+		if ( !WP_DEBUG || !isset( $_GET['rtb_devmode'] ) || $_GET['rtb_devmode'] !== 'add_bookings' ) {
+			return;
+		}
+
+		$lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam feugiat consequat diam, in tincidunt purus convallis vel. Morbi sed dapibus diam. Vestibulum laoreet mi at neque varius consequat. Nam non mi erat. Donec nec semper velit. Maecenas id tortor orci. Aenean viverra suscipit urna, egestas adipiscing felis varius vitae. Curabitur et accumsan turpis. Suspendisse sed risus ac mi lobortis aliquam vel vel dolor. Nulla facilisi. In feugiat tempus massa, sed pulvinar neque bibendum ut. Nullam nibh eros, consectetur et orci non, condimentum tempor nunc. Maecenas sit amet libero sed diam pulvinar iaculis eget vitae odio. Quisque ac luctus metus, sit amet fringilla magna. Aliquam commodo odio eu eros imperdiet, ut auctor odio faucibus.';
+		$words = explode( ' ', str_replace( array( ',', '.'), '', $lorem ) );
+		for ( $i = 0; $i < 100; $i++ ) {
+
+			shuffle( $words );
+
+			$phone = '(';
+			for( $p = 0; $p < 3; $p++ ) {
+				$phone .= rand(0,9);
+			}
+			$phone .= ') ';
+			for( $p = 0; $p < 3; $p++ ) {
+				$phone .= rand(0,9);
+			}
+			$phone .= '-';
+			for( $p = 0; $p < 4; $p++ ) {
+				$phone .= rand(0,9);
+			}
+
+			$status = rand(0, 100) > 30 ? 'confirmed' : 'pending';
+			$status = rand(0, 100) > 90 ? 'closed' : $status;
+
+			// Get the date formatted for MySQL
+			$date = new DateTime( date('Y-m-d H:i:s', current_time() + rand( 0, 7776000 ) ) ); // 90 days in advance
+
+			$id = wp_insert_post(
+				array(
+					'post_type'		=> RTB_BOOKING_POST_TYPE,
+					'post_title'	=> $words[0] . ' ' . $words[1],
+					'post_content'	=> rand(0,10) < 3 ? $lorem : '',
+					'post_date'		=> $date->format( 'Y-m-d H:i:s' ),
+					'post_status'	=> $status,
+				)
+			);
+
+			$meta = array(
+				'party' => rand(1, 20),
+				'email' => $words[2] . '@email.com',
+				'phone' => $phone,
+				'date_submission' 	=> current_time(), // keep track of when it was submitted for logs
+			);
+
+			$meta = apply_filters( 'rtb_sanitize_post_metadata_devmode', $meta, $id );
+
+			update_post_meta( $id, 'rtb', $meta );
+
+		}
+	}
+
+	/**
+	 * Enqueue the admin-only CSS and Javascript
+	 * @since 0.0.1
+	 */
+	public function enqueue_admin_assets() {
+
+		$screen = get_current_screen();
+		if ( $screen->base == 'toplevel_page_rtb-bookings' ) {
+			wp_enqueue_style( 'rtb-admin', RTB_PLUGIN_URL . '/assets/css/admin.css' );
+			wp_enqueue_script( 'rtb-admin', RTB_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '', true );
+		}
+	}
 }
 } // endif;
 

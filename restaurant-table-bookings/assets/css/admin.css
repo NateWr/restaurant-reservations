@@ -1,0 +1,53 @@
+/* CSS Stylesheet for the admin interface for Restaurant Table Bookings */
+
+.clearfix:before,
+.clearfix:after { /* thanks bootstrap */
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/* Bookings Table */
+#rtb-bookings-table .subsubsub {
+	float: right;
+}
+
+#rtb-bookings-table  .subsubsub .trash a {
+	color: #a00;
+}
+
+#rtb-bookings-table  .subsubsub .trash a:hover {
+	color: red;
+}
+
+#rtb-filters {
+	float: left;
+}
+
+#rtb-filters  .subsubsub {
+	margin-bottom: 0.5em;
+	float: none;
+}
+
+#rtb-filters .date-filters {
+	clear: both;
+	padding: 1em;
+	margin: 1em 0 2em;
+	background: #fff;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
+#rtb-filters .date-filters .datepicker {
+	max-width: 10em;
+}
+
+#rtb-filters .current {
+	font-weight: 600;
+	color: #000;
+}
+
+/* @todo date is hidden with media query. use WP breakpoint but keep date visible */
