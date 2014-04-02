@@ -58,7 +58,7 @@ class rtbBooking {
 
 		$this->ID = $post->ID;
 		$this->name = $post->post_title;
-		$this->date = $this->format_date( $post->post_title );
+		$this->date = $this->format_date( $post->post_date );
 		$this->message = apply_filters( 'the_content', $post->post_content );
 		$this->post_status = $post->post_status;
 
@@ -99,7 +99,7 @@ class rtbBooking {
 	 * @since 0.0.1
 	 */
 	public function format_date( $date ) {
-		$date = mysql2date( get_option( 'date_format' ), $date);
+		$date = mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $date);
 		return apply_filters( 'get_the_date', $date );
 	}
 
