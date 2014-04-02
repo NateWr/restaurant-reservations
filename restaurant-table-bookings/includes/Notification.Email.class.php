@@ -61,7 +61,7 @@ class rtbNotificationEmail extends rtbNotification {
 		$this->set_from_email();
 		$this->set_subject();
 		$this->set_headers();
-		$this->set_message( 'Here is my email message body' );
+		$this->set_message( 'Here is my email message body for ' . $this->target . ' on ' . $this->event );
 		
 		// @todo validate data and return false if invalid
 		return true;
@@ -133,7 +133,7 @@ class rtbNotificationEmail extends rtbNotification {
 	 * @since 0.0.1
 	 */
 	public function send_notification() {
-		print_r($this);
+		wp_mail( $this->to_email, $this->subject, $this->message, $this->headers );
 	}
 }
 } // endif;
