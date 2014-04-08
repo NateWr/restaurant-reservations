@@ -27,7 +27,7 @@ class sapAdminPageSettingToggle_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 	 */
 	public function display_setting() {
 	
-		$input_name = $this->get_input_name( $this->id, $this->page );
+		$input_name = $this->get_input_name();
 
 		?>
 

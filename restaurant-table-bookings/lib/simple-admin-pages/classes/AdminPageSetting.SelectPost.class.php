@@ -40,7 +40,7 @@ class sapAdminPageSettingSelectPost_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 
 
 		?>
 
-			<select name="<?php echo $this->get_input_name( $this->id, $this->page ); ?>" id="<?php echo $this->get_input_name( $this->id, $this->page ); ?>">
+			<select name="<?php echo $this->get_input_name(); ?>" id="<?php echo $this->get_input_name(); ?>">
 
 				<?php if ( $this->blank_option === true ) : ?>
 					<option></option>

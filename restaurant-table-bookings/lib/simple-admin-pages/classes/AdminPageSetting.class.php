@@ -170,8 +170,8 @@ abstract class sapAdminPageSetting_2_0_a_1 {
 	 * "page[option_name]"
 	 * @since 1.2
 	 */
-	public function get_input_name( $option_name, $page ) {
-		return esc_attr( $page ) . '[' . esc_attr( $option_name ) . ']';
+	public function get_input_name() {
+		return esc_attr( $this->page ) . '[' . esc_attr( $this->id ) . ']';
 	}
 
 	/**

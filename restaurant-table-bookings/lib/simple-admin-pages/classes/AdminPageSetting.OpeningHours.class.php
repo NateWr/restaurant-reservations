@@ -111,8 +111,8 @@ class sapAdminPageSettingOpeningHours_2_0_a_1 extends sapAdminPageSetting_2_0_a_
 			<table class="sap-opening-hours">
 				<tr>
 					<td>
-						<input type="hidden" id="sap-opening-hours-day-<?php echo $i; ?>-name" name="<?php echo $this->get_input_name(  $this->id, $this->page  ); ?>[<?php echo $i; ?>][day_name]" value="<?php echo esc_attr( $this->get_day_name( $this->value[$i]['day'] ) ); ?>">
-						<select name="<?php echo $this->get_input_name( $this->id, $this->page ); ?>[<?php echo $i; ?>][day]" id="<?php echo $this->id . '-' . $i; ?>-day" class="sap-opening-hours-day" data-target="#sap-opening-hours-day-<?php echo $i; ?>-name">
+						<input type="hidden" id="sap-opening-hours-day-<?php echo $i; ?>-name" name="<?php echo $this->get_input_name(); ?>[<?php echo $i; ?>][day_name]" value="<?php echo esc_attr( $this->get_day_name( $this->value[$i]['day'] ) ); ?>">
+						<select name="<?php echo $this->get_input_name(); ?>[<?php echo $i; ?>][day]" id="<?php echo $this->id . '-' . $i; ?>-day" class="sap-opening-hours-day" data-target="#sap-opening-hours-day-<?php echo $i; ?>-name">
 							<option value=""></option>
 
 							<?php foreach ( $this->weekdays as $id => $name ) : ?>
@@ -126,7 +126,7 @@ class sapAdminPageSettingOpeningHours_2_0_a_1 extends sapAdminPageSetting_2_0_a_
 						</select>
 					</td>
 					<td>
-						<input name="<?php echo $this->get_input_name( $this->id, $this->page ); ?>[<?php echo $i; ?>][hours]" type="text" id="<?php echo $this->id . '-' . $i; ?>-hours" value="<?php echo $this->value[$i]['hours']; ?>" class="regular-text sap-opening-hours-hours" />
+						<input name="<?php echo $this->get_input_name(); ?>[<?php echo $i; ?>][hours]" type="text" id="<?php echo $this->id . '-' . $i; ?>-hours" value="<?php echo $this->value[$i]['hours']; ?>" class="regular-text sap-opening-hours-hours" />
 					</td>
 				</tr>
 			</table>
