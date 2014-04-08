@@ -1,0 +1,34 @@
+/*
+ * CSS Stylesheet for Simple Admin Pages library
+ *
+ * This stylesheet formats the display components placed into the WordPress
+ * admin menu. It attempts to replicate WordPress's existing admin menu style.
+ *
+ * @package Simple Admin Pages
+*/
+
+/**
+ * Textarea
+ */
+textarea.small-text {
+	width: 25em;
+	height: 10em;
+}
+textarea.large-text {
+	height: 30em;
+}
+
+/*
+ * Opening Hours
+ */
+.sap-opening-hours td {
+	padding-left: 0;
+	padding-right: 1em;
+	padding-top: 0;
+}
+input.sap-opening-hours-day {
+	width: 15em;
+}
+input.sap-opening-hours-hours {
+	width: 9em;
+}

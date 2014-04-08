@@ -1,0 +1,215 @@
+<?php
+
+/**
+ * Register, display and save a settings page in the WordPress admin menu.
+ *
+ * @since 1.0
+ * @package Simple Admin Pages
+ */
+
+class sapAdminPage_2_0_a_1 {
+
+	public $title;
+	public $menu_title;
+	public $description; // optional description for this page
+	public $capability; // user permissions needed to edit this panel
+	public $id; // id of this page
+	public $sections = array(); // array of sections to display on this page
+	public $show_button = true; // whether or not to show the Save Changes button
+
+	public $setup_function = 'add_options_page'; // WP function to register the page
+
+
+	/**
+	 * Initialize the page
+	 * @since 1.0
+	 */
+	public function __construct( $args ) {
+
+		// Parse the values passed
+		$this->parse_args( $args );
+
+	}
+
+	/**
+	 * Parse the arguments passed in the construction and assign them to
+	 * internal variables.
+	 * @since 1.1
+	 */
+	private function parse_args( $args ) {
+		foreach ( $args as $key => $val ) {
+			switch ( $key ) {
+
+				case 'id' :
+					$this->{$key} = esc_attr( $val );
+
+				default :
+					$this->{$key} = $val;
+
+			}
+		}
+	}
+
+	/**
+	 * Add the page to the appropriate menu slot.
+	 * @note The default will be to post to the options page, but other classes
+	 *			should override this function.
+	 * @since 1.0
+	 */
+	public function add_admin_menu() {
+		call_user_func( $this->setup_function, $this->title, $this->menu_title, $this->capability, $this->id, array( $this, 'display_admin_menu' ) );
+	}
+
+	/**
+	 * Add a section to the page
+	 * @since 1.0
+	 */
+	public function add_section( $section ) {
+
+		if ( !$section ) {
+			return;
+		}
+
+		$this->sections[ $section->id ] = $section;
+
+	}
+
+	/**
+	 * Register the settings and sanitization callbacks for each setting
+	 * @since 1.0
+	 */
+	public function register_admin_menu() {
+
+		foreach ( $this->sections as $section ) {
+			$section->add_settings_section();
+
+			foreach ( $section->settings as $setting ) {
+				$setting->add_settings_field( $section->id );
+			}
+		}
+
+		register_setting( $this->id, $this->id, array( $this, 'sanitize_callback' ) );
+	}
+
+	/**
+	 * Loop through the settings and sanitize the data
+	 * @since 2.0
+	 */
+	public function sanitize_callback( $value ) {
+
+		if ( empty( $_POST['_wp_http_referer'] ) ) {
+			return $value;
+		}
+
+		// Get the current page/tab so we only update those settings
+		parse_str( $_POST['_wp_http_referer'], $referrer );
+		$current_page = $this->get_current_page( $referrer );
+
+		// Use a new empty value so only values for settings that were added are
+		// passed to the db.
+		$new_value = array();
+
+		foreach ( $this->sections as $section ) {
+			foreach ( $section->settings as $setting ) {
+				if ( $setting->tab == $current_page ) {
+					$setting_value = isset( $value[$setting->id] ) ? $value[$setting->id] : '';
+					$new_value[$setting->id] = $setting->sanitize_callback_wrapper( $setting_value );
+				}
+			}
+		}
+
+		// Pull in the existing values so we never overwrite values that were
+		// on a different tab
+		$old_value = get_option( $this->id );
+
+		if ( is_array( $old_value ) ) {
+			return array_merge( $old_value, $new_value );
+		} else {
+			return $new_value;
+		}
+
+	}
+
+	/**
+	 * Get the current page/tab being viewed
+	 * @since 2.0
+	 */
+	public function get_current_page( $request ) {
+
+		if ( !empty( $request['tab'] ) ) {
+			return $request['tab'];
+		} elseif ( !empty( $this->default_tab ) ) {
+			return $this->default_tab;
+		} else {
+			return $this->id;
+		}
+
+	}
+
+	/**
+	 * Output the settings passed to this page
+	 * @since 1.0
+	 */
+	public function display_admin_menu() {
+
+		if ( !$this->title && !count( $this->settings ) ) {
+			return;
+		}
+
+		$current_page = $this->get_current_page( $_GET );
+
+		?>
+
+			<div class="wrap">
+
+				<?php $this->display_page_title(); ?>
+
+				<?php if ( isset( $this->default_tab ) ) : ?>
+				<h2 class="nav-tab-wrapper">
+				<?php
+				foreach( $this->sections as $section ) {
+
+					if ( isset( $section->is_tab ) && $section->is_tab === true ) {
+
+						$tab_url = add_query_arg(
+							array(
+								'settings-updated' => false,
+								'tab' => $section->id
+							)
+						);
+
+						$active = $current_page == $section->id ? ' nav-tab-active' : '';
+						echo '<a href="' . esc_url( $tab_url ) . '" title="' . esc_attr( $section->title ) . '" class="nav-tab' . $active . '">';
+							echo esc_html( $section->title );
+						echo '</a>';
+					}
+				}
+				?>
+				</h2>
+				<?php endif; ?>
+
+				<form method="post" action="options.php">
+					<?php settings_fields( $this->id ); ?>
+					<?php do_settings_sections( $current_page ); ?>
+					<?php if ( $this->show_button ) { submit_button(); } ?>
+				 </form>
+			</div>
+
+		<?php
+	}
+
+	/**
+	 * Output the title of the page
+	 * @since 1.0
+	 */
+	public function display_page_title() {
+
+		if ( empty( $this->title ) ) {
+			return;
+		}
+		?>
+			<h2><?php echo $this->title; ?></h2>
+		<?php
+	}
+
+}

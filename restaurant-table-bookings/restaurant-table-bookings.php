@@ -68,6 +68,10 @@ class rtbInit {
 		require_once( RTB_PLUGIN_DIR . '/includes/Notifications.class.php' );
 		$this->notifications = new rtbNotifications();
 
+		// Load settings
+		require_once( RTB_PLUGIN_DIR . '/includes/Settings.class.php' );
+		$this->settings = new rtbSettings();
+
 		// Development tool
 		// @todo maybe split off this sort of thing to another file
 		add_action( 'init', array( $this, 'dev_add_bookings_data' ) );
@@ -229,6 +233,7 @@ class rtbInit {
 	/**
 	 * Enqueue the admin-only CSS and Javascript
 	 * @since 0.0.1
+	 * @todo use jquery date picker styles to blend with WP admin here: http://x-team.github.io/wp-jquery-ui-datepicker-skins/
 	 */
 	public function enqueue_admin_assets() {
 
