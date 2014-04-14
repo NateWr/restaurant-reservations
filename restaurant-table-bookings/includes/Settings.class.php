@@ -90,8 +90,28 @@ class rtbSettings {
 			'rtb-settings',
 			array(
 				'id'            => 'schedule',
-				'title'         => __( 'Schedule', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Booking Schedule', RTB_TEXTDOMAIN ),
 				'is_tab'		=> true,
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'schedule',
+			'scheduler',
+			array(
+				'id'			=> 'schedule-open',
+				'title'			=> __( 'Booking Schedule', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Set up rules to define when visitors can request a booking on your site.', RTB_TEXTDOMAIN ),
+				'weekdays'		=> array(
+					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
+					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', RTB_TEXTDOMAIN ),
+					'wednesday'		=> _x( 'We', 'Wednesday abbreviation', RTB_TEXTDOMAIN ),
+					'thursday'		=> _x( 'Th', 'Thursday abbreviation', RTB_TEXTDOMAIN ),
+					'friday'		=> _x( 'Fr', 'Friday abbreviation', RTB_TEXTDOMAIN ),
+					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', RTB_TEXTDOMAIN ),
+					'sunday'		=> _x( 'Su', 'Sunday abbreviation', RTB_TEXTDOMAIN )
+				)
 			)
 		);
 
