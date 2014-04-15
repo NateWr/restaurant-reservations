@@ -54,6 +54,23 @@ abstract class rtbNotification {
 	 * @since 0.0.1
 	 */
 	abstract public function prepare_notification();
+	
+	/**
+	 * Process a template and insert booking details
+	 * @since 0.0.1
+	 */
+	public function process_template( $message ) {
+	
+		$template_tags = array(
+			'{target}'	=> $this->target,
+			'{event}'	=> $this->event,
+		);
+		
+		$template_tags = apply_filters( 'rtb_notification_template_tags', $template_tags, $this );
+		
+		return str_replace( array_keys( $template_tags ), array_values( $template_tags ), $message );
+	
+	}
 
 	/**
 	 * Send notification
