@@ -57,6 +57,10 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 
 		$value = array();
 
+		if ( empty( $val ) ) {
+			return $value;
+		}
+
 		foreach ( $val as $i => $rule ) {
 
 			if ( !empty( $rule['weekdays'] ) ) {
@@ -391,7 +395,7 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		if ( empty( $values['time']['start'] ) && empty( $values['time']['end'] ) ) {
 			return $this->schedule_summaries['all_day'];
 		}
-		
+
 		if ( empty( $values['time']['start'] ) ) {
 			return $this->schedule_summaries['before'] . ' ' . $values['time']['end'];
 		}
@@ -399,7 +403,7 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		if ( empty( $values['time']['end'] ) ) {
 			return $this->schedule_summaries['after'] . ' ' . $values['time']['start'];
 		}
-		
+
 		return $values['time']['start'] . $this->schedule_summaries['separator'] . $values['time']['end'];
 
 	}
