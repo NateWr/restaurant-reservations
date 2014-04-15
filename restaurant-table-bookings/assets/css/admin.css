@@ -50,4 +50,30 @@
 	color: #000;
 }
 
-/* @todo date is hidden with media query. use WP breakpoint but keep date visible */
+#rtb-bookings-table .column-message .rtb-message-data,
+#rtb-bookings-table .message-row {
+	display: none;
+}
+
+#rtb-bookings-table tr.closed {
+	opacity: 0.7;
+	filter: opacity(alpha=70);
+}
+#rtb-bookings-table tr.closed:hover {
+	opacity: 1;
+	filter: opacity(alpha=100);
+}
+
+#rtb-bookings-table tr.pending .check-column,
+#rtb-bookings-table tr.pending.message-row td {
+	border-left: 4px solid #dd3d36;
+}
+
+
+
+@media screen and (max-width: 782px) {
+
+	#rtb-bookings-table .fixed .column-date {
+		display: table-cell;
+	}
+}

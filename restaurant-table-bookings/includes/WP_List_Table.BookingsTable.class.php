@@ -240,6 +240,21 @@ class rtbBookingsTable extends WP_List_Table {
 	}
 
 	/**
+	 * Generates content for a single row of the table
+	 * @since 0.0.1
+	 */
+	function single_row( $item ) {
+		static $row_class = '';
+		$row_class = ( $row_class == '' ? 'alternate' : '' );
+
+		echo '<tr class="' . esc_attr( $item->post_status );
+		echo $row_class == '' ? '' : ' ' . $row_class;
+		echo '">';
+		$this->single_row_columns( $item );
+		echo '</tr>';
+	}
+
+	/**
 	 * Retrieve the table columns
 	 * @since 0.0.1
 	 */
@@ -294,7 +309,8 @@ class rtbBookingsTable extends WP_List_Table {
 			case 'message' :
 				$value = '';
 				if ( trim( $booking->message ) ) {
-					$value = '<span class="dashicons dashicons-testimonial"></span>';
+					$value = '<a href="#" data-id="message-' . esc_attr( $booking->ID ) . '"><span class="dashicons dashicons-testimonial"></span></a>';
+					$value .= '<div class="rtb-message-data">' . $booking->message . '</div>';
 				}
 				break;
 			case 'status' :
