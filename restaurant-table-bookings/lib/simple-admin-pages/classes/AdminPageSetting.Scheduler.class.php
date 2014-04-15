@@ -162,8 +162,7 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 			?>
 			</div>
 			<div class="sap-add-scheduler">
-				<div class="dashicons dashicons-plus"></div>
-				<a href="#">
+				<a href="#" class="button">
 					<?php _e( 'Add new scheduling rule', SAP_TEXTDOMAIN ); ?>
 				</a>
 			</div>
