@@ -128,26 +128,26 @@ class rtbNotificationEmail extends rtbNotification {
 
 		if ( $this->event == 'new_submission' ) {
 			if ( $this->target == 'user' ) {
-				$template = $settings['template-booking-user'];
+				$template = 'template-booking-user';
 			} elseif ( $this->target == 'admin' ) { // @todo check if admin notifications are enabled
-				$template = 'A new booking has been made'; // @todo allow this to be customized
+				$template = 'template-booking-admin';
 			}
 
 		} elseif ( $this->event == 'pending_to_confirmed' ) {
 			if ( $this->target == 'user' ) {
-				$template = $settings['template-confirmed-user'];
+				$template = 'template-confirmed-user';
 			}
 
 		} elseif ( $this->event == 'pending_to_closed' ) {
 			if ( $this->target == 'user' ) {
-				$template = $settings['template-rejected-user'];
+				$template = 'template-rejected-user';
 			}
 		}
 
 		if ( !isset( $template ) ) {
 			$this->message = '';
 		} else {
-			$this->message = $this->process_template( $template );
+			$this->message = $this->process_template( $this->get_template( $template ) );
 		}
 
 	}

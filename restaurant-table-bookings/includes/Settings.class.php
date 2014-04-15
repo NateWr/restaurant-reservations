@@ -21,6 +21,8 @@ class rtbSettings {
 	 * @sa https://github.com/NateWr/simple-admin-pages
 	 */
 	public function load_settings_panel() {
+	
+		global $rtb_controller;
 
 		require_once( RTB_PLUGIN_DIR . '/lib/simple-admin-pages/simple-admin-pages.php' );
 		$sap = sap_initialize_library(
@@ -185,6 +187,30 @@ class rtbSettings {
 		$sap->add_setting(
 			'rtb-settings',
 			'notifications',
+			'text',
+			array(
+				'id'			=> 'reply-to-name',
+				'title'			=> __( 'Reply-To Name', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The name which should appear in the Reply-To field of a notification email', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $rtb_controller->defaults['reply-to-name'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications',
+			'text',
+			array(
+				'id'			=> 'reply-to-address',
+				'title'			=> __( 'Reply-To Email Address', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The email address which should appear in the Reply-To field of a notification email.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $rtb_controller->defaults['reply-to-address'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications',
 			'toggle',
 			array(
 				'id'			=> 'admin-email-option',
@@ -201,7 +227,7 @@ class rtbSettings {
 				'id'			=> 'admin-email-address',
 				'title'			=> __( 'Admin Email Address', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'The recipient email address where admin notifications should be sent.', RTB_TEXTDOMAIN ),
-				'placeholder'	=> get_option( 'admin_email' ),
+				'placeholder'	=> $rtb_controller->defaults['admin-email-address'],
 			)
 		);
 
@@ -211,42 +237,55 @@ class rtbSettings {
 				'id'            => 'notifications-templates',
 				'title'         => __( 'Email Templates', RTB_TEXTDOMAIN ),
 				'tab'			=> 'notifications',
+				'description'	=> 'Adjust the messages that are emailed to users and admins during the booking process.',
 			)
 		);
 
 		$sap->add_setting(
 			'rtb-settings',
 			'notifications-templates',
-			'textarea',
+			'editor',
+			array(
+				'id'			=> 'template-booking-admin',
+				'title'			=> __( 'Admin Notification', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Enter the email an admin should receive when an initial booking request is made.', RTB_TEXTDOMAIN ),
+				'default'		=> $rtb_controller->defaults['template-booking-admin'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications-templates',
+			'editor',
 			array(
 				'id'			=> 'template-booking-user',
 				'title'			=> __( 'Booking Request Received', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Enter the email a user should receive when they make an initial booking request on your website.', RTB_TEXTDOMAIN ),
-				'size'			=> 'large',
+				'description'	=> __( 'Enter the email a user should receive when they make an initial booking request.', RTB_TEXTDOMAIN ),
+				'default'		=> $rtb_controller->defaults['template-booking-user'],
 			)
 		);
 
 		$sap->add_setting(
 			'rtb-settings',
 			'notifications-templates',
-			'textarea',
+			'editor',
 			array(
 				'id'			=> 'template-confirmed-user',
 				'title'			=> __( 'Booking Request Confirmed', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Enter the email a user should receive when their booking has been confirmed.', RTB_TEXTDOMAIN ),
-				'size'			=> 'large',
+				'default'		=> $rtb_controller->defaults['template-confirmed-user'],
 			)
 		);
 
 		$sap->add_setting(
 			'rtb-settings',
 			'notifications-templates',
-			'textarea',
+			'editor',
 			array(
 				'id'			=> 'template-rejected-user',
 				'title'			=> __( 'Booking Request Rejected', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Enter the email a user should receive when their booking has been rejected.', RTB_TEXTDOMAIN ),
-				'size'			=> 'large',
+				'default'		=> $rtb_controller->defaults['template-rejected-user'],
 			)
 		);
 

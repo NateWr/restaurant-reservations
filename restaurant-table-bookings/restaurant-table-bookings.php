@@ -24,7 +24,7 @@
  */
 if ( ! defined( 'ABSPATH' ) )
 	exit;
-	
+
 if ( !class_exists( 'rtbInit' ) ) {
 class rtbInit {
 
@@ -92,7 +92,89 @@ class rtbInit {
 	 * Load the plugin's configuration settings and default content
 	 * @since 0.0.1
 	 */
-	public function load_config() {	}
+	public function load_config() {
+
+		$this->defaults = array(
+
+			// Email address where admin notifications should be sent
+			'admin-email-address'			=> get_option( 'admin_email' ),
+
+			// Name and email address which should appear in the Reply-To section of notification emails
+			'reply-to-name'					=> get_bloginfo( 'name' ),
+			'reply-to-address'				=> get_option( 'admin_email' ),
+
+			// Email template sent to an admin when a new booking request is made
+			'template-booking-admin'		=> _x( 'A new booking request has been made at {site_name}:
+
+{user_name}
+{party} people
+{date}
+
+{bookings_link}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to the admin when a new booking request is made. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+
+			// Email template sent to a user when a new booking request is made
+			'template-booking-user'		=> _x( 'Thanks {user_name},
+
+Your booking request is <strong>waiting to be confirmed</strong>.
+
+Give us a few moments to make sure that we\'ve got space for you. You will receive another email from us soon. If this request was made outside of our normal working hours, we may not be able to confirm it until we\'re open again.
+
+<strong>Your request details:</strong>
+{user_name}
+{party} people
+{date}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+
+			// Email template sent to a user when a booking request is confirmed
+			'template-confirmed-user'		=> _x( 'Hi {user_name},
+
+Your booking request has been <strong>confirmed</strong>. We look forward to seeing you soon.
+
+<strong>Your booking:</strong>
+{user_name}
+{party} people
+{date}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+
+			// Email template sent to a user when a booking request is rejected
+			'template-rejected-user'		=> _x( 'Hi {user_name},
+
+Sorry, we could not accomodate your booking request. We\'re full or not open at the time you requested:
+
+{user_name}
+{party} people
+{date}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+		);
+
+		$this->defaults = apply_filters( 'rtb_defaults', $this->defaults );
+
+	}
 
 	/**
 	 * Load the plugin textdomain for localistion

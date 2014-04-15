@@ -54,22 +54,47 @@ abstract class rtbNotification {
 	 * @since 0.0.1
 	 */
 	abstract public function prepare_notification();
-	
+
+	/**
+	 * Retrieve a notification template
+	 * @since 0.0.1
+	 */
+	public function get_template( $type ) {
+
+		$settings = get_option( 'rtb-settings' );
+
+		if ( !empty( $settings[ $type ] ) ) {
+			return $settings[ $type ];
+		}
+
+		global $rtb_controller;
+		if ( !empty( $rtb_controller->defaults[ $type ] ) ) {
+			return $rtb_controller->defaults[ $type ];
+		}
+
+		return '';
+	}
+
 	/**
 	 * Process a template and insert booking details
 	 * @since 0.0.1
 	 */
 	public function process_template( $message ) {
-	
+
 		$template_tags = array(
-			'{target}'	=> $this->target,
-			'{event}'	=> $this->event,
+			'{user_name}'		=> $this->booking->name,
+			'{party}'			=> $this->booking->party,
+			'{date}'			=> $this->booking->date,
+			'{bookings_link}'	=> '<a href="' . home_url( '/wp-admin/admin.php?page=rtb-bookings&status=pending' ) . '">' . __( 'View pending bookings', RTB_TEXTDOMAIN ) . '</a>',
+			'{site_name}'		=> get_bloginfo( 'name' ),
+			'{site_link}'		=> '<a href="' . home_url( '/' ) . '">' . get_bloginfo( 'name' ) . '</a>',
+			'{current_time}'	=> date( get_option( 'date_format' ), current_time( 'timestamp' ) ) . ' ' . date( get_option( 'time_format' ), current_time( 'timestamp' ) ),
 		);
-		
+
 		$template_tags = apply_filters( 'rtb_notification_template_tags', $template_tags, $this );
-		
+
 		return str_replace( array_keys( $template_tags ), array_values( $template_tags ), $message );
-	
+
 	}
 
 	/**
