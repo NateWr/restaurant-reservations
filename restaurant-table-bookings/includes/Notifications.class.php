@@ -50,7 +50,6 @@ class rtbNotifications {
 			'rtb_insert_booking'	=> array( $this, 'new_submission' ), 		// Booking submitted
 			'pending_to_confirmed'	=> array( $this, 'pending_to_confirmed' ), 	// Booking confirmed
 			'pending_to_closed'		=> array( $this, 'pending_to_closed' ), 	// Booking can not be made
-			'confirmed_to_closed'	=> array( $this, 'confirmed_to_closed' ), 	// If booking in past, send a "how'd you like your meal" email.
 		);
 
 		$hooks = apply_filters( 'rtb_notification_transition_callbacks', $hooks );
@@ -67,7 +66,6 @@ class rtbNotifications {
 			new rtbNotificationEmail( 'new_submission', 'admin' ),
 			new rtbNotificationEmail( 'pending_to_confirmed', 'user' ),
 			new rtbNotificationEmail( 'pending_to_closed', 'user' ),
-			new rtbNotificationEmail( 'confirmed_to_closed', 'user' ),
 		);
 
 		$this->notifications = apply_filters( 'rtb_notifications', $this->notifications );
