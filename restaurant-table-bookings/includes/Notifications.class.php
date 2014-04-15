@@ -148,7 +148,7 @@ class rtbNotifications {
 
 		$this->set_booking( $booking_post );
 
-		$this->event( 'pending_to_closed' );
+		$this->event( 'confirmed_to_closed' );
 
 	}
 
