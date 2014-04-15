@@ -101,7 +101,7 @@ class rtbSettings {
 			'scheduler',
 			array(
 				'id'			=> 'schedule-open',
-				'title'			=> __( 'Booking Schedule', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Allow Bookings', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Set up rules to define when visitors can request a booking on your site.', RTB_TEXTDOMAIN ),
 				'weekdays'		=> array(
 					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
@@ -111,6 +111,64 @@ class rtbSettings {
 					'friday'		=> _x( 'Fr', 'Friday abbreviation', RTB_TEXTDOMAIN ),
 					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', RTB_TEXTDOMAIN ),
 					'sunday'		=> _x( 'Su', 'Sunday abbreviation', RTB_TEXTDOMAIN )
+				),
+				'weeks'			=> array(
+					'first'		=> __( '1st', RTB_TEXTDOMAIN ),
+					'second'	=> __( '2nd', RTB_TEXTDOMAIN ),
+					'third'		=> __( '3rd', RTB_TEXTDOMAIN ),
+					'fourth'	=> __( '4th', RTB_TEXTDOMAIN ),
+					'last'		=> _x( 'last', 'Last week of the month', RTB_TEXTDOMAIN ),
+				),
+				'time_format'	=> _x( 'h:i A', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
+				'date_format'	=> _x( 'd mmmm, yyyy', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'schedule',
+			'scheduler',
+			array(
+				'id'			=> 'schedule-closed',
+				'title'			=> __( 'Forbid Bookings', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Set up rules to define when visitors can <strong>not</strong> request a booking on your site.', RTB_TEXTDOMAIN ),
+				'weekdays'		=> array(
+					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
+					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', RTB_TEXTDOMAIN ),
+					'wednesday'		=> _x( 'We', 'Wednesday abbreviation', RTB_TEXTDOMAIN ),
+					'thursday'		=> _x( 'Th', 'Thursday abbreviation', RTB_TEXTDOMAIN ),
+					'friday'		=> _x( 'Fr', 'Friday abbreviation', RTB_TEXTDOMAIN ),
+					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', RTB_TEXTDOMAIN ),
+					'sunday'		=> _x( 'Su', 'Sunday abbreviation', RTB_TEXTDOMAIN )
+				),
+				'weeks'			=> array(
+					'first'		=> __( '1st', RTB_TEXTDOMAIN ),
+					'second'	=> __( '2nd', RTB_TEXTDOMAIN ),
+					'third'		=> __( '3rd', RTB_TEXTDOMAIN ),
+					'fourth'	=> __( '4th', RTB_TEXTDOMAIN ),
+					'last'		=> _x( 'last', 'Last week of the month', RTB_TEXTDOMAIN ),
+				),
+				'time_format'	=> _x( 'h:i A', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
+				'date_format'	=> _x( 'd mmmm, yyyy', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'schedule',
+			'select',
+			array(
+				'id'            => 'late-bookings',
+				'title'         => __( 'Late Bookings', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Select how long in advance customers should have to make their booking.', RTB_TEXTDOMAIN ),
+				'options'       => array(
+					'15' => __( '15 minutes before booking', RTB_TEXTDOMAIN ),
+					'30' => __( '30 minutes before booking', RTB_TEXTDOMAIN ),
+					'45' => __( '45 minutes before booking', RTB_TEXTDOMAIN ),
+					'60' => __( '1 hour before booking', RTB_TEXTDOMAIN ),
+					'120' => __( '2 hours before booking', RTB_TEXTDOMAIN ),
+					'240' => __( '4 hours before booking', RTB_TEXTDOMAIN ),
+					'1440' => __( '1 day before booking', RTB_TEXTDOMAIN ),
 				)
 			)
 		);
