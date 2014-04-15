@@ -200,7 +200,8 @@ class rtbSettings {
 			array(
 				'id'			=> 'admin-email-address',
 				'title'			=> __( 'Admin Email Address', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The recipient email address where admin notifications should be sent.', RTB_TEXTDOMAIN )
+				'description'	=> __( 'The recipient email address where admin notifications should be sent.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> get_option( 'admin_email' ),
 			)
 		);
 
