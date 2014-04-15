@@ -61,8 +61,8 @@ class rtbNotificationEmail extends rtbNotification {
 		$this->set_from_email();
 		$this->set_subject();
 		$this->set_headers();
-		$this->set_message( 'Here is my email message body for {target} on {event}.' );
-		
+		$this->set_message();
+
 		// @todo validate data and return false if invalid
 		return true;
 
@@ -122,9 +122,33 @@ class rtbNotificationEmail extends rtbNotification {
 	 * @since 0.0.1
 	 * @todo different messages for different notifications
 	 */
-	public function set_message( $message ) {
+	public function set_message() {
 
-		$this->message = $this->process_template( $message );
+		$settings = get_option( 'rtb-settings' );
+
+		if ( $this->event == 'new_submission' ) {
+			if ( $this->target == 'user' ) {
+				$template = $settings['template-booking-user'];
+			} elseif ( $this->target == 'admin' ) { // @todo check if admin notifications are enabled
+				$template = 'A new booking has been made'; // @todo allow this to be customized
+			}
+
+		} elseif ( $this->event == 'pending_to_confirmed' ) {
+			if ( $this->target == 'user' ) {
+				$template = $settings['template-confirmed-user'];
+			}
+
+		} elseif ( $this->event == 'pending_to_closed' ) {
+			if ( $this->target == 'user' ) {
+				$template = $settings['template-rejected-user'];
+			}
+		}
+
+		if ( !isset( $template ) ) {
+			$this->message = '';
+		} else {
+			$this->message = $this->process_template( $template );
+		}
 
 	}
 
