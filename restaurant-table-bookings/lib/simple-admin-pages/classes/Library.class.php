@@ -145,6 +145,10 @@ class sapLibrary_2_0_a_1 {
 				require_once('AdminPageSetting.SelectTaxonomy.class.php');
 				return $this->get_versioned_classname( 'sapAdminPageSettingSelectTaxonomy' );
 
+			case 'editor' :
+				require_once('AdminPageSetting.Editor.class.php');
+				return $this->get_versioned_classname( 'sapAdminPageSettingEditor' );
+
 			case 'html' :
 				require_once('AdminPageSetting.HTML.class.php');
 				return $this->get_versioned_classname( 'sapAdminPageSettingHTML' );
