@@ -72,12 +72,14 @@ class rtbNotificationEmail extends rtbNotification {
 	 * Set to email
 	 * @since 0.0.1
 	 */
-	public function set_to_email( $email = null ) {
+	public function set_to_email() {
 
 		if ( $this->target == 'user' ) {
-			$this->to_email = $email === null ? $this->booking->email : $email; // @todo full name + email
+			$this->to_email = empty( $this->booking->email ) ? null : $this->booking->email; // @todo full name + email
+
 		} else {
-			$this->to_email = $email === null ? 'notthisway@gmail.com' : $email; // @todo take from settings
+			global $rtb_controller;
+			$this->to_email = $rtb_controller->settings->get_setting( 'admin-email-address' );
 		}
 
 	}
@@ -86,10 +88,12 @@ class rtbNotificationEmail extends rtbNotification {
 	 * Set from email
 	 * @since 0.0.1
 	 */
-	public function set_from_email( $email = null, $name = null ) {
+	public function set_from_email() {
+	
+		global $rtb_controller;
 
-		$this->from_email = $email === null ? 'notthisway@gmail.com' : $email; // @todo take from settings
-		$this->from_name = $name === null ? 'Restaurant Table Bookings' : $name; // @todo take from settings. fallback should be WP site name
+		$this->from_email = $rtb_controller->settings->get_setting( 'reply-to-address' );
+		$this->from_name = $rtb_controller->settings->get_setting( 'reply-to-name' );
 
 	}
 
@@ -120,7 +124,6 @@ class rtbNotificationEmail extends rtbNotification {
 	/**
 	 * Set email message body
 	 * @since 0.0.1
-	 * @todo different messages for different notifications
 	 */
 	public function set_message() {
 

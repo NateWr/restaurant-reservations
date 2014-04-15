@@ -9,10 +9,136 @@ if ( !class_exists( 'rtbBooking' ) ) {
  */
 class rtbSettings {
 
+	/**
+	 * Default values for settings
+	 * @since 0.0.1
+	 */
+	public $defaults = array();
+
+	/**
+	 * Stored values for settings
+	 * @since 0.0.1
+	 */
+	public $settings = array();
+
 	public function __construct() {
+
+		add_action( 'init', array( $this, 'set_defaults' ) );
 
 		add_action( 'init', array( $this, 'load_settings_panel' ) );
 
+	}
+
+	/**
+	 * Load the plugin's default settings
+	 * @since 0.0.1
+	 */
+	public function set_defaults() {
+
+		$this->defaults = array(
+
+			// Email address where admin notifications should be sent
+			'admin-email-address'			=> get_option( 'admin_email' ),
+
+			// Name and email address which should appear in the Reply-To section of notification emails
+			'reply-to-name'					=> get_bloginfo( 'name' ),
+			'reply-to-address'				=> get_option( 'admin_email' ),
+
+			// Email template sent to an admin when a new booking request is made
+			'subject-booking-admin'			=> _x( 'New Booking Request', 'Default email subject for admin notifications of new bookings', RTB_TEXTDOMAIN ),
+			'template-booking-admin'		=> _x( 'A new booking request has been made at {site_name}:
+
+{user_name}
+{party} people
+{date}
+
+{bookings_link}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to the admin when a new booking request is made. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+
+			// Email template sent to a user when a new booking request is made
+			'subject-booking-user'			=> sprintf( _x( 'Your booking at %s is pending', 'Default email subject sent to user when they request a booking. %s will be replaced by the website name', RTB_TEXTDOMAIN ), get_bloginfo( 'name' ) ),
+			'template-booking-user'			=> _x( 'Thanks {user_name},
+
+Your booking request is <strong>waiting to be confirmed</strong>.
+
+Give us a few moments to make sure that we\'ve got space for you. You will receive another email from us soon. If this request was made outside of our normal working hours, we may not be able to confirm it until we\'re open again.
+
+<strong>Your request details:</strong>
+{user_name}
+{party} people
+{date}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+
+			// Email template sent to a user when a booking request is confirmed
+			'subject-confirmed-user'		=> sprintf( _x( 'Your booking at %s is confirmed', 'Default email subject sent to user when their booking is confirmed. %s will be replaced by the website name', RTB_TEXTDOMAIN ), get_bloginfo( 'name' ) ),
+			'template-confirmed-user'		=> _x( 'Hi {user_name},
+
+Your booking request has been <strong>confirmed</strong>. We look forward to seeing you soon.
+
+<strong>Your booking:</strong>
+{user_name}
+{party} people
+{date}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+
+			// Email template sent to a user when a booking request is rejected
+			'subject-rejected-user'			=> sprintf( _x( 'Your booking at %s was not accepted', 'Default email subject sent to user when their booking is rejected. %s will be replaced by the website name', RTB_TEXTDOMAIN ), get_bloginfo( 'name' ) ),
+			'template-rejected-user'		=> _x( 'Hi {user_name},
+
+Sorry, we could not accomodate your booking request. We\'re full or not open at the time you requested:
+
+{user_name}
+{party} people
+{date}
+
+&nbsp;
+
+<em>This message was sent by {site_link} on {current_time}.</em>',
+				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
+				RTB_TEXTDOMAIN
+			),
+		);
+
+		$this->defaults = apply_filters( 'rtb_defaults', $this->defaults );
+	}
+
+	/**
+	 * Get a setting's value or fallback to a default if one exists
+	 * @since 0.0.1
+	 */
+	public function get_setting( $setting ) {
+
+		if ( !empty( $this->settings ) ) {
+			$this->settings = get_option( 'rtb-settings' );
+		}
+
+		if ( !empty( $this->settings[ $setting ] ) ) {
+			return $this->settings[ $setting ];
+		}
+
+		if ( !empty( $this->defaults[ $setting ] ) ) {
+			return $this->defaults[ $setting ];
+		}
+
+		return null;
 	}
 
 	/**
@@ -21,8 +147,6 @@ class rtbSettings {
 	 * @sa https://github.com/NateWr/simple-admin-pages
 	 */
 	public function load_settings_panel() {
-	
-		global $rtb_controller;
 
 		require_once( RTB_PLUGIN_DIR . '/lib/simple-admin-pages/simple-admin-pages.php' );
 		$sap = sap_initialize_library(
@@ -192,7 +316,7 @@ class rtbSettings {
 				'id'			=> 'reply-to-name',
 				'title'			=> __( 'Reply-To Name', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'The name which should appear in the Reply-To field of a notification email', RTB_TEXTDOMAIN ),
-				'placeholder'	=> $rtb_controller->defaults['reply-to-name'],
+				'placeholder'	=> $this->defaults['reply-to-name'],
 			)
 		);
 
@@ -204,7 +328,7 @@ class rtbSettings {
 				'id'			=> 'reply-to-address',
 				'title'			=> __( 'Reply-To Email Address', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'The email address which should appear in the Reply-To field of a notification email.', RTB_TEXTDOMAIN ),
-				'placeholder'	=> $rtb_controller->defaults['reply-to-address'],
+				'placeholder'	=> $this->defaults['reply-to-address'],
 			)
 		);
 
@@ -226,8 +350,8 @@ class rtbSettings {
 			array(
 				'id'			=> 'admin-email-address',
 				'title'			=> __( 'Admin Email Address', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The recipient email address where admin notifications should be sent.', RTB_TEXTDOMAIN ),
-				'placeholder'	=> $rtb_controller->defaults['admin-email-address'],
+				'description'	=> __( 'The email address where admin notifications should be sent.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['admin-email-address'],
 			)
 		);
 
@@ -241,15 +365,74 @@ class rtbSettings {
 			)
 		);
 
+		// @todo this should maybe be generated automatically from an array of tags/descriptions somewhere, so that addons
+		//	can easily add/edit without conflicting with each other.
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications-templates',
+			'html',
+			array(
+				'id'			=> 'template-tags-description',
+				'title'			=> __( 'Template Tags', RTB_TEXTDOMAIN ),
+				'html'			=> '
+					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails.', RTB_TEXTDOMAIN ) . '</p>
+					<div class="rtb-template-tags-box">
+						<strong>{user_name}</strong> ' . __( 'Name of the user who made the booking', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{party}</strong> ' . __( 'Number of people booked', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{date}</strong> ' . __( 'Date and time of the booking', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{bookings_link}</strong> ' . __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{site_name}</strong> ' . __( 'The name of this website', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{site_link}</strong> ' . __( 'A link to this website', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{current_time}</strong> ' . __( 'Current date and time', RTB_TEXTDOMAIN ) . '
+					</div>',
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications-templates',
+			'text',
+			array(
+				'id'			=> 'subject-booking-admin',
+				'title'			=> __( 'Admin Notification Subject', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The email subject for admin notifications.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['subject-booking-admin'],
+			)
+		);
+
 		$sap->add_setting(
 			'rtb-settings',
 			'notifications-templates',
 			'editor',
 			array(
 				'id'			=> 'template-booking-admin',
-				'title'			=> __( 'Admin Notification', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Admin Notification Email', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Enter the email an admin should receive when an initial booking request is made.', RTB_TEXTDOMAIN ),
-				'default'		=> $rtb_controller->defaults['template-booking-admin'],
+				'default'		=> $this->defaults['template-booking-admin'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications-templates',
+			'text',
+			array(
+				'id'			=> 'subject-booking-user',
+				'title'			=> __( 'New Request Email Subject', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The email subject a user should receive when they make an initial booking request.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['subject-booking-user'],
 			)
 		);
 
@@ -259,9 +442,21 @@ class rtbSettings {
 			'editor',
 			array(
 				'id'			=> 'template-booking-user',
-				'title'			=> __( 'Booking Request Received', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'New Request Email', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Enter the email a user should receive when they make an initial booking request.', RTB_TEXTDOMAIN ),
-				'default'		=> $rtb_controller->defaults['template-booking-user'],
+				'default'		=> $this->defaults['template-booking-user'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications-templates',
+			'text',
+			array(
+				'id'			=> 'subject-confirmed-user',
+				'title'			=> __( 'Confirmed Email Subject', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The email subject a user should receive when their booking has been confirmed.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['subject-confirmed-user'],
 			)
 		);
 
@@ -271,9 +466,21 @@ class rtbSettings {
 			'editor',
 			array(
 				'id'			=> 'template-confirmed-user',
-				'title'			=> __( 'Booking Request Confirmed', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Confirmed Email', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Enter the email a user should receive when their booking has been confirmed.', RTB_TEXTDOMAIN ),
-				'default'		=> $rtb_controller->defaults['template-confirmed-user'],
+				'default'		=> $this->defaults['template-confirmed-user'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'notifications-templates',
+			'text',
+			array(
+				'id'			=> 'subject-rejected-user',
+				'title'			=> __( 'Rejected Email Subject', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The email subject a user should receive when their booking has been rejected.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['subject-rejected-user'],
 			)
 		);
 
@@ -283,9 +490,9 @@ class rtbSettings {
 			'editor',
 			array(
 				'id'			=> 'template-rejected-user',
-				'title'			=> __( 'Booking Request Rejected', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Rejected Email', RTB_TEXTDOMAIN ),
 				'description'	=> __( 'Enter the email a user should receive when their booking has been rejected.', RTB_TEXTDOMAIN ),
-				'default'		=> $rtb_controller->defaults['template-rejected-user'],
+				'default'		=> $this->defaults['template-rejected-user'],
 			)
 		);
 

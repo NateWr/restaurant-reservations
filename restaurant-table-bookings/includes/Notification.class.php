@@ -61,18 +61,15 @@ abstract class rtbNotification {
 	 */
 	public function get_template( $type ) {
 
-		$settings = get_option( 'rtb-settings' );
-
-		if ( !empty( $settings[ $type ] ) ) {
-			return $settings[ $type ];
-		}
-
 		global $rtb_controller;
-		if ( !empty( $rtb_controller->defaults[ $type ] ) ) {
-			return $rtb_controller->defaults[ $type ];
-		}
 
-		return '';
+		$template = $rtb_controller->settings->get_setting( $type );
+
+		if ( $template === null ) {
+			return '';
+		} else {
+			return $template;
+		}
 	}
 
 	/**
