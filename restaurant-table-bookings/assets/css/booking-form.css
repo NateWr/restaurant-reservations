@@ -1,2 +1,35 @@
 /* Frontend CSS Stylesheet for Restaurant Table Bookings */
 
+.rtb-booking-form fieldset {
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+}
+.rtb-booking-form legend {
+	padding: 0 0.5em;
+}
+.rtb-booking-form label {
+	display: block;
+	margin-top: 1em;
+}
+.rtb-booking-form input {
+	width: 15em;
+}
+.rtb-booking-form textarea {
+	width: 90%;
+}
+.rtb-booking-form .add-message {
+	margin-top: 1em;
+}
+.rtb-booking-form .message {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+.rtb-booking-form .message-open {
+	position: relative;
+	top: auto;
+	left: auto;
+}
+.rtb-booking-form .message textarea {
+	min-height: 6em;
+}

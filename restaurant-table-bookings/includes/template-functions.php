@@ -36,7 +36,7 @@ function rtb_print_booking_form() {
 
 	?>
 
-<div class="booking-form">
+<div class="rtb-booking-form">
 	<form method="POST" action="">
 		<input type="hidden" name="action" value="booking_request">
 		<fieldset class="reservation">
@@ -84,10 +84,12 @@ function rtb_print_booking_form() {
 				</label>
 				<input type="text" id="phone" name="rtb-phone" placeholder="Your phone number">
 			</div>
-			<div class="message">
+			<div class="add-message">
 				<a href="#">
 					<?php _e( 'Add a Message', RTB_TEXTDOMAIN ); ?>
 				</a>
+			</div>
+			<div class="message">
 				<label for="rtb-message">
 					<?php _e( 'Message', RTB_TEXTDOMAIN ); ?>
 				</label>
@@ -116,6 +118,7 @@ if ( !function_exists( 'rtb_enqueue_assets' ) ) {
 function rtb_enqueue_assets() {
 
 	wp_enqueue_style( 'rtb-booking-form' );
+	wp_enqueue_script( 'rtb-booking-form' );
 
 }
 } // endif;
