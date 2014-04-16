@@ -40,6 +40,7 @@ class rtbInit {
 		define( 'RTB_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
 		define( 'RTB_BOOKING_POST_TYPE', 'rtb-booking' );
 		define( 'RTB_BOOKING_POST_TYPE_SLUG', 'booking' );
+		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
 
 		// Initialize the plugin
 		add_action( 'init', array( $this, 'load_config' ) );
@@ -60,7 +61,6 @@ class rtbInit {
 
 		// Load the template functions which print the booking form, etc
 		require_once( RTB_PLUGIN_DIR . '/includes/template-functions.php' );
-
 
 		// Load assets
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
@@ -290,8 +290,7 @@ class rtbInit {
 	 */
 	function register_assets() {
 
-		// Theme authors can hook in to not load any of the default assets
-		if ( apply_filters( 'rtb-dont-register-assets', false ) ) {
+		if ( !RTB_LOAD_FRONTEND_ASSETS ) {
 			return;
 		}
 

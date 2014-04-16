@@ -118,7 +118,33 @@ if ( !function_exists( 'rtb_enqueue_assets' ) ) {
 function rtb_enqueue_assets() {
 
 	wp_enqueue_style( 'rtb-booking-form' );
+
+	wp_enqueue_style( 'pickadate-default', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/themes/default.css' );
+	wp_enqueue_style( 'pickadate-date', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/themes/default.date.css' );
+	wp_enqueue_style( 'pickadate-time', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/themes/default.time.css' );
+	wp_enqueue_script( 'pickadate', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/picker.js', array( 'jquery' ), '', true );
+	wp_enqueue_script( 'pickadate-date', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/picker.date.js', array( 'jquery' ), '', true );
+	wp_enqueue_script( 'pickadate-time', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/picker.time.js', array( 'jquery' ), '', true );
+	wp_enqueue_script( 'pickadate-legacy', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/legacy.js', array( 'jquery' ), '', true );
+	// @todo is there some way I can enqueue this for RTL languages
+	// wp_enqueue_style( 'pickadate-rtl', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/themes/rtl.css' );
+	
 	wp_enqueue_script( 'rtb-booking-form' );
+	
+	// Pass date and time format settings to the pickadate controls
+	global $rtb_controller;
+	wp_localize_script(
+		'rtb-booking-form',
+		'rtb_pickadate',
+		array(
+			'date_format' => $rtb_controller->settings->get_setting( 'date-format' ),
+			'time_format'  => $rtb_controller->settings->get_setting( 'time-format' ),
+			'schedule_open' => $rtb_controller->settings->get_setting( 'schedule-open' ),
+			'schedule_closed' => $rtb_controller->settings->get_setting( 'schedule-closed' ),
+			'early_bookings' => $rtb_controller->settings->get_setting( 'early-bookings' ),
+			'late_bookings' => $rtb_controller->settings->get_setting( 'late-bookings' ),
+		)
+	);
 
 }
 } // endif;

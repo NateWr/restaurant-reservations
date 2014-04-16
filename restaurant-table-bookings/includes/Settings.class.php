@@ -37,6 +37,9 @@ class rtbSettings {
 
 		$this->defaults = array(
 
+			'date-format'					=> _x( 'mmmm d, yyyy', 'Default date format for display. Must match formatting rules at http://amsul.ca/pickadate.js/date.htm#formatting-rules', RTB_TEXTDOMAIN ),
+			'time-format'					=> _x( 'h:i A', 'Default time format for display. Must match formatting rules at http://amsul.ca/pickadate.js/time.htm#formats', RTB_TEXTDOMAIN ),
+
 			// Email address where admin notifications should be sent
 			'admin-email-address'			=> get_option( 'admin_email' ),
 
@@ -126,7 +129,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	 */
 	public function get_setting( $setting ) {
 
-		if ( !empty( $this->settings ) ) {
+		if ( empty( $this->settings ) ) {
 			$this->settings = get_option( 'rtb-settings' );
 		}
 
@@ -212,6 +215,30 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
+		$sap->add_setting(
+			'rtb-settings',
+			'general',
+			'text',
+			array(
+				'id'            => 'date-format',
+				'title'         => __( 'Date Format', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Define how the date should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/date.htm#formatting-rules">Formatting rules</a>', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['date-format'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'general',
+			'text',
+			array(
+				'id'            => 'time-format',
+				'title'         => __( 'Time Format', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Define how the time should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/time.htm#formatting-rules">Formatting rules</a>', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['time-format'],
+			)
+		);
+
 		$sap->add_section(
 			'rtb-settings',
 			array(
@@ -245,8 +272,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 					'fourth'	=> __( '4th', RTB_TEXTDOMAIN ),
 					'last'		=> _x( 'last', 'Last week of the month', RTB_TEXTDOMAIN ),
 				),
-				'time_format'	=> _x( 'h:i A', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
-				'date_format'	=> _x( 'd mmmm, yyyy', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
+				'time_format'	=> $this->get_setting( 'time-format' ),
+				'date_format'	=> $this->get_setting( 'date-format' ),
 			)
 		);
 
@@ -257,7 +284,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'			=> 'schedule-closed',
 				'title'			=> __( 'Forbid Bookings', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Set up rules to define when visitors can <strong>not</strong> request a booking on your site.', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Set up rules to define when visitors <strong>can not</strong> request a booking on your site.', RTB_TEXTDOMAIN ),
 				'weekdays'		=> array(
 					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
 					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', RTB_TEXTDOMAIN ),
@@ -274,8 +301,28 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 					'fourth'	=> __( '4th', RTB_TEXTDOMAIN ),
 					'last'		=> _x( 'last', 'Last week of the month', RTB_TEXTDOMAIN ),
 				),
-				'time_format'	=> _x( 'h:i A', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
-				'date_format'	=> _x( 'd mmmm, yyyy', 'Time format when selecting a time. See http://amsul.ca/pickadate.js/ for formatting options', RTB_TEXTDOMAIN ),
+				'time_format'	=> $this->get_setting( 'time-format' ),
+				'date_format'	=> $this->get_setting( 'date-format' ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'schedule',
+			'select',
+			array(
+				'id'            => 'early-bookings',
+				'title'         => __( 'Early Bookings', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Select how early customers can make their booking.', RTB_TEXTDOMAIN ),
+				'blank_option'	=> false,
+				'options'       => array(
+					''		=> __( 'Any time', RTB_TEXTDOMAIN ),
+					'1' 	=> __( 'Up to 1 day in advance', RTB_TEXTDOMAIN ),
+					'7' 	=> __( 'Up to 1 week in advance', RTB_TEXTDOMAIN ),
+					'14' 	=> __( 'Up to 2 weeks in advance', RTB_TEXTDOMAIN ),
+					'30' 	=> __( 'Up to 30 days in advance', RTB_TEXTDOMAIN ),
+					'90' 	=> __( 'Up to 90 days in advance', RTB_TEXTDOMAIN ),
+				)
 			)
 		);
 
@@ -286,15 +333,17 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'late-bookings',
 				'title'         => __( 'Late Bookings', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select how long in advance customers should have to make their booking.', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Select how late customers can make their booking.', RTB_TEXTDOMAIN ),
+				'blank_option'	=> false,
 				'options'       => array(
-					'15' => __( '15 minutes before booking', RTB_TEXTDOMAIN ),
-					'30' => __( '30 minutes before booking', RTB_TEXTDOMAIN ),
-					'45' => __( '45 minutes before booking', RTB_TEXTDOMAIN ),
-					'60' => __( '1 hour before booking', RTB_TEXTDOMAIN ),
-					'120' => __( '2 hours before booking', RTB_TEXTDOMAIN ),
-					'240' => __( '4 hours before booking', RTB_TEXTDOMAIN ),
-					'1440' => __( '1 day before booking', RTB_TEXTDOMAIN ),
+					'' 		=> __( 'Up to the last minute', RTB_TEXTDOMAIN ),
+					'15' 	=> __( '15 minutes before booking', RTB_TEXTDOMAIN ),
+					'30' 	=> __( '30 minutes before booking', RTB_TEXTDOMAIN ),
+					'45' 	=> __( '45 minutes before booking', RTB_TEXTDOMAIN ),
+					'60' 	=> __( '1 hour before booking', RTB_TEXTDOMAIN ),
+					'120' 	=> __( '2 hours before booking', RTB_TEXTDOMAIN ),
+					'240' 	=> __( '4 hours before booking', RTB_TEXTDOMAIN ),
+					'1440' 	=> __( '1 day before booking', RTB_TEXTDOMAIN ),
 				)
 			)
 		);
@@ -495,7 +544,6 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'default'		=> $this->defaults['template-rejected-user'],
 			)
 		);
-
 
 		$sap = apply_filters( 'rtb_settings_page', $sap );
 
