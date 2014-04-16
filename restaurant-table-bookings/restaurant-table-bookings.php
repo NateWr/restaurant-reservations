@@ -45,6 +45,9 @@ class rtbInit {
 		add_action( 'init', array( $this, 'load_config' ) );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 
+		// Add custom roles and capabilities
+		add_action( 'init', array( $this, 'add_roles' ) );
+
 		// Load custom post types
 		require_once( RTB_PLUGIN_DIR . '/includes/CustomPostTypes.class.php' );
 		$this->cpts = new rtbCustomPostTypes();
@@ -103,6 +106,39 @@ class rtbInit {
 	}
 
 	/**
+	 * Add a role to manage the bookings and add the capability to Editors,
+	 * Administrators and Super Admins
+	 * @since 0.0.1
+	 */
+	public function add_roles() {
+
+		// The booking manager should be able to access the bookings list and
+		// update booking statuses, but shouldn't be able to touch anything else
+		// in the account.
+		$booking_manager = add_role(
+			'rtb_booking_manager',
+			__( 'Booking Manager', RTB_TEXTDOMAIN ),
+			array(
+				'read'				=> true,
+				'manage_bookings'	=> true,
+			)
+		);
+
+		$manage_bookings_roles = apply_filters(
+			'rtb_manage_bookings_roles',
+			array(
+				'administrator',
+				'editor',
+			)
+		);
+
+		global $wp_roles;
+		foreach ( $manage_bookings_roles as $role ) {
+			$wp_roles->add_cap( $role, 'manage_bookings' );
+		}
+	}
+
+	/**
 	 * Add the top-level admin menu page
 	 * @since 0.0.1
 	 */
@@ -111,7 +147,7 @@ class rtbInit {
 		add_menu_page(
 			_x( 'Bookings', 'Title of admin page that lists bookings', RTB_TEXTDOMAIN ),
 			_x( 'Bookings', 'Title of bookings admin menu item', RTB_TEXTDOMAIN ),
-			'edit_others_posts', // @todo this should be a custom capability attached to a custom role maybe?
+			'manage_bookings',
 			'rtb-bookings',
 			array( $this, 'show_admin_bookings_page' ),
 			'dashicons-calendar',

@@ -164,7 +164,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'menu_title'    => __( 'Settings', RTB_TEXTDOMAIN ),
 				'parent_menu'	=> 'rtb-bookings',
 				'description'   => '',
-				'capability'    => 'manage_options', // @todo custom capability?
+				'capability'    => 'manage_options',
 				'default_tab'   => 'general',
 			)
 		);

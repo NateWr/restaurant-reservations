@@ -371,6 +371,10 @@ class rtbBookingsTable extends WP_List_Table {
 			return;
 		}
 
+		if ( !current_user_can( 'manage_bookings' ) ) {
+			return;
+		}
+
 		if ( ! is_array( $ids ) ) {
 			$ids = array( $ids );
 		}
