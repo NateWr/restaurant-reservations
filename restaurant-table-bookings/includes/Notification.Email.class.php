@@ -89,7 +89,7 @@ class rtbNotificationEmail extends rtbNotification {
 	 * @since 0.0.1
 	 */
 	public function set_from_email() {
-	
+
 		global $rtb_controller;
 
 		$this->from_email = $rtb_controller->settings->get_setting( 'reply-to-address' );
@@ -100,11 +100,24 @@ class rtbNotificationEmail extends rtbNotification {
 	/**
 	 * Set email subject
 	 * @since 0.0.1
-	 * @todo different subjects for different notifications
 	 */
-	public function set_subject( $subject = null ) {
+	public function set_subject() {
 
-		$this->subject = $subject === null ? __( 'Restaurant Booking', RTB_TEXTDOMAIN ) : $subject; // @todo fallback should be something like "Booking at [restaurant name]"
+		global $rtb_controller;
+
+		if( $this->event == 'new_submission' ) {
+			if ( $this->target == 'admin' ) {
+				$this->subject = $rtb_controller->settings->get_setting( 'subject-booking-admin' );
+			} elseif ( $this->target == 'user' ) {
+				$this->subject = $rtb_controller->settings->get_setting( 'subject-booking-user' );
+			}
+
+		} elseif ( $this->event == 'pending_to_confirmed' ) {
+			$this->subject = $rtb_controller->settings->get_setting( 'subject-confirmed-user' );
+
+		} elseif ( $this->event == 'pending_to_closed' ) {
+			$this->subject = $rtb_controller->settings->get_setting( 'subject-rejected-user' );
+		}
 
 	}
 
@@ -132,7 +145,7 @@ class rtbNotificationEmail extends rtbNotification {
 		if ( $this->event == 'new_submission' ) {
 			if ( $this->target == 'user' ) {
 				$template = 'template-booking-user';
-			} elseif ( $this->target == 'admin' ) { // @todo check if admin notifications are enabled
+			} elseif ( $this->target == 'admin' ) {
 				$template = 'template-booking-admin';
 			}
 
