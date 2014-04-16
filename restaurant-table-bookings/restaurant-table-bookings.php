@@ -58,8 +58,13 @@ class rtbInit {
 		// Flush the rewrite rules for the custom post types
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
 
-		// Load admin assets
+		// Load the template functions which print the booking form, etc
+		require_once( RTB_PLUGIN_DIR . '/includes/template-functions.php' );
+
+
+		// Load assets
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 
 		// Handle booking request submission
 		// @todo this should only be called when a page is rendered with the
@@ -269,7 +274,6 @@ class rtbInit {
 	/**
 	 * Enqueue the admin-only CSS and Javascript
 	 * @since 0.0.1
-	 * @todo use jquery date picker styles to blend with WP admin here: http://x-team.github.io/wp-jquery-ui-datepicker-skins/
 	 */
 	public function enqueue_admin_assets() {
 
@@ -278,6 +282,20 @@ class rtbInit {
 			wp_enqueue_style( 'rtb-admin', RTB_PLUGIN_URL . '/assets/css/admin.css' );
 			wp_enqueue_script( 'rtb-admin', RTB_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '', true );
 		}
+	}
+
+	/**
+	 * Register the front-end CSS and Javascript for the booking form
+	 * @since 0.0.1
+	 */
+	function register_assets() {
+
+		// Theme authors can hook in to not load any of the default assets
+		if ( apply_filters( 'rtb-dont-register-assets', false ) ) {
+			return;
+		}
+
+		wp_register_style( 'rtb-booking-form', RTB_PLUGIN_URL . '/assets/css/booking-form.css' );
 	}
 
 }
