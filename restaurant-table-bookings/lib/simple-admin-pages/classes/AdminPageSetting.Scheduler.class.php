@@ -50,6 +50,31 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 	public $date_format = 'd mmmm, yyyy';
 
 	/**
+	 * Boolean to disable the weekday selection option
+	 */
+	public $disable_weekdays = false;
+
+	/**
+	 * Boolean to disable the weeks selection option
+	 */
+	public $disable_weeks = false;
+
+	/**
+	 * Boolean to disable the date selection option
+	 */
+	public $disable_date = false;
+
+	/**
+	 * Boolean to disable the time selection option
+	 */
+	public $disable_time = false;
+
+	/**
+	 * Boolean to disable the end time selection option
+	 */
+	public $disable_end_time = false;
+
+	/**
 	 * Escape the value to display it in text fields and other input fields
 	 * @since 2.0
 	 */
@@ -117,12 +142,16 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		}
 
 		$sap_scheduler_settings[ $this->id ] = array(
-			'time_interval' => $this->time_interval,
-			'time_format'	=> $this->time_format,
-			'date_format'	=> $this->date_format,
-			'template'		=> $this->get_template(),
-			'weekdays'		=> $this->weekdays,
-			'weeks'			=> $this->weeks,
+			'time_interval' 	=> $this->time_interval,
+			'time_format'		=> $this->time_format,
+			'date_format'		=> $this->date_format,
+			'template'			=> $this->get_template(),
+			'weekdays'			=> $this->weekdays,
+			'weeks'				=> $this->weeks,
+			'disable_weekdays'	=> $this->disable_weekdays,
+			'disable_weeks'		=> $this->disable_weeks,
+			'disable_date'		=> $this->disable_date,
+			'disable_time'		=> $this->disable_time,
 		);
 
 		// This gets called multiple times, but only the last call is actually
@@ -183,25 +212,51 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		?>
 
 		<div class="sap-scheduler-rule clearfix<?php echo $list ? ' list' : ''; ?>">
-			<div class="sap-scheduler-date <?php echo $date_format; ?>">
+			<div class="sap-scheduler-date <?php echo $date_format; echo $this->disable_time === true ? ' full-width' : ''; ?>">
 				<ul class="sap-selector">
+
+				<?php if ( !$this->has_multiple_date_formats() ) : ?>
+					<li>
+						<div class="dashicons dashicons-calendar"></div>
+						<?php if ( $date_format == 'weekly' ) : ?>
+						<?php _ex( 'Weekly', 'Format of a scheduling rule', SAP_TEXTDOMAIN ); ?>
+						<?php elseif ( $date_format == 'monthly' ) : ?>
+						<?php _ex( 'Monthly', 'Format of a scheduling rule', SAP_TEXTDOMAIN ); ?>
+						<?php elseif ( $date_format == 'date' ) : ?>
+						<?php _ex( 'Date', 'Format of a scheduling rule', SAP_TEXTDOMAIN ); ?>
+						<?php endif; ?>
+					</li>
+				<?php else : ?>
+
+					<?php if ( $this->disable_weekdays === false ) : ?>
 					<li>
 						<div class="dashicons dashicons-calendar"></div>
 						<a href="#" data-format="weekly"<?php echo $date_format == 'weekly' ? ' class="selected"' : ''; ?>>
 							<?php _ex( 'Weekly', 'Format of a scheduling rule', SAP_TEXTDOMAIN ); ?>
 						</a>
 					</li>
+					<?php endif; ?>
+
+					<?php if ( $this->disable_weeks === false ) : ?>
 					<li>
 						<a href="#" data-format="monthly"<?php echo $date_format == 'monthly' ? ' class="selected"' : ''; ?>>
 							<?php _ex( 'Monthly', 'Format of a scheduling rule', SAP_TEXTDOMAIN ); ?>
 						</a>
 					</li>
+					<?php endif; ?>
+
+					<?php if ( $this->disable_date === false ) : ?>
 					<li>
 						<a href="#" data-format="date"<?php echo $date_format == 'date' ? ' class="selected"' : ''; ?>>
 							<?php _ex( 'Date', 'Format of a scheduling rule', SAP_TEXTDOMAIN ); ?>
 						</a>
 					</li>
+					<?php endif; ?>
+
+				<?php endif; ?>
 				</ul>
+
+				<?php if ( $this->disable_weekdays === false ) : ?>
 				<ul class="sap-scheduler-weekdays">
 					<li class="label">
 						<?php _ex( 'Days of the week', 'Label for selecting days of the week in a scheduling rule', SAP_TEXTDOMAIN ); ?>
@@ -215,6 +270,9 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 					</li>
 				<?php endforeach; ?>
 				</ul>
+				<?php endif; ?>
+
+				<?php if ( $this->disable_weeks === false ) : ?>
 				<ul class="sap-scheduler-weeks">
 					<li class="label">
 						<?php _ex( 'Weeks of the month', 'Label for selecting weeks of the month in a scheduling rule', SAP_TEXTDOMAIN ); ?>
@@ -228,14 +286,22 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 					</li>
 				<?php endforeach; ?>
 				</ul>
+				<?php endif; ?>
+
+				<?php if ( $this->disable_date === false ) : ?>
 				<div class="sap-scheduler-date-input">
 					<label for="<?php echo $this->get_input_name(); ?>[<?php echo $id; ?>][date]">
 						<?php _e( 'Date', SAP_TEXTDOMAIN ); ?>
 					</label>
 					<input type="text" name="<?php echo $this->get_input_name(); ?>[<?php echo $id; ?>][date]" id="<?php echo $this->get_input_name(); ?>[<?php echo $id; ?>][date]" value="<?php echo empty( $values['date'] ) ? '' : $values['date']; ?>">
 				</div>
+				<?php endif; ?>
+
 			</div>
+
+			<?php if ( $this->disable_time === false ) : ?>
 			<div class="sap-scheduler-time <?php echo $time_format; ?>">
+
 				<ul class="sap-selector">
 					<li>
 						<div class="dashicons dashicons-clock"></div>
@@ -249,39 +315,51 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 						</a>
 					</li>
 				</ul>
+
 				<div class="sap-scheduler-time-input clearfix">
+
 					<div class="start">
 						<label for="<?php echo $this->get_input_name(); ?>[<?php echo $id; ?>][time][start]">
 							<?php _ex( 'Start', 'Label for the starting time of a scheduling rule', SAP_TEXTDOMAIN ); ?>
 						</label>
 						<input type="text" name="<?php echo $this->get_input_name() . '[' . $id . '][time][start]'; ?>" id="<?php echo $this->get_input_name() . '[' . $id . '][time][start]'; ?>" value="<?php echo empty( $values['time']['start'] ) ? '' : $values['time']['start']; ?>">
 					</div>
+
+					<?php if ( $this->disable_end_time === false ) : ?>
 					<div class="end">
 						<label for="<?php echo $this->get_input_name(); ?>[<?php echo $id; ?>][time][end]">
 							<?php _ex( 'End', 'Label for the ending time of a scheduling rule', SAP_TEXTDOMAIN ); ?>
 						</label>
 						<input type="text" name="<?php echo $this->get_input_name() . '[' . $id . '][time][end]'; ?>" id="<?php echo $this->get_input_name() . '[' . $id . '][time][end]'; ?>" value="<?php echo empty( $values['time']['end'] ) ? '' : $values['time']['end']; ?>">
 					</div>
+					<?php endif; ?>
+
 				</div>
+
 				<div class="sap-scheduler-all-day">
 					<?php _ex( 'All day long. Want to <a href="#" data-format="time-slot">set a time slot</a>?', 'Prompt displayed when a scheduling rule is set without any time restrictions.', SAP_TEXTDOMAIN ); ?>
 				</div>
+
 			</div>
+			<?php endif; ?>
+
 			<div class="sap-scheduler-brief">
 				<div class="date">
 					<div class="dashicons dashicons-calendar"></div>
 					<span class="value"><?php echo $this->get_date_summary( $values ); ?></span>
 				</div>
+				<?php if ( $this->disable_time === false ) : ?>
 				<div class="time">
 					<div class="dashicons dashicons-clock"></div>
 					<span class="value"><?php echo $this->get_time_summary( $values ); ?></span>
 				</div>
+				<?php endif; ?>
 			</div>
 			<div class="sap-scheduler-control">
-				<a href="#" class="toggle" title="<?php _e( 'Close rule', SAP_TEXTDOMAIN ); ?>">
+				<a href="#" class="toggle" title="<?php _e( 'Open and close this rule', SAP_TEXTDOMAIN ); ?>">
 					<div class="dashicons dashicons-<?php echo $list ? 'edit' : 'arrow-up-alt2'; ?>"></div>
 					<span class="screen-reader-text">
-						<?php _e( 'Close scheduling rule', SAP_TEXTDOMAIN ); ?>
+						<?php _e( 'Open and close this rule', SAP_TEXTDOMAIN ); ?>
 					</span>
 				</a>
 				<a href="#" class="delete" title="<?php _e( 'Delete rule', SAP_TEXTDOMAIN ); ?>">
@@ -304,13 +382,24 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 	 * @since 2.0
 	 */
 	public function get_date_format( $values ) {
+
 		if ( !empty( $values['date'] ) ) {
 			return 'date';
 		} elseif ( !empty( $values['weeks'] ) ) {
 			return 'monthly';
+		} elseif ( !empty( $values['weekdays'] ) ) {
+			return 'weekly';
 		}
 
-		return 'weekly';
+		if ( $this->disable_weekdays === false ) {
+			return 'weekly';
+		}
+		if ( $this->disable_weeks === false ) {
+			return 'monthly';
+		}
+		if ( $this->disable_date === false ) {
+			return 'date';
+		}
 	}
 
 	/**
@@ -323,6 +412,29 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		}
 
 		return 'time-slot';
+	}
+
+	/**
+	 * Determine if multiple date formats are enabled
+	 * @since 2.0
+	 */
+	public function has_multiple_date_formats() {
+		$i = 0;
+		if ( $this->disable_weekdays === false ) {
+			$i++;
+		}
+		if ( $this->disable_weeks === false ) {
+			$i++;
+		}
+		if ( $this->disable_date === false ) {
+			$i++;
+		}
+
+		if ( $i > 1 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -339,7 +451,8 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		$this->schedule_summaries = array(
 			'never' 				=> _x( 'Never', 'Brief description of a scheduling rule when no weekdays or weeks are included in the rule.', SAP_TEXTDOMAIN ),
 			'weekly_always' 		=> _x( 'Every day', 'Brief description of a scheduling rule when all the weekdays/weeks are included in the rule.', SAP_TEXTDOMAIN ),
-			'monthly_partial' 		=> _x( '{days} on the {weeks} week of the month', 'Brief description of a scheduling rule when some weekdays are included on only some weeks of the month. The {days} and {weeks} bits should be left alone and will be replaced by a comma-separated list of days (the first one) and weeks (the second one) in the following format: M, T, W on the first, second week of the month', SAP_TEXTDOMAIN ),
+			'monthly_weekdays' 		=> _x( '{days} on the {weeks} week of the month', 'Brief description of a scheduling rule when some weekdays are included on only some weeks of the month. The {days} and {weeks} bits should be left alone and will be replaced by a comma-separated list of days (the first one) and weeks (the second one) in the following format: M, T, W on the first, second week of the month', SAP_TEXTDOMAIN ),
+			'monthly_weeks' 		=> _x( '{weeks} week of the month', 'Brief description of a scheduling rule when some weeks of the month are included but all or no weekdays are selected.  {weeks}  should be left alone and will be replaced by a comma-separated list of weeks (the second one) in the following format: First, second week of the month', SAP_TEXTDOMAIN ),
 			'all_day' 				=> _x( 'All day', 'Brief description of a scheduling rule when no times are set', SAP_TEXTDOMAIN ),
 			'before' 				=> _x( 'Ends at', 'Brief description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm.', SAP_TEXTDOMAIN ),
 			'after' 				=> _x( 'Starts at', 'Brief description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm.', SAP_TEXTDOMAIN ),
@@ -357,11 +470,13 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 			return $values['date'];
 		}
 
-		if ( empty( $values['weekdays'] ) ) {
+		if ( empty( $values['weekdays'] ) && $this->disable_weekdays === false ) {
 			return $this->schedule_summaries['never'];
 		}
 
-		if ( count( $values['weekdays'] ) == 7 ) {
+		if ( empty( $values['weekdays'] ) ) {
+			$weekdays = '';
+		} elseif ( count( $values['weekdays'] ) == 7 ) {
 			$weekdays = $this->schedule_summaries['weekly_always'];
 		} else {
 			$arr = array();
@@ -371,8 +486,12 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 			$weekdays = join( ', ', $arr );
 		}
 
-		if ( empty( $values['weeks'] ) || count( $values['weeks'] ) == 5 ) {
+		if ( ( empty( $values['weeks'] ) || count( $values['weeks'] ) == 5 ) && $this->disable_weekdays === false ) {
 			return $weekdays;
+		}
+
+		if ( empty( $values['weeks'] ) ) {
+			return $this->schedule_summaries['never'];
 		}
 
 		$arr = array();
@@ -381,7 +500,11 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		}
 		$weeks = join( ', ', $arr );
 
-		return str_replace( array( '{days}', '{weeks}' ), array( $weekdays, $weeks ), $this->schedule_summaries['monthly_partial'] );
+		if ( !empty( $weekdays ) ) {
+			return str_replace( array( '{days}', '{weeks}' ), array( $weekdays, $weeks ), $this->schedule_summaries['monthly_weekdays'] );
+		} else {
+			return str_replace( '{weeks}', ucfirst( $weeks ), $this->schedule_summaries['monthly_weeks'] );
+		}
 
 	}
 

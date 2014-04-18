@@ -69,10 +69,10 @@ input.sap-opening-hours-hours {
 .sap-selector li {
 	display: inline-block;
 	margin-right: 1em;
+	line-height: 20px;
 }
 .sap-selector a {
 	text-decoration: none;
-	line-height: 20px;
 }
 .sap-selector .selected {
 	font-weight: 600;
@@ -199,6 +199,10 @@ input.sap-opening-hours-hours {
 	.sap-scheduler-date {
 		float: left;
 		width: 50%;
+	}
+	.sap-scheduler-date.full-width {
+		float: none;
+		width: 100%;
 	}
 	.sap-scheduler-time {
 		float: right;
