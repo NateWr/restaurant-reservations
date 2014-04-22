@@ -254,8 +254,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'scheduler',
 			array(
 				'id'			=> 'schedule-open',
-				'title'			=> __( 'Allow Bookings', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Set up rules to define when visitors can request a booking on your site.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Schedule', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Define the weekly schedule during which you accept bookings.', RTB_TEXTDOMAIN ),
 				'weekdays'		=> array(
 					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
 					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', RTB_TEXTDOMAIN ),
@@ -265,15 +265,10 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', RTB_TEXTDOMAIN ),
 					'sunday'		=> _x( 'Su', 'Sunday abbreviation', RTB_TEXTDOMAIN )
 				),
-				'weeks'			=> array(
-					'first'		=> __( '1st', RTB_TEXTDOMAIN ),
-					'second'	=> __( '2nd', RTB_TEXTDOMAIN ),
-					'third'		=> __( '3rd', RTB_TEXTDOMAIN ),
-					'fourth'	=> __( '4th', RTB_TEXTDOMAIN ),
-					'last'		=> _x( 'last', 'Last week of the month', RTB_TEXTDOMAIN ),
-				),
 				'time_format'	=> $this->get_setting( 'time-format' ),
 				'date_format'	=> $this->get_setting( 'date-format' ),
+				'disable_weeks'	=> true,
+				'disable_date'	=> true,
 			)
 		);
 
@@ -282,27 +277,16 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'schedule',
 			'scheduler',
 			array(
-				'id'			=> 'schedule-closed',
-				'title'			=> __( 'Forbid Bookings', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Set up rules to define when visitors <strong>can not</strong> request a booking on your site.', RTB_TEXTDOMAIN ),
-				'weekdays'		=> array(
-					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
-					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', RTB_TEXTDOMAIN ),
-					'wednesday'		=> _x( 'We', 'Wednesday abbreviation', RTB_TEXTDOMAIN ),
-					'thursday'		=> _x( 'Th', 'Thursday abbreviation', RTB_TEXTDOMAIN ),
-					'friday'		=> _x( 'Fr', 'Friday abbreviation', RTB_TEXTDOMAIN ),
-					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', RTB_TEXTDOMAIN ),
-					'sunday'		=> _x( 'Su', 'Sunday abbreviation', RTB_TEXTDOMAIN )
+				'id'				=> 'schedule-closed',
+				'title'				=> __( 'Exceptions', RTB_TEXTDOMAIN ),
+				'description'		=> __( "Define special opening hours for holidays, events or other needs. Leave the time empty if you're closed all day.", RTB_TEXTDOMAIN ),
+				'time_format'		=> $this->get_setting( 'time-format' ),
+				'date_format'		=> $this->get_setting( 'date-format' ),
+				'disable_weekdays'	=> true,
+				'disable_weeks'		=> true,
+				'instance_schedule_summaries' => array(
+					'all_day'	=> _x( 'Closed all day', 'Brief description of a scheduling exception when no times are set', SAP_TEXTDOMAIN ),
 				),
-				'weeks'			=> array(
-					'first'		=> __( '1st', RTB_TEXTDOMAIN ),
-					'second'	=> __( '2nd', RTB_TEXTDOMAIN ),
-					'third'		=> __( '3rd', RTB_TEXTDOMAIN ),
-					'fourth'	=> __( '4th', RTB_TEXTDOMAIN ),
-					'last'		=> _x( 'last', 'Last week of the month', RTB_TEXTDOMAIN ),
-				),
-				'time_format'	=> $this->get_setting( 'time-format' ),
-				'date_format'	=> $this->get_setting( 'date-format' ),
 			)
 		);
 
