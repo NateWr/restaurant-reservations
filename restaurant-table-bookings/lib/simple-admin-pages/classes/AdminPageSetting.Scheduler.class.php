@@ -75,6 +75,13 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 	public $disable_end_time = false;
 
 	/**
+	 * Array containing strings for schedule summaries. See the default
+	 * summaries at set_schedule_summaries(). Use this to overwrite the defaults
+	 * with anything more useful to this instance.
+	 */
+	public $instance_schedule_summaries;
+
+	/**
 	 * Escape the value to display it in text fields and other input fields
 	 * @since 2.0
 	 */
@@ -449,15 +456,19 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 		}
 
 		$this->schedule_summaries = array(
-			'never' 				=> _x( 'Never', 'Brief description of a scheduling rule when no weekdays or weeks are included in the rule.', SAP_TEXTDOMAIN ),
-			'weekly_always' 		=> _x( 'Every day', 'Brief description of a scheduling rule when all the weekdays/weeks are included in the rule.', SAP_TEXTDOMAIN ),
-			'monthly_weekdays' 		=> _x( '{days} on the {weeks} week of the month', 'Brief description of a scheduling rule when some weekdays are included on only some weeks of the month. The {days} and {weeks} bits should be left alone and will be replaced by a comma-separated list of days (the first one) and weeks (the second one) in the following format: M, T, W on the first, second week of the month', SAP_TEXTDOMAIN ),
+			'never' 				=> _x( 'Never', 'Brief default description of a scheduling rule when no weekdays or weeks are included in the rule.', SAP_TEXTDOMAIN ),
+			'weekly_always' 		=> _x( 'Every day', 'Brief default description of a scheduling rule when all the weekdays/weeks are included in the rule.', SAP_TEXTDOMAIN ),
+			'monthly_weekdays' 		=> _x( '{days} on the {weeks} week of the month', 'Brief default description of a scheduling rule when some weekdays are included on only some weeks of the month. The {days} and {weeks} bits should be left alone and will be replaced by a comma-separated list of days (the first one) and weeks (the second one) in the following format: M, T, W on the first, second week of the month', SAP_TEXTDOMAIN ),
 			'monthly_weeks' 		=> _x( '{weeks} week of the month', 'Brief description of a scheduling rule when some weeks of the month are included but all or no weekdays are selected.  {weeks}  should be left alone and will be replaced by a comma-separated list of weeks (the second one) in the following format: First, second week of the month', SAP_TEXTDOMAIN ),
-			'all_day' 				=> _x( 'All day', 'Brief description of a scheduling rule when no times are set', SAP_TEXTDOMAIN ),
-			'before' 				=> _x( 'Ends at', 'Brief description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm.', SAP_TEXTDOMAIN ),
-			'after' 				=> _x( 'Starts at', 'Brief description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm.', SAP_TEXTDOMAIN ),
-			'separator'				=> _x( '&mdash;', 'Separator between times of a scheduling rule.', SAP_TEXTDOMAIN ),
+			'all_day' 				=> _x( 'All day', 'Brief default description of a scheduling rule when no times are set', SAP_TEXTDOMAIN ),
+			'before' 				=> _x( 'Ends at', 'Brief default description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm.', SAP_TEXTDOMAIN ),
+			'after' 				=> _x( 'Starts at', 'Brief default description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm.', SAP_TEXTDOMAIN ),
+			'separator'				=> _x( '&mdash;', 'Default separator between times of a scheduling rule.', SAP_TEXTDOMAIN ),
 		);
+
+		if ( !empty( $this->instance_schedule_summaries ) ) {
+			$this->schedule_summaries = array_merge( $this->schedule_summaries, $this->instance_schedule_summaries );
+		}
 	}
 
 	/**
