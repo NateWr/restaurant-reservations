@@ -128,9 +128,9 @@ function rtb_enqueue_assets() {
 	wp_enqueue_script( 'pickadate-legacy', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/legacy.js', array( 'jquery' ), '', true );
 	// @todo is there some way I can enqueue this for RTL languages
 	// wp_enqueue_style( 'pickadate-rtl', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/themes/rtl.css' );
-	
+
 	wp_enqueue_script( 'rtb-booking-form' );
-	
+
 	// Pass date and time format settings to the pickadate controls
 	global $rtb_controller;
 	wp_localize_script(
@@ -139,12 +139,74 @@ function rtb_enqueue_assets() {
 		array(
 			'date_format' => $rtb_controller->settings->get_setting( 'date-format' ),
 			'time_format'  => $rtb_controller->settings->get_setting( 'time-format' ),
+			'disable_dates'	=> rtb_get_datepicker_rules(),
 			'schedule_open' => $rtb_controller->settings->get_setting( 'schedule-open' ),
 			'schedule_closed' => $rtb_controller->settings->get_setting( 'schedule-closed' ),
 			'early_bookings' => $rtb_controller->settings->get_setting( 'early-bookings' ),
 			'late_bookings' => $rtb_controller->settings->get_setting( 'late-bookings' ),
 		)
 	);
+
+}
+} // endif;
+
+/**
+ * Get rules for datepicker date ranges
+ * See: http://amsul.ca/pickadate.js/date.htm#disable-dates
+ * @since 0.0.1
+ */
+if ( !function_exists( 'rtb_get_datepicker_rules' ) ) {
+function rtb_get_datepicker_rules() {
+
+	global $rtb_controller;
+
+	$disable_rules = array();
+
+	$disabled_weekdays = array(
+		'sunday'	=> 1,
+		'monday'	=> 2,
+		'tuesday'	=> 3,
+		'wednesday'	=> 4,
+		'thursday'	=> 5,
+		'friday'	=> 6,
+		'saturday'	=> 7,
+	);
+
+	// Determine which weekdays should be disabled
+	$enabled_dates = array();
+	$schedule_open = $rtb_controller->settings->get_setting( 'schedule-open' );
+	foreach ( $schedule_open as $rule ) {
+		if ( !empty( $rule['weekdays'] ) ) {
+			foreach ( $rule['weekdays'] as $weekday => $value ) {
+				unset( $disabled_weekdays[ $weekday ] );
+			}
+		}
+	}
+
+	if ( count( $disabled_weekdays ) < 7 ) {
+		foreach ( $disabled_weekdays as $weekday ) {
+			$disable_rules[] = $weekday;
+		}
+	}
+
+	// Handle exception dates
+	$schedule_closed = $rtb_controller->settings->get_setting( 'schedule-closed' );
+	foreach ( $schedule_closed as $rule ) {
+	
+		// Disable exception dates that are closed all day
+		if ( !empty( $rule['date'] ) && empty( $rule['time'] ) ) {
+			$date = new DateTime( $rule['date'] );
+			$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ) );
+		
+		// Enable exception dates that have opening times
+		} elseif ( !empty( $rule['date'] ) ) {
+			$date = new DateTime( $rule['date'] );
+			$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ), 'inverted' );
+		}
+			
+	}
+
+	return $disable_rules;
 
 }
 } // endif;
