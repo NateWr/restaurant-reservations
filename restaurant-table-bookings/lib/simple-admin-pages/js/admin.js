@@ -263,12 +263,12 @@ jQuery(document).ready(function ($) {
 			});
 
 			if ( weekdays == 0 && sap_scheduler.settings[ scheduler_id ].disable_weekdays === false ) {
-				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.summaries['never'] );
+				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.settings[scheduler_id].summaries['never'] );
 
 				return;
 
 			} else if ( weekdays == 7 ) {
-				var weekday_string = sap_scheduler.summaries['weekly_always'];
+				var weekday_string = sap_scheduler.settings[scheduler_id].summaries['weekly_always'];
 
 			} else {
 				var weekday_string = weekday_arr.join( ', ' );
@@ -290,15 +290,15 @@ jQuery(document).ready(function ($) {
 			}
 
 			if ( weeks == 0 ) {
-				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.summaries['never'] );
+				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.settings[scheduler_id].summaries['never'] );
 
 				return;
 			}
 
 			if ( weekday_string != '' ) {
-				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.summaries['monthly_weekdays'].replace( '{days}', weekday_arr.join( ', ' ) ).replace( '{weeks}', weeks_arr.join( ', ' ) ) );
+				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.settings[scheduler_id].summaries['monthly_weekdays'].replace( '{days}', weekday_arr.join( ', ' ) ).replace( '{weeks}', weeks_arr.join( ', ' ) ) );
 			} else {
-				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.summaries['monthly_weeks'].replace( '{weeks}', weeks_arr.join( ', ' ) ) );
+				scheduler_rule.find( '.sap-scheduler-brief .date .value' ).html( sap_scheduler.settings[scheduler_id].summaries['monthly_weeks'].replace( '{weeks}', weeks_arr.join( ', ' ) ) );
 			}
 		}
 
@@ -312,19 +312,19 @@ jQuery(document).ready(function ($) {
 			var end = scheduler_rule.find( '.sap-scheduler-time-input .end input' ).val();
 
 			if ( start == '' && ( end == '' || typeof end == 'undefined' ) ) {
-				scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( sap_scheduler.summaries['all_day'] );
+				scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( sap_scheduler.settings[scheduler_id].summaries['all_day'] );
 
 				return;
 			}
 
 			if ( start == '' ) {
-				scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( sap_scheduler.summaries['before'] + ' ' + end );
+				scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( sap_scheduler.settings[scheduler_id].summaries['before'] + ' ' + end );
 
 				return;
 			}
 
 			if ( end == '' || typeof end == 'undefined' ) {
-				scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( sap_scheduler.summaries['after'] + ' ' + start );
+				scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( sap_scheduler.settings[scheduler_id].summaries['after'] + ' ' + start );
 
 				return;
 			}
@@ -332,7 +332,7 @@ jQuery(document).ready(function ($) {
 			if ( typeof end == 'undefined' ) {
 				return scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( start );
 			} else {
-				return scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( start + sap_scheduler.summaries['separator'] + end );
+				return scheduler_rule.find( '.sap-scheduler-brief .time .value' ).html( start + sap_scheduler.settings[scheduler_id].summaries['separator'] + end );
 			}
 		}
 	}

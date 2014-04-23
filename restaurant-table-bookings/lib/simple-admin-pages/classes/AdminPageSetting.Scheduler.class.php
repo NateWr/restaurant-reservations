@@ -159,6 +159,7 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 			'disable_weeks'		=> $this->disable_weeks,
 			'disable_date'		=> $this->disable_date,
 			'disable_time'		=> $this->disable_time,
+			'summaries'			=> $this->schedule_summaries,
 		);
 
 		// This gets called multiple times, but only the last call is actually
@@ -167,8 +168,7 @@ class sapAdminPageSettingScheduler_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 			'sap-admin-script',
 			'sap_scheduler',
 			array(
-				'settings' => $sap_scheduler_settings,
-				'summaries'  => $this->schedule_summaries,
+				'settings' => $sap_scheduler_settings
 			)
 		);
 
