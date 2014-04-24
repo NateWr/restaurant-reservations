@@ -8,6 +8,8 @@
  * Author URI: http://themeofthecrop.com
  * License:     GNU General Public License v2.0 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Requires at least: 3.8
+ * Tested up to: 3.9
  *
  * Text Domain: rtbdomain
  * Domain Path: /languages/
