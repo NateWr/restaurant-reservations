@@ -192,18 +192,18 @@ function rtb_get_datepicker_rules() {
 	// Handle exception dates
 	$schedule_closed = $rtb_controller->settings->get_setting( 'schedule-closed' );
 	foreach ( $schedule_closed as $rule ) {
-	
+
 		// Disable exception dates that are closed all day
 		if ( !empty( $rule['date'] ) && empty( $rule['time'] ) ) {
 			$date = new DateTime( $rule['date'] );
 			$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ) );
-		
+
 		// Enable exception dates that have opening times
 		} elseif ( !empty( $rule['date'] ) ) {
 			$date = new DateTime( $rule['date'] );
 			$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ), 'inverted' );
 		}
-			
+
 	}
 
 	return $disable_rules;

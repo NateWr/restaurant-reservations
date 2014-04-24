@@ -34,7 +34,18 @@ jQuery(document).ready(function ($) {
 		// Pass conditional configuration parameters
 		// @todo set timepicker interval
 		if ( rtb_pickadate.disable_dates.length ) {
-			datepicker.set( 'disable', rtb_pickadate.disable_dates );
+			console.log( rtb_pickadate.disable_dates );
+			/*
+			 * @todo the browser is hanging on the disable call. gotta figure
+			 * out a fix. https://github.com/amsul/pickadate.js/issues/408
+			datepicker.set( 'disable', [
+					1,
+					5,
+					[ 2014, 4, 30 ],
+				]
+			);
+			*/
+//			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
 
 		datepicker.on( {
