@@ -195,7 +195,6 @@ class rtbInit {
 	 * @todo maybe this should be added as a part of a shortcode that is included
 	 *	on the booking confirmation page? ie - when this shortcode is executed,
 	 *	call this function to check for valid booking request.
-	 * @todo add support for nonce
 	 */
 	public function make_booking_request() {
 

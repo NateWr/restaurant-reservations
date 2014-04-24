@@ -559,7 +559,7 @@ class rtbBookingsTable extends WP_List_Table {
 			if ( $_GET['schedule'] == 'upcoming' ) {
 				$args['date_query'] = array(
 					array(
-						'after' => '-1 hour', // show bookings that have just passed @todo make a setting for how long they should remain in upcoming
+						'after' => '-1 hour', // show bookings that have just passed
 					)
 				);
 				if ( empty( $_GET['order'] ) ) {
