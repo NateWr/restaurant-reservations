@@ -1,6 +1,6 @@
 {
-  "name": "restaurant-table-bookings",
-  "description": "Accept online table bookings and reservations for your restaurant.",
+  "name": "restaurant-reservations",
+  "description": "Accept restaurant reservations online.",
   "version": "0.0.1",
   "author": {
     "name": "Theme of the Crop",

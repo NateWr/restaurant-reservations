@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Restaurant Table Bookings
+ * Plugin Name: Restaurant Reservations
  * Plugin URI: http://themeofthecrop.com
- * Description: Accept online table bookings and reservations for your restaurant.
+ * Description: Accept restaurant reservations online.
  * Version: 0.0.1
  * Author: Theme of the Crop
  * Author URI: http://themeofthecrop.com

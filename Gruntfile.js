@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 		// Configure JSHint
 		jshint: {
 			test: {
-				src: 'restaurant-table-bookings/assets/js/*.js'
+				src: 'restaurant-reservations/assets/js/*.js'
 			}
 		},
 
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 			main: {
 				files: [
 					{
-						cwd: 'restaurant-table-bookings/',
+						cwd: 'restaurant-reservations/',
 						src: '**',
 						dest: export_dir + '/<%= pkg.name %>'
 					}
@@ -32,11 +32,11 @@ module.exports = function(grunt) {
 		// Watch for changes on some files and auto-compile them
 		watch: {
 			js: {
-				files: ['restaurant-table-bookings/assets/js/*.js'],
+				files: ['restaurant-reservations/assets/js/*.js'],
 				tasks: ['jshint', 'sync']
 			},
 			sync: {
-				files: ['!restaurant-table-bookings/assets/js/*.js', 'restaurant-table-bookings/**/*'],
+				files: ['!restaurant-reservations/assets/js/*.js', 'restaurant-reservations/**/*'],
 				tasks: ['sync']
 			}
 		}
