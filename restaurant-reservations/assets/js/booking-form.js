@@ -37,10 +37,6 @@ jQuery(document).ready(function ($) {
 			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
 
-		if ( rtb_pickadate.late_bookings == 1440 ) {
-			datepicker.set( 'date_min', 1 );
-		}
-
 		datepicker.on( {
 			close: function() {
 				rtb_update_timepicker_range();
