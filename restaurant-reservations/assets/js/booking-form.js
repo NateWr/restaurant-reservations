@@ -1,4 +1,4 @@
-/* Javascript for Restaurant Table Bookings admin */
+/* Javascript for Restaurant Reservations booking form */
 jQuery(document).ready(function ($) {
 
 	/**

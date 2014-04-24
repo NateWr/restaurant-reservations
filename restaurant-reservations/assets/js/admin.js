@@ -1,4 +1,4 @@
-/* Javascript for Restaurant Table Bookings admin */
+/* Javascript for Restaurant Reservations admin */
 jQuery(document).ready(function ($) {
 
 	// Show or hide a booking message in the bookings table

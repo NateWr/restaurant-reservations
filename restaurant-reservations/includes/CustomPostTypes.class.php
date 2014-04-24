@@ -1,6 +1,6 @@
 <?php
 /**
- * Class to handle all custom post type definitions for Restaurant Table Bookings
+ * Class to handle all custom post type definitions for Restaurant Reservations
  */
 
 if ( !defined( 'ABSPATH' ) )

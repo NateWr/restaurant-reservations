@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !class_exists( 'rtbNotifications' ) ) {
 /**
- * Class to process notifications for Restaurant Table Bookings
+ * Class to process notifications for Restaurant Reservations
  *
  * This class contains the registered notifications and sends them when the
  * event is triggered.

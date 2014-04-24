@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !class_exists( 'rtbNotificationEmail' ) ) {
 /**
- * Class to handle an email notification for Restaurant Table Bookings
+ * Class to handle an email notification for Restaurant Reservations
  *
  * This class extends rtbNotification and must implement the following methods:
  *	prepare_notification() - set up and validate data

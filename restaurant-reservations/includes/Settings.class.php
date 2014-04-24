@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !class_exists( 'rtbBooking' ) ) {
 /**
- * Class to handle configurable settings for Restaurant Table Bookings
+ * Class to handle configurable settings for Restaurant Reservations
  *
  * @since 0.0.1
  */

@@ -3,7 +3,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !class_exists( 'rtbNotification' ) ) {
 /**
- * Base class to handle a notification for Restaurant Table Bookings
+ * Base class to handle a notification for Restaurant Reservations
  *
  * This class sets up the notification content and sends it when run by
  * rtbNotifications. This class should be extended for each type of
