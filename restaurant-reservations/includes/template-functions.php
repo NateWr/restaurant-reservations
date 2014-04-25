@@ -47,19 +47,19 @@ function rtb_print_booking_form() {
 				<label for="rtb-date">
 					<?php _e( 'Date', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="date" id="rtb-date">
+				<input type="text" name="rtb-date" id="rtb-date">
 			</div>
 			<div class="time">
 				<label for="rtb-time">
 					<?php _e( 'Time', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="time" id="rtb-time">
+				<input type="text" name="rtb-time" id="rtb-time">
 			</div>
 			<div class="party">
 				<label for="rtb-party">
 					<?php _e( 'Party', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="party" id="rtb-party">
+				<input type="text" name="rtb-party" id="rtb-party">
 			</div>
 		</fieldset>
 		<fieldset class="contact">
@@ -70,19 +70,19 @@ function rtb_print_booking_form() {
 				<label for="rtb-name">
 					<?php _e( 'Name', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="name" id="rtb-name" placeholder="Your name">
+				<input type="text" name="rtb-name" id="rtb-name" placeholder="Your name">
 			</div>
 			<div class="email">
 				<label for="rtb-email">
 					<?php _e( 'Email', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="email" id="rtb-email" placeholder="your@email.com">
+				<input type="text" name="rtb-email" id="rtb-email" placeholder="your@email.com">
 			</div>
 			<div class="phone">
 				<label for="rtb-phone">
 					<?php _e( 'Phone', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" id="phone" name="rtb-phone" placeholder="Your phone number">
+				<input type="text" name="rtb-phone" id="rtb-phone" placeholder="Your phone number">
 			</div>
 			<div class="add-message">
 				<a href="#">
@@ -93,7 +93,7 @@ function rtb_print_booking_form() {
 				<label for="rtb-message">
 					<?php _e( 'Message', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<textarea name="message" id="rtb-message"></textarea>
+				<textarea name="rtb-message" id="rtb-message"></textarea>
 			</div>
 		</fieldset>
 		<button type="submit"><?php _e( 'Request Booking', RTB_TEXTDOMAIN ); ?></button>

@@ -119,7 +119,7 @@ class rtbBooking {
 		$this->validation_errors = array();
 
 		// Date
-		$date = empty( $_POST['date'] ) ? false : $_POST['date'];
+		$date = empty( $_POST['rtb-date'] ) ? false : $_POST['rtb-date'];
 		if ( $date === false ) {
 			$this->validation_errors[] = array(
 				'field'		=> 'date',
@@ -129,7 +129,7 @@ class rtbBooking {
 
 		} else {
 			try {
-				$date = new DateTime( $_POST['date'] );
+				$date = new DateTime( $_POST['rtb-date'] );
 			} catch ( Exception $e ) {
 				$this->validation_errors[] = array(
 					'field'		=> 'date',
@@ -140,7 +140,7 @@ class rtbBooking {
 		}
 
 		// Time
-		$time = empty( $_POST['time'] ) ? false : $_POST['time'];
+		$time = empty( $_POST['rtb-time'] ) ? false : $_POST['rtb-time'];
 		if ( $time === false ) {
 			$this->validation_errors[] = array(
 				'field'		=> 'time',
@@ -150,7 +150,7 @@ class rtbBooking {
 
 		} else {
 			try {
-				$time = new DateTime( $_POST['time'] );
+				$time = new DateTime( $_POST['rtb-time'] );
 			} catch ( Exception $e ) {
 				$this->validation_errors[] = array(
 					'field'		=> 'time',
@@ -300,7 +300,7 @@ class rtbBooking {
 		}
 
 		// Name
-		$this->name = empty( $_POST['name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( $_POST['name'] ), true ); // @todo limit length? how long will WP leave a post title?
+		$this->name = empty( $_POST['rtb-name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( $_POST['rtb-name'] ), true ); // @todo limit length? how long will WP leave a post title?
 		if ( empty( $this->name ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'name',
@@ -310,7 +310,7 @@ class rtbBooking {
 		}
 
 		// Party
-		$this->party = empty( $_POST['party'] ) ? '' : sanitize_text_field( $_POST['party'] );
+		$this->party = empty( $_POST['rtb-party'] ) ? '' : sanitize_text_field( $_POST['rtb-party'] );
 		if ( empty( $this->party ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'party',
@@ -320,8 +320,8 @@ class rtbBooking {
 		}
 
 		// Email/Phone
-		$this->email = empty( $_POST['email'] ) ? '' : sanitize_text_field( $_POST['email'] ); // @todo email validation? send notification back to form on bad email
-		$this->phone = empty( $_POST['phone'] ) ? '' : sanitize_text_field( $_POST['phone'] );
+		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( $_POST['rtb-email'] ); // @todo email validation? send notification back to form on bad email
+		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( $_POST['rtb-phone'] );
 		if ( empty( $this->email ) && empty( $this->phone ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'email',
@@ -331,7 +331,7 @@ class rtbBooking {
 		}
 
 		// Message
-		$this->message = empty( $_POST['message'] ) ? '' : sanitize_text_field( $_POST['message'] );
+		$this->message = empty( $_POST['rtb-message'] ) ? '' : sanitize_text_field( $_POST['rtb-message'] );
 
 		do_action( 'rtb_validate_booking_submission', $this );
 
