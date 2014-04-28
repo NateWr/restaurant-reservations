@@ -22,6 +22,8 @@ add_shortcode( 'booking-form', 'rtb_booking_form_shortcode' );
 if ( !function_exists( 'rtb_print_booking_form' ) ) {
 function rtb_print_booking_form() {
 
+	global $rtb_controller;
+
 	// Enqueue assets for the form
 	rtb_enqueue_assets();
 
@@ -44,22 +46,25 @@ function rtb_print_booking_form() {
 				<?php _e( 'Book a table', RTB_TEXTDOMAIN ); ?>
 			</legend>
 			<div class="date">
+				<?php echo rtb_print_form_error( 'date' ); ?>
 				<label for="rtb-date">
 					<?php _e( 'Date', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="rtb-date" id="rtb-date">
+				<input type="text" name="rtb-date" id="rtb-date" value="<?php echo esc_attr( $rtb_controller->request->request_date ); ?>">
 			</div>
 			<div class="time">
+				<?php echo rtb_print_form_error( 'time' ); ?>
 				<label for="rtb-time">
 					<?php _e( 'Time', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="rtb-time" id="rtb-time">
+				<input type="text" name="rtb-time" id="rtb-time" value="<?php echo esc_attr( $rtb_controller->request->request_time ); ?>">
 			</div>
 			<div class="party">
+				<?php echo rtb_print_form_error( 'party' ); ?>
 				<label for="rtb-party">
 					<?php _e( 'Party', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="rtb-party" id="rtb-party">
+				<input type="text" name="rtb-party" id="rtb-party" value="<?php echo esc_attr( $rtb_controller->request->party ); ?>">
 			</div>
 		</fieldset>
 		<fieldset class="contact">
@@ -67,22 +72,25 @@ function rtb_print_booking_form() {
 				<?php _e( 'Contact Details', RTB_TEXTDOMAIN ); ?>
 			</legend>
 			<div class="name">
+				<?php echo rtb_print_form_error( 'name' ); ?>
 				<label for="rtb-name">
 					<?php _e( 'Name', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="rtb-name" id="rtb-name" placeholder="Your name">
+				<input type="text" name="rtb-name" id="rtb-name" placeholder="Your name" value="<?php echo esc_attr( $rtb_controller->request->name ); ?>">
 			</div>
 			<div class="email">
+				<?php echo rtb_print_form_error( 'email' ); ?>
 				<label for="rtb-email">
 					<?php _e( 'Email', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="rtb-email" id="rtb-email" placeholder="your@email.com">
+				<input type="text" name="rtb-email" id="rtb-email" placeholder="your@email.com" value="<?php echo esc_attr( $rtb_controller->request->email ); ?>">
 			</div>
 			<div class="phone">
+				<?php echo rtb_print_form_error( 'phone' ); ?>
 				<label for="rtb-phone">
 					<?php _e( 'Phone', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<input type="text" name="rtb-phone" id="rtb-phone" placeholder="Your phone number">
+				<input type="text" name="rtb-phone" id="rtb-phone" placeholder="Your phone number" value="<?php echo esc_attr( $rtb_controller->request->phone ); ?>">
 			</div>
 			<div class="add-message">
 				<a href="#">
@@ -90,10 +98,11 @@ function rtb_print_booking_form() {
 				</a>
 			</div>
 			<div class="message">
+				<?php echo rtb_print_form_error( 'message' ); ?>
 				<label for="rtb-message">
 					<?php _e( 'Message', RTB_TEXTDOMAIN ); ?>
 				</label>
-				<textarea name="rtb-message" id="rtb-message"></textarea>
+				<textarea name="rtb-message" id="rtb-message"><?php echo esc_attr( $rtb_controller->request->message ); ?></textarea>
 			</div>
 		</fieldset>
 		<button type="submit"><?php _e( 'Request Booking', RTB_TEXTDOMAIN ); ?></button>
@@ -208,5 +217,24 @@ function rtb_get_datepicker_rules() {
 
 	return $disable_rules;
 
+}
+} // endif;
+
+/**
+ * Print a form validation error
+ * @since 0.0.1
+ */
+if ( !function_exists( 'rtb_print_form_error' ) ) {
+function rtb_print_form_error( $field ) {
+
+	global $rtb_controller;
+
+	if ( !empty( $rtb_controller->request ) && !empty( $rtb_controller->request->validation_errors ) ) {
+		foreach ( $rtb_controller->request->validation_errors as $error ) {
+			if ( $error['field'] == $field ) {
+				echo '<div class="rtb-error">' . $error['message'] . '</div>';
+			}
+		}
+	}
 }
 } // endif;

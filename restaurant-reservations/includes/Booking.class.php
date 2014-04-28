@@ -144,7 +144,7 @@ class rtbBooking {
 		if ( $time === false ) {
 			$this->validation_errors[] = array(
 				'field'		=> 'time',
-				'error_msg'	=> $e->getMessage(),
+				'error_msg'	=> 'Booking request missing time',
 				'message'	=> __( 'Please enter the time you would like to book.', RTB_TEXTDOMAIN ),
 			);
 
@@ -292,12 +292,16 @@ class rtbBooking {
 				}
 			}
 
-
 			// Accept the date if it has passed validation
 			if ( empty( $this->validation_errors ) ) {
 				$this->date = $request->format( 'Y-m-d H:i:s' );
 			}
 		}
+
+		// Save requested date/time values in case they need to be
+		// printed in the form again
+		$this->request_date = empty( $_POST['rtb-date'] ) ? '' : $_POST['rtb-date'];
+		$this->request_time = empty( $_POST['rtb-time'] ) ? '' : $_POST['rtb-time'];
 
 		// Name
 		$this->name = empty( $_POST['rtb-name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( $_POST['rtb-name'] ), true ); // @todo limit length? how long will WP leave a post title?
@@ -321,16 +325,16 @@ class rtbBooking {
 
 		// Email/Phone
 		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( $_POST['rtb-email'] ); // @todo email validation? send notification back to form on bad email
-		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( $_POST['rtb-phone'] );
-		if ( empty( $this->email ) && empty( $this->phone ) ) {
+		if ( empty( $this->email ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'email',
-				'post_variable'	=> $this->email . '/' . $this->phone,
-				'message'	=> __( 'Please enter an email address or phone number so we can confirm your booking.', RTB_TEXTDOMAIN ),
+				'post_variable'	=> $this->email,
+				'message'	=> __( 'Please enter an email address so we can confirm your booking.', RTB_TEXTDOMAIN ),
 			);
 		}
 
-		// Message
+		// Phone/Message
+		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( $_POST['rtb-phone'] );
 		$this->message = empty( $_POST['rtb-message'] ) ? '' : sanitize_text_field( $_POST['rtb-message'] );
 
 		do_action( 'rtb_validate_booking_submission', $this );

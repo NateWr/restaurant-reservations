@@ -205,8 +205,8 @@ class rtbInit {
 		}
 
 		require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
-		$booking = new rtbBooking();
-		if ( $booking->insert_booking() === true ) {
+		$this->request = new rtbBooking();
+		if ( $this->request->insert_booking() === true ) {
 			// @todo success
 		} else {
 			// @todo failure
