@@ -189,7 +189,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'booking-page',
 				'title'         => __( 'Booking Page', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select the page on your site to display the booking form and confirmation message.', RTB_TEXTDOMAIN ), // @todo "Click here to create the page"
+				'description'   => __( 'Select a page on your site to automatically display the booking form and confirmation message.', RTB_TEXTDOMAIN ),
 				'blank_option'	=> true,
 				'args'			=> array(
 					'post_type' 		=> 'page',
