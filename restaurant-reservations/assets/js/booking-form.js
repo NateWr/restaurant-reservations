@@ -46,6 +46,8 @@ jQuery(document).ready(function ($) {
 			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
 
+		// Update timepicker on pageload and whenever the datepicker is closed
+		rtb_update_timepicker_range();
 		datepicker.on( {
 			close: function() {
 				rtb_update_timepicker_range();
