@@ -29,13 +29,25 @@ function rtb_print_booking_form() {
 
 	// Allow themes and plugins to override the booking form's HTML output.
 	$output = apply_filters( 'rtb_booking_form_html_pre', '' );
-
 	if ( !empty( $output ) ) {
 		return $output;
 	}
 
+	// Process a booking request
+	if ( !empty( $_POST['action'] ) && $_POST['action'] !== 'booking_request' ) {
+
+		if ( empty( $rtb_controller->request ) ) {
+			require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
+			$rtb_controller->request = new rtbBooking();
+		}
+
+		$rtb_controller->request->insert_booking();
+	}
+
 	if ( empty( $rtb_controller->request ) ) {
 		$request = new stdClass();
+		$request->request_processed = false;
+		$request->request_inserted = false;
 	} else {
 		$request = $rtb_controller->request;
 	}
@@ -45,6 +57,11 @@ function rtb_print_booking_form() {
 	?>
 
 <div class="rtb-booking-form">
+	<?php if ( $request->request_inserted === true ) : ?>
+	<div class="rtb-message">
+		<p><?php echo $rtb_controller->settings->get_setting( 'success-message' ); ?></p>
+	</div>
+	<?php else : ?>
 	<form method="POST" action="">
 		<input type="hidden" name="action" value="booking_request">
 		<fieldset class="reservation">
@@ -113,6 +130,7 @@ function rtb_print_booking_form() {
 		</fieldset>
 		<button type="submit"><?php _e( 'Request Booking', RTB_TEXTDOMAIN ); ?></button>
 	</form>
+	<?php endif; ?>
 </div>
 
 	<?php

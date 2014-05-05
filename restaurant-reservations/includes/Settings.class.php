@@ -37,6 +37,7 @@ class rtbSettings {
 
 		$this->defaults = array(
 
+			'success-message'				=> _x( 'Thanks, your booking request is waiting to be confirmed. Updates will be sent to the email address you provided.', RTB_TEXTDOMAIN ),
 			'date-format'					=> _x( 'mmmm d, yyyy', 'Default date format for display. Must match formatting rules at http://amsul.ca/pickadate.js/date.htm#formatting-rules', RTB_TEXTDOMAIN ),
 			'time-format'					=> _x( 'h:i A', 'Default time format for display. Must match formatting rules at http://amsul.ca/pickadate.js/time.htm#formats', RTB_TEXTDOMAIN ),
 
@@ -212,6 +213,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 					'posts_per_page'	=> -1,
 					'post_status'		=> 'publish',
 				),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'general',
+			'textarea',
+			array(
+				'id'			=> 'success-message',
+				'title'			=> __( 'Success Message', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Enter the message to display when a booking request is made.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> $this->defaults['success-message'],
 			)
 		);
 

@@ -9,6 +9,20 @@ if ( !class_exists( 'rtbBooking' ) ) {
  */
 class rtbBooking {
 
+	/**
+	 * Whether or not this request has been processed. Used to prevent
+	 * duplicate forms on one page from processing a booking form more than
+	 * once.
+	 * @since 0.0.1
+	 */
+	public $request_processed = false;
+
+	/**
+	 * Whether or not this request was successfully saved to the database.
+	 * @since 0.0.1
+	 */
+	public $request_inserted = false;
+
 	public function __construct() {}
 
 	/**
@@ -98,6 +112,15 @@ class rtbBooking {
 	 */
 	public function insert_booking() {
 
+		// Check if this request has already been processed. If multiple forms
+		// exist on the same page, this prevents a single submission from
+		// being added twice.
+		if ( $this->request_processed === true ) {
+			return true;
+		}
+
+		$this->request_processed = true;
+
 		$this->validate_submission();
 		if ( $this->is_valid_submission() === false ) {
 			return false;
@@ -105,9 +128,13 @@ class rtbBooking {
 
 		if ( $this->insert_post_data() === false ) {
 			return false;
+		} else {
+			$this->request_inserted = true;
 		}
 
 		do_action( 'rtb_insert_booking', $this );
+
+		return true;
 	}
 
 	/**
