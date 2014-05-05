@@ -415,6 +415,12 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 						<strong>{bookings_link}</strong> ' . __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ) . '
 					</div>
 					<div class="rtb-template-tags-box">
+						<strong>{confirm_link}</strong> ' . __( 'A link to confirm this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{close_link}</strong> ' . __( 'A link to reject this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
 						<strong>{site_name}</strong> ' . __( 'The name of this website', RTB_TEXTDOMAIN ) . '
 					</div>
 					<div class="rtb-template-tags-box">

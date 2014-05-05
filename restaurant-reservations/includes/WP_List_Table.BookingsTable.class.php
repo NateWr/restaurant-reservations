@@ -86,6 +86,9 @@ class rtbBookingsTable extends WP_List_Table {
 
 		// Run any bulk action requests
 		$this->process_bulk_action();
+		
+		// Run any quicklink requests
+		$this->process_quicklink_action();
 
 		// Retrieve a count of the number of bookings by status
 		$this->get_booking_counts();
@@ -407,6 +410,40 @@ class rtbBookingsTable extends WP_List_Table {
 			add_action( 'rtb_bookings_table_top', array( $this, 'admin_notice_bulk_actions' ) );
 		}
 
+	}
+
+	/**
+	 * Process quicklink actions sent out in notification emails
+	 * @since 0.0.1
+	 */
+	public function process_quicklink_action() {
+	
+		if ( empty( $_REQUEST['rtb-quicklink'] ) ) {
+			return;
+		}
+
+		if ( !current_user_can( 'manage_bookings' ) ) {
+			return;
+		}
+		
+		global $rtb_controller;
+		
+		$results = array();
+		
+		$id = !empty( $_REQUEST['booking'] ) ? $_REQUEST['booking'] : false;
+		
+		if ( $_REQUEST['rtb-quicklink'] == 'confirm' ) {
+			$results[$id] = $rtb_controller->cpts->update_booking_status( $id, 'confirmed' );
+			$this->last_action = 'set-status-confirmed';
+		} elseif ( $_REQUEST['rtb-quicklink'] == 'close' ) {
+			$results[$id] = $rtb_controller->cpts->update_booking_status( $id, 'closed' );
+			$this->last_action = 'set-status-closed';
+		}
+
+		if( count( $results ) ) {
+			$this->results = $results;
+			add_action( 'rtb_bookings_table_top', array( $this, 'admin_notice_bulk_actions' ) );
+		}
 	}
 
 	/**
