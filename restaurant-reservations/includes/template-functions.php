@@ -44,12 +44,20 @@ function rtb_print_booking_form() {
 		$rtb_controller->request->insert_booking();
 	}
 
+	// Set up a dummy request object if no request has been made. This just
+	// simplifies the display of values in the form below
 	if ( empty( $rtb_controller->request ) ) {
 		$request = new stdClass();
 		$request->request_processed = false;
 		$request->request_inserted = false;
 	} else {
 		$request = $rtb_controller->request;
+	}
+
+	// Define the form's action parameter
+	$booking_page = $rtb_controller->settings->get_setting( 'booking-page' );
+	if ( !empty( $booking_page ) ) {
+		$booking_page = get_permalink( $booking_page );
 	}
 
 	ob_start();
@@ -62,7 +70,7 @@ function rtb_print_booking_form() {
 		<p><?php echo $rtb_controller->settings->get_setting( 'success-message' ); ?></p>
 	</div>
 	<?php else : ?>
-	<form method="POST" action="">
+	<form method="POST" action="<?php echo esc_attr( $booking_page ); ?>">
 		<input type="hidden" name="action" value="booking_request">
 		<fieldset class="reservation">
 			<legend>

@@ -189,24 +189,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'booking-page',
 				'title'         => __( 'Booking Page', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select the page on your site to display the booking form.', RTB_TEXTDOMAIN ), // @todo "Click here to create the page"
-				'blank_option'	=> true,
-				'args'			=> array(
-					'post_type' 		=> 'page',
-					'posts_per_page'	=> -1,
-					'post_status'		=> 'publish',
-				),
-			)
-		);
-
-		$sap->add_setting(
-			'rtb-settings',
-			'general',
-			'post',
-			array(
-				'id'            => 'confirmation-page',
-				'title'         => __( 'Confirmation Page', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select the page on your site to display the booking confirmation details.', RTB_TEXTDOMAIN ), // @todo "Click here to create the page"
+				'description'   => __( 'Select the page on your site to display the booking form and confirmation message.', RTB_TEXTDOMAIN ), // @todo "Click here to create the page"
 				'blank_option'	=> true,
 				'args'			=> array(
 					'post_type' 		=> 'page',

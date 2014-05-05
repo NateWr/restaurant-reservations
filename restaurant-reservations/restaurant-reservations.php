@@ -76,6 +76,9 @@ class rtbInit {
 		require_once( RTB_PLUGIN_DIR . '/includes/Settings.class.php' );
 		$this->settings = new rtbSettings();
 
+		// Append booking form to a post's $content variable
+		add_filter( 'the_content', array( $this, 'append_to_content' ) );
+
 		// Development tool
 		// @todo maybe split off this sort of thing to another file
 		add_action( 'init', array( $this, 'dev_add_bookings_data' ) );
@@ -183,6 +186,29 @@ class rtbInit {
 		</div>
 
 		<?php
+	}
+
+	/**
+	 * Append booking form to a post's $content variable
+	 * @since 0.0.1
+	 */
+	function append_to_content( $content ) {
+
+		if ( !is_main_query() || !in_the_loop() ) {
+			return $content;
+		}
+
+		$booking_page = $this->settings->get_setting( 'booking-page' );
+		if ( empty( $booking_page ) ) {
+			return $content;
+		}
+
+		global $post;
+		if ( $post->ID !== $this->settings->get_setting( 'booking-page' ) ) {
+			return $content;
+		}
+
+		return $content . rtb_print_booking_form();
 	}
 
 	/**
