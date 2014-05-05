@@ -68,12 +68,6 @@ class rtbInit {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 
-		// Handle booking request submission
-		// @todo this should only be called when a page is rendered with the
-		//	booking submission response shortcode, or called directly in the
-		//	admin interface. Eventually this will be split off to its own class
-		add_action( 'init', array( $this, 'make_booking_request' ) );
-
 		// Handle notifications
 		require_once( RTB_PLUGIN_DIR . '/includes/Notifications.class.php' );
 		$this->notifications = new rtbNotifications();
@@ -189,28 +183,6 @@ class rtbInit {
 		</div>
 
 		<?php
-	}
-
-	/**
-	 * Add a new booking post type when user submits the form
-	 * @since 0.0.1
-	 * @todo maybe this should be added as a part of a shortcode that is included
-	 *	on the booking confirmation page? ie - when this shortcode is executed,
-	 *	call this function to check for valid booking request.
-	 */
-	public function make_booking_request() {
-
-		if ( empty( $_POST['action'] ) || $_POST['action'] !== 'booking_request' ) {
-			return null;
-		}
-
-		require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
-		$this->request = new rtbBooking();
-		if ( $this->request->insert_booking() === true ) {
-			// @todo success
-		} else {
-			// @todo failure
-		}
 	}
 
 	/**

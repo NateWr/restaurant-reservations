@@ -34,7 +34,7 @@ function rtb_print_booking_form() {
 	}
 
 	// Process a booking request
-	if ( !empty( $_POST['action'] ) && $_POST['action'] !== 'booking_request' ) {
+	if ( !empty( $_POST['action'] ) && $_POST['action'] == 'booking_request' ) {
 
 		if ( empty( $rtb_controller->request ) ) {
 			require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
