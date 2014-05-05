@@ -45,7 +45,6 @@ class rtbInit {
 		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
 
 		// Initialize the plugin
-		add_action( 'init', array( $this, 'load_config' ) );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		// Add custom roles and capabilities
@@ -94,12 +93,6 @@ class rtbInit {
 		$this->cpts->load_cpts();
 		flush_rewrite_rules();
 	}
-
-	/**
-	 * Load the plugin's configuration settings and default content
-	 * @since 0.0.1
-	 */
-	public function load_config() {}
 
 	/**
 	 * Load the plugin textdomain for localistion
