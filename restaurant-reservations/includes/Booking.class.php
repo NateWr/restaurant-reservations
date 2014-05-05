@@ -401,7 +401,7 @@ class rtbBooking {
 			$this->insert_post_error = $id;
 			return false;
 		} else {
-			$this->id = $id;
+			$this->ID = $id;
 		}
 
 		$meta = array(
@@ -413,7 +413,7 @@ class rtbBooking {
 
 		$meta = apply_filters( 'rtb_insert_booking_metadata', $meta, $this );
 
-		return update_post_meta( $this->id, 'rtb', $meta );
+		return update_post_meta( $this->ID, 'rtb', $meta );
 
 	}
 
