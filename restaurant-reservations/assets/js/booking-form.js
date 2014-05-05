@@ -39,9 +39,12 @@ jQuery(document).ready(function ($) {
 
 		var datepicker = $date_input.pickadate( 'picker' );
 		var timepicker = $time_input.pickatime( 'picker' );
+		
+		if ( typeof datepicker == 'undefined' ) {
+			return;
+		}
 
 		// Pass conditional configuration parameters
-		// @todo set timepicker interval
 		if ( rtb_pickadate.disable_dates.length ) {
 			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
