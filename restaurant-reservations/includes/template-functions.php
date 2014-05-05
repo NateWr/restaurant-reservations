@@ -238,7 +238,7 @@ function rtb_print_form_error( $field ) {
 	if ( !empty( $rtb_controller->request ) && !empty( $rtb_controller->request->validation_errors ) ) {
 		foreach ( $rtb_controller->request->validation_errors as $error ) {
 			if ( $error['field'] == $field ) {
-				echo '<div class="rtb-error">' . $error['message'] . '</div>';
+				echo '<div class="rtb-error"><div class="dashicons dashicons-arrow-down"></div> ' . $error['message'] . '</div>';
 			}
 		}
 	}

@@ -2,6 +2,15 @@
 jQuery(document).ready(function ($) {
 
 	/**
+	 * Scroll to the first error message on the booking form
+	 */
+	if ( $( '.rtb-booking-form .rtb-error' ).length ) {
+		$('html, body').animate({
+			scrollTop: $( '.rtb-booking-form .rtb-error' ).first().offset().top + -40
+		}, 500);
+	}
+
+	/**
 	 * Show the message field on the booking form
 	 */
 	$( '.rtb-booking-form .add-message a' ).click( function() {

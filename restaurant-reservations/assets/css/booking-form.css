@@ -7,9 +7,11 @@
 .rtb-booking-form legend {
 	padding: 0 0.5em;
 }
+.rtb-booking-form fieldset>div {
+	margin-top: 1em;
+}
 .rtb-booking-form label {
 	display: block;
-	margin-top: 1em;
 }
 .rtb-booking-form input {
 	width: 15em;
@@ -32,4 +34,28 @@
 }
 .rtb-booking-form .message textarea {
 	min-height: 6em;
+}
+.rtb-booking-form .rtb-error {
+	font-size: 0.85em;
+	padding: 0.25em;
+	background: #f50;
+	color: #fff;
+}
+
+/* Compatibility styles for pickadate on common themes */
+#rtb-date_root .picker__button--clear,
+#rtb-date_root .picker__button--today {
+	/* don't adopt the theme's button text color */
+	color: #000;
+}
+#rtb-date_root .picker__nav--next,
+#rtb-date_root .picker__nav--prev {
+	/* next/prev calendar arrows button areas sometimes don't cover the arrows */
+	min-height: 2em;
+}
+#rtb-time_root .picker__list,
+#rtb-time_root .picker__list li {
+	/* override some theme's list styles */
+	list-style: none;
+	margin: 0 0 0 1px;
 }
