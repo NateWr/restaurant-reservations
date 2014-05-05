@@ -45,7 +45,7 @@ class sapAdminPageSettingTextarea_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 	public function display_setting() {
 		?>
 
-		<textarea name="<?php echo $this->get_input_name(); ?>" id="<?php echo $this->get_input_name(); ?>" class="<?php echo $this->size; ?>-text"><?php echo $this->value; ?></textarea>
+		<textarea name="<?php echo $this->get_input_name(); ?>" id="<?php echo $this->get_input_name(); ?>" class="<?php echo $this->size; ?>-text"<?php echo !empty( $this->placeholder ) ? ' placeholder="' . esc_attr( $this->placeholder ) . '"' : ''; ?>><?php echo $this->value; ?></textarea>
 
 		<?php
 		
