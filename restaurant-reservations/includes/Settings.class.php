@@ -391,7 +391,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
-		// @todo this should maybe be generated automatically from an array of tags/descriptions somewhere, so that addons
+		// @todo this should be generated automatically from an array of tags/descriptions somewhere, so that addons
 		//	can easily add/edit without conflicting with each other.
 		$sap->add_setting(
 			'rtb-settings',

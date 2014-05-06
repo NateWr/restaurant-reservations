@@ -331,7 +331,7 @@ class rtbBooking {
 		$this->request_time = empty( $_POST['rtb-time'] ) ? '' : $_POST['rtb-time'];
 
 		// Name
-		$this->name = empty( $_POST['rtb-name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( $_POST['rtb-name'] ), true ); // @todo limit length? how long will WP leave a post title?
+		$this->name = empty( $_POST['rtb-name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( $_POST['rtb-name'] ), true ); // @todo should I limit length?
 		if ( empty( $this->name ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'name',
@@ -351,7 +351,7 @@ class rtbBooking {
 		}
 
 		// Email/Phone
-		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( $_POST['rtb-email'] ); // @todo email validation? send notification back to form on bad email
+		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( $_POST['rtb-email'] ); // @todo email validation? send notification back to form on bad email address.
 		if ( empty( $this->email ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'email',
