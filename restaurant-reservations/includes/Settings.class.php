@@ -57,6 +57,8 @@ class rtbSettings {
 {date}
 
 {bookings_link}
+{confirm_link}
+{close_link}
 
 &nbsp;
 
