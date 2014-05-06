@@ -31,6 +31,13 @@ if ( !class_exists( 'rtbInit' ) ) {
 class rtbInit {
 
 	/**
+	 * Set a flag which tracks whether the form has already been rendered on
+	 * the page. Only one form per page for now.
+	 * @todo support multiple forms per page
+	 */
+	public $form_rendered = false;
+
+	/**
 	 * Initialize the plugin and register hooks
 	 */
 	public function __construct() {
@@ -43,6 +50,7 @@ class rtbInit {
 		define( 'RTB_BOOKING_POST_TYPE', 'rtb-booking' );
 		define( 'RTB_BOOKING_POST_TYPE_SLUG', 'booking' );
 		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
+		
 
 		// Initialize the plugin
 		add_action( 'init', array( $this, 'load_textdomain' ) );
@@ -77,6 +85,9 @@ class rtbInit {
 
 		// Append booking form to a post's $content variable
 		add_filter( 'the_content', array( $this, 'append_to_content' ) );
+
+		// Register the widget
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 		// Development tool
 		// @todo maybe split off this sort of thing to another file
@@ -288,6 +299,15 @@ class rtbInit {
 
 		wp_register_style( 'rtb-booking-form', RTB_PLUGIN_URL . '/assets/css/booking-form.css' );
 		wp_register_script( 'rtb-booking-form', RTB_PLUGIN_URL . '/assets/js/booking-form.js', array( 'jquery' ) );
+	}
+
+	/**
+	 * Register the widgets
+	 * @since 1.1
+	 */
+	public function register_widgets() {
+		require_once( RTB_PLUGIN_DIR . '/includes/WP_Widget.BookingFormWidget.class.php' );
+		register_widget( 'rtbBookingFormWidget' );
 	}
 
 }

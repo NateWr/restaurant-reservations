@@ -23,6 +23,13 @@ if ( !function_exists( 'rtb_print_booking_form' ) ) {
 function rtb_print_booking_form() {
 
 	global $rtb_controller;
+	
+	// Only allow the form to be displayed once on a page
+	if ( $rtb_controller->form_rendered === true ) {
+		return;
+	} else {
+		$rtb_controller->form_rendered = true;
+	}
 
 	// Enqueue assets for the form
 	rtb_enqueue_assets();
