@@ -171,7 +171,7 @@ class rtbNotificationEmail extends rtbNotification {
 		if ( !isset( $template ) ) {
 			$this->message = '';
 		} else {
-			$this->message = $this->process_template( $this->get_template( $template ) );
+			$this->message = wpautop( $this->process_template( $this->get_template( $template ) ) );
 		}
 
 	}
