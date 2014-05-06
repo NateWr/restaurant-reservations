@@ -223,35 +223,39 @@ function rtb_get_datepicker_rules() {
 	// Determine which weekdays should be disabled
 	$enabled_dates = array();
 	$schedule_open = $rtb_controller->settings->get_setting( 'schedule-open' );
-	foreach ( $schedule_open as $rule ) {
-		if ( !empty( $rule['weekdays'] ) ) {
-			foreach ( $rule['weekdays'] as $weekday => $value ) {
-				unset( $disabled_weekdays[ $weekday ] );
+	if ( !is_array( $schedule_open ) ) {
+		foreach ( $schedule_open as $rule ) {
+			if ( !empty( $rule['weekdays'] ) ) {
+				foreach ( $rule['weekdays'] as $weekday => $value ) {
+					unset( $disabled_weekdays[ $weekday ] );
+				}
 			}
 		}
-	}
 
-	if ( count( $disabled_weekdays ) < 7 ) {
-		foreach ( $disabled_weekdays as $weekday ) {
-			$disable_rules[] = $weekday;
+		if ( count( $disabled_weekdays ) < 7 ) {
+			foreach ( $disabled_weekdays as $weekday ) {
+				$disable_rules[] = $weekday;
+			}
 		}
 	}
 
 	// Handle exception dates
 	$schedule_closed = $rtb_controller->settings->get_setting( 'schedule-closed' );
-	foreach ( $schedule_closed as $rule ) {
+	if ( !is_array( $schedule_closed ) ) {
+		foreach ( $schedule_closed as $rule ) {
 
-		// Disable exception dates that are closed all day
-		if ( !empty( $rule['date'] ) && empty( $rule['time'] ) ) {
-			$date = new DateTime( $rule['date'] );
-			$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ) );
+			// Disable exception dates that are closed all day
+			if ( !empty( $rule['date'] ) && empty( $rule['time'] ) ) {
+				$date = new DateTime( $rule['date'] );
+				$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ) );
 
-		// Enable exception dates that have opening times
-		} elseif ( !empty( $rule['date'] ) ) {
-			$date = new DateTime( $rule['date'] );
-			$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ), 'inverted' );
+			// Enable exception dates that have opening times
+			} elseif ( !empty( $rule['date'] ) ) {
+				$date = new DateTime( $rule['date'] );
+				$disable_rules[] = array( $date->format( 'Y' ), ( $date->format( 'n' ) - 1 ), $date->format( 'j' ), 'inverted' );
+			}
+
 		}
-
 	}
 
 	return $disable_rules;
