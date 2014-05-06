@@ -89,6 +89,9 @@ class rtbInit {
 		// Register the widget
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
+		// Add links to plugin listing
+		add_filter('plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2);
+
 		// Development tool
 		// @todo maybe split off this sort of thing to another file
 		add_action( 'init', array( $this, 'dev_add_bookings_data' ) );
@@ -303,11 +306,26 @@ class rtbInit {
 
 	/**
 	 * Register the widgets
-	 * @since 1.1
+	 * @since 0.0.1
 	 */
 	public function register_widgets() {
 		require_once( RTB_PLUGIN_DIR . '/includes/WP_Widget.BookingFormWidget.class.php' );
 		register_widget( 'rtbBookingFormWidget' );
+	}
+
+	/**
+	 * Add links to the plugin listing on the installed plugins page
+	 * @since 0.0.1
+	 */
+	public function plugin_action_links( $links, $plugin ) {
+
+		if ( $plugin == RTB_PLUGIN_FNAME ) {
+
+			$links['help'] = '<a href="' . RTB_PLUGIN_URL . '/docs" title="' . __( 'View the help documentation for Restaurant Reservations', RTB_TEXTDOMAIN ) . '">' . __( 'Help', RTB_TEXTDOMAIN ) . '</a>';
+		}
+
+		return $links;
+
 	}
 
 }
