@@ -223,7 +223,7 @@ function rtb_get_datepicker_rules() {
 	// Determine which weekdays should be disabled
 	$enabled_dates = array();
 	$schedule_open = $rtb_controller->settings->get_setting( 'schedule-open' );
-	if ( !is_array( $schedule_open ) ) {
+	if ( is_array( $schedule_open ) ) {
 		foreach ( $schedule_open as $rule ) {
 			if ( !empty( $rule['weekdays'] ) ) {
 				foreach ( $rule['weekdays'] as $weekday => $value ) {
@@ -241,7 +241,7 @@ function rtb_get_datepicker_rules() {
 
 	// Handle exception dates
 	$schedule_closed = $rtb_controller->settings->get_setting( 'schedule-closed' );
-	if ( !is_array( $schedule_closed ) ) {
+	if ( is_array( $schedule_closed ) ) {
 		foreach ( $schedule_closed as $rule ) {
 
 			// Disable exception dates that are closed all day
