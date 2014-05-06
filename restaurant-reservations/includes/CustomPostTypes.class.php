@@ -159,9 +159,12 @@ class rtbCustomPostTypes {
 	 * Delete a booking request (or send to trash)
 	 *
 	 * @since 0.0.1
-	 * @todo roles/capabilities check
 	 */
 	public function delete_booking( $id ) {
+
+		if ( !current_user_can( 'manage_bookings' ) ) {
+			return;
+		}
 
 		// If we're already looking at trashed posts, delete it for good.
 		// Otherwise, just send it to trash.
@@ -184,10 +187,13 @@ class rtbCustomPostTypes {
 	/**
 	 * Update a booking status.
 	 * @since 0.0.1
-	 * @todo roles/capabilities check
 	 */
 	function update_booking_status( $id, $status ) {
 
+		if ( !current_user_can( 'manage_bookings' ) ) {
+			return;
+		}
+		
 		if ( !$this->is_valid_booking_status( $status ) ) {
 			return false;
 		}
