@@ -63,9 +63,17 @@ class rtbNotificationEmail extends rtbNotification {
 		$this->set_headers();
 		$this->set_message();
 
-		// @todo validate data and return false if invalid
+		// Return false if we're missing any of the required information
+		if ( 	empty( $this->to_email) ||
+				empty( $this->from_email) ||
+				empty( $this->from_name) ||
+				empty( $this->subject) ||
+				empty( $this->headers) ||
+				empty( $this->message) ) {
+			return false;
+		}
+		
 		return true;
-
 	}
 
 	/**
@@ -75,7 +83,7 @@ class rtbNotificationEmail extends rtbNotification {
 	public function set_to_email() {
 
 		if ( $this->target == 'user' ) {
-			$this->to_email = empty( $this->booking->email ) ? null : $this->booking->email; // @todo full name + email
+			$this->to_email = empty( $this->booking->email ) ? null : $this->booking->email;
 
 		} else {
 			global $rtb_controller;
