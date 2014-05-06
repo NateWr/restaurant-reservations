@@ -14,10 +14,12 @@
 	display: block;
 }
 .rtb-booking-form input {
-	width: 15em;
+	width: 100%;
+	max-width: 15em;
 }
 .rtb-booking-form textarea {
-	width: 90%;
+	width: 100%;
+	max-width: 30em;
 }
 .rtb-booking-form .add-message {
 	margin-top: 1em;
