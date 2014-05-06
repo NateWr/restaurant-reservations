@@ -1,0 +1,31 @@
+/**
+ * Documentation Markup
+ **********************/
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: #eee;
+	margin: 0;
+}
+li {
+	padding-bottom: 5px;
+}
+#toc {
+	position: absolute;
+	width: 250px;
+}
+#content {
+	padding: 20px;	
+	margin-left: 300px;
+	background-color: #fff;
+	box-shadow: 0 0 5px #000;
+}
+#toc>ul>li {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+code {
+	font-family: Courier, monospace;
+	padding: 2px 5px;
+	background-color: #eee;
+	border-radius: 2px;
+}
