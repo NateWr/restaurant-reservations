@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 0.0.1
+Stable tag: 1.0
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -40,10 +40,6 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Go to Bookings > Settings to set up the page to display your booking form.
 
-== Frequently Asked Questions ==
-
-= Where can I find more documentation? =
-
 == Screenshots ==
 
 1. Easily manage bookings. View today's bookings or upcoming bookings at-a-glance. Confirm or reject bookings quickly.
@@ -58,5 +54,5 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
-= 1.0 (@todo date) =
+= 1.0 (2014-05-07) =
 * Initial release
