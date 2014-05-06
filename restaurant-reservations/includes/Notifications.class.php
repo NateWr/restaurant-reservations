@@ -59,8 +59,18 @@ class rtbNotifications {
 		}
 
 		// Register notifications
+		add_action( 'init', array( $this, 'register_notifications' ) );
+	}
+
+	/**
+	 * Register notifications
+	 * @since 0.0.1
+	 */
+	public function register_notifications() {
+
 		require_once( RTB_PLUGIN_DIR . '/includes/Notification.class.php' );
 		require_once( RTB_PLUGIN_DIR . '/includes/Notification.Email.class.php' );
+
 		$this->notifications = array(
 			new rtbNotificationEmail( 'new_submission', 'user' ),
 			new rtbNotificationEmail( 'pending_to_confirmed', 'user' ),
@@ -68,7 +78,7 @@ class rtbNotifications {
 		);
 
 		global $rtb_controller;
-		$admin_email_option = $rtb_controller->settings->get_setting( 'admin-email-option' )
+		$admin_email_option = $rtb_controller->settings->get_setting( 'admin-email-option' );
 		if ( $admin_email_option ) {
 			$this->notifications[] = new rtbNotificationEmail( 'new_submission', 'admin' );
 		}
