@@ -263,7 +263,7 @@ class rtbBooking {
 
 			// Check against weekly scheduling rules
 			$rules = $rtb_controller->settings->get_setting( 'schedule-open' );
-			if ( !$exception_is_active && empty( $this->validation_errors ) && !empty( $rules ) ) {
+			if ( empty( $exception_is_active ) && empty( $this->validation_errors ) && !empty( $rules ) ) {
 				$request_weekday = strtolower( $request->format( 'l' ) );
 				$time_is_valid = null;
 				$day_is_valid = null;
