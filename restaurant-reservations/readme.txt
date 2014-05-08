@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -54,8 +54,16 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.0.2 (2014-05-08) =
+* Remove development tool from codebase
+
 = 1.0.1 (2014-05-08) =
 * Replace dashicons caret with CSS-only caret in booking form
 
 = 1.0 (2014-05-07) =
 * Initial release
+
+== Upgrade Notice ==
+
+= 1.0.2 =
+This update removes a bit of code that was used for development purposes. Please update as this code could be run by any user on the frontend.
