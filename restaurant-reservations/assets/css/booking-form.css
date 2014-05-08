@@ -43,6 +43,16 @@
 	background: #f50;
 	color: #fff;
 }
+.rtb-booking-form .rtb-error:before {
+	content: ' ';
+	border-top: 4px solid;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+	width: 0;
+	height: 0;
+	display: inline-block;
+	margin: 0.25em 0.5em;
+}
 
 /* Compatibility styles for pickadate on common themes */
 #rtb-date_root .picker__button--clear,
