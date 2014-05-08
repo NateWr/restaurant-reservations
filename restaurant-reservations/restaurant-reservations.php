@@ -92,10 +92,6 @@ class rtbInit {
 		// Add links to plugin listing
 		add_filter('plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2);
 
-		// Development tool
-		// @todo maybe split off this sort of thing to another file
-		add_action( 'init', array( $this, 'dev_add_bookings_data' ) );
-
 	}
 
 	/**
@@ -216,65 +212,6 @@ class rtbInit {
 		}
 
 		return $content . rtb_print_booking_form();
-	}
-
-	/**
-	 * Development tool to populate the database with lots of bookings
-	 * @since 0.0.1
-	 */
-	public function dev_add_bookings_data() {
-
-		if ( !WP_DEBUG || !isset( $_GET['rtb_devmode'] ) || $_GET['rtb_devmode'] !== 'add_bookings' ) {
-			return;
-		}
-
-		$lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam feugiat consequat diam, in tincidunt purus convallis vel. Morbi sed dapibus diam. Vestibulum laoreet mi at neque varius consequat. Nam non mi erat. Donec nec semper velit. Maecenas id tortor orci. Aenean viverra suscipit urna, egestas adipiscing felis varius vitae. Curabitur et accumsan turpis. Suspendisse sed risus ac mi lobortis aliquam vel vel dolor. Nulla facilisi. In feugiat tempus massa, sed pulvinar neque bibendum ut. Nullam nibh eros, consectetur et orci non, condimentum tempor nunc. Maecenas sit amet libero sed diam pulvinar iaculis eget vitae odio. Quisque ac luctus metus, sit amet fringilla magna. Aliquam commodo odio eu eros imperdiet, ut auctor odio faucibus.';
-		$words = explode( ' ', str_replace( array( ',', '.'), '', $lorem ) );
-		for ( $i = 0; $i < 100; $i++ ) {
-
-			shuffle( $words );
-
-			$phone = '(';
-			for( $p = 0; $p < 3; $p++ ) {
-				$phone .= rand(0,9);
-			}
-			$phone .= ') ';
-			for( $p = 0; $p < 3; $p++ ) {
-				$phone .= rand(0,9);
-			}
-			$phone .= '-';
-			for( $p = 0; $p < 4; $p++ ) {
-				$phone .= rand(0,9);
-			}
-
-			$status = rand(0, 100) > 30 ? 'confirmed' : 'pending';
-			$status = rand(0, 100) > 90 ? 'closed' : $status;
-
-			// Get the date formatted for MySQL
-			$date = new DateTime( date('Y-m-d H:i:s', current_time() + rand( 0, 7776000 ) ) ); // 90 days in advance
-
-			$id = wp_insert_post(
-				array(
-					'post_type'		=> RTB_BOOKING_POST_TYPE,
-					'post_title'	=> $words[0] . ' ' . $words[1],
-					'post_content'	=> rand(0,10) < 3 ? $lorem : '',
-					'post_date'		=> $date->format( 'Y-m-d H:i:s' ),
-					'post_status'	=> $status,
-				)
-			);
-
-			$meta = array(
-				'party' => rand(1, 20),
-				'email' => $words[2] . '@email.com',
-				'phone' => $phone,
-				'date_submission' 	=> current_time(), // keep track of when it was submitted for logs
-			);
-
-			$meta = apply_filters( 'rtb_sanitize_post_metadata_devmode', $meta, $id );
-
-			update_post_meta( $id, 'rtb', $meta );
-
-		}
 	}
 
 	/**
