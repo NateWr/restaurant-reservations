@@ -28,6 +28,8 @@ jQuery(document).ready(function ($) {
 		// Declare datepicker
 		var $date_input = $( '#rtb-date' ).pickadate({
 			format: rtb_pickadate.date_format,
+			formatSubmit: 'yyyy/mm/dd',
+			hiddenName: true,
 			min: true,
 			container: 'body',
 		});
