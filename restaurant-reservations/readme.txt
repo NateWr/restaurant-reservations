@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 3.9
+Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -23,11 +23,13 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Add your booking form to any page, post or widget area
 * Customize all notification messages, and date and time formats
 
-This plugin is under active development. More features will be added to this plugin and addons will be created which extend the functionality or integrate with third-party services. Follow future developments at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
+More features will be added to this plugin and addons will be created which extend the functionality or integrate with third-party services. Follow future developments at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
+
+This plugin is part of a group of plugins in development for restaurants. Check out the [Food and Drink Menu](http://wordpress.org/plugins/food-and-drink-menu/) plugin as well.
 
 = How to use =
 
-There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the screenshots for this plugin will show you where to find it.
+There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the [screenshots](http://wordpress.org/plugins/food-and-drink-menu/screenshots/) for this plugin will show you where to find it.
 
 = Developers =
 
@@ -54,6 +56,12 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.1 (2014-05-12) =
+* Attempt to load the correct language for the datepicker from the WordPress settings
+* Add support for choosing a language for the datepicker if different from WordPress settings
+* Allow late bookings to be blocked 4 hours and 1 day in advance
+* Fix: don't show settings under WordPress's core General settings page
+
 = 1.0.2 (2014-05-08) =
 * Remove development tool from codebase
 
@@ -64,6 +72,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1 =
+This update improves internationalization (i8n) by attempting to determine the appropriate language for the booking form datepicker from your WordPress settings. It also adds a setting to pick a language manually from a list of supported languages. This update also adds options to block late bookings at least 4 hours or 1 day in advance. Thanks to Remco and Roland for their early feedback.
 
 = 1.0.2 =
 This update removes a bit of code that was used for development purposes. Please update as this code could be run by any user on the frontend.
