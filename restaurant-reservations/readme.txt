@@ -29,7 +29,7 @@ This plugin is part of a group of plugins in development for restaurants. Check 
 
 = How to use =
 
-There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the [screenshots](http://wordpress.org/plugins/food-and-drink-menu/screenshots/) for this plugin will show you where to find it.
+There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the [screenshots](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
 
 = Developers =
 
