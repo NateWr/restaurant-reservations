@@ -41,7 +41,7 @@ jQuery(document).ready(function ($) {
 
 		var datepicker = $date_input.pickadate( 'picker' );
 		var timepicker = $time_input.pickatime( 'picker' );
-		
+
 		if ( typeof datepicker == 'undefined' ) {
 			return;
 		}
@@ -67,7 +67,12 @@ jQuery(document).ready(function ($) {
 		timepicker.set( 'enable', false );
 		timepicker.set( 'disable', false );
 
-		var selected_date = new Date( datepicker.get( 'select', 'yyyy/mm/dd' ) );
+		if ( datepicker.get() === '' ) {
+			timepicker.set( 'disable', true );
+			return;
+		}
+
+		selected_date = new Date( datepicker.get( 'select', 'yyyy/mm/dd' ) );
 		var selected_date_year = selected_date.getFullYear();
 		var selected_date_month = selected_date.getMonth();
 		var selected_date_date = selected_date.getDate();
