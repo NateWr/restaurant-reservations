@@ -67,7 +67,7 @@ jQuery(document).ready(function ($) {
 		timepicker.set( 'enable', false );
 		timepicker.set( 'disable', false );
 
-		var selected_date = new Date( datepicker.get() );
+		var selected_date = new Date( datepicker.get( 'select', 'yyyy/mm/dd' ) );
 		var selected_date_year = selected_date.getFullYear();
 		var selected_date_month = selected_date.getMonth();
 		var selected_date_date = selected_date.getDate();
