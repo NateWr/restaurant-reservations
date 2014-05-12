@@ -219,10 +219,17 @@ class rtbBooking {
 			} else {
 				$late_bookings_seconds = $late_bookings * 60; // Late bookings allowance in seconds
 				if ( $request->format( 'U' ) < ( current_time( 'timestamp' ) + $late_bookings_seconds ) ) {
+					if ( $late_bookings >= 1440 ) {
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s days in advance.', RTB_TEXTDOMAIN ), $late_bookings / 1440 );
+					} elseif ( $late_bookings >= 60 ) {
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s hours in advance.', RTB_TEXTDOMAIN ), $late_bookings / 60 );
+					} else {
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s mings in advance.', RTB_TEXTDOMAIN ), $late_bookings );
+					}
 					$this->validation_errors[] = array(
 						'field'		=> 'time',
 						'error_msg'	=> 'Booking request made too close to the reserved time',
-						'message'	=> sprintf( __( 'Sorry, bookings must be made more than %s minutes in advance.', RTB_TEXTDOMAIN ), $late_bookings ),
+						'message'	=> $late_bookings_message,
 					);
 				}
 			}

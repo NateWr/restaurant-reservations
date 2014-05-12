@@ -372,10 +372,12 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'blank_option'	=> false,
 				'options'       => array(
 					'' 		=> __( 'Up to the last minute', RTB_TEXTDOMAIN ),
-					'15' 	=> __( 'Up to 15 minutes in advance', RTB_TEXTDOMAIN ),
-					'30' 	=> __( 'Up to 30 minutes in advance', RTB_TEXTDOMAIN ),
-					'45' 	=> __( 'Up to 45 minutes in advance', RTB_TEXTDOMAIN ),
-					'60' 	=> __( 'Up to 1 hour in advance', RTB_TEXTDOMAIN ),
+					'15' 	=> __( 'At least 15 minutes in advance', RTB_TEXTDOMAIN ),
+					'30' 	=> __( 'At least 30 minutes in advance', RTB_TEXTDOMAIN ),
+					'45' 	=> __( 'At least 45 minutes in advance', RTB_TEXTDOMAIN ),
+					'60' 	=> __( 'At least 1 hour in advance', RTB_TEXTDOMAIN ),
+					'240' 	=> __( 'At least 4 hours in advance', RTB_TEXTDOMAIN ),
+					'1440' 	=> __( 'At least 1 day in advance', RTB_TEXTDOMAIN ),
 				)
 			)
 		);

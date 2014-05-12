@@ -50,6 +50,10 @@ jQuery(document).ready(function ($) {
 		if ( rtb_pickadate.disable_dates.length ) {
 			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
+		
+		if ( rtb_pickadate.late_bookings === '1440' ) {
+			datepicker.set( 'min', 1 );
+		}
 
 		// Update timepicker on pageload and whenever the datepicker is closed
 		rtb_update_timepicker_range();
