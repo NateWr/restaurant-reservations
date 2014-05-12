@@ -32,6 +32,13 @@ jQuery(document).ready(function ($) {
 			hiddenName: true,
 			min: true,
 			container: 'body',
+			// this prevents translations from overwriting the start of the
+			// week. ideally, in the future, support for this can be added, but
+			// at the moment I can't figure out how to check the datepicker's
+			// firstDay setting and update my disabled dates values
+			// accordingly.
+			// @todo support start of the week based on language file
+			firstDay: 0, 
 		});
 
 		// Declare timepicker
