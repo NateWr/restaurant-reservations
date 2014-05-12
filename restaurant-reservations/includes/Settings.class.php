@@ -237,6 +237,59 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
+		// Add i8n setting for pickadate if the frontend assets are to be loaded
+		if ( RTB_LOAD_FRONTEND_ASSETS ) {
+			$sap->add_setting(
+				'rtb-settings',
+				'rtb-general',
+				'select',
+				array(
+					'id'            => 'i8n',
+					'title'         => __( 'Language', RTB_TEXTDOMAIN ),
+					'description'   => __( 'Select a language to use if you don\'t want the booking form datepicker to use English.', RTB_TEXTDOMAIN ),
+					'options'		=> array(
+						'ar'	=> 'ar',
+						'bg_BG'	=> 'bg_BG',
+						'bs_BA'	=> 'bs_BA',
+						'ca_ES'	=> 'ca_ES',
+						'cs_CZ'	=> 'cs_CZ',
+						'da_DK'	=> 'da_DK',
+						'de_DE'	=> 'de_DE',
+						'el_GR'	=> 'el_GR',
+						'es_ES'	=> 'es_ES',
+						'et_EE'	=> 'et_EE',
+						'eu_ES'	=> 'eu_ES',
+						'fi_FI'	=> 'fi_FI',
+						'fr_FR'	=> 'fr_FR',
+						'gl_ES'	=> 'gl_ES',
+						'he_IL'	=> 'he_IL',
+						'hr_HR'	=> 'hr_HR',
+						'hu_HU'	=> 'hu_HU',
+						'id_ID'	=> 'id_ID',
+						'is_IS'	=> 'is_IS',
+						'it_IT'	=> 'it_IT',
+						'ja_JP'	=> 'ja_JP',
+						'ko_KR'	=> 'ko_KR',
+						'nl_NL'	=> 'nl_NL',
+						'no_NO'	=> 'no_NO',
+						'pl_PL'	=> 'pl_PL',
+						'pt_BR'	=> 'pt_BR',
+						'pt_PT'	=> 'pt_PT',
+						'ro_RO'	=> 'ro_RO',
+						'ru_RU'	=> 'ru_RU',
+						'sk_SK'	=> 'sk_SK',
+						'sl_SI'	=> 'sl_SI',
+						'sv_SE'	=> 'sv_SE',
+						'th_TH'	=> 'th_TH',
+						'tr_TR'	=> 'tr_TR',
+						'uk_UA'	=> 'uk_UA',
+						'zh_CN'	=> 'zh_CN',
+						'zh_TW'	=> 'zh_TW',
+					),
+				)
+			);
+		}
+
 		$sap->add_section(
 			'rtb-settings',
 			array(

@@ -174,11 +174,8 @@ function rtb_enqueue_assets() {
 	wp_enqueue_script( 'pickadate-date' );
 	wp_enqueue_script( 'pickadate-time' );
 	wp_enqueue_script( 'pickadate-legacy' );
-	
-//	wp_enqueue_script( 'pickadate-i8n' );
-	
-	// @todo is there some way I can enqueue this for RTL languages
-//	wp_enqueue_style( 'pickadate-rtl' );
+	wp_enqueue_script( 'pickadate-i8n' ); // only registered if needed
+	wp_enqueue_style( 'pickadate-rtl' ); // only registered if needed
 
 	wp_enqueue_script( 'rtb-booking-form' );
 
