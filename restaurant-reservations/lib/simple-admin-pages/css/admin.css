@@ -136,7 +136,7 @@ input.sap-opening-hours-hours {
 	max-width: 8em;
 }
 .sap-scheduler-all-day {
-	display: inline-block;
+	display: block;
 	margin-top: 1.7em;
 	font-style: italic;
 	padding: 1em;
@@ -213,11 +213,11 @@ input.sap-opening-hours-hours {
 /**
  * Adjustements to pickadate library css to override WP admin styles
  */
-.picker__table {
+.picker .picker__table {
 	table-layout: auto;
 }
-.picker__table th,
-.picker__table td {
+.picker .picker__table th,
+.picker .picker__table td {
 	text-align: center;
 	display: table-cell;
 	padding: 0.5em;

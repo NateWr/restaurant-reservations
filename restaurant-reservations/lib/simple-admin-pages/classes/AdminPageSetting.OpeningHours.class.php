@@ -25,9 +25,22 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingOpeningHours_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
+class sapAdminPageSettingOpeningHours_2_0_a_4 extends sapAdminPageSetting_2_0_a_4 {
 
 	public $sanitize_callback = 'sanitize_text_field';
+	
+	/**
+	 * Scripts that must be loaded for this component
+	 * @since 2.0.a.4
+	 */
+	public $scripts = array(
+		'sap-opening-hours' => array(
+			'path'			=> 'js/opening-hours.js',
+			'dependencies'	=> array( 'jquery' ),
+			'version'		=> '2.0.a.4',
+			'footer'		=> true,
+		),
+	);
 
 	// Array of days of the week
 	public $weekdays = array(

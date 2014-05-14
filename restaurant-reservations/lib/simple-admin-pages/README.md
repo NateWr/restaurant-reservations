@@ -38,7 +38,7 @@ Here's a simple example of how you can use this library to create an admin page.
 	require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 	$sap = sap_initialize_library(
 		array(
-			'version'		=> '2.0.a.1', // Version of the library
+			'version'		=> '2.0.a.4', // Version of the library
 			'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 		)
 	);
@@ -127,7 +127,7 @@ The lib_url is used to print stylesheets or scripts attached to the library.
 require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 $sap = sap_initialize_library(
 	$args = array(
-		'version'		=> '2.0.a.2', // Version of the library
+		'version'		=> '2.0.a.4', // Version of the library
 		'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 	)
 );
@@ -367,6 +367,20 @@ $all_page_settings[ $my_setting_id ];
 ```
 
 ## Changelog
+
+- 2.0.a.4 - 2014-05-15
+	- Only load assets when component is called
+	- Revert adding version number to script handles
+	- Fix localized script handler for Scheduler
+	- Fix pickadate CSS rule specificity
+
+- 2.0.a.3 - 2014-05-14
+	- Fix undefined function error in Scheduler javascript when using Firefox
+	- Add version number to style and script handles so different versions will be enqueued
+
+- 2.0.a.2 - 2014-05-11
+	- Add support for top-level menus
+	- Support line breaks in textarea components
 
 - 2.0.a.1 - 2014-04-03
 	- Save all data on a page as one row in wp_options

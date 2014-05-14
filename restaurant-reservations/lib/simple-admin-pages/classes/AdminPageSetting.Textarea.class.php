@@ -9,7 +9,7 @@
  * @todo textareas should have an option to swap new lines for <br>s
  */
 
-class sapAdminPageSettingTextarea_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
+class sapAdminPageSettingTextarea_2_0_a_4 extends sapAdminPageSetting_2_0_a_4 {
 
 	/*
 	 * Size of this textarea
@@ -20,7 +20,7 @@ class sapAdminPageSettingTextarea_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 	 */
 	public $size = 'small';
 
-	public $sanitize_callback = 'sanitize_text_field';
+	public $sanitize_callback = 'wp_kses';
 	
 	/**
 	 * Escape the value to display it safely HTML textarea fields

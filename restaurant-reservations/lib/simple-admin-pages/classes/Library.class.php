@@ -1,5 +1,5 @@
 <?php
-if ( !class_exists( 'sapLibrary_2_0_a_1' ) ) {
+if ( !class_exists( 'sapLibrary_2_0_a_4' ) ) {
 /**
  * This library class loads and provides access to the correct version of the
  * Simple Admin Pages library.
@@ -7,10 +7,10 @@ if ( !class_exists( 'sapLibrary_2_0_a_1' ) ) {
  * @since 1.0
  * @package Simple Admin Pages
  */
-class sapLibrary_2_0_a_1 {
+class sapLibrary_2_0_a_4 {
 
 	// Version of the library
-	private $version = '2.0.a.1';
+	private $version = '2.0.a.4';
 
 	// A full URL to the library which is used to correctly link scripts and
 	// stylesheets.
@@ -206,6 +206,9 @@ class sapLibrary_2_0_a_1 {
 		if ( $menu_location == 'themes' ) {
 			$this->load_class( 'sapAdminPageThemes', 'AdminPage.Themes.class.php' );
 			$class = $this->get_versioned_classname( 'sapAdminPageThemes' );
+		} elseif ( $menu_location == 'menu' ) {
+			$this->load_class( 'sapAdminPageMenu', 'AdminPage.Menu.class.php' );
+			$class = $this->get_versioned_classname( 'sapAdminPageMenu' );
 		} elseif ( $menu_location == 'submenu' ) {
 			$this->load_class( 'sapAdminPageSubmenu', 'AdminPage.Submenu.class.php' );
 			$class = $this->get_versioned_classname( 'sapAdminPageSubmenu' );
@@ -365,26 +368,28 @@ class sapLibrary_2_0_a_1 {
 	}
 
 	/**
-	 * Enqueue the CSS stylesheet
+	 * Enqueue the stylesheets and scripts
 	 * @since 1.0
 	 * @todo complex settings should enqueue their assets only when loaded
 	 */
 	public function enqueue_scripts() {
-
-		// Load the pickadate library
-		wp_enqueue_style( 'pickadate-default', $this->lib_url . 'lib/pickadate/themes/default.css' );
-		wp_enqueue_style( 'pickadate-date', $this->lib_url . 'lib/pickadate/themes/default.date.css' );
-		wp_enqueue_style( 'pickadate-time', $this->lib_url . 'lib/pickadate/themes/default.time.css' );
-		wp_enqueue_script( 'pickadate', $this->lib_url . 'lib/pickadate/picker.js', array( 'jquery' ), '', true );
-		wp_enqueue_script( 'pickadate-date', $this->lib_url . 'lib/pickadate/picker.date.js', array( 'jquery' ), '', true );
-		wp_enqueue_script( 'pickadate-time', $this->lib_url . 'lib/pickadate/picker.time.js', array( 'jquery' ), '', true );
-		wp_enqueue_script( 'pickadate-legacy', $this->lib_url . 'lib/pickadate/legacy.js', array( 'jquery' ), '', true );
-		// @todo is there some way I can enqueue this for RTL languages
-		// wp_enqueue_style( 'pickadate-rtl', $this->lib_url . 'lib/pickadate/themes/rtl.css' );
+		
+		// Enqueue assets for specific settings
+		foreach ( $this->pages as $page ) {
+			foreach ( $page->sections as $section ) {
+				foreach ( $section->settings as $setting ) {
+					foreach( $setting->scripts as $handle => $script ) {
+						wp_enqueue_script( $handle, $this->lib_url . $script['path'], $script['dependencies'], $script['version'], $script['footer'] );
+					}
+					foreach( $setting->styles as $handle => $style ) {
+						wp_enqueue_style( $handle . '-' . $this->version, $this->lib_url . $style['path'], $style['dependencies'], $style['version'], $style['media'] );
+					}
+				}
+			}
+		}
 
 		// Default styles and scripts
-		wp_enqueue_style( 'sap-admin-style', $this->lib_url . 'css/admin.css' );
-		wp_enqueue_script( 'sap-admin-script', $this->lib_url . 'js/admin.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_style( 'sap-admin-style-' . $this->version, $this->lib_url . 'css/admin.css' );
 	}
 
 	/**

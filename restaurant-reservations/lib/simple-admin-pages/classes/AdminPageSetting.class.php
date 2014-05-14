@@ -15,7 +15,7 @@
  * @package Simple Admin Pages
  */
 
-abstract class sapAdminPageSetting_2_0_a_1 {
+abstract class sapAdminPageSetting_2_0_a_4 {
 
 	// Page defaults
 	public $id; // used in form fields and database to track and store setting
@@ -35,6 +35,42 @@ abstract class sapAdminPageSetting_2_0_a_1 {
 	 * @since 1.0
 	 */
 	public $sanitize_callback = 'sanitize_text_field';
+	
+	/**
+	 * Scripts that must be loaded for this component
+	 * @since 2.0.a.4
+	 */
+	public $scripts = array(
+		/**
+		 * Example
+		 * See: http://codex.wordpress.org/Function_Reference/wp_enqueue_script
+		 *
+		'handle' => array(
+			'path'			=> 'path/from/simple-admin-pages/file.js',
+			'dependencies'	=> array( 'jquery' ),
+			'version'		=> '3.5.0',
+			'footer'		=> true,
+		),
+		 */
+	);
+	
+	/**
+	 * Styles that must be loaded for this component
+	 * @since 2.0.a.4
+	 */
+	public $styles = array(
+		/**
+		 * Example
+		 * See: http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+		 *
+		'handle' => array(
+			'path'			=> 'path/from/simple-admin-pages/file.css',
+			'dependencies'	=> 'array( 'another-handle')', // or empty string
+			'version'		=> '3.5.0',
+			'media'			=> null,
+		),
+		 */
+	);
 
 	/**
 	 * Initialize the setting

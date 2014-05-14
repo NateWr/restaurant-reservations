@@ -205,7 +205,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		require_once( RTB_PLUGIN_DIR . '/lib/simple-admin-pages/simple-admin-pages.php' );
 		$sap = sap_initialize_library(
 			$args = array(
-				'version'       => '2.0.a.1',
+				'version'       => '2.0.a.4',
 				'lib_url'       => RTB_PLUGIN_URL . '/lib/simple-admin-pages/',
 			)
 		);
