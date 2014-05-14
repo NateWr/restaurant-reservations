@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -56,6 +56,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.1.1 (2014-05-14) =
+* Update Simple Admin Pages library to fix broken Scheduler in Firefox
+
 = 1.1 (2014-05-12) =
 * Attempt to load the correct language for the datepicker from the WordPress settings
 * Add support for choosing a language for the datepicker if different from WordPress settings
@@ -72,6 +75,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+This update fixes problems some users reported when using the Firefox browser to modify the booking schedule. This required an update to a library that is shared with another plugin, Food and Drink Menu. If you are using that plugin, please update that one as well or you may get some odd behavior.
 
 = 1.1 =
 This update improves internationalization (i8n) by attempting to determine the appropriate language for the booking form datepicker from your WordPress settings. It also adds a setting to pick a language manually from a list of supported languages. This update also adds options to block late bookings at least 4 hours or 1 day in advance. Thanks to Remco and Roland for their early feedback.
