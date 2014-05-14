@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -56,6 +56,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.1.2 (2014-05-14) =
+* Update Simple Admin Pages library to fix an uncommon error when saving Textarea components
+
 = 1.1.1 (2014-05-14) =
 * Update Simple Admin Pages library to fix broken Scheduler in Firefox
 
@@ -75,6 +78,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+This update fixes an error some people may experience when trying to save settings. This is the second update today, so if you missed the other one please read the changelog for the 1.1.1 update as well.
 
 = 1.1.1 =
 This update fixes problems some users reported when using the Firefox browser to modify the booking schedule. This required an update to a library that is shared with another plugin, Food and Drink Menu. If you are using that plugin, please update that one as well or you may get some odd behavior. (Thanks to sangwh and bforsoft for reporting the issue.)
