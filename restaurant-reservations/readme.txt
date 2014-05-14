@@ -77,7 +77,7 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 == Upgrade Notice ==
 
 = 1.1.1 =
-This update fixes problems some users reported when using the Firefox browser to modify the booking schedule. This required an update to a library that is shared with another plugin, Food and Drink Menu. If you are using that plugin, please update that one as well or you may get some odd behavior.
+This update fixes problems some users reported when using the Firefox browser to modify the booking schedule. This required an update to a library that is shared with another plugin, Food and Drink Menu. If you are using that plugin, please update that one as well or you may get some odd behavior. (Thanks to sangwh and bforsoft for reporting the issue.)
 
 = 1.1 =
 This update improves internationalization (i8n) by attempting to determine the appropriate language for the booking form datepicker from your WordPress settings. It also adds a setting to pick a language manually from a list of supported languages. This update also adds options to block late bookings at least 4 hours or 1 day in advance. Thanks to Remco and Roland for their early feedback.
