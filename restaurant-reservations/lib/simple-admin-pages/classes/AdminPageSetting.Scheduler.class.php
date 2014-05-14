@@ -10,7 +10,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingScheduler_2_0_a_4 extends sapAdminPageSetting_2_0_a_4 {
+class sapAdminPageSettingScheduler_2_0_a_5 extends sapAdminPageSetting_2_0_a_5 {
 
 	public $sanitize_callback = 'sanitize_text_field';
 	
@@ -46,7 +46,7 @@ class sapAdminPageSettingScheduler_2_0_a_4 extends sapAdminPageSetting_2_0_a_4 {
 		'sap-scheduler' => array(
 			'path'			=> 'js/scheduler.js',
 			'dependencies'	=> array( 'jquery' ),
-			'version'		=> '2.0.a.4',
+			'version'		=> '2.0.a.5',
 			'footer'		=> true,
 		),
 		// @todo there should be some way to load alternate language .js files

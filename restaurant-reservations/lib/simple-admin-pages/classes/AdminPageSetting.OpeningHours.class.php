@@ -25,7 +25,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingOpeningHours_2_0_a_4 extends sapAdminPageSetting_2_0_a_4 {
+class sapAdminPageSettingOpeningHours_2_0_a_5 extends sapAdminPageSetting_2_0_a_5 {
 
 	public $sanitize_callback = 'sanitize_text_field';
 	
@@ -37,7 +37,7 @@ class sapAdminPageSettingOpeningHours_2_0_a_4 extends sapAdminPageSetting_2_0_a_
 		'sap-opening-hours' => array(
 			'path'			=> 'js/opening-hours.js',
 			'dependencies'	=> array( 'jquery' ),
-			'version'		=> '2.0.a.4',
+			'version'		=> '2.0.a.5',
 			'footer'		=> true,
 		),
 	);
