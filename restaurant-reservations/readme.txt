@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -56,6 +56,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.1.3 (2014-05-22) =
+* Fix an error where the wrong date would be selected when a form was reloaded with validation errors
+
 = 1.1.2 (2014-05-14) =
 * Update Simple Admin Pages library to fix an uncommon error when saving Textarea components
 
@@ -78,6 +81,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+This update fixes an error when the form had validation errors (missing fields or wrong date/time selected). Instead of loading the selected date it would load today's date. This update ensures the selected date is reloaded properly.
 
 = 1.1.2 =
 This update fixes an error some people may experience when trying to save settings. This is the second update today, so if you missed the other one please read the changelog for the 1.1.1 update as well.
