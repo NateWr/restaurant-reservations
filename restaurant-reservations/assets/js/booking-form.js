@@ -39,6 +39,16 @@ jQuery(document).ready(function ($) {
 			// accordingly.
 			// @todo support start of the week based on language file
 			firstDay: 0, 
+			
+			// Select the value when loaded if a value has been set
+			onStart: function() {
+				if ( $( '#rtb-date' ).val()	!== '' ) {
+					var date = new Date( $( '#rtb-date' ).val() );
+					if ( Object.prototype.toString.call( date ) === "[object Date]" ) {
+						this.set( 'select', date );
+					}
+				}
+			}
 		});
 
 		// Declare timepicker
