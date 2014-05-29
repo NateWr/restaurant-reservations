@@ -81,7 +81,7 @@ abstract class rtbNotification {
 		$template_tags = array(
 			'{user_name}'		=> $this->booking->name,
 			'{party}'			=> $this->booking->party,
-			'{date}'			=> $this->booking->date,
+			'{date}'			=> $this->booking->format_date( $this->booking->date ),
 			'{bookings_link}'	=> '<a href="' . admin_url( 'admin.php?page=rtb-bookings&status=pending' ) . '">' . __( 'View pending bookings', RTB_TEXTDOMAIN ) . '</a>',
 			'{confirm_link}'	=> '<a href="' . admin_url( 'admin.php?page=rtb-bookings&rtb-quicklink=confirm&booking=' . esc_attr( $this->booking->ID ) ) . '">' . __( 'Confirm this booking', RTB_TEXTDOMAIN ) . '</a>',
 			'{close_link}'		=> '<a href="' . admin_url( 'admin.php?page=rtb-bookings&rtb-quicklink=close&booking=' . esc_attr( $this->booking->ID ) ) . '">' . __( 'Reject this booking', RTB_TEXTDOMAIN ) . '</a>',

@@ -295,7 +295,7 @@ class rtbBookingsTable extends WP_List_Table {
 	public function column_default( $booking, $column_name ) {
 		switch ( $column_name ) {
 			case 'date' :
-				$value = $booking->date;
+				$value = $booking->format_date( $booking->date );
 				break;
 			case 'party' :
 				$value = $booking->party;

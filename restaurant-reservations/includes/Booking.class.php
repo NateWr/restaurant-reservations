@@ -59,7 +59,7 @@ class rtbBooking {
 
 		$this->ID = $post->ID;
 		$this->name = $post->post_title;
-		$this->date = $this->format_date( $post->post_date );
+		$this->date = $post->post_date;
 		$this->message = apply_filters( 'the_content', $post->post_content );
 		$this->post_status = $post->post_status;
 
