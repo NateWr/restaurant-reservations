@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -56,6 +56,12 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.1.4 (2014-07-03) =
+* Add a .pot file for easier translations
+* Fix notifications that showed MySQL date format instead of user-selected format
+* Fix Arabic translation of pickadate component
+* Add support for the correct start of the week depending on language
+
 = 1.1.3 (2014-05-22) =
 * Fix an error where the wrong date would be selected when a form was reloaded with validation errors
 
@@ -81,6 +87,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+This updated fixes an error with the format of the date in notification emails. Now it will show you the date formatted however you have chosen for it to be formatted in your WordPress installation. It also now displays the correct start of the week depending on the language selected for the datepicker. A .pot file is now included for easier translations.
 
 = 1.1.3 =
 This update fixes an error when the form had validation errors (missing fields or wrong date/time selected). Instead of loading the selected date it would load today's date. This update ensures the selected date is reloaded properly.
