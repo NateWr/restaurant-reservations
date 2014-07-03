@@ -32,14 +32,7 @@ jQuery(document).ready(function ($) {
 			hiddenName: true,
 			min: true,
 			container: 'body',
-			// this prevents translations from overwriting the start of the
-			// week. ideally, in the future, support for this can be added, but
-			// at the moment I can't figure out how to check the datepicker's
-			// firstDay setting and update my disabled dates values
-			// accordingly.
-			// @todo support start of the week based on language file
-			firstDay: 0, 
-			
+
 			// Select the value when loaded if a value has been set
 			onStart: function() {
 				if ( $( '#rtb-date' ).val()	!== '' ) {
@@ -65,9 +58,24 @@ jQuery(document).ready(function ($) {
 
 		// Pass conditional configuration parameters
 		if ( rtb_pickadate.disable_dates.length ) {
+
+			// Update weekday dates if start of the week has been modified
+			if ( typeof datepicker.component.settings.firstDay == 'number' ) {
+				var weekday_num = 0;
+				for ( var disable_key in rtb_pickadate.disable_dates ) {
+					if ( typeof rtb_pickadate.disable_dates[disable_key] == 'number' ) {
+						weekday_num = rtb_pickadate.disable_dates[disable_key] - datepicker.component.settings.firstDay;
+						if ( weekday_num < 1 ) {
+							weekday_num = 7;
+						}
+						rtb_pickadate.disable_dates[disable_key] = weekday_num;
+					}
+				}
+			}
+			
 			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
-		
+
 		if ( rtb_pickadate.late_bookings === '1440' ) {
 			datepicker.set( 'min', 1 );
 		}
