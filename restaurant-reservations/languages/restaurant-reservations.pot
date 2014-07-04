@@ -908,7 +908,3 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Theme of the Crop"
 msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "http://themeofthecrop.com"
-msgstr ""
