@@ -25,7 +25,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 
 More features will be added to this plugin and addons will be created which extend the functionality or integrate with third-party services. Follow future developments at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
 
-This plugin is part of a group of plugins in development for restaurants. Check out the [Food and Drink Menu](http://wordpress.org/plugins/food-and-drink-menu/) plugin as well.
+This plugin is part of a group of plugins for restaurants. Check out the [Food and Drink Menu](http://wordpress.org/plugins/food-and-drink-menu/), [Good Reviews for WordPress](http://wordpress.org/plugins/good-reviews-wp/) and [Business Profile](http://wordpress.org/plugins/business-profile/) plugins as well.
 
 = How to use =
 
