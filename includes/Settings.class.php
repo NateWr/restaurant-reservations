@@ -252,6 +252,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-general',
+			'text',
+			array(
+				'id'            => 'party-size',
+				'title'         => __( 'Max Party Size', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Set a maximum allowed party size for bookings. Leave it empty to allow parties of any size.', RTB_TEXTDOMAIN ),
+				'placeholder'	=> __( 'No limit', RTB_TEXTDOMAIN ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-general',
 			'textarea',
 			array(
 				'id'			=> 'success-message',
