@@ -20,7 +20,7 @@ class rtbSettings {
 	 * @since 0.0.1
 	 */
 	public $settings = array();
-	
+
 	/**
 	 *
 	 */
@@ -165,7 +165,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				RTB_TEXTDOMAIN
 			),
 		);
-		
+
 		$i8n = get_bloginfo( 'language' );
 		if ( array_key_exists( $i8n, $this->supported_i8n ) ) {
 			$this->defaults['i8n'] = $i8n;
@@ -477,6 +477,12 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 					</div>
 					<div class="rtb-template-tags-box">
 						<strong>{date}</strong> ' . __( 'Date and time of the booking', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{phone}</strong> ' . __( 'Phone number if supplied with the request', RTB_TEXTDOMAIN ) . '
+					</div>
+					<div class="rtb-template-tags-box">
+						<strong>{message}</strong> ' . __( 'Message added to the request', RTB_TEXTDOMAIN ) . '
 					</div>
 					<div class="rtb-template-tags-box">
 						<strong>{bookings_link}</strong> ' . __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ) . '
