@@ -72,12 +72,18 @@ jQuery(document).ready(function ($) {
 					}
 				}
 			}
-			
+
 			datepicker.set( 'disable', rtb_pickadate.disable_dates );
 		}
 
 		if ( rtb_pickadate.late_bookings === '1440' ) {
 			datepicker.set( 'min', 1 );
+		}
+
+		// If no date has been set, select today's date or the soonest valid
+		// date. User may opt not to do this in the settings.
+		if ( rtb_pickadate.date_onload !== 'empty' && $( '#rtb-date' ).val() === '' ) {
+			datepicker.set( 'select', new Date() );
 		}
 
 		// Update timepicker on pageload and whenever the datepicker is closed

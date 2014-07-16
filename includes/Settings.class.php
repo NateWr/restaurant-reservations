@@ -404,6 +404,22 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-schedule',
+			'select',
+			array(
+				'id'			=> 'date-onload',
+				'title'			=> __( 'Date Pre-selection', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'When the booking form is loaded, should it automatically attempt to select a valid date?', RTB_TEXTDOMAIN ),
+				'blank_option'	=> false,
+				'options'       => array(
+					'' 			=> __( 'Select today or soonest valid date', RTB_TEXTDOMAIN ),
+					'empty' 	=> __( 'Leave empty', RTB_TEXTDOMAIN ),
+				)
+			)
+		);
+
 		$sap->add_section(
 			'rtb-settings',
 			array(

@@ -23,7 +23,7 @@ if ( !function_exists( 'rtb_print_booking_form' ) ) {
 function rtb_print_booking_form() {
 
 	global $rtb_controller;
-	
+
 	// Only allow the form to be displayed once on a page
 	if ( $rtb_controller->form_rendered === true ) {
 		return;
@@ -192,6 +192,7 @@ function rtb_enqueue_assets() {
 			'schedule_closed' => $rtb_controller->settings->get_setting( 'schedule-closed' ),
 			'early_bookings' => $rtb_controller->settings->get_setting( 'early-bookings' ),
 			'late_bookings' => $rtb_controller->settings->get_setting( 'late-bookings' ),
+			'date_onload' => $rtb_controller->settings->get_setting( 'date-onload' ),
 		)
 	);
 
