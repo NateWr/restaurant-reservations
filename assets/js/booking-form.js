@@ -47,6 +47,7 @@ jQuery(document).ready(function ($) {
 		// Declare timepicker
 		var $time_input = $( '#rtb-time' ).pickatime({
 			format: rtb_pickadate.time_format,
+			interval: parseInt( rtb_pickadate.time_interval, 10 )
 		});
 
 		var datepicker = $date_input.pickadate( 'picker' );

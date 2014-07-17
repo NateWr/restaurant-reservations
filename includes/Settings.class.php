@@ -83,6 +83,7 @@ class rtbSettings {
 			'success-message'				=> _x( 'Thanks, your booking request is waiting to be confirmed. Updates will be sent to the email address you provided.', RTB_TEXTDOMAIN ),
 			'date-format'					=> _x( 'mmmm d, yyyy', 'Default date format for display. Must match formatting rules at http://amsul.ca/pickadate.js/date.htm#formatting-rules', RTB_TEXTDOMAIN ),
 			'time-format'					=> _x( 'h:i A', 'Default time format for display. Must match formatting rules at http://amsul.ca/pickadate.js/time.htm#formats', RTB_TEXTDOMAIN ),
+			'time-interval'					=> _x( '30', 'Default interval in minutes when selecting a time.', RTB_TEXTDOMAIN ),
 
 			// Email address where admin notifications should be sent
 			'admin-email-address'			=> get_option( 'admin_email' ),
@@ -416,6 +417,24 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'options'       => array(
 					'' 			=> __( 'Select today or soonest valid date', RTB_TEXTDOMAIN ),
 					'empty' 	=> __( 'Leave empty', RTB_TEXTDOMAIN ),
+				)
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-schedule',
+			'select',
+			array(
+				'id'			=> 'time-interval',
+				'title'			=> __( 'Time Interval', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'Select the number of minutes between each available time.', RTB_TEXTDOMAIN ),
+				'blank_option'	=> false,
+				'options'       => array(
+					'' 			=> __( 'Every 30 minutes', RTB_TEXTDOMAIN ),
+					'15' 		=> __( 'Every 15 minutes', RTB_TEXTDOMAIN ),
+					'10' 		=> __( 'Every 10 minutes', RTB_TEXTDOMAIN ),
+					'5' 		=> __( 'Every 5 minutes', RTB_TEXTDOMAIN ),
 				)
 			)
 		);

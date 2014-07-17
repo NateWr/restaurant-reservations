@@ -193,6 +193,7 @@ function rtb_enqueue_assets() {
 			'early_bookings' => $rtb_controller->settings->get_setting( 'early-bookings' ),
 			'late_bookings' => $rtb_controller->settings->get_setting( 'late-bookings' ),
 			'date_onload' => $rtb_controller->settings->get_setting( 'date-onload' ),
+			'time_interval' => $rtb_controller->settings->get_setting( 'time-interval' ),
 		)
 	);
 
