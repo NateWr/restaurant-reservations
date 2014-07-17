@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.1.4
+Stable tag: 1.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -56,6 +56,13 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.2 (2014-07-17) =
+* Add notification template tags for phone number and message
+* Add automatic selection of date when page is loaded (option to disable this feature)
+* Add option to set time interval of time picker
+* Fix auto-detection of pickadate language from WordPress site language
+* Fix duplicate entry in .pot file that caused PoEdit error
+
 = 1.1.4 (2014-07-03) =
 * Add a .pot file for easier translations
 * Fix notifications that showed MySQL date format instead of user-selected format
@@ -87,6 +94,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2 =
+This update adds new template tags for notification emails, a new option to customize the time interval and more. A new .pot file has been generated, so update your translations. Consult the changelog for further details.
 
 = 1.1.4 =
 This updated fixes an error with the format of the date in notification emails. Now it will show you the date formatted however you have chosen for it to be formatted in your WordPress installation. It also now displays the correct start of the week depending on the language selected for the datepicker. A .pot file is now included for easier translations.

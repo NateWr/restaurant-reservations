@@ -3,7 +3,7 @@
  * Plugin Name: Restaurant Reservations
  * Plugin URI: http://themeofthecrop.com
  * Description: Accept restaurant reservations and bookings online.
- * Version: 1.1.4
+ * Version: 1.2
  * Author: Theme of the Crop
  * Author URI: http://themeofthecrop.com
  * License:     GNU General Public License v2.0 or later
@@ -50,7 +50,7 @@ class rtbInit {
 		define( 'RTB_BOOKING_POST_TYPE', 'rtb-booking' );
 		define( 'RTB_BOOKING_POST_TYPE_SLUG', 'booking' );
 		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
-		
+
 
 		// Initialize the plugin
 		add_action( 'init', array( $this, 'load_textdomain' ) );
@@ -244,11 +244,11 @@ class rtbInit {
 		wp_register_script( 'pickadate-date', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/picker.date.js', array( 'jquery' ), '', true );
 		wp_register_script( 'pickadate-time', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/picker.time.js', array( 'jquery' ), '', true );
 		wp_register_script( 'pickadate-legacy', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/legacy.js', array( 'jquery' ), '', true );
-		
+
 		$i8n = $this->settings->get_setting( 'i8n' );
 		if ( !empty( $i8n ) ) {
 			wp_register_script( 'pickadate-i8n', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/translations/' . esc_attr( $i8n ) . '.js', array( 'jquery' ), '', true );
-			
+
 			// Arabic and Hebrew are right-to-left languages
 			if ( $i8n == 'ar' || $i8n == 'he_IL' ) {
 				wp_register_style( 'pickadate-rtl', RTB_PLUGIN_URL . '/lib/simple-admin-pages/lib/pickadate/themes/rtl.css' );
