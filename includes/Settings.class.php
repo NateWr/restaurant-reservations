@@ -22,7 +22,7 @@ class rtbSettings {
 	public $settings = array();
 
 	/**
-	 *
+	 * Languages supported by the pickadate library
 	 */
 	public $supported_i8n = array(
 		'ar'	=> 'ar',
@@ -167,7 +167,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			),
 		);
 
-		$i8n = get_bloginfo( 'language' );
+		$i8n = str_replace( '-', '_', get_bloginfo( 'language' ) );
 		if ( array_key_exists( $i8n, $this->supported_i8n ) ) {
 			$this->defaults['i8n'] = $i8n;
 		}
