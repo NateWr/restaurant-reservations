@@ -143,6 +143,8 @@ class rtbBooking {
 	 */
 	public function validate_submission() {
 
+		global $rtb_controller;
+
 		$this->validation_errors = array();
 
 		// Date
@@ -189,8 +191,6 @@ class rtbBooking {
 
 		// Check against valid open dates/times
 		if ( is_object( $time ) && is_object( $date ) ) {
-
-			global $rtb_controller;
 
 			$request = new DateTime( $date->format( 'Y-m-d' ) . ' ' . $time->format( 'H:i:s' ) );
 
