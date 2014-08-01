@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -56,6 +56,10 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.2.1 (2014-08-01) =
+* Fix: bulk actions below the bookings table don't work
+* Fix: PHP Notice generated during validation
+
 = 1.2 (2014-07-17) =
 * Add notification template tags for phone number and message
 * Add automatic selection of date when page is loaded (option to disable this feature)
@@ -94,6 +98,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+This is a minor maintenance update which fixes a couple of small bugs.
 
 = 1.2 =
 This update adds new template tags for notification emails, a new option to customize the time interval and more. A new .pot file has been generated, so update your translations. Consult the changelog for further details.
