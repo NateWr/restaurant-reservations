@@ -86,7 +86,7 @@ class rtbBookingsTable extends WP_List_Table {
 
 		// Run any bulk action requests
 		$this->process_bulk_action();
-		
+
 		// Run any quicklink requests
 		$this->process_quicklink_action();
 
@@ -370,6 +370,9 @@ class rtbBookingsTable extends WP_List_Table {
 		$ids    = isset( $_POST['bookings'] ) ? $_POST['bookings'] : false;
 		$action = isset( $_POST['action'] ) ? $_POST['action'] : false;
 
+		// Check bulk actions selector below the table
+		$action = $action == '-1' && isset( $_POST['action2'] ) ? $_POST['action2'] : $action;
+
 		if( empty( $action ) || $action == '-1' ) {
 			return;
 		}
@@ -417,7 +420,7 @@ class rtbBookingsTable extends WP_List_Table {
 	 * @since 0.0.1
 	 */
 	public function process_quicklink_action() {
-	
+
 		if ( empty( $_REQUEST['rtb-quicklink'] ) ) {
 			return;
 		}
@@ -425,13 +428,13 @@ class rtbBookingsTable extends WP_List_Table {
 		if ( !current_user_can( 'manage_bookings' ) ) {
 			return;
 		}
-		
+
 		global $rtb_controller;
-		
+
 		$results = array();
-		
+
 		$id = !empty( $_REQUEST['booking'] ) ? $_REQUEST['booking'] : false;
-		
+
 		if ( $_REQUEST['rtb-quicklink'] == 'confirm' ) {
 			$results[$id] = $rtb_controller->cpts->update_booking_status( $id, 'confirmed' );
 			$this->last_action = 'set-status-confirmed';
