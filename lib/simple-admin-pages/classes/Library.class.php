@@ -1,5 +1,5 @@
 <?php
-if ( !class_exists( 'sapLibrary_2_0_a_5' ) ) {
+if ( !class_exists( 'sapLibrary_2_0_a_6' ) ) {
 /**
  * This library class loads and provides access to the correct version of the
  * Simple Admin Pages library.
@@ -7,10 +7,10 @@ if ( !class_exists( 'sapLibrary_2_0_a_5' ) ) {
  * @since 1.0
  * @package Simple Admin Pages
  */
-class sapLibrary_2_0_a_5 {
+class sapLibrary_2_0_a_6 {
 
 	// Version of the library
-	private $version = '2.0.a.5';
+	private $version = '2.0.a.6';
 
 	// A full URL to the library which is used to correctly link scripts and
 	// stylesheets.
@@ -161,6 +161,10 @@ class sapLibrary_2_0_a_5 {
 				require_once('AdminPageSetting.OpeningHours.class.php');
 				return $this->get_versioned_classname( 'sapAdminPageSettingOpeningHours' );
 
+			case 'address' :
+				require_once('AdminPageSetting.Address.class.php');
+				return $this->get_versioned_classname( 'sapAdminPageSettingAddress' );
+
 			default :
 
 				// Exit early if a custom type is declared without providing the
@@ -176,6 +180,11 @@ class sapLibrary_2_0_a_5 {
 					require_once( $type['filename'] );
 				} elseif ( isset( $this->lib_extension_path ) && file_exists( $this->lib_extension_path . $type['filename'] ) ) {
 					require_once( $this->lib_extension_path . '/' . $type['filename'] );
+					if ( !class_exists( $type['class'] ) ) {
+						return false;
+					} else {
+						return $type['class'];
+					}
 				} else {
 					return false;
 				}
@@ -260,7 +269,7 @@ class sapLibrary_2_0_a_5 {
 		}
 
 		$class = $this->get_setting_classname( $type );
-		if ( ( $class && class_exists( $class ) ) && is_subclass_of( $class, $this->get_versioned_classname( 'sapAdminPageSetting' ) ) ) {
+		if ( $class && class_exists( $class ) ) {
 			$this->pages[ $page ]->sections[ $section ]->add_setting( new $class( $args ) );
 		}
 

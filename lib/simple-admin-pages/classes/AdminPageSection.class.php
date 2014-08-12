@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSection_2_0_a_5 {
+class sapAdminPageSection_2_0_a_6 {
 
 	// Page defaults
 	public $id; // unique id for this section
