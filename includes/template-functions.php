@@ -67,6 +67,72 @@ function rtb_print_booking_form() {
 		$booking_page = get_permalink( $booking_page );
 	}
 
+	// Define the form fields
+	//
+	// This array defines the field details and a callback function to
+	// render each field. To customize the form output, modify the
+	// callback functions to point to your custom function. Don't forget
+	// to output an error message in your custom callback function. You
+	// can use rtb_print_form_error( $slug ) to do this.
+	$fields = array(
+
+		// Reservation details fieldset
+		'reservation'	=> array(
+			'legend'	=> __( 'Book a table', RTB_TEXTDOMAIN ),
+			'fields'	=> array(
+				'date'		=> array(
+					'title'			=> __( 'Date', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->request_date ) ? '' : $request->request_date,
+					'callback'		=> 'rtb_print_form_text_field',
+				),
+				'time'		=> array(
+					'title'			=> __( 'Time', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->request_time ) ? '' : $request->request_time,
+					'callback'		=> 'rtb_print_form_text_field',
+				),
+				'party'		=> array(
+					'title'			=> __( 'Party', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->party ) ? '' : $request->party,
+					'callback'		=> 'rtb_print_form_text_field',
+				),
+			),
+		),
+
+		// Contact details fieldset
+		'contact'	=> array(
+			'legend'	=> __( 'Contact Details', RTB_TEXTDOMAIN ),
+			'fields'	=> array(
+				'name'		=> array(
+					'title'			=> __( 'Name', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->name ) ? '' : $request->name,
+					'callback'		=> 'rtb_print_form_text_field',
+				),
+				'email'		=> array(
+					'title'			=> __( 'Email', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->email ) ? '' : $request->email,
+					'callback'		=> 'rtb_print_form_text_field',
+				),
+				'phone'		=> array(
+					'title'			=> __( 'Phone', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->phone ) ? '' : $request->phone,
+					'callback'		=> 'rtb_print_form_text_field',
+				),
+				'add-message'	=> array(
+					'title'		=> __( 'Add a Message', RTB_TEXTDOMAIN ),
+					'request_input'	=> '',
+					'callback'	=> 'rtb_print_form_message_link',
+				),
+				'message'		=> array(
+					'title'			=> __( 'Message', RTB_TEXTDOMAIN ),
+					'request_input'	=> empty( $request->message ) ? '' : $request->message,
+					'callback'		=> 'rtb_print_form_textarea_field',
+				),
+			),
+		),
+	);
+
+	$fields = apply_filters( 'rtb_booking_form_fields', $fields );
+
 	ob_start();
 
 	?>
@@ -79,71 +145,26 @@ function rtb_print_booking_form() {
 	<?php else : ?>
 	<form method="POST" action="<?php echo esc_attr( $booking_page ); ?>">
 		<input type="hidden" name="action" value="booking_request">
-		<fieldset class="reservation">
+
+		<?php do_action( 'rtb_booking_form_before_fields' ); ?>
+
+		<?php foreach( $fields as $fieldset => $contents ) : ?>
+		<fieldset class="<?php echo $fieldset; ?>">
 			<legend>
-				<?php _e( 'Book a table', RTB_TEXTDOMAIN ); ?>
+				<?php echo $contents['legend']; ?>
 			</legend>
-			<div class="date">
-				<?php echo rtb_print_form_error( 'date' ); ?>
-				<label for="rtb-date">
-					<?php _e( 'Date', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<input type="text" name="rtb-date" id="rtb-date" value="<?php echo empty( $request->request_date ) ? '' : esc_attr( $request->request_date ); ?>">
-			</div>
-			<div class="time">
-				<?php echo rtb_print_form_error( 'time' ); ?>
-				<label for="rtb-time">
-					<?php _e( 'Time', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<input type="text" name="rtb-time" id="rtb-time" value="<?php echo empty( $request->request_time ) ? '' : esc_attr( $request->request_time ); ?>">
-			</div>
-			<div class="party">
-				<?php echo rtb_print_form_error( 'party' ); ?>
-				<label for="rtb-party">
-					<?php _e( 'Party', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<input type="text" name="rtb-party" id="rtb-party" value="<?php echo empty( $request->party ) ? '' : esc_attr( $request->party ); ?>">
-			</div>
+			<?php
+				foreach( $contents['fields'] as $slug => $field ) {
+					call_user_func( $field['callback'], $slug, $field['title'], $field['request_input'] );
+				}
+			?>
 		</fieldset>
-		<fieldset class="contact">
-			<legend>
-				<?php _e( 'Contact Details', RTB_TEXTDOMAIN ); ?>
-			</legend>
-			<div class="name">
-				<?php echo rtb_print_form_error( 'name' ); ?>
-				<label for="rtb-name">
-					<?php _e( 'Name', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<input type="text" name="rtb-name" id="rtb-name" placeholder="Your name" value="<?php echo empty( $request->name ) ? '' : esc_attr( $request->name ); ?>">
-			</div>
-			<div class="email">
-				<?php echo rtb_print_form_error( 'email' ); ?>
-				<label for="rtb-email">
-					<?php _e( 'Email', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<input type="text" name="rtb-email" id="rtb-email" placeholder="your@email.com" value="<?php echo empty( $request->email ) ? '' : esc_attr( $request->email ); ?>">
-			</div>
-			<div class="phone">
-				<?php echo rtb_print_form_error( 'phone' ); ?>
-				<label for="rtb-phone">
-					<?php _e( 'Phone', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<input type="text" name="rtb-phone" id="rtb-phone" placeholder="Your phone number" value="<?php echo empty( $request->phone ) ? '' : esc_attr( $request->phone ); ?>">
-			</div>
-			<div class="add-message">
-				<a href="#">
-					<?php _e( 'Add a Message', RTB_TEXTDOMAIN ); ?>
-				</a>
-			</div>
-			<div class="message">
-				<?php echo rtb_print_form_error( 'message' ); ?>
-				<label for="rtb-message">
-					<?php _e( 'Message', RTB_TEXTDOMAIN ); ?>
-				</label>
-				<textarea name="rtb-message" id="rtb-message"><?php echo empty( $request->message ) ? '' : esc_attr( $request->message ); ?></textarea>
-			</div>
-		</fieldset>
+		<?php endforeach; ?>
+
+		<?php do_action( 'rtb_booking_form_after_fields' ); ?>
+		
 		<button type="submit"><?php _e( 'Request Booking', RTB_TEXTDOMAIN ); ?></button>
+		
 	</form>
 	<?php endif; ?>
 </div>
@@ -261,6 +282,78 @@ function rtb_get_datepicker_rules() {
 	}
 
 	return $disable_rules;
+
+}
+} // endif;
+
+/**
+ * Print a text input form field
+ * @since 1.3
+ */
+if ( !function_exists( 'rtb_print_form_text_field' ) ) {
+function rtb_print_form_text_field( $slug, $title, $value ) {
+
+	$slug = esc_attr( $slug );
+	$value = esc_attr( $value );
+
+	?>
+	
+	<div class="<?php echo $slug; ?>">
+		<?php echo rtb_print_form_error( $slug ); ?>
+		<label for="rtb-<?php echo $slug; ?>">
+			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+		</label>
+		<input type="text" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo $value; ?>">
+	</div>
+
+	<?php
+
+}
+} // endif;
+
+/**
+ * Print a textarea form field
+ * @since 1.3
+ */
+if ( !function_exists( 'rtb_print_form_textarea_field' ) ) {
+function rtb_print_form_textarea_field( $slug, $title, $value ) {
+
+	$slug = esc_attr( $slug );
+
+	?>
+	
+	<div class="<?php echo $slug; ?>">
+		<?php echo rtb_print_form_error( $slug ); ?>
+		<label for="rtb-<?php echo $slug; ?>">
+			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+		</label>
+		<textarea name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>"><?php echo $value; ?></textarea>
+	</div>
+			
+	<?php
+
+}
+} // endif;
+
+/**
+ * Print the Add Message link to display the message field
+ * @since 1.3
+ */
+if ( !function_exists( 'rtb_print_form_message_link' ) ) {
+function rtb_print_form_message_link( $slug, $title, $value ) {
+
+	$slug = esc_attr( $slug );
+	$value = esc_attr( $value );
+
+	?>
+	
+	<div class="<?php echo $slug; ?>">
+		<a href="#">
+			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+		</a>
+	</div>
+			
+	<?php
 
 }
 } // endif;
