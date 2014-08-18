@@ -131,7 +131,7 @@ function rtb_print_booking_form() {
 		),
 	);
 
-	$fields = apply_filters( 'rtb_booking_form_fields', $fields );
+	$fields = apply_filters( 'rtb_booking_form_fields', $fields, $request );
 
 	ob_start();
 
@@ -150,9 +150,13 @@ function rtb_print_booking_form() {
 
 		<?php foreach( $fields as $fieldset => $contents ) : ?>
 		<fieldset class="<?php echo $fieldset; ?>">
+
+			<?php if ( !empty( $contents['legend'] ) ) : ?>
 			<legend>
 				<?php echo $contents['legend']; ?>
 			</legend>
+			<?php endif; ?>
+
 			<?php
 				foreach( $contents['fields'] as $slug => $field ) {
 					call_user_func( $field['callback'], $slug, $field['title'], $field['request_input'] );
