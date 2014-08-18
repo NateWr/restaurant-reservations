@@ -10,12 +10,21 @@
 .rtb-booking-form fieldset>div {
 	margin-top: 1em;
 }
+.rtb-booking-form fieldset>div:first-child {
+	margin-top: 0;
+}
 .rtb-booking-form label {
 	display: block;
 }
 .rtb-booking-form input {
 	width: 100%;
 	max-width: 15em;
+}
+.rtb-booking-form input[type="checkbox"],
+.rtb-booking-form input[type="radio"] {
+	width: auto;
+	margin-right: 0.25em;
+	vertical-align: middle;
 }
 .rtb-booking-form textarea {
 	width: 100%;
