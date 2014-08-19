@@ -59,8 +59,8 @@ jQuery(document).ready(function ($) {
 
 				for( var i in r.data ) {
 					rtbAddons.el.append( rtbAddons.getAddonHTML( r.data[i] ) );
+					rtbAddons.el.find( '.addon.' + r.data[i].id ).fadeIn();
 				}
-
 			},
 
 			showError: function( r ) {
