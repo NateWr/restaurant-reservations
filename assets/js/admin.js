@@ -66,7 +66,7 @@ jQuery(document).ready(function ($) {
 			showError: function( r ) {
 
 				if ( typeof r.data == 'undefined' || typeof r.data.msg == 'undefined' ) {
-					rtbAddons.el.html( '<span class="error">An unknown error occured.</span>' ); // @todo translation
+					rtbAddons.el.html( '<span class="error">' + rtb_addons.strings.error_unknown + '</span>' );
 				} else {
 					rtbAddons.el.html( '<span class="error">' + r.data.msg + '</span>' );
 				}
@@ -103,18 +103,18 @@ jQuery(document).ready(function ($) {
 						html += '<a href="' + addon.url + '" class="button button-primary" target="_blank">';
 
 						if ( typeof addon.price !== 'undefined' && addon.price.length ) {
-							html += 'Learn More'; // @todo translation
+							html += rtb_addons.strings.learn_more;
 						} else {
-							html += 'Free'; // @todo translation
+							html += rtb_addons.strings.free;
 						}
 
 						html += '</a>';
 
 					} else if ( addon.status === 'installed' ) {
-						html += '<span class="installed">Already Installed</span>'; // @todo translation
+						html += '<span class="installed">' + rtb_addons.strings.installed + '</span>';
 
 					} else {
-						html += '<span class="soon">Coming Soon</span>'; // @todo translation
+						html += '<span class="soon">' + rtb_addons.strings.coming_soon + '</span>';
 					}
 
 					html += '</div>'; // .action

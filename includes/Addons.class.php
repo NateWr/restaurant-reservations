@@ -86,7 +86,12 @@ class rtbAddons {
 				array(
 					'nonce'			=> wp_create_nonce( 'rtb-addons' ),
 					'strings'		=> array(
-						'loading'	=> __( 'Loading', RTB_TEXTDOMAIN ),
+						'loading'		=> __( 'Loading', RTB_TEXTDOMAIN ),
+						'error_unknown'	=> _x( 'An unknown error occured.', 'Error message when retrieving list of addons', RTB_TEXTDOMAIN ),
+						'installed'		=> _x( 'Already Installed', 'Label for an addon that is already installed and activated.', RTB_TEXTDOMAIN ),
+						'coming_soon'	=> _x( 'Coming Soon', 'Label for an addon that is not yet released.', RTB_TEXTDOMAIN ),
+						'free'			=> _x( 'Free', 'Label for an addon that is free.', RTB_TEXTDOMAIN ),
+						'learn_more'	=> _x( 'Get It', 'Label for an addon that is released.', RTB_TEXTDOMAIN ),
 					)
 				)
 			);
