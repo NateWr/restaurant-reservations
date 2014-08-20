@@ -96,7 +96,7 @@ class rtbInit {
 		require_once( RTB_PLUGIN_DIR . '/includes/Addons.class.php' );
 		new rtbAddons(
 			array(
-				'api_url'	=> 'http://themeofthecrop.com/api/addons/',
+				'api_url'	=> 'http://api.themeofthecrop.com/addons/',
 				'plugin'	=> basename( plugin_dir_path( __FILE__ ) ),
 			)
 		);
