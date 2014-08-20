@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
 	if ( typeof rtb_pickadate !== 'undefined' ) {
 
 		// Declare datepicker
-		var $date_input = $( '#rtb-date' ).pickadate({
+		var date_input = $( '#rtb-date' ).pickadate({
 			format: rtb_pickadate.date_format,
 			formatSubmit: 'yyyy/mm/dd',
 			hiddenName: true,
@@ -45,13 +45,27 @@ jQuery(document).ready(function ($) {
 		});
 
 		// Declare timepicker
-		var $time_input = $( '#rtb-time' ).pickatime({
+		var time_input = $( '#rtb-time' ).pickatime({
 			format: rtb_pickadate.time_format,
-			interval: parseInt( rtb_pickadate.time_interval, 10 )
+			formatSubmit: 'h:i A',
+			hiddenName: true,
+			interval: parseInt( rtb_pickadate.time_interval, 10 ),
+
+			// Select the value when loaded if a value has been set
+			onStart: function() {
+				if ( $( '#rtb-time' ).val()	!== '' ) {
+					var today = new Date();
+					var today_date = today.getFullYear() + '/' + ( today.getMonth() + 1 ) + '/' + today.getDate();
+					var time = new Date( today_date + ' ' + $( '#rtb-time' ).val() );
+					if ( Object.prototype.toString.call( time ) === "[object Date]" ) {
+						this.set( 'select', time );
+					}
+				}
+			}
 		});
 
-		var datepicker = $date_input.pickadate( 'picker' );
-		var timepicker = $time_input.pickatime( 'picker' );
+		var datepicker = date_input.pickadate( 'picker' );
+		var timepicker = time_input.pickatime( 'picker' );
 
 		if ( typeof datepicker == 'undefined' ) {
 			return;
