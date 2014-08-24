@@ -31,6 +31,9 @@ This plugin is part of a group of plugins for restaurants. Check out the [Food a
 
 There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the [screenshots](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
 
+= MailChimp addon beta =
+A commercial addon for this plugin is in development that will allow you to subscribe new reservations to your MailChimp mailing list. The plugin is currently in a short beta period before release. I'm offering a free license to anyone who participates. [Learn more](http://themeofthecrop.com/2014/08/18/mailchimp-restaurant-reservations-ready-beta/).
+
 = Developers =
 
 This plugin is packed with hooks so you can extend it, customize it and rebrand it as needed. Development takes place on [GitHub](https://github.com/NateWr/restaurant-reservations), so fork it up.
