@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 3.9.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -59,6 +59,13 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 == Changelog ==
 
+= 1.2.2 (2014-08-24) =
+* Fix: custom date formats can break date validation for new bookings
+* Add new booking form generation hooks for easier customization
+* Add support for upcoming MailChimp addon
+* Add new addons page
+* Update Simple Admin Pages library to v2.0.a.7
+
 = 1.2.1 (2014-08-01) =
 * Fix: bulk actions below the bookings table don't work
 * Fix: PHP Notice generated during validation
@@ -101,6 +108,9 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+This update adds support for a new MailChimp addon that will be released soon. An addons page is now available under the Bookings menu. A bug in which custom date/time formats could cause validation errors has been fixed. New hooks are now in place so that it's easier to customize the form output. 
 
 = 1.2.1 =
 This is a minor maintenance update which fixes a couple of small bugs.
