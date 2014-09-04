@@ -3,7 +3,7 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 3.9.1
+Tested Up To: 4.0
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
 Stable tag: 1.2.2
 License: GPLv2 or later
@@ -32,9 +32,7 @@ This plugin is part of a group of plugins for restaurants. Check out the [Food a
 There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the [screenshots](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
 
 = Addons =
-[MailChimp for Restaurant Reservations](http://themeofthecrop.com/2014/08/18/mailchimp-restaurant-reservations-ready-beta/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations)
-
-Subscribe emails from new restaurant reservations to your MailChimp mailing list.
+[MailChimp for Restaurant Reservations](http://themeofthecrop.com/2014/08/18/mailchimp-restaurant-reservations-ready-beta/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
 
 = Developers =
 
