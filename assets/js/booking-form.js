@@ -95,10 +95,19 @@ jQuery(document).ready(function ($) {
 			datepicker.set( 'min', 1 );
 		}
 
-		// If no date has been set, select today's date or the soonest valid
+		// If no date has been set, select today's date if it's a valid
 		// date. User may opt not to do this in the settings.
-		if ( rtb_pickadate.date_onload !== 'empty' && $( '#rtb-date' ).val() === '' ) {
-			datepicker.set( 'select', new Date() );
+		if ( $( '#rtb-date' ).val() === '' ) {
+
+			if ( rtb_pickadate.date_onload == 'soonest' ) {
+				datepicker.set( 'select', new Date() );
+			} else if ( rtb_pickadate.date_onload !== 'empty' ) {
+				var dateToVerify = datepicker.component.create( new Date() );
+				var isDisabled = datepicker.component.disabled( dateToVerify );
+				if ( !isDisabled ) {
+					datepicker.set( 'select', dateToVerify );
+				}
+			}
 		}
 
 		// Update timepicker on pageload and whenever the datepicker is closed
