@@ -45,6 +45,32 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Go to Bookings > Settings to set up the page to display your booking form.
 
+== Frequently Asked Questions ==
+
+= Is there a shortcode to print the booking form? =
+
+Yes, use the `[booking-form]` shortcode.
+
+= Can I change the format of the date or time =
+
+Yes, set the format for the datepicker in *Bookings > Settings*. The format used in the backend will depend on the date and time formats in your WordPress settings.
+
+= The datepicker or timepicker is not working =
+
+If you load up the form and no date or time picker is popping up when you select those fields, this is likely caused by a Javascript error from another plugin or theme. You can find the problematic plugin by deactivating other plugins you're using one-by-one. Test after each deactivation to see if the date and time pickers work.
+
+If you have deactivated all other plugins and still have a problem, try switching to a default theme (one of the TwentySomething themes).
+
+= I'm not receiving notification emails for new bookings =
+
+This is almost always the result of issues with your server and can be caused by a number of things. Before posting a support request, please run through the following checklist:
+
+1. Double-check that the notification email in *Bookings > Settings > Notifications* is correct.
+2. Make sure that WordPress is able to send emails. The admin email address in the WordPress settings page should receive notifications of new users.
+3. If you're not able to receive regular WordPress emails, contact your web host and ask them for help sorting it out.
+4. If you're able to receive regular WordPress emails but not booking notifications, check your spam filters or junk mail folders.
+5. If you still haven't found the emails, contact your web host and let them know the date, time and email address where you expected to receive a booking. They should be able to check their logs to see what is happening to the email.
+
 == Screenshots ==
 
 1. Easily manage bookings. View today's bookings or upcoming bookings at-a-glance. Confirm or reject bookings quickly.
