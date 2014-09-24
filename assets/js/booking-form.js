@@ -97,7 +97,7 @@ jQuery(document).ready(function ($) {
 
 		// If no date has been set, select today's date if it's a valid
 		// date. User may opt not to do this in the settings.
-		if ( $( '#rtb-date' ).val() === '' ) {
+		if ( $( '#rtb-date' ).val() === '' && !$( '.rtb-booking-form .date .rtb-error' ).length ) {
 
 			if ( rtb_pickadate.date_onload == 'soonest' ) {
 				datepicker.set( 'select', new Date() );
