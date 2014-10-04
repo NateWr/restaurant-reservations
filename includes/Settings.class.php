@@ -514,7 +514,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'id'			=> 'template-tags-description',
 				'title'			=> __( 'Template Tags', RTB_TEXTDOMAIN ),
 				'html'			=> '
-					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails.', RTB_TEXTDOMAIN ) . '</p>' .
+					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails. Tags labeled with an asterisk (*) can be used in the email subject as well.', RTB_TEXTDOMAIN ) . '</p>' .
 					$this->render_template_tag_descriptions(),
 			)
 		);
@@ -629,9 +629,9 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 		$descriptions = apply_filters( 'rtb_notification_template_tag_descriptions', array(
 				'{user_email}'		=> __( 'Email of the user who made the booking', RTB_TEXTDOMAIN ),
-				'{user_name}'		=> __( 'Name of the user who made the booking', RTB_TEXTDOMAIN ),
-				'{party}'			=> __( 'Number of people booked', RTB_TEXTDOMAIN ),
-				'{date}'			=> __( 'Date and time of the booking', RTB_TEXTDOMAIN ),
+				'{user_name}'		=> __( '* Name of the user who made the booking', RTB_TEXTDOMAIN ),
+				'{party}'			=> __( '* Number of people booked', RTB_TEXTDOMAIN ),
+				'{date}'			=> __( '* Date and time of the booking', RTB_TEXTDOMAIN ),
 				'{phone}'			=> __( 'Phone number if supplied with the request', RTB_TEXTDOMAIN ),
 				'{message}'			=> __( 'Message added to the request', RTB_TEXTDOMAIN ),
 				'{bookings_link}'	=> __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ),
