@@ -456,7 +456,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'			=> 'reply-to-name',
 				'title'			=> __( 'Reply-To Name', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The name which should appear in the Reply-To field of a notification email', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The name which should appear in the Reply-To field of a user notification email', RTB_TEXTDOMAIN ),
 				'placeholder'	=> $this->defaults['reply-to-name'],
 			)
 		);
@@ -468,7 +468,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'			=> 'reply-to-address',
 				'title'			=> __( 'Reply-To Email Address', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email address which should appear in the Reply-To field of a notification email.', RTB_TEXTDOMAIN ),
+				'description'	=> __( 'The email address which should appear in the Reply-To field of a user notification email.', RTB_TEXTDOMAIN ),
 				'placeholder'	=> $this->defaults['reply-to-address'],
 			)
 		);
