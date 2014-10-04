@@ -79,6 +79,7 @@ abstract class rtbNotification {
 	public function process_template( $message ) {
 
 		$template_tags = array(
+			'{user_email}'		=> $this->booking->email,
 			'{user_name}'		=> $this->booking->name,
 			'{party}'			=> $this->booking->party,
 			'{date}'			=> $this->booking->format_date( $this->booking->date ),

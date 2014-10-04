@@ -628,6 +628,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	public function render_template_tag_descriptions() {
 
 		$descriptions = apply_filters( 'rtb_notification_template_tag_descriptions', array(
+				'{user_email}'		=> __( 'Email of the user who made the booking', RTB_TEXTDOMAIN ),
 				'{user_name}'		=> __( 'Name of the user who made the booking', RTB_TEXTDOMAIN ),
 				'{party}'			=> __( 'Number of people booked', RTB_TEXTDOMAIN ),
 				'{date}'			=> __( 'Date and time of the booking', RTB_TEXTDOMAIN ),
