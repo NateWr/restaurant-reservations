@@ -285,7 +285,7 @@ function rtb_get_datepicker_rules() {
 		}
 	}
 
-	return $disable_rules;
+	return apply_filters( 'rtb_datepicker_disable_rules', $disable_rules, $schedule_open, $schedule_closed );
 
 }
 } // endif;
