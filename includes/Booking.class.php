@@ -148,7 +148,7 @@ class rtbBooking {
 		$this->validation_errors = array();
 
 		// Date
-		$date = empty( $_POST['rtb-date'] ) ? false : $_POST['rtb-date'];
+		$date = empty( $_POST['rtb-date'] ) ? false : stripslashes_deep( $_POST['rtb-date'] );
 		if ( $date === false ) {
 			$this->validation_errors[] = array(
 				'field'		=> 'date',
@@ -158,7 +158,7 @@ class rtbBooking {
 
 		} else {
 			try {
-				$date = new DateTime( $_POST['rtb-date'] );
+				$date = new DateTime( stripslashes_deep( $_POST['rtb-date'] ) );
 			} catch ( Exception $e ) {
 				$this->validation_errors[] = array(
 					'field'		=> 'date',
@@ -169,7 +169,7 @@ class rtbBooking {
 		}
 
 		// Time
-		$time = empty( $_POST['rtb-time'] ) ? false : $_POST['rtb-time'];
+		$time = empty( $_POST['rtb-time'] ) ? false : stripslashes_deep( $_POST['rtb-time'] );
 		if ( $time === false ) {
 			$this->validation_errors[] = array(
 				'field'		=> 'time',
@@ -179,7 +179,7 @@ class rtbBooking {
 
 		} else {
 			try {
-				$time = new DateTime( $_POST['rtb-time'] );
+				$time = new DateTime( stripslashes_deep( $_POST['rtb-time'] ) );
 			} catch ( Exception $e ) {
 				$this->validation_errors[] = array(
 					'field'		=> 'time',
@@ -334,11 +334,11 @@ class rtbBooking {
 
 		// Save requested date/time values in case they need to be
 		// printed in the form again
-		$this->request_date = empty( $_POST['rtb-date'] ) ? '' : $_POST['rtb-date'];
-		$this->request_time = empty( $_POST['rtb-time'] ) ? '' : $_POST['rtb-time'];
+		$this->request_date = empty( $_POST['rtb-date'] ) ? '' : stripslashes_deep( $_POST['rtb-date'] );
+		$this->request_time = empty( $_POST['rtb-time'] ) ? '' : stripslashes_deep( $_POST['rtb-time'] );
 
 		// Name
-		$this->name = empty( $_POST['rtb-name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( $_POST['rtb-name'] ), true ); // @todo should I limit length?
+		$this->name = empty( $_POST['rtb-name'] ) ? '' : wp_strip_all_tags( sanitize_text_field( stripslashes_deep( $_POST['rtb-name'] ) ), true ); // @todo should I limit length?
 		if ( empty( $this->name ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'name',
@@ -348,7 +348,7 @@ class rtbBooking {
 		}
 
 		// Party
-		$this->party = empty( $_POST['rtb-party'] ) ? '' : sanitize_text_field( $_POST['rtb-party'] );
+		$this->party = empty( $_POST['rtb-party'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-party'] ) );
 		if ( empty( $this->party ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'party',
@@ -373,7 +373,7 @@ class rtbBooking {
 		}
 
 		// Email/Phone
-		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( $_POST['rtb-email'] ); // @todo email validation? send notification back to form on bad email address.
+		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-email'] ) ); // @todo email validation? send notification back to form on bad email address.
 		if ( empty( $this->email ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'email',
@@ -383,8 +383,8 @@ class rtbBooking {
 		}
 
 		// Phone/Message
-		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( $_POST['rtb-phone'] );
-		$this->message = empty( $_POST['rtb-message'] ) ? '' : sanitize_text_field( $_POST['rtb-message'] );
+		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-phone'] ) );
+		$this->message = empty( $_POST['rtb-message'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-message'] ) );
 
 		do_action( 'rtb_validate_booking_submission', $this );
 
