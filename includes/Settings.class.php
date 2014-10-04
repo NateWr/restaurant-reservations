@@ -506,8 +506,6 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
-		// @todo this should be generated automatically from an array of tags/descriptions somewhere, so that addons
-		//	can easily add/edit without conflicting with each other.
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-notifications-templates',
@@ -516,40 +514,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'id'			=> 'template-tags-description',
 				'title'			=> __( 'Template Tags', RTB_TEXTDOMAIN ),
 				'html'			=> '
-					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails.', RTB_TEXTDOMAIN ) . '</p>
-					<div class="rtb-template-tags-box">
-						<strong>{user_name}</strong> ' . __( 'Name of the user who made the booking', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{party}</strong> ' . __( 'Number of people booked', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{date}</strong> ' . __( 'Date and time of the booking', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{phone}</strong> ' . __( 'Phone number if supplied with the request', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{message}</strong> ' . __( 'Message added to the request', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{bookings_link}</strong> ' . __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{confirm_link}</strong> ' . __( 'A link to confirm this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{close_link}</strong> ' . __( 'A link to reject this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{site_name}</strong> ' . __( 'The name of this website', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{site_link}</strong> ' . __( 'A link to this website', RTB_TEXTDOMAIN ) . '
-					</div>
-					<div class="rtb-template-tags-box">
-						<strong>{current_time}</strong> ' . __( 'Current date and time', RTB_TEXTDOMAIN ) . '
-					</div>',
+					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails.', RTB_TEXTDOMAIN ) . '</p>' .
+					$this->render_template_tag_descriptions(),
 			)
 		);
 
@@ -653,6 +619,39 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 		$sap->add_admin_menus();
 
+	}
+
+	/**
+	 * Render HTML code of descriptions for the template tags
+	 * @since 1.2.3
+	 */
+	public function render_template_tag_descriptions() {
+
+		$descriptions = apply_filters( 'rtb_notification_template_tag_descriptions', array(
+				'{user_name}'		=> __( 'Name of the user who made the booking', RTB_TEXTDOMAIN ),
+				'{party}'			=> __( 'Number of people booked', RTB_TEXTDOMAIN ),
+				'{date}'			=> __( 'Date and time of the booking', RTB_TEXTDOMAIN ),
+				'{phone}'			=> __( 'Phone number if supplied with the request', RTB_TEXTDOMAIN ),
+				'{message}'			=> __( 'Message added to the request', RTB_TEXTDOMAIN ),
+				'{bookings_link}'	=> __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ),
+				'{confirm_link}'	=> __( 'A link to confirm this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ),
+				'{close_link}'		=> __( 'A link to reject this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ),
+				'{site_name}'		=> __( 'The name of this website', RTB_TEXTDOMAIN ),
+				'{site_link}'		=> __( 'A link to this website', RTB_TEXTDOMAIN ),
+				'{current_time}'	=> __( 'Current date and time', RTB_TEXTDOMAIN ),
+			)
+		);
+
+		$output = '';
+
+		foreach ( $descriptions as $tag => $description ) {
+			$output .= '
+				<div class="rtb-template-tags-box">
+					<strong>' . $tag . '</strong> ' . $description . '
+				</div>';
+		}
+
+		return $output;
 	}
 
 }
