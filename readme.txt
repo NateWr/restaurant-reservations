@@ -51,17 +51,17 @@ This plugin is packed with hooks so you can extend it, customize it and rebrand 
 
 Yes, use the `[booking-form]` shortcode.
 
-= Can I change the format of the date or time =
+= Can I change the format of the date or time? =
 
 Yes, set the format for the datepicker in *Bookings > Settings*. The format used in the backend will depend on the date and time formats in your WordPress settings.
 
-= The datepicker or timepicker is not working =
+= The datepicker or timepicker is not working. =
 
 If you load up the form and no date or time picker is popping up when you select those fields, this is likely caused by a Javascript error from another plugin or theme. You can find the problematic plugin by deactivating other plugins you're using one-by-one. Test after each deactivation to see if the date and time pickers work.
 
 If you have deactivated all other plugins and still have a problem, try switching to a default theme (one of the TwentySomething themes).
 
-= I'm not receiving notification emails for new bookings =
+= I'm not receiving notification emails for new bookings. =
 
 This is almost always the result of issues with your server and can be caused by a number of things. Before posting a support request, please run through the following checklist:
 
@@ -70,6 +70,12 @@ This is almost always the result of issues with your server and can be caused by
 3. If you're not able to receive regular WordPress emails, contact your web host and ask them for help sorting it out.
 4. If you're able to receive regular WordPress emails but not booking notifications, check your spam filters or junk mail folders.
 5. If you still haven't found the emails, contact your web host and let them know the date, time and email address where you expected to receive a booking. They should be able to check their logs to see what is happening to the email.
+
+= Can I translate the booking form? =
+
+Yes, everything in this plugin can be translated using the standard translation process and software like PoEdit. If you're not familiar with that process, I'd recommend you take a look at the [Loco Translate](https://wordpress.org/plugins/loco-translate/) plugin, which provides a simple interface in your WordPress admin area for translating themes and plugins.
+
+If you make a translation, please help others out by adding it to the [GitHub repository](https://github.com/NateWr/restaurant-reservations) so that I can distribute it for others.
 
 == Screenshots ==
 
