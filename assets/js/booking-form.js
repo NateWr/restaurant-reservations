@@ -50,6 +50,7 @@ jQuery(document).ready(function ($) {
 			formatSubmit: 'h:i A',
 			hiddenName: true,
 			interval: parseInt( rtb_pickadate.time_interval, 10 ),
+			container: 'body',
 
 			// Select the value when loaded if a value has been set
 			onStart: function() {
