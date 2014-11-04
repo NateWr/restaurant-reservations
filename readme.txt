@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.0
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -91,6 +91,15 @@ If you make a translation, please help others out by adding it to the [GitHub re
 
 == Changelog ==
 
+= 1.2.3 (2014-11-04) =
+* Add a {user_email} notification template tag
+* Add filter to notification template tag descriptions for extensions
+* Add Reply-To mail headers and use a more reliable From header
+* Add filter to the datepicker rules for disabled dates
+* Fix: missing "Clear" button translation in time picker for many languages
+* Fix: open time picker in body container to mitigate rare positioning bugs
+* Fix: don't auto-select today's date if it's not a valid date or errors are attached to the date field
+
 = 1.2.2 (2014-08-24) =
 * Fix: custom date formats can break date validation for new bookings
 * Add new booking form generation hooks for easier customization
@@ -140,6 +149,9 @@ If you make a translation, please help others out by adding it to the [GitHub re
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+This update adds a {user_email} notification template tag and improves the mail headers on notifications to mitigate spam risk. It also adds the missing translation for the Clear button in the time picker for many languages. More minor bug fixes listed in the changelog.
 
 = 1.2.2 =
 This update adds support for a new MailChimp addon that will be released soon. An addons page is now available under the Bookings menu. A bug in which custom date/time formats could cause validation errors has been fixed. New hooks are now in place so that it's easier to customize the form output. 
