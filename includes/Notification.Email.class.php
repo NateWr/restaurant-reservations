@@ -142,7 +142,7 @@ class rtbNotificationEmail extends rtbNotification {
 
 		global $rtb_controller;
 
-		$headers = "From: " . stripslashes_deep( html_entity_decode( $rtb_controller->settings->get_setting( 'reply-to-name' ), ENT_COMPAT, 'UTF-8' ) ) . " <" . apply_filters( 'rtb_notification_email_from_header', get_option( 'admin_email' ) ) . ">\r\n";
+		$headers = "From: " . stripslashes_deep( html_entity_decode( $rtb_controller->settings->get_setting( 'reply-to-name' ), ENT_COMPAT, 'UTF-8' ) ) . " <" . apply_filters( 'rtb_notification_email_header_from_email', get_option( 'admin_email' ) ) . ">\r\n";
 		$headers .= "Reply-To: " . stripslashes_deep( html_entity_decode( $this->from_name, ENT_COMPAT, 'UTF-8' ) ) . " <" . $this->from_email . ">\r\n";
 		$headers .= "Content-Type: text/html; charset=utf-8\r\n";
 		$this->headers = apply_filters( 'rtb_notification_email_headers', $headers, $this );
