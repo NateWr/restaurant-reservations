@@ -43,7 +43,7 @@ function rtb_print_booking_form() {
 	// Process a booking request
 	if ( !empty( $_POST['action'] ) && $_POST['action'] == 'booking_request' ) {
 
-		if ( empty( $rtb_controller->request ) ) {
+		if ( get_class( $rtb_controller->request ) === 'stdClass' ) {
 			require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
 			$rtb_controller->request = new rtbBooking();
 		}
@@ -51,15 +51,8 @@ function rtb_print_booking_form() {
 		$rtb_controller->request->insert_booking();
 	}
 
-	// Set up a dummy request object if no request has been made. This just
-	// simplifies the display of values in the form below
-	if ( empty( $rtb_controller->request ) ) {
-		$request = new stdClass();
-		$request->request_processed = false;
-		$request->request_inserted = false;
-	} else {
-		$request = $rtb_controller->request;
-	}
+	// Shorthand
+	$request = $rtb_controller->request;
 
 	// Define the form's action parameter
 	$booking_page = $rtb_controller->settings->get_setting( 'booking-page' );

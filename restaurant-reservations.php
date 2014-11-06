@@ -38,6 +38,12 @@ class rtbInit {
 	public $form_rendered = false;
 
 	/**
+	 * An object which stores a booking request, or an empty object if
+	 * no request has been processed.
+	 */
+	public $request;
+
+	/**
 	 * Initialize the plugin and register hooks
 	 */
 	public function __construct() {
@@ -51,9 +57,13 @@ class rtbInit {
 		define( 'RTB_BOOKING_POST_TYPE_SLUG', 'booking' );
 		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
 
-
 		// Initialize the plugin
 		add_action( 'init', array( $this, 'load_textdomain' ) );
+
+		// Set up empty request object
+		$this->request = new stdClass();
+		$this->request->request_processed = false;
+		$this->request->request_inserted = false;
 
 		// Add custom roles and capabilities
 		add_action( 'init', array( $this, 'add_roles' ) );
