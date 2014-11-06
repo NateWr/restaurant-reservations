@@ -86,7 +86,10 @@ function rtb_print_booking_form() {
 
 			<?php
 				foreach( $contents['fields'] as $slug => $field ) {
-					call_user_func( $field['callback'], $slug, $field['title'], $field['request_input'] );
+
+					$args = empty( $field['callback_args'] ) ? null : $field['callback_args'];
+
+					call_user_func( $field['callback'], $slug, $field['title'], $field['request_input'], $args );
 				}
 			?>
 		</fieldset>
@@ -222,7 +225,7 @@ function rtb_get_datepicker_rules() {
  * @since 1.3
  */
 if ( !function_exists( 'rtb_print_form_text_field' ) ) {
-function rtb_print_form_text_field( $slug, $title, $value ) {
+function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
@@ -247,7 +250,7 @@ function rtb_print_form_text_field( $slug, $title, $value ) {
  * @since 1.3
  */
 if ( !function_exists( 'rtb_print_form_textarea_field' ) ) {
-function rtb_print_form_textarea_field( $slug, $title, $value ) {
+function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 
@@ -267,11 +270,41 @@ function rtb_print_form_textarea_field( $slug, $title, $value ) {
 } // endif;
 
 /**
+ * Print a select form field
+ * @since 1.3
+ */
+if ( !function_exists( 'rtb_print_form_select_field' ) ) {
+function rtb_print_form_select_field( $slug, $title, $value, $args ) {
+
+	$slug = esc_attr( $slug );
+	$value = esc_attr( $value );
+	$options = $args['options'];
+
+	?>
+	
+	<div class="<?php echo $slug; ?>">
+		<?php echo rtb_print_form_error( $slug ); ?>
+		<label for="rtb-<?php echo $slug; ?>">
+			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+		</label>
+		<select name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>">
+			<?php foreach ( $options as $opt_value => $opt_label ) : ?>
+			<option value="<?php echo esc_attr( $opt_value ); ?>" <?php selected( $opt_value, $value ); ?>><?php echo esc_attr( $opt_label ); ?></option>
+			<?php endforeach; ?>
+		</select>
+	</div>
+
+	<?php
+
+}
+} // endif;
+
+/**
  * Print the Add Message link to display the message field
  * @since 1.3
  */
 if ( !function_exists( 'rtb_print_form_message_link' ) ) {
-function rtb_print_form_message_link( $slug, $title, $value ) {
+function rtb_print_form_message_link( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );

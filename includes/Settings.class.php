@@ -253,12 +253,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-general',
-			'text',
+			'select',
 			array(
 				'id'            => 'party-size',
 				'title'         => __( 'Max Party Size', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Set a maximum allowed party size for bookings. Leave it empty to allow parties of any size.', RTB_TEXTDOMAIN ),
-				'placeholder'	=> __( 'No limit', RTB_TEXTDOMAIN ),
+				'description'   => __( 'Set a maximum allowed party size for bookings.', RTB_TEXTDOMAIN ),
+				'blank_option'	=> false,
+				'options'       => $this->get_party_size_setting_options(),
 			)
 		);
 
@@ -622,6 +623,40 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	}
 
 	/**
+	 * Get options for the party size setting
+	 * @since 1.3
+	 */
+	public function get_party_size_setting_options() {
+
+		$options = array(
+			'' 		=> __( 'Any size', RTB_TEXTDOMAIN ),
+		);
+
+		$max = apply_filters( 'rtb_party_size_upper_limit', 100 );
+
+		for ( $i = 1; $i <= $max; $i++ ) {
+			$options[$i] = $i;
+		}
+
+		return apply_filters( 'rtb_party_size_setting_options', $options );
+	}
+
+	/**
+	 * Get options for the party select field in the booking form
+	 * @since 1.3
+	 */
+	public function get_form_party_options() {
+
+		$max = empty( $this->get_setting( 'party-size' ) ) ? apply_filters( 'rtb_party_size_upper_limit', 100 ) : (int) $this->get_setting( 'party-size' );
+
+		for ( $i = 1; $i <= $max; $i++ ) {
+			$options[$i] = $i;
+		}
+
+		return apply_filters( 'rtb_form_party_options', $options );
+	}
+
+	/**
 	 * Retrieve form fields
 	 * @since 1.3
 	 */
@@ -662,7 +697,10 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 					'party'		=> array(
 						'title'			=> __( 'Party', RTB_TEXTDOMAIN ),
 						'request_input'	=> empty( $request->party ) ? '' : $request->party,
-						'callback'		=> 'rtb_print_form_text_field',
+						'callback'		=> 'rtb_print_form_select_field',
+						'callback_args'	=> array(
+							'options'	=> $this->get_form_party_options(),
+						)
 					),
 				),
 			),

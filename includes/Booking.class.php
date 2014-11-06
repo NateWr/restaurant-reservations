@@ -348,7 +348,7 @@ class rtbBooking {
 		}
 
 		// Party
-		$this->party = empty( $_POST['rtb-party'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-party'] ) );
+		$this->party = empty( $_POST['rtb-party'] ) ? '' : absint( $_POST['rtb-party'] );
 		if ( empty( $this->party ) ) {
 			$this->validation_errors[] = array(
 				'field'			=> 'party',
@@ -357,13 +357,9 @@ class rtbBooking {
 			);
 
 		// Check party size
-		// If the user has entered a party size like "five" or "3-4" or
-		// something like that, let's go ahead and allow it. Restaurant manager
-		// can choose to accept or deny it. We'll only evaluate the max party
-		// size criteria on pure digits ("2" or "10").
-		} elseif ( ctype_digit( $this->party ) ) {
+		} else {
 			$party_size = $rtb_controller->settings->get_setting( 'party-size' );
-			if ( !empty( $party_size ) && $party_size < (int) $this->party ) {
+			if ( !empty( $party_size ) && $party_size < $this->party ) {
 				$this->validation_errors[] = array(
 					'field'			=> 'party',
 					'post_variable'	=> $this->party,
