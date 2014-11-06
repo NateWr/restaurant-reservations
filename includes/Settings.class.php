@@ -622,6 +622,88 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	}
 
 	/**
+	 * Retrieve form fields
+	 * @since 1.3
+	 */
+	public function get_booking_form_fields( $request = null ) {
+
+		// $request will represent a rtbBooking object with the request
+		// details when the form is being printed and $_POST data exists
+		// to populate the request. All other times $request will just
+		// be an empty object
+		if ( $request === null ) {
+			global $rtb_controller;
+			$request = $rtb_controller->request;
+		}
+
+		// This array defines the field details and a callback function to
+		// render each field. To customize the form output, modify the
+		// callback functions to point to your custom function. Don't forget
+		// to output an error message in your custom callback function. You
+		// can use rtb_print_form_error( $slug ) to do this.
+		//
+		// See /includes/template-functions.php
+		$fields = array(
+
+			// Reservation details fieldset
+			'reservation'	=> array(
+				'legend'	=> __( 'Book a table', RTB_TEXTDOMAIN ),
+				'fields'	=> array(
+					'date'		=> array(
+						'title'			=> __( 'Date', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->request_date ) ? '' : $request->request_date,
+						'callback'		=> 'rtb_print_form_text_field',
+					),
+					'time'		=> array(
+						'title'			=> __( 'Time', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->request_time ) ? '' : $request->request_time,
+						'callback'		=> 'rtb_print_form_text_field',
+					),
+					'party'		=> array(
+						'title'			=> __( 'Party', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->party ) ? '' : $request->party,
+						'callback'		=> 'rtb_print_form_text_field',
+					),
+				),
+			),
+
+			// Contact details fieldset
+			'contact'	=> array(
+				'legend'	=> __( 'Contact Details', RTB_TEXTDOMAIN ),
+				'fields'	=> array(
+					'name'		=> array(
+						'title'			=> __( 'Name', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->name ) ? '' : $request->name,
+						'callback'		=> 'rtb_print_form_text_field',
+					),
+					'email'		=> array(
+						'title'			=> __( 'Email', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->email ) ? '' : $request->email,
+						'callback'		=> 'rtb_print_form_text_field',
+					),
+					'phone'		=> array(
+						'title'			=> __( 'Phone', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->phone ) ? '' : $request->phone,
+						'callback'		=> 'rtb_print_form_text_field',
+					),
+					'add-message'	=> array(
+						'title'		=> __( 'Add a Message', RTB_TEXTDOMAIN ),
+						'request_input'	=> '',
+						'callback'	=> 'rtb_print_form_message_link',
+					),
+					'message'		=> array(
+						'title'			=> __( 'Message', RTB_TEXTDOMAIN ),
+						'request_input'	=> empty( $request->message ) ? '' : $request->message,
+						'callback'		=> 'rtb_print_form_textarea_field',
+					),
+				),
+			),
+		);
+
+		return apply_filters( 'rtb_booking_form_fields', $fields, $request );
+	}
+
+	/**
 	 * Render HTML code of descriptions for the template tags
 	 * @since 1.2.3
 	 */

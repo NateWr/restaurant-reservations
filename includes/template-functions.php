@@ -51,87 +51,21 @@ function rtb_print_booking_form() {
 		$rtb_controller->request->insert_booking();
 	}
 
-	// Shorthand
-	$request = $rtb_controller->request;
-
 	// Define the form's action parameter
 	$booking_page = $rtb_controller->settings->get_setting( 'booking-page' );
 	if ( !empty( $booking_page ) ) {
 		$booking_page = get_permalink( $booking_page );
 	}
 
-	// Define the form fields
-	//
-	// This array defines the field details and a callback function to
-	// render each field. To customize the form output, modify the
-	// callback functions to point to your custom function. Don't forget
-	// to output an error message in your custom callback function. You
-	// can use rtb_print_form_error( $slug ) to do this.
-	$fields = array(
-
-		// Reservation details fieldset
-		'reservation'	=> array(
-			'legend'	=> __( 'Book a table', RTB_TEXTDOMAIN ),
-			'fields'	=> array(
-				'date'		=> array(
-					'title'			=> __( 'Date', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->request_date ) ? '' : $request->request_date,
-					'callback'		=> 'rtb_print_form_text_field',
-				),
-				'time'		=> array(
-					'title'			=> __( 'Time', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->request_time ) ? '' : $request->request_time,
-					'callback'		=> 'rtb_print_form_text_field',
-				),
-				'party'		=> array(
-					'title'			=> __( 'Party', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->party ) ? '' : $request->party,
-					'callback'		=> 'rtb_print_form_text_field',
-				),
-			),
-		),
-
-		// Contact details fieldset
-		'contact'	=> array(
-			'legend'	=> __( 'Contact Details', RTB_TEXTDOMAIN ),
-			'fields'	=> array(
-				'name'		=> array(
-					'title'			=> __( 'Name', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->name ) ? '' : $request->name,
-					'callback'		=> 'rtb_print_form_text_field',
-				),
-				'email'		=> array(
-					'title'			=> __( 'Email', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->email ) ? '' : $request->email,
-					'callback'		=> 'rtb_print_form_text_field',
-				),
-				'phone'		=> array(
-					'title'			=> __( 'Phone', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->phone ) ? '' : $request->phone,
-					'callback'		=> 'rtb_print_form_text_field',
-				),
-				'add-message'	=> array(
-					'title'		=> __( 'Add a Message', RTB_TEXTDOMAIN ),
-					'request_input'	=> '',
-					'callback'	=> 'rtb_print_form_message_link',
-				),
-				'message'		=> array(
-					'title'			=> __( 'Message', RTB_TEXTDOMAIN ),
-					'request_input'	=> empty( $request->message ) ? '' : $request->message,
-					'callback'		=> 'rtb_print_form_textarea_field',
-				),
-			),
-		),
-	);
-
-	$fields = apply_filters( 'rtb_booking_form_fields', $fields, $request );
+	// Retrieve the form fields
+	$fields = $rtb_controller->settings->get_booking_form_fields( $rtb_controller->request );
 
 	ob_start();
 
 	?>
 
 <div class="rtb-booking-form">
-	<?php if ( $request->request_inserted === true ) : ?>
+	<?php if ( $rtb_controller->request->request_inserted === true ) : ?>
 	<div class="rtb-message">
 		<p><?php echo $rtb_controller->settings->get_setting( 'success-message' ); ?></p>
 	</div>
