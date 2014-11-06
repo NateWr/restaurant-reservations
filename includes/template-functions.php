@@ -97,7 +97,7 @@ function rtb_print_booking_form() {
 
 		<?php do_action( 'rtb_booking_form_after_fields' ); ?>
 		
-		<button type="submit"><?php _e( 'Request Booking', RTB_TEXTDOMAIN ); ?></button>
+		<button type="submit"><?php echo apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', RTB_TEXTDOMAIN ) ); ?></button>
 		
 	</form>
 	<?php endif; ?>
