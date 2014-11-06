@@ -186,14 +186,14 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		}
 
 		if ( !empty( $this->settings[ $setting ] ) ) {
-			return $this->settings[ $setting ];
+			return apply_filters( 'rtb-setting-' . $setting, $this->settings[ $setting ] );
 		}
 
 		if ( !empty( $this->defaults[ $setting ] ) ) {
-			return $this->defaults[ $setting ];
+			return apply_filters( 'rtb-setting-' . $setting, $this->defaults[ $setting ] );
 		}
 
-		return null;
+		return apply_filters( 'rtb-setting-' . $setting, null );
 	}
 
 	/**
