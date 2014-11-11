@@ -226,7 +226,7 @@ class rtbInit {
 		}
 
 		global $post;
-		if ( $post->ID !== $this->settings->get_setting( 'booking-page' ) ) {
+		if ( $post->ID != $this->settings->get_setting( 'booking-page' ) ) {
 			return $content;
 		}
 
