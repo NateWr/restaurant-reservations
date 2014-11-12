@@ -153,7 +153,7 @@ class rtbBooking {
 			$this->validation_errors[] = array(
 				'field'		=> 'date',
 				'error_msg'	=> 'Booking request missing date',
-				'message'	=> __( 'Please enter the date you would like to book.', RTB_TEXTDOMAIN ),
+				'message'	=> __( 'Please enter the date you would like to book.', 'restaurant-reservations' ),
 			);
 
 		} else {
@@ -163,7 +163,7 @@ class rtbBooking {
 				$this->validation_errors[] = array(
 					'field'		=> 'date',
 					'error_msg'	=> $e->getMessage(),
-					'message'	=> __( 'The date you entered is not valid. Please select from one of the dates in the calendar.', RTB_TEXTDOMAIN ),
+					'message'	=> __( 'The date you entered is not valid. Please select from one of the dates in the calendar.', 'restaurant-reservations' ),
 				);
 			}
 		}
@@ -174,7 +174,7 @@ class rtbBooking {
 			$this->validation_errors[] = array(
 				'field'		=> 'time',
 				'error_msg'	=> 'Booking request missing time',
-				'message'	=> __( 'Please enter the time you would like to book.', RTB_TEXTDOMAIN ),
+				'message'	=> __( 'Please enter the time you would like to book.', 'restaurant-reservations' ),
 			);
 
 		} else {
@@ -184,7 +184,7 @@ class rtbBooking {
 				$this->validation_errors[] = array(
 					'field'		=> 'time',
 					'error_msg'	=> $e->getMessage(),
-					'message'	=> __( 'The time you entered is not valid. Please select from one of the times provided.', RTB_TEXTDOMAIN ),
+					'message'	=> __( 'The time you entered is not valid. Please select from one of the times provided.', 'restaurant-reservations' ),
 				);
 			}
 		}
@@ -201,7 +201,7 @@ class rtbBooking {
 					$this->validation_errors[] = array(
 						'field'		=> 'time',
 						'error_msg'	=> 'Booking request too far in the future',
-						'message'	=> sprintf( __( 'Sorry, bookings can not be made more than %s days in advance.', RTB_TEXTDOMAIN ), $early_bookings ),
+						'message'	=> sprintf( __( 'Sorry, bookings can not be made more than %s days in advance.', 'restaurant-reservations' ), $early_bookings ),
 					);
 				}
 			}
@@ -212,7 +212,7 @@ class rtbBooking {
 					$this->validation_errors[] = array(
 						'field'		=> 'time',
 						'error_msg'	=> 'Booking request in the past',
-						'message'	=> __( 'Sorry, bookings can not be made in the past.', RTB_TEXTDOMAIN ),
+						'message'	=> __( 'Sorry, bookings can not be made in the past.', 'restaurant-reservations' ),
 					);
 				}
 
@@ -220,11 +220,11 @@ class rtbBooking {
 				$late_bookings_seconds = $late_bookings * 60; // Late bookings allowance in seconds
 				if ( $request->format( 'U' ) < ( current_time( 'timestamp' ) + $late_bookings_seconds ) ) {
 					if ( $late_bookings >= 1440 ) {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s days in advance.', RTB_TEXTDOMAIN ), $late_bookings / 1440 );
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s days in advance.', 'restaurant-reservations' ), $late_bookings / 1440 );
 					} elseif ( $late_bookings >= 60 ) {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s hours in advance.', RTB_TEXTDOMAIN ), $late_bookings / 60 );
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s hours in advance.', 'restaurant-reservations' ), $late_bookings / 60 );
 					} else {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s mings in advance.', RTB_TEXTDOMAIN ), $late_bookings );
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s mings in advance.', 'restaurant-reservations' ), $late_bookings );
 					}
 					$this->validation_errors[] = array(
 						'field'		=> 'time',
@@ -263,7 +263,7 @@ class rtbBooking {
 					$this->validation_errors[] = array(
 						'field'		=> 'date',
 						'error_msg'	=> 'Booking request made on invalid date or time in an exception rule',
-						'message'	=> __( 'Sorry, no bookings are being accepted then.', RTB_TEXTDOMAIN ),
+						'message'	=> __( 'Sorry, no bookings are being accepted then.', 'restaurant-reservations' ),
 					);
 				}
 			}
@@ -315,13 +315,13 @@ class rtbBooking {
 					$this->validation_errors[] = array(
 						'field'		=> 'date',
 						'error_msg'	=> 'Booking request made on an invalid date',
-						'message'	=> __( 'Sorry, no bookings are being accepted on that date.', RTB_TEXTDOMAIN ),
+						'message'	=> __( 'Sorry, no bookings are being accepted on that date.', 'restaurant-reservations' ),
 					);
 				} elseif ( !$time_is_valid ) {
 					$this->validation_errors[] = array(
 						'field'		=> 'time',
 						'error_msg'	=> 'Booking request made at an invalid time',
-						'message'	=> __( 'Sorry, no bookings are being accepted at that time.', RTB_TEXTDOMAIN ),
+						'message'	=> __( 'Sorry, no bookings are being accepted at that time.', 'restaurant-reservations' ),
 					);
 				}
 			}
@@ -343,7 +343,7 @@ class rtbBooking {
 			$this->validation_errors[] = array(
 				'field'			=> 'name',
 				'post_variable'	=> $this->name,
-				'message'	=> __( 'Please enter a name for this booking.', RTB_TEXTDOMAIN ),
+				'message'	=> __( 'Please enter a name for this booking.', 'restaurant-reservations' ),
 			);
 		}
 
@@ -353,7 +353,7 @@ class rtbBooking {
 			$this->validation_errors[] = array(
 				'field'			=> 'party',
 				'post_variable'	=> $this->party,
-				'message'	=> __( 'Please let us know how many people will be in your party.', RTB_TEXTDOMAIN ),
+				'message'	=> __( 'Please let us know how many people will be in your party.', 'restaurant-reservations' ),
 			);
 
 		// Check party size
@@ -363,7 +363,7 @@ class rtbBooking {
 				$this->validation_errors[] = array(
 					'field'			=> 'party',
 					'post_variable'	=> $this->party,
-					'message'	=> sprintf( __( 'We only accept bookings for parties of up to %d people.', RTB_TEXTDOMAIN ), $party_size ),
+					'message'	=> sprintf( __( 'We only accept bookings for parties of up to %d people.', 'restaurant-reservations' ), $party_size ),
 				);
 			}
 		}
@@ -374,7 +374,7 @@ class rtbBooking {
 			$this->validation_errors[] = array(
 				'field'			=> 'email',
 				'post_variable'	=> $this->email,
-				'message'	=> __( 'Please enter an email address so we can confirm your booking.', RTB_TEXTDOMAIN ),
+				'message'	=> __( 'Please enter an email address so we can confirm your booking.', 'restaurant-reservations' ),
 			);
 		}
 

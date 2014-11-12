@@ -80,10 +80,10 @@ class rtbSettings {
 
 		$this->defaults = array(
 
-			'success-message'				=> _x( 'Thanks, your booking request is waiting to be confirmed. Updates will be sent to the email address you provided.', RTB_TEXTDOMAIN ),
-			'date-format'					=> _x( 'mmmm d, yyyy', 'Default date format for display. Must match formatting rules at http://amsul.ca/pickadate.js/date.htm#formatting-rules', RTB_TEXTDOMAIN ),
-			'time-format'					=> _x( 'h:i A', 'Default time format for display. Must match formatting rules at http://amsul.ca/pickadate.js/time.htm#formats', RTB_TEXTDOMAIN ),
-			'time-interval'					=> _x( '30', 'Default interval in minutes when selecting a time.', RTB_TEXTDOMAIN ),
+			'success-message'				=> _x( 'Thanks, your booking request is waiting to be confirmed. Updates will be sent to the email address you provided.', 'restaurant-reservations' ),
+			'date-format'					=> _x( 'mmmm d, yyyy', 'Default date format for display. Must match formatting rules at http://amsul.ca/pickadate.js/date.htm#formatting-rules', 'restaurant-reservations' ),
+			'time-format'					=> _x( 'h:i A', 'Default time format for display. Must match formatting rules at http://amsul.ca/pickadate.js/time.htm#formats', 'restaurant-reservations' ),
+			'time-interval'					=> _x( '30', 'Default interval in minutes when selecting a time.', 'restaurant-reservations' ),
 
 			// Email address where admin notifications should be sent
 			'admin-email-address'			=> get_option( 'admin_email' ),
@@ -93,7 +93,7 @@ class rtbSettings {
 			'reply-to-address'				=> get_option( 'admin_email' ),
 
 			// Email template sent to an admin when a new booking request is made
-			'subject-booking-admin'			=> _x( 'New Booking Request', 'Default email subject for admin notifications of new bookings', RTB_TEXTDOMAIN ),
+			'subject-booking-admin'			=> _x( 'New Booking Request', 'Default email subject for admin notifications of new bookings', 'restaurant-reservations' ),
 			'template-booking-admin'		=> _x( 'A new booking request has been made at {site_name}:
 
 {user_name}
@@ -108,11 +108,11 @@ class rtbSettings {
 
 <em>This message was sent by {site_link} on {current_time}.</em>',
 				'Default email sent to the admin when a new booking request is made. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
-				RTB_TEXTDOMAIN
+				'restaurant-reservations'
 			),
 
 			// Email template sent to a user when a new booking request is made
-			'subject-booking-user'			=> sprintf( _x( 'Your booking at %s is pending', 'Default email subject sent to user when they request a booking. %s will be replaced by the website name', RTB_TEXTDOMAIN ), get_bloginfo( 'name' ) ),
+			'subject-booking-user'			=> sprintf( _x( 'Your booking at %s is pending', 'Default email subject sent to user when they request a booking. %s will be replaced by the website name', 'restaurant-reservations' ), get_bloginfo( 'name' ) ),
 			'template-booking-user'			=> _x( 'Thanks {user_name},
 
 Your booking request is <strong>waiting to be confirmed</strong>.
@@ -128,11 +128,11 @@ Give us a few moments to make sure that we\'ve got space for you. You will recei
 
 <em>This message was sent by {site_link} on {current_time}.</em>',
 				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
-				RTB_TEXTDOMAIN
+				'restaurant-reservations'
 			),
 
 			// Email template sent to a user when a booking request is confirmed
-			'subject-confirmed-user'		=> sprintf( _x( 'Your booking at %s is confirmed', 'Default email subject sent to user when their booking is confirmed. %s will be replaced by the website name', RTB_TEXTDOMAIN ), get_bloginfo( 'name' ) ),
+			'subject-confirmed-user'		=> sprintf( _x( 'Your booking at %s is confirmed', 'Default email subject sent to user when their booking is confirmed. %s will be replaced by the website name', 'restaurant-reservations' ), get_bloginfo( 'name' ) ),
 			'template-confirmed-user'		=> _x( 'Hi {user_name},
 
 Your booking request has been <strong>confirmed</strong>. We look forward to seeing you soon.
@@ -146,11 +146,11 @@ Your booking request has been <strong>confirmed</strong>. We look forward to see
 
 <em>This message was sent by {site_link} on {current_time}.</em>',
 				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
-				RTB_TEXTDOMAIN
+				'restaurant-reservations'
 			),
 
 			// Email template sent to a user when a booking request is rejected
-			'subject-rejected-user'			=> sprintf( _x( 'Your booking at %s was not accepted', 'Default email subject sent to user when their booking is rejected. %s will be replaced by the website name', RTB_TEXTDOMAIN ), get_bloginfo( 'name' ) ),
+			'subject-rejected-user'			=> sprintf( _x( 'Your booking at %s was not accepted', 'Default email subject sent to user when their booking is rejected. %s will be replaced by the website name', 'restaurant-reservations' ), get_bloginfo( 'name' ) ),
 			'template-rejected-user'		=> _x( 'Hi {user_name},
 
 Sorry, we could not accomodate your booking request. We\'re full or not open at the time you requested:
@@ -163,7 +163,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 <em>This message was sent by {site_link} on {current_time}.</em>',
 				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
-				RTB_TEXTDOMAIN
+				'restaurant-reservations'
 			),
 		);
 
@@ -215,8 +215,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'submenu',
 			array(
 				'id'            => 'rtb-settings',
-				'title'         => __( 'Settings', RTB_TEXTDOMAIN ),
-				'menu_title'    => __( 'Settings', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Settings', 'restaurant-reservations' ),
+				'menu_title'    => __( 'Settings', 'restaurant-reservations' ),
 				'parent_menu'	=> 'rtb-bookings',
 				'description'   => '',
 				'capability'    => 'manage_options',
@@ -228,7 +228,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'rtb-settings',
 			array(
 				'id'            => 'rtb-general',
-				'title'         => __( 'General', RTB_TEXTDOMAIN ),
+				'title'         => __( 'General', 'restaurant-reservations' ),
 				'is_tab'		=> true,
 			)
 		);
@@ -239,8 +239,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'post',
 			array(
 				'id'            => 'booking-page',
-				'title'         => __( 'Booking Page', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select a page on your site to automatically display the booking form and confirmation message.', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Booking Page', 'restaurant-reservations' ),
+				'description'   => __( 'Select a page on your site to automatically display the booking form and confirmation message.', 'restaurant-reservations' ),
 				'blank_option'	=> true,
 				'args'			=> array(
 					'post_type' 		=> 'page',
@@ -256,8 +256,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'select',
 			array(
 				'id'            => 'party-size',
-				'title'         => __( 'Max Party Size', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Set a maximum allowed party size for bookings.', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Max Party Size', 'restaurant-reservations' ),
+				'description'   => __( 'Set a maximum allowed party size for bookings.', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => $this->get_party_size_setting_options(),
 			)
@@ -269,8 +269,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'textarea',
 			array(
 				'id'			=> 'success-message',
-				'title'			=> __( 'Success Message', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Enter the message to display when a booking request is made.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Success Message', 'restaurant-reservations' ),
+				'description'	=> __( 'Enter the message to display when a booking request is made.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['success-message'],
 			)
 		);
@@ -281,8 +281,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'            => 'date-format',
-				'title'         => __( 'Date Format', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Define how the date should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/date.htm#formatting-rules">Formatting rules</a>', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Date Format', 'restaurant-reservations' ),
+				'description'   => __( 'Define how the date should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/date.htm#formatting-rules">Formatting rules</a>', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['date-format'],
 			)
 		);
@@ -293,8 +293,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'            => 'time-format',
-				'title'         => __( 'Time Format', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Define how the time should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/time.htm#formatting-rules">Formatting rules</a>', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Time Format', 'restaurant-reservations' ),
+				'description'   => __( 'Define how the time should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/time.htm#formatting-rules">Formatting rules</a>', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['time-format'],
 			)
 		);
@@ -307,8 +307,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'select',
 				array(
 					'id'            => 'i8n',
-					'title'         => __( 'Language', RTB_TEXTDOMAIN ),
-					'description'   => __( 'Select a language to use for the booking form datepicker if it is different than your WordPress language setting.', RTB_TEXTDOMAIN ),
+					'title'         => __( 'Language', 'restaurant-reservations' ),
+					'description'   => __( 'Select a language to use for the booking form datepicker if it is different than your WordPress language setting.', 'restaurant-reservations' ),
 					'options'		=> $this->supported_i8n,
 				)
 			);
@@ -318,36 +318,36 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'rtb-settings',
 			array(
 				'id'            => 'rtb-schedule',
-				'title'         => __( 'Booking Schedule', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Booking Schedule', 'restaurant-reservations' ),
 				'is_tab'		=> true,
 			)
 		);
 
 		// Translateable strings for scheduler components
 		$scheduler_strings = array(
-			'add_rule'			=> __( 'Add new scheduling rule', RTB_TEXTDOMAIN ),
-			'weekly'			=> _x( 'Weekly', 'Format of a scheduling rule', RTB_TEXTDOMAIN ),
-			'monthly'			=> _x( 'Monthly', 'Format of a scheduling rule', RTB_TEXTDOMAIN ),
-			'date'				=> _x( 'Date', 'Format of a scheduling rule', RTB_TEXTDOMAIN ),
-			'weekdays'			=> _x( 'Days of the week', 'Label for selecting days of the week in a scheduling rule', RTB_TEXTDOMAIN ),
-			'month_weeks'		=> _x( 'Weeks of the month', 'Label for selecting weeks of the month in a scheduling rule', RTB_TEXTDOMAIN ),
-			'date_label'		=> _x( 'Date', 'Label to select a date for a scheduling rule', RTB_TEXTDOMAIN ),
-			'time_label'		=> _x( 'Time', 'Label to select a time slot for a scheduling rule', RTB_TEXTDOMAIN ),
-			'allday'			=> _x( 'All day', 'Label to set a scheduling rule to last all day', RTB_TEXTDOMAIN ),
-			'start'				=> _x( 'Start', 'Label for the starting time of a scheduling rule', RTB_TEXTDOMAIN ),
-			'end'				=> _x( 'End', 'Label for the ending time of a scheduling rule', RTB_TEXTDOMAIN ),
-			'set_time_prompt'	=> _x( 'All day long. Want to %sset a time slot%s?', 'Prompt displayed when a scheduling rule is set without any time restrictions', RTB_TEXTDOMAIN ),
-			'toggle'			=> _x( 'Open and close this rule', 'Toggle a scheduling rule open and closed', RTB_TEXTDOMAIN ),
-			'delete'			=> _x( 'Delete rule', 'Delete a scheduling rule', RTB_TEXTDOMAIN ),
-			'delete_schedule'	=> __( 'Delete scheduling rule', RTB_TEXTDOMAIN ),
-			'never'				=> _x( 'Never', 'Brief default description of a scheduling rule when no weekdays or weeks are included in the rule', RTB_TEXTDOMAIN ),
-			'weekly_always'	=> _x( 'Every day', 'Brief default description of a scheduling rule when all the weekdays/weeks are included in the rule', RTB_TEXTDOMAIN ),
-			'monthly_weekdays'	=> _x( '%s on the %s week of the month', 'Brief default description of a scheduling rule when some weekdays are included on only some weeks of the month. %s should be left alone and will be replaced by a comma-separated list of days and weeks in the following format: M, T, W on the first, second week of the month', RTB_TEXTDOMAIN ),
-			'monthly_weeks'		=> _x( '%s week of the month', 'Brief default description of a scheduling rule when some weeks of the month are included but all or no weekdays are selected. %s should be left alone and will be replaced by a comma-separated list of weeks in the following format: First, second week of the month', RTB_TEXTDOMAIN ),
-			'all_day'			=> _x( 'All day', 'Brief default description of a scheduling rule when no times are set', RTB_TEXTDOMAIN ),
-			'before'			=> _x( 'Ends at', 'Brief default description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm', RTB_TEXTDOMAIN ),
-			'after'				=> _x( 'Starts at', 'Brief default description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm', RTB_TEXTDOMAIN ),
-			'separator'			=> _x( '&mdash;', 'Separator between times of a scheduling rule', RTB_TEXTDOMAIN ),
+			'add_rule'			=> __( 'Add new scheduling rule', 'restaurant-reservations' ),
+			'weekly'			=> _x( 'Weekly', 'Format of a scheduling rule', 'restaurant-reservations' ),
+			'monthly'			=> _x( 'Monthly', 'Format of a scheduling rule', 'restaurant-reservations' ),
+			'date'				=> _x( 'Date', 'Format of a scheduling rule', 'restaurant-reservations' ),
+			'weekdays'			=> _x( 'Days of the week', 'Label for selecting days of the week in a scheduling rule', 'restaurant-reservations' ),
+			'month_weeks'		=> _x( 'Weeks of the month', 'Label for selecting weeks of the month in a scheduling rule', 'restaurant-reservations' ),
+			'date_label'		=> _x( 'Date', 'Label to select a date for a scheduling rule', 'restaurant-reservations' ),
+			'time_label'		=> _x( 'Time', 'Label to select a time slot for a scheduling rule', 'restaurant-reservations' ),
+			'allday'			=> _x( 'All day', 'Label to set a scheduling rule to last all day', 'restaurant-reservations' ),
+			'start'				=> _x( 'Start', 'Label for the starting time of a scheduling rule', 'restaurant-reservations' ),
+			'end'				=> _x( 'End', 'Label for the ending time of a scheduling rule', 'restaurant-reservations' ),
+			'set_time_prompt'	=> _x( 'All day long. Want to %sset a time slot%s?', 'Prompt displayed when a scheduling rule is set without any time restrictions', 'restaurant-reservations' ),
+			'toggle'			=> _x( 'Open and close this rule', 'Toggle a scheduling rule open and closed', 'restaurant-reservations' ),
+			'delete'			=> _x( 'Delete rule', 'Delete a scheduling rule', 'restaurant-reservations' ),
+			'delete_schedule'	=> __( 'Delete scheduling rule', 'restaurant-reservations' ),
+			'never'				=> _x( 'Never', 'Brief default description of a scheduling rule when no weekdays or weeks are included in the rule', 'restaurant-reservations' ),
+			'weekly_always'	=> _x( 'Every day', 'Brief default description of a scheduling rule when all the weekdays/weeks are included in the rule', 'restaurant-reservations' ),
+			'monthly_weekdays'	=> _x( '%s on the %s week of the month', 'Brief default description of a scheduling rule when some weekdays are included on only some weeks of the month. %s should be left alone and will be replaced by a comma-separated list of days and weeks in the following format: M, T, W on the first, second week of the month', 'restaurant-reservations' ),
+			'monthly_weeks'		=> _x( '%s week of the month', 'Brief default description of a scheduling rule when some weeks of the month are included but all or no weekdays are selected. %s should be left alone and will be replaced by a comma-separated list of weeks in the following format: First, second week of the month', 'restaurant-reservations' ),
+			'all_day'			=> _x( 'All day', 'Brief default description of a scheduling rule when no times are set', 'restaurant-reservations' ),
+			'before'			=> _x( 'Ends at', 'Brief default description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm', 'restaurant-reservations' ),
+			'after'				=> _x( 'Starts at', 'Brief default description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm', 'restaurant-reservations' ),
+			'separator'			=> _x( '&mdash;', 'Separator between times of a scheduling rule', 'restaurant-reservations' ),
 		);
 
 		$sap->add_setting(
@@ -356,16 +356,16 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'scheduler',
 			array(
 				'id'			=> 'schedule-open',
-				'title'			=> __( 'Schedule', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Define the weekly schedule during which you accept bookings.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Schedule', 'restaurant-reservations' ),
+				'description'	=> __( 'Define the weekly schedule during which you accept bookings.', 'restaurant-reservations' ),
 				'weekdays'		=> array(
-					'monday'		=> _x( 'Mo', 'Monday abbreviation', RTB_TEXTDOMAIN ),
-					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', RTB_TEXTDOMAIN ),
-					'wednesday'		=> _x( 'We', 'Wednesday abbreviation', RTB_TEXTDOMAIN ),
-					'thursday'		=> _x( 'Th', 'Thursday abbreviation', RTB_TEXTDOMAIN ),
-					'friday'		=> _x( 'Fr', 'Friday abbreviation', RTB_TEXTDOMAIN ),
-					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', RTB_TEXTDOMAIN ),
-					'sunday'		=> _x( 'Su', 'Sunday abbreviation', RTB_TEXTDOMAIN )
+					'monday'		=> _x( 'Mo', 'Monday abbreviation', 'restaurant-reservations' ),
+					'tuesday'		=> _x( 'Tu', 'Tuesday abbreviation', 'restaurant-reservations' ),
+					'wednesday'		=> _x( 'We', 'Wednesday abbreviation', 'restaurant-reservations' ),
+					'thursday'		=> _x( 'Th', 'Thursday abbreviation', 'restaurant-reservations' ),
+					'friday'		=> _x( 'Fr', 'Friday abbreviation', 'restaurant-reservations' ),
+					'saturday'		=> _x( 'Sa', 'Saturday abbreviation', 'restaurant-reservations' ),
+					'sunday'		=> _x( 'Su', 'Sunday abbreviation', 'restaurant-reservations' )
 				),
 				'time_format'	=> $this->get_setting( 'time-format' ),
 				'date_format'	=> $this->get_setting( 'date-format' ),
@@ -375,15 +375,15 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
-		$scheduler_strings['all_day'] = _x( 'Closed all day', 'Brief default description of a scheduling exception when no times are set', RTB_TEXTDOMAIN );
+		$scheduler_strings['all_day'] = _x( 'Closed all day', 'Brief default description of a scheduling exception when no times are set', 'restaurant-reservations' );
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-schedule',
 			'scheduler',
 			array(
 				'id'				=> 'schedule-closed',
-				'title'				=> __( 'Exceptions', RTB_TEXTDOMAIN ),
-				'description'		=> __( "Define special opening hours for holidays, events or other needs. Leave the time empty if you're closed all day.", RTB_TEXTDOMAIN ),
+				'title'				=> __( 'Exceptions', 'restaurant-reservations' ),
+				'description'		=> __( "Define special opening hours for holidays, events or other needs. Leave the time empty if you're closed all day.", 'restaurant-reservations' ),
 				'time_format'		=> $this->get_setting( 'time-format' ),
 				'date_format'		=> $this->get_setting( 'date-format' ),
 				'disable_weekdays'	=> true,
@@ -398,16 +398,16 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'select',
 			array(
 				'id'            => 'early-bookings',
-				'title'         => __( 'Early Bookings', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select how early customers can make their booking.', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Early Bookings', 'restaurant-reservations' ),
+				'description'   => __( 'Select how early customers can make their booking.', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
-					''		=> __( 'Any time', RTB_TEXTDOMAIN ),
-					'1' 	=> __( 'Up to 1 day in advance', RTB_TEXTDOMAIN ),
-					'7' 	=> __( 'Up to 1 week in advance', RTB_TEXTDOMAIN ),
-					'14' 	=> __( 'Up to 2 weeks in advance', RTB_TEXTDOMAIN ),
-					'30' 	=> __( 'Up to 30 days in advance', RTB_TEXTDOMAIN ),
-					'90' 	=> __( 'Up to 90 days in advance', RTB_TEXTDOMAIN ),
+					''		=> __( 'Any time', 'restaurant-reservations' ),
+					'1' 	=> __( 'Up to 1 day in advance', 'restaurant-reservations' ),
+					'7' 	=> __( 'Up to 1 week in advance', 'restaurant-reservations' ),
+					'14' 	=> __( 'Up to 2 weeks in advance', 'restaurant-reservations' ),
+					'30' 	=> __( 'Up to 30 days in advance', 'restaurant-reservations' ),
+					'90' 	=> __( 'Up to 90 days in advance', 'restaurant-reservations' ),
 				)
 			)
 		);
@@ -418,17 +418,17 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'select',
 			array(
 				'id'            => 'late-bookings',
-				'title'         => __( 'Late Bookings', RTB_TEXTDOMAIN ),
-				'description'   => __( 'Select how late customers can make their booking.', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Late Bookings', 'restaurant-reservations' ),
+				'description'   => __( 'Select how late customers can make their booking.', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
-					'' 		=> __( 'Up to the last minute', RTB_TEXTDOMAIN ),
-					'15' 	=> __( 'At least 15 minutes in advance', RTB_TEXTDOMAIN ),
-					'30' 	=> __( 'At least 30 minutes in advance', RTB_TEXTDOMAIN ),
-					'45' 	=> __( 'At least 45 minutes in advance', RTB_TEXTDOMAIN ),
-					'60' 	=> __( 'At least 1 hour in advance', RTB_TEXTDOMAIN ),
-					'240' 	=> __( 'At least 4 hours in advance', RTB_TEXTDOMAIN ),
-					'1440' 	=> __( 'At least 1 day in advance', RTB_TEXTDOMAIN ),
+					'' 		=> __( 'Up to the last minute', 'restaurant-reservations' ),
+					'15' 	=> __( 'At least 15 minutes in advance', 'restaurant-reservations' ),
+					'30' 	=> __( 'At least 30 minutes in advance', 'restaurant-reservations' ),
+					'45' 	=> __( 'At least 45 minutes in advance', 'restaurant-reservations' ),
+					'60' 	=> __( 'At least 1 hour in advance', 'restaurant-reservations' ),
+					'240' 	=> __( 'At least 4 hours in advance', 'restaurant-reservations' ),
+					'1440' 	=> __( 'At least 1 day in advance', 'restaurant-reservations' ),
 				)
 			)
 		);
@@ -439,13 +439,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'select',
 			array(
 				'id'			=> 'date-onload',
-				'title'			=> __( 'Date Pre-selection', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'When the booking form is loaded, should it automatically attempt to select a valid date?', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Date Pre-selection', 'restaurant-reservations' ),
+				'description'	=> __( 'When the booking form is loaded, should it automatically attempt to select a valid date?', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
-					'' 			=> __( 'Select today if valid', RTB_TEXTDOMAIN ),
-					'soonest'	=> __( 'Select today or next valid date', RTB_TEXTDOMAIN ),
-					'empty' 	=> __( 'Leave empty', RTB_TEXTDOMAIN ),
+					'' 			=> __( 'Select today if valid', 'restaurant-reservations' ),
+					'soonest'	=> __( 'Select today or next valid date', 'restaurant-reservations' ),
+					'empty' 	=> __( 'Leave empty', 'restaurant-reservations' ),
 				)
 			)
 		);
@@ -456,14 +456,14 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'select',
 			array(
 				'id'			=> 'time-interval',
-				'title'			=> __( 'Time Interval', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Select the number of minutes between each available time.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Time Interval', 'restaurant-reservations' ),
+				'description'	=> __( 'Select the number of minutes between each available time.', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
-					'' 			=> __( 'Every 30 minutes', RTB_TEXTDOMAIN ),
-					'15' 		=> __( 'Every 15 minutes', RTB_TEXTDOMAIN ),
-					'10' 		=> __( 'Every 10 minutes', RTB_TEXTDOMAIN ),
-					'5' 		=> __( 'Every 5 minutes', RTB_TEXTDOMAIN ),
+					'' 			=> __( 'Every 30 minutes', 'restaurant-reservations' ),
+					'15' 		=> __( 'Every 15 minutes', 'restaurant-reservations' ),
+					'10' 		=> __( 'Every 10 minutes', 'restaurant-reservations' ),
+					'5' 		=> __( 'Every 5 minutes', 'restaurant-reservations' ),
 				)
 			)
 		);
@@ -472,7 +472,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'rtb-settings',
 			array(
 				'id'            => 'rtb-notifications',
-				'title'         => __( 'Notifications', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Notifications', 'restaurant-reservations' ),
 				'is_tab'		=> true,
 			)
 		);
@@ -483,8 +483,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'reply-to-name',
-				'title'			=> __( 'Reply-To Name', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The name which should appear in the Reply-To field of a user notification email', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Reply-To Name', 'restaurant-reservations' ),
+				'description'	=> __( 'The name which should appear in the Reply-To field of a user notification email', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['reply-to-name'],
 			)
 		);
@@ -495,8 +495,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'reply-to-address',
-				'title'			=> __( 'Reply-To Email Address', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email address which should appear in the Reply-To field of a user notification email.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Reply-To Email Address', 'restaurant-reservations' ),
+				'description'	=> __( 'The email address which should appear in the Reply-To field of a user notification email.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['reply-to-address'],
 			)
 		);
@@ -507,8 +507,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'toggle',
 			array(
 				'id'			=> 'admin-email-option',
-				'title'			=> __( 'Admin Notification', RTB_TEXTDOMAIN ),
-				'label'			=> __( 'Send an email notification to an administrator when a new booking is requested.', RTB_TEXTDOMAIN )
+				'title'			=> __( 'Admin Notification', 'restaurant-reservations' ),
+				'label'			=> __( 'Send an email notification to an administrator when a new booking is requested.', 'restaurant-reservations' )
 			)
 		);
 
@@ -518,8 +518,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'admin-email-address',
-				'title'			=> __( 'Admin Email Address', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email address where admin notifications should be sent.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Admin Email Address', 'restaurant-reservations' ),
+				'description'	=> __( 'The email address where admin notifications should be sent.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['admin-email-address'],
 			)
 		);
@@ -528,7 +528,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'rtb-settings',
 			array(
 				'id'            => 'rtb-notifications-templates',
-				'title'         => __( 'Email Templates', RTB_TEXTDOMAIN ),
+				'title'         => __( 'Email Templates', 'restaurant-reservations' ),
 				'tab'			=> 'rtb-notifications',
 				'description'	=> 'Adjust the messages that are emailed to users and admins during the booking process.',
 			)
@@ -540,9 +540,9 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'html',
 			array(
 				'id'			=> 'template-tags-description',
-				'title'			=> __( 'Template Tags', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Template Tags', 'restaurant-reservations' ),
 				'html'			=> '
-					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails. Tags labeled with an asterisk (*) can be used in the email subject as well.', RTB_TEXTDOMAIN ) . '</p>' .
+					<p class="description">' . __( 'Use the following tags to automatically add booking information to the emails. Tags labeled with an asterisk (*) can be used in the email subject as well.', 'restaurant-reservations' ) . '</p>' .
 					$this->render_template_tag_descriptions(),
 			)
 		);
@@ -553,8 +553,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'subject-booking-admin',
-				'title'			=> __( 'Admin Notification Subject', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email subject for admin notifications.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Admin Notification Subject', 'restaurant-reservations' ),
+				'description'	=> __( 'The email subject for admin notifications.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['subject-booking-admin'],
 			)
 		);
@@ -565,8 +565,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'editor',
 			array(
 				'id'			=> 'template-booking-admin',
-				'title'			=> __( 'Admin Notification Email', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Enter the email an admin should receive when an initial booking request is made.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Admin Notification Email', 'restaurant-reservations' ),
+				'description'	=> __( 'Enter the email an admin should receive when an initial booking request is made.', 'restaurant-reservations' ),
 				'default'		=> $this->defaults['template-booking-admin'],
 			)
 		);
@@ -577,8 +577,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'subject-booking-user',
-				'title'			=> __( 'New Request Email Subject', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email subject a user should receive when they make an initial booking request.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'New Request Email Subject', 'restaurant-reservations' ),
+				'description'	=> __( 'The email subject a user should receive when they make an initial booking request.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['subject-booking-user'],
 			)
 		);
@@ -589,8 +589,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'editor',
 			array(
 				'id'			=> 'template-booking-user',
-				'title'			=> __( 'New Request Email', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Enter the email a user should receive when they make an initial booking request.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'New Request Email', 'restaurant-reservations' ),
+				'description'	=> __( 'Enter the email a user should receive when they make an initial booking request.', 'restaurant-reservations' ),
 				'default'		=> $this->defaults['template-booking-user'],
 			)
 		);
@@ -601,8 +601,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'subject-confirmed-user',
-				'title'			=> __( 'Confirmed Email Subject', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email subject a user should receive when their booking has been confirmed.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Confirmed Email Subject', 'restaurant-reservations' ),
+				'description'	=> __( 'The email subject a user should receive when their booking has been confirmed.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['subject-confirmed-user'],
 			)
 		);
@@ -613,8 +613,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'editor',
 			array(
 				'id'			=> 'template-confirmed-user',
-				'title'			=> __( 'Confirmed Email', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Enter the email a user should receive when their booking has been confirmed.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Confirmed Email', 'restaurant-reservations' ),
+				'description'	=> __( 'Enter the email a user should receive when their booking has been confirmed.', 'restaurant-reservations' ),
 				'default'		=> $this->defaults['template-confirmed-user'],
 			)
 		);
@@ -625,8 +625,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'text',
 			array(
 				'id'			=> 'subject-rejected-user',
-				'title'			=> __( 'Rejected Email Subject', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'The email subject a user should receive when their booking has been rejected.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Rejected Email Subject', 'restaurant-reservations' ),
+				'description'	=> __( 'The email subject a user should receive when their booking has been rejected.', 'restaurant-reservations' ),
 				'placeholder'	=> $this->defaults['subject-rejected-user'],
 			)
 		);
@@ -637,8 +637,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'editor',
 			array(
 				'id'			=> 'template-rejected-user',
-				'title'			=> __( 'Rejected Email', RTB_TEXTDOMAIN ),
-				'description'	=> __( 'Enter the email a user should receive when their booking has been rejected.', RTB_TEXTDOMAIN ),
+				'title'			=> __( 'Rejected Email', 'restaurant-reservations' ),
+				'description'	=> __( 'Enter the email a user should receive when their booking has been rejected.', 'restaurant-reservations' ),
 				'default'		=> $this->defaults['template-rejected-user'],
 			)
 		);
@@ -656,7 +656,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	public function get_party_size_setting_options() {
 
 		$options = array(
-			'' 		=> __( 'Any size', RTB_TEXTDOMAIN ),
+			'' 		=> __( 'Any size', 'restaurant-reservations' ),
 		);
 
 		$max = apply_filters( 'rtb_party_size_upper_limit', 100 );
@@ -709,20 +709,20 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 			// Reservation details fieldset
 			'reservation'	=> array(
-				'legend'	=> __( 'Book a table', RTB_TEXTDOMAIN ),
+				'legend'	=> __( 'Book a table', 'restaurant-reservations' ),
 				'fields'	=> array(
 					'date'		=> array(
-						'title'			=> __( 'Date', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Date', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->request_date ) ? '' : $request->request_date,
 						'callback'		=> 'rtb_print_form_text_field',
 					),
 					'time'		=> array(
-						'title'			=> __( 'Time', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Time', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->request_time ) ? '' : $request->request_time,
 						'callback'		=> 'rtb_print_form_text_field',
 					),
 					'party'		=> array(
-						'title'			=> __( 'Party', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Party', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->party ) ? '' : $request->party,
 						'callback'		=> 'rtb_print_form_select_field',
 						'callback_args'	=> array(
@@ -734,30 +734,30 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 			// Contact details fieldset
 			'contact'	=> array(
-				'legend'	=> __( 'Contact Details', RTB_TEXTDOMAIN ),
+				'legend'	=> __( 'Contact Details', 'restaurant-reservations' ),
 				'fields'	=> array(
 					'name'		=> array(
-						'title'			=> __( 'Name', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Name', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->name ) ? '' : $request->name,
 						'callback'		=> 'rtb_print_form_text_field',
 					),
 					'email'		=> array(
-						'title'			=> __( 'Email', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Email', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->email ) ? '' : $request->email,
 						'callback'		=> 'rtb_print_form_text_field',
 					),
 					'phone'		=> array(
-						'title'			=> __( 'Phone', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Phone', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->phone ) ? '' : $request->phone,
 						'callback'		=> 'rtb_print_form_text_field',
 					),
 					'add-message'	=> array(
-						'title'		=> __( 'Add a Message', RTB_TEXTDOMAIN ),
+						'title'		=> __( 'Add a Message', 'restaurant-reservations' ),
 						'request_input'	=> '',
 						'callback'	=> 'rtb_print_form_message_link',
 					),
 					'message'		=> array(
-						'title'			=> __( 'Message', RTB_TEXTDOMAIN ),
+						'title'			=> __( 'Message', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->message ) ? '' : $request->message,
 						'callback'		=> 'rtb_print_form_textarea_field',
 					),
@@ -775,18 +775,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	public function render_template_tag_descriptions() {
 
 		$descriptions = apply_filters( 'rtb_notification_template_tag_descriptions', array(
-				'{user_email}'		=> __( 'Email of the user who made the booking', RTB_TEXTDOMAIN ),
-				'{user_name}'		=> __( '* Name of the user who made the booking', RTB_TEXTDOMAIN ),
-				'{party}'			=> __( '* Number of people booked', RTB_TEXTDOMAIN ),
-				'{date}'			=> __( '* Date and time of the booking', RTB_TEXTDOMAIN ),
-				'{phone}'			=> __( 'Phone number if supplied with the request', RTB_TEXTDOMAIN ),
-				'{message}'			=> __( 'Message added to the request', RTB_TEXTDOMAIN ),
-				'{bookings_link}'	=> __( 'A link to the admin panel showing pending bookings', RTB_TEXTDOMAIN ),
-				'{confirm_link}'	=> __( 'A link to confirm this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ),
-				'{close_link}'		=> __( 'A link to reject this booking. Only include this in admin notifications', RTB_TEXTDOMAIN ),
-				'{site_name}'		=> __( 'The name of this website', RTB_TEXTDOMAIN ),
-				'{site_link}'		=> __( 'A link to this website', RTB_TEXTDOMAIN ),
-				'{current_time}'	=> __( 'Current date and time', RTB_TEXTDOMAIN ),
+				'{user_email}'		=> __( 'Email of the user who made the booking', 'restaurant-reservations' ),
+				'{user_name}'		=> __( '* Name of the user who made the booking', 'restaurant-reservations' ),
+				'{party}'			=> __( '* Number of people booked', 'restaurant-reservations' ),
+				'{date}'			=> __( '* Date and time of the booking', 'restaurant-reservations' ),
+				'{phone}'			=> __( 'Phone number if supplied with the request', 'restaurant-reservations' ),
+				'{message}'			=> __( 'Message added to the request', 'restaurant-reservations' ),
+				'{bookings_link}'	=> __( 'A link to the admin panel showing pending bookings', 'restaurant-reservations' ),
+				'{confirm_link}'	=> __( 'A link to confirm this booking. Only include this in admin notifications', 'restaurant-reservations' ),
+				'{close_link}'		=> __( 'A link to reject this booking. Only include this in admin notifications', 'restaurant-reservations' ),
+				'{site_name}'		=> __( 'The name of this website', 'restaurant-reservations' ),
+				'{site_link}'		=> __( 'A link to this website', 'restaurant-reservations' ),
+				'{current_time}'	=> __( 'Current date and time', 'restaurant-reservations' ),
 			)
 		);
 

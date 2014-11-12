@@ -35,19 +35,19 @@ class rtbCustomPostTypes {
 		// Define the booking custom post type
 		$args = array(
 			'labels' => array(
-				'name'               => __( 'Bookings',                   RTB_TEXTDOMAIN ),
-				'singular_name'      => __( 'Booking',                    RTB_TEXTDOMAIN ),
-				'menu_name'          => __( 'Bookings',                   RTB_TEXTDOMAIN ),
-				'name_admin_bar'     => __( 'Bookings',                   RTB_TEXTDOMAIN ),
-				'add_new'            => __( 'Add New',                 	  RTB_TEXTDOMAIN ),
-				'add_new_item'       => __( 'Add New Booking',            RTB_TEXTDOMAIN ),
-				'edit_item'          => __( 'Edit Booking',               RTB_TEXTDOMAIN ),
-				'new_item'           => __( 'New Booking',                RTB_TEXTDOMAIN ),
-				'view_item'          => __( 'View Booking',               RTB_TEXTDOMAIN ),
-				'search_items'       => __( 'Search Bookings',            RTB_TEXTDOMAIN ),
-				'not_found'          => __( 'No bookings found',          RTB_TEXTDOMAIN ),
-				'not_found_in_trash' => __( 'No bookings found in trash', RTB_TEXTDOMAIN ),
-				'all_items'          => __( 'All Bookings',               RTB_TEXTDOMAIN ),
+				'name'               => __( 'Bookings',                   'restaurant-reservations' ),
+				'singular_name'      => __( 'Booking',                    'restaurant-reservations' ),
+				'menu_name'          => __( 'Bookings',                   'restaurant-reservations' ),
+				'name_admin_bar'     => __( 'Bookings',                   'restaurant-reservations' ),
+				'add_new'            => __( 'Add New',                 	  'restaurant-reservations' ),
+				'add_new_item'       => __( 'Add New Booking',            'restaurant-reservations' ),
+				'edit_item'          => __( 'Edit Booking',               'restaurant-reservations' ),
+				'new_item'           => __( 'New Booking',                'restaurant-reservations' ),
+				'view_item'          => __( 'View Booking',               'restaurant-reservations' ),
+				'search_items'       => __( 'Search Bookings',            'restaurant-reservations' ),
+				'not_found'          => __( 'No bookings found',          'restaurant-reservations' ),
+				'not_found_in_trash' => __( 'No bookings found in trash', 'restaurant-reservations' ),
+				'all_items'          => __( 'All Bookings',               'restaurant-reservations' ),
 			),
 			'menu_icon' => 'dashicons-calendar',
 			'public' => false,
@@ -77,31 +77,31 @@ class rtbCustomPostTypes {
 	public function set_booking_statuses() {
 
 		$this->booking_statuses['pending'] = array(
-			'label'						=> _x( 'Pending', 'Booking status when it is pending review', RTB_TEXTDOMAIN ),
+			'label'						=> _x( 'Pending', 'Booking status when it is pending review', 'restaurant-reservations' ),
 			'default'					=> true, // Whether or not this status is part of WP Core
 			'user_selectable'			=> true, // Whether or not a user can set a booking to this status
 		);
 
 		$this->booking_statuses['confirmed'] = array (
-			'label'                     => _x( 'Confirmed', 'Booking status for a confirmed booking', RTB_TEXTDOMAIN ),
+			'label'                     => _x( 'Confirmed', 'Booking status for a confirmed booking', 'restaurant-reservations' ),
 			'default'					=> false, // Whether or not this status is part of WP Core
 			'user_selectable'			=> true, // Whether or not a user can set a booking to this status
 			'public'                    => false,
 			'exclude_from_search'       => true,
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Confirmed <span class="count">(%s)</span>', 'Confirmed <span class="count">(%s)</span>', RTB_TEXTDOMAIN ),
+			'label_count'               => _n_noop( 'Confirmed <span class="count">(%s)</span>', 'Confirmed <span class="count">(%s)</span>', 'restaurant-reservations' ),
 		);
 
 		$this->booking_statuses['closed'] = array(
-			'label'                     => _x( 'Closed', 'Booking status for a closed booking', RTB_TEXTDOMAIN ),
+			'label'                     => _x( 'Closed', 'Booking status for a closed booking', 'restaurant-reservations' ),
 			'default'					=> false, // Whether or not this status is part of WP Core
 			'user_selectable'			=> true, // Whether or not a user can set a booking to this status
 			'public'                    => false,
 			'exclude_from_search'       => true,
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>', RTB_TEXTDOMAIN )
+			'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>', 'restaurant-reservations' )
 		);
 
 		// Let addons hook in to add/edit/remove post statuses

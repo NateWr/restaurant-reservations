@@ -22,8 +22,8 @@ class rtbBookingFormWidget extends WP_Widget {
 
 		parent::__construct(
 			'rtb_booking_form_widget',
-			__('Booking Form', RTB_TEXTDOMAIN),
-			array( 'description' => __( 'Display a form to accept bookings.', RTB_TEXTDOMAIN ), )
+			__('Booking Form', 'restaurant-reservations'),
+			array( 'description' => __( 'Display a form to accept bookings.', 'restaurant-reservations' ), )
 		);
 
 	}

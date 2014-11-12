@@ -97,7 +97,7 @@ function rtb_print_booking_form() {
 
 		<?php do_action( 'rtb_booking_form_after_fields' ); ?>
 		
-		<button type="submit"><?php echo apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', RTB_TEXTDOMAIN ) ); ?></button>
+		<button type="submit"><?php echo apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', 'restaurant-reservations' ) ); ?></button>
 		
 	</form>
 	<?php endif; ?>
@@ -235,7 +235,7 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 	<div class="<?php echo $slug; ?>">
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
-			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+			<?php _e( $title, 'restaurant-reservations' ); ?>
 		</label>
 		<input type="text" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo $value; ?>">
 	</div>
@@ -259,7 +259,7 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 	<div class="<?php echo $slug; ?>">
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
-			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+			<?php _e( $title, 'restaurant-reservations' ); ?>
 		</label>
 		<textarea name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>"><?php echo $value; ?></textarea>
 	</div>
@@ -285,7 +285,7 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 	<div class="<?php echo $slug; ?>">
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
-			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+			<?php _e( $title, 'restaurant-reservations' ); ?>
 		</label>
 		<select name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>">
 			<?php foreach ( $options as $opt_value => $opt_label ) : ?>
@@ -313,7 +313,7 @@ function rtb_print_form_message_link( $slug, $title, $value, $args = array() ) {
 	
 	<div class="<?php echo $slug; ?>">
 		<a href="#">
-			<?php _e( $title, RTB_TEXTDOMAIN ); ?>
+			<?php _e( $title, 'restaurant-reservations' ); ?>
 		</a>
 	</div>
 			

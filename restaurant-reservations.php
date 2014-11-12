@@ -11,7 +11,7 @@
  * Requires at least: 3.8
  * Tested up to: 4.0
  *
- * Text Domain: rtbdomain
+ * Text Domain: restaurant-reservations
  * Domain Path: /languages/
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
@@ -49,7 +49,6 @@ class rtbInit {
 	public function __construct() {
 
 		// Common strings
-		define( 'RTB_TEXTDOMAIN', 'rtbdomain' );
 		define( 'RTB_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'RTB_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 		define( 'RTB_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
@@ -111,6 +110,10 @@ class rtbInit {
 			)
 		);
 
+		// Load backwards compatibility functions
+		require_once( RTB_PLUGIN_DIR . '/includes/Compatibility.class.php' );
+		new rtbCompatibility();
+
 	}
 
 	/**
@@ -128,7 +131,7 @@ class rtbInit {
 	 * @since 0.0.1
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( RTB_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . "/languages/" );
+		load_plugin_textdomain( 'restaurant-reservations', false, plugin_basename( dirname( __FILE__ ) ) . "/languages/" );
 	}
 
 	/**
@@ -143,7 +146,7 @@ class rtbInit {
 		// in the account.
 		$booking_manager = add_role(
 			'rtb_booking_manager',
-			__( 'Booking Manager', RTB_TEXTDOMAIN ),
+			__( 'Booking Manager', 'restaurant-reservations' ),
 			array(
 				'read'				=> true,
 				'manage_bookings'	=> true,
@@ -171,8 +174,8 @@ class rtbInit {
 	public function add_menu_page() {
 
 		add_menu_page(
-			_x( 'Bookings', 'Title of admin page that lists bookings', RTB_TEXTDOMAIN ),
-			_x( 'Bookings', 'Title of bookings admin menu item', RTB_TEXTDOMAIN ),
+			_x( 'Bookings', 'Title of admin page that lists bookings', 'restaurant-reservations' ),
+			_x( 'Bookings', 'Title of bookings admin menu item', 'restaurant-reservations' ),
 			'manage_bookings',
 			'rtb-bookings',
 			array( $this, 'show_admin_bookings_page' ),
@@ -194,7 +197,7 @@ class rtbInit {
 		?>
 
 		<div class="wrap">
-			<h2><?php _e( 'Restaurant Bookings', RTB_TEXTDOMAIN ); ?></h2>
+			<h2><?php _e( 'Restaurant Bookings', 'restaurant-reservations' ); ?></h2>
 			<?php do_action( 'rtb_bookings_table_top' ); ?>
 			<form id="rtb-bookings-table" method="POST" action="">
 				<input type="hidden" name="post_type" value="<?php echo RTB_BOOKING_POST_TYPE; ?>" />
@@ -295,7 +298,7 @@ class rtbInit {
 
 		if ( $plugin == RTB_PLUGIN_FNAME ) {
 
-			$links['help'] = '<a href="' . RTB_PLUGIN_URL . '/docs" title="' . __( 'View the help documentation for Restaurant Reservations', RTB_TEXTDOMAIN ) . '">' . __( 'Help', RTB_TEXTDOMAIN ) . '</a>';
+			$links['help'] = '<a href="' . RTB_PLUGIN_URL . '/docs" title="' . __( 'View the help documentation for Restaurant Reservations', 'restaurant-reservations' ) . '">' . __( 'Help', 'restaurant-reservations' ) . '</a>';
 		}
 
 		return $links;

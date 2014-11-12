@@ -72,8 +72,8 @@ class rtbBookingsTable extends WP_List_Table {
 
 		// Set parent defaults
 		parent::__construct( array(
-			'singular'  => __( 'Booking', RTB_TEXTDOMAIN ),
-			'plural'    => __( 'Bookings', RTB_TEXTDOMAIN ),
+			'singular'  => __( 'Booking', 'restaurant-reservations' ),
+			'plural'    => __( 'Bookings', 'restaurant-reservations' ),
 			'ajax'      => false
 		) );
 
@@ -169,15 +169,15 @@ class rtbBookingsTable extends WP_List_Table {
 		$schedule_query_string = remove_query_arg( array( 'schedule', 'start-date', 'end-date' ), $this->query_string );
 
 		$views = array(
-			'all'		=> sprintf( '<a href="%s"%s>%s</a>', $schedule_query_string, $schedule == '' ? ' class="current"' : '', __( 'All', RTB_TEXTDOMAIN ) ),
-			'today'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'today', 'paged' => FALSE ), $schedule_query_string ), $schedule === 'today' ? ' class="current"' : '', __( 'Today', RTB_TEXTDOMAIN ) ),
-			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'upcoming', 'paged' => FALSE ), remove_query_arg( array( 'order' ), $schedule_query_string ) ), $schedule === 'upcoming' ? ' class="current"' : '', __( 'Upcoming', RTB_TEXTDOMAIN ) ),
+			'all'		=> sprintf( '<a href="%s"%s>%s</a>', $schedule_query_string, $schedule == '' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
+			'today'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'today', 'paged' => FALSE ), $schedule_query_string ), $schedule === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
+			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'upcoming', 'paged' => FALSE ), remove_query_arg( array( 'order' ), $schedule_query_string ) ), $schedule === 'upcoming' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
 		);
 
 		if ( $schedule == 'custom' ) {
 			$start_date = !empty( $this->filter_start_date ) ? $this->filter_start_date : '*';
 			$end_date = !empty( $this->filter_end_date ) ? $this->filter_end_date : '*';
-			$views['custom'] = '<span class="current">' . $start_date . _x( '&mdash;', 'Separator between two dates in a date range', RTB_TEXTDOMAIN ) . $end_date . '</span>';
+			$views['custom'] = '<span class="current">' . $start_date . _x( '&mdash;', 'Separator between two dates in a date range', 'restaurant-reservations' ) . $end_date . '</span>';
 		}
 
 		$views = apply_filters( 'rtn_bookings_table_views_schedule', $views );
@@ -189,13 +189,13 @@ class rtbBookingsTable extends WP_List_Table {
 			</ul>
 
 			<div class="date-filters">
-				<label for="start-date" class="screen-reader-text"><?php _e( 'Start Date:', RTB_TEXTDOMAIN ); ?></label>
-				<input type="text" id="start-date" name="start-date" class="datepicker" value="<?php echo esc_attr( $this->filter_start_date ); ?>" placeholder="<?php _e( 'Start Date', RTB_TEXTDOMAIN ); ?>" />
-				<label for="end-date" class="screen-reader-text"><?php _e( 'End Date:', RTB_TEXTDOMAIN ); ?></label>
-				<input type="text" id="end-date" name="end-date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', RTB_TEXTDOMAIN ); ?>" />
-				<input type="submit" class="button-secondary" value="<?php _e( 'Apply', RTB_TEXTDOMAIN ); ?>"/>
+				<label for="start-date" class="screen-reader-text"><?php _e( 'Start Date:', 'restaurant-reservations' ); ?></label>
+				<input type="text" id="start-date" name="start-date" class="datepicker" value="<?php echo esc_attr( $this->filter_start_date ); ?>" placeholder="<?php _e( 'Start Date', 'restaurant-reservations' ); ?>" />
+				<label for="end-date" class="screen-reader-text"><?php _e( 'End Date:', 'restaurant-reservations' ); ?></label>
+				<input type="text" id="end-date" name="end-date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', 'restaurant-reservations' ); ?>" />
+				<input type="submit" class="button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
 				<?php if( !empty( $start_date ) || !empty( $end_date ) ) : ?>
-				<a href="<?php echo add_query_arg( array( 'action' => 'clear_date_filters' ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', RTB_TEXTDOMAIN ); ?></a>
+				<a href="<?php echo add_query_arg( array( 'action' => 'clear_date_filters' ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
 				<?php endif; ?>
 			</div>
 
@@ -209,7 +209,7 @@ class rtbBookingsTable extends WP_List_Table {
 				// 	email post meta as well or this search box could be
 				//	misleading for people who expect to search across all
 				//	visible data
-				// $this->search_box( __( 'Search', RTB_TEXTDOMAIN ), 'rtb-bookings' );
+				// $this->search_box( __( 'Search', 'restaurant-reservations' ), 'rtb-bookings' );
 			?>
 
 			<?php
@@ -232,11 +232,11 @@ class rtbBookingsTable extends WP_List_Table {
 		$current = isset( $_GET['status'] ) ? $_GET['status'] : '';
 
 		$views = array(
-			'all'		=> sprintf( '<a href="%s"%s>%s</a>', remove_query_arg( array( 'status', 'paged' ), $this->query_string ), $current === 'all' || $current == '' ? ' class="current"' : '', __( 'All', RTB_TEXTDOMAIN ) . ' <span class="count">(' . $this->booking_counts['total'] . ')</span>' ),
-			'pending'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'pending', 'paged' => FALSE ), $this->query_string ), $current === 'pending' ? ' class="current"' : '', __( 'Pending', RTB_TEXTDOMAIN ) . ' <span class="count">(' . $this->booking_counts['pending'] . ')</span>' ),
-			'confirmed'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'confirmed', 'paged' => FALSE ), $this->query_string ), $current === 'confirmed' ? ' class="current"' : '', __( 'Confirmed', RTB_TEXTDOMAIN ) . ' <span class="count">(' . $this->booking_counts['confirmed'] . ')</span>' ),
-			'closed'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'closed', 'paged' => FALSE ), $this->query_string ), $current === 'closed' ? ' class="current"' : '', __( 'Closed', RTB_TEXTDOMAIN ) . ' <span class="count">(' . $this->booking_counts['closed'] . ')</span>' ),
-			'trash' => sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'trash', 'paged' => FALSE ), $this->query_string ), $current === 'trash' ? ' class="current"' : '', __( 'Trash', RTB_TEXTDOMAIN ) . ' <span class="count">(' . $this->booking_counts['trash'] . ')</span>' ),
+			'all'		=> sprintf( '<a href="%s"%s>%s</a>', remove_query_arg( array( 'status', 'paged' ), $this->query_string ), $current === 'all' || $current == '' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['total'] . ')</span>' ),
+			'pending'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'pending', 'paged' => FALSE ), $this->query_string ), $current === 'pending' ? ' class="current"' : '', __( 'Pending', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['pending'] . ')</span>' ),
+			'confirmed'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'confirmed', 'paged' => FALSE ), $this->query_string ), $current === 'confirmed' ? ' class="current"' : '', __( 'Confirmed', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['confirmed'] . ')</span>' ),
+			'closed'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'closed', 'paged' => FALSE ), $this->query_string ), $current === 'closed' ? ' class="current"' : '', __( 'Closed', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['closed'] . ')</span>' ),
+			'trash' => sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'trash', 'paged' => FALSE ), $this->query_string ), $current === 'trash' ? ' class="current"' : '', __( 'Trash', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['trash'] . ')</span>' ),
 		);
 
 		return apply_filters( 'rtb_bookings_table_views_status', $views );
@@ -264,13 +264,13 @@ class rtbBookingsTable extends WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
-			'date'     	=> __( 'Date', RTB_TEXTDOMAIN ),
-			'party'  	=> __( 'Party', RTB_TEXTDOMAIN ),
-			'name'  	=> __( 'Name', RTB_TEXTDOMAIN ),
-			'email'  	=> __( 'Email', RTB_TEXTDOMAIN ),
-			'phone'  	=> __( 'Phone', RTB_TEXTDOMAIN ),
-			'message'  	=> __( 'Message', RTB_TEXTDOMAIN ),
-			'status'  	=> __( 'Status', RTB_TEXTDOMAIN )
+			'date'     	=> __( 'Date', 'restaurant-reservations' ),
+			'party'  	=> __( 'Party', 'restaurant-reservations' ),
+			'name'  	=> __( 'Name', 'restaurant-reservations' ),
+			'email'  	=> __( 'Email', 'restaurant-reservations' ),
+			'phone'  	=> __( 'Phone', 'restaurant-reservations' ),
+			'message'  	=> __( 'Message', 'restaurant-reservations' ),
+			'status'  	=> __( 'Status', 'restaurant-reservations' )
 		);
 
 		return apply_filters( 'rtb_bookings_table_columns', $columns );
@@ -321,7 +321,7 @@ class rtbBookingsTable extends WP_List_Table {
 				if ( !empty( $rtb_controller->cpts->booking_statuses[$booking->post_status] ) ) {
 					$value = $rtb_controller->cpts->booking_statuses[$booking->post_status]['label'];
 				} elseif ( $booking->post_status == 'trash' ) {
-					$value = _x( 'Trash', 'Status label for bookings put in the trash', RTB_TEXTDOMAIN );
+					$value = _x( 'Trash', 'Status label for bookings put in the trash', 'restaurant-reservations' );
 				} else {
 					$value = $booking->post_status;
 				}
@@ -353,10 +353,10 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function get_bulk_actions() {
 		$actions = array(
-			'delete'                 => __( 'Delete',                RTB_TEXTDOMAIN ),
-			'set-status-confirmed'   => __( 'Set To Confirmed',      RTB_TEXTDOMAIN ),
-			'set-status-pending'     => __( 'Set To Pending Review', RTB_TEXTDOMAIN ),
-			'set-status-closed'      => __( 'Set To Closed',         RTB_TEXTDOMAIN )
+			'delete'                 => __( 'Delete',                'restaurant-reservations' ),
+			'set-status-confirmed'   => __( 'Set To Confirmed',      'restaurant-reservations' ),
+			'set-status-pending'     => __( 'Set To Pending Review', 'restaurant-reservations' ),
+			'set-status-closed'      => __( 'Set To Closed',         'restaurant-reservations' )
 		);
 
 		return apply_filters( 'rtb_bookings_table_bulk_actions', $actions );
@@ -471,16 +471,16 @@ class rtbBookingsTable extends WP_List_Table {
 		<div id="rtb-admin-notice-bulk-<?php esc_attr( $this->last_action ); ?>" class="updated">
 
 			<?php if ( $this->last_action == 'delete' ) : ?>
-			<p><?php echo sprintf( _n( '%d booking deleted successfully.', '%d bookings deleted successfully.', $success, RTB_TEXTDOMAIN ), $success ); ?></p>
+			<p><?php echo sprintf( _n( '%d booking deleted successfully.', '%d bookings deleted successfully.', $success, 'restaurant-reservations' ), $success ); ?></p>
 
 			<?php elseif ( $this->last_action == 'set-status-confirmed' ) : ?>
-			<p><?php echo sprintf( _n( '%d booking confirmed.', '%d bookings confirmed.', $success, RTB_TEXTDOMAIN ), $success ); ?></p>
+			<p><?php echo sprintf( _n( '%d booking confirmed.', '%d bookings confirmed.', $success, 'restaurant-reservations' ), $success ); ?></p>
 
 			<?php elseif ( $this->last_action == 'set-status-pending' ) : ?>
-			<p><?php echo sprintf( _n( '%d booking set to pending.', '%d bookings set to pending.', $success, RTB_TEXTDOMAIN ), $success ); ?></p>
+			<p><?php echo sprintf( _n( '%d booking set to pending.', '%d bookings set to pending.', $success, 'restaurant-reservations' ), $success ); ?></p>
 
 			<?php elseif ( $this->last_action == 'set-status-closed' ) : ?>
-			<p><?php echo sprintf( _n( '%d booking closed.', '%d bookings closed.', $success, RTB_TEXTDOMAIN ), $success ); ?></p>
+			<p><?php echo sprintf( _n( '%d booking closed.', '%d bookings closed.', $success, 'restaurant-reservations' ), $success ); ?></p>
 
 			<?php endif; ?>
 		</div>
@@ -492,7 +492,7 @@ class rtbBookingsTable extends WP_List_Table {
 		?>
 
 		<div id="rtb-admin-notice-bulk-<?php esc_attr( $this->last_action ); ?>" class="error">
-			<p><?php echo sprintf( _n( '%d booking had errors and could not be processed.', '%d bookings had errors and could not be processed.', $failure, RTB_TEXTDOMAIN ), $failure ); ?></p>
+			<p><?php echo sprintf( _n( '%d booking had errors and could not be processed.', '%d bookings had errors and could not be processed.', $failure, 'restaurant-reservations' ), $failure ); ?></p>
 		</div>
 
 		<?php
