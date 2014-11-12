@@ -19,7 +19,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingSelectTaxonomy_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
+class sapAdminPageSettingSelectTaxonomy_2_0_a_8 extends sapAdminPageSetting_2_0_a_8 {
 
 	public $sanitize_callback = 'intval';
 	

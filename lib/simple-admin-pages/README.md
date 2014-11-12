@@ -19,14 +19,17 @@ yet.*
 
 - Text field
 - Textarea field
-- Checkbox (single option to enable/disable setting)
+- Toggle (checkbox to enable/disable setting)
 - Select dropdown with custom options
 - Select dropdown of any post type
 - Select dropdown of any taxonomy type
 - HTML Content (for instructions, links or other inert text)
+- WordPress Editor
 
 ## Controls Supported for Special Use Cases
 
+- Date and Time Scheduler
+- Google Map Address (with GeoLocation)
 - Business Opening Hours
 
 ## Usage
@@ -38,7 +41,7 @@ Here's a simple example of how you can use this library to create an admin page.
 	require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 	$sap = sap_initialize_library(
 		array(
-			'version'		=> '2.0.a.7', // Version of the library
+			'version'		=> '2.0.a.8', // Version of the library
 			'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 		)
 	);
@@ -48,8 +51,8 @@ Here's a simple example of how you can use this library to create an admin page.
 		'options', 				// Admin menu which this page should be added to
 		array(					// Array of key/value pairs matching the AdminPage class constructor variables
 			'id'			=> 'basic-settings',
-			'title'			=> __( 'Page Title', SAP_TEXTDOMAIN ),
-			'menu_title'	=> __( 'menu Title', SAP_TEXTDOMAIN ),
+			'title'			=> __( 'Page Title', 'textdomain' ),
+			'menu_title'	=> __( 'menu Title', 'textdomain' ),
 			'description'	=> '',
 			'capability'	=> 'manage_options' // User permissions access level
 		)
@@ -60,8 +63,8 @@ Here's a simple example of how you can use this library to create an admin page.
 		'basic-settings',		// Page to add this section to
 		array(					// Array of key/value pairs matching the AdminPageSection class constructor variables
 			'id'			=> 'basic-details',
-			'title'			=> __( 'Basic Details', SAP_TEXTDOMAIN ),
-			'description'	=> __( 'This section includes some basic details for you to configure.', SAP_TEXTDOMAIN )
+			'title'			=> __( 'Basic Details', 'textdomain' ),
+			'description'	=> __( 'This section includes some basic details for you to configure.', 'textdomain' )
 		)
 	);
 
@@ -72,12 +75,12 @@ Here's a simple example of how you can use this library to create an admin page.
 		'select',				// Type of setting (see sapLibrary::get_setting_classname()
 		array(
 			'id'			=> 'select-field',
-			'title'			=> __( 'Select Field', SAP_TEXTDOMAIN ),
-			'description'	=> __( 'A demonstration of the select field type.', SAP_TEXTDOMAIN ),
+			'title'			=> __( 'Select Field', 'textdomain' ),
+			'description'	=> __( 'A demonstration of the select field type.', 'textdomain' ),
 			'options'		=> array(
-				'one' 	=> __( 'Option 1', SAP_TEXTDOMAIN ),
-				'two' 	=> __( 'Option 2', SAP_TEXTDOMAIN ),
-				'three' => __( 'Option 3', SAP_TEXTDOMAIN )
+				'one' 	=> __( 'Option 1', 'textdomain' ),
+				'two' 	=> __( 'Option 2', 'textdomain' ),
+				'three' => __( 'Option 3', 'textdomain' )
 			)
 		)
 	);
@@ -127,7 +130,7 @@ The lib_url is used to print stylesheets or scripts attached to the library.
 require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 $sap = sap_initialize_library(
 	$args = array(
-		'version'		=> '2.0.a.7', // Version of the library
+		'version'		=> '2.0.a.8', // Version of the library
 		'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 	)
 );
@@ -184,8 +187,8 @@ $sap->add_page(
 	$type,
 	$args = array(
 		'id'			=> 'my-settings',
-		'title'			=> __( 'Page Title', SAP_TEXTDOMAIN ),
-		'menu_title'	=> __( 'menu Title', SAP_TEXTDOMAIN ),
+		'title'			=> __( 'Page Title', 'textdomain' ),
+		'menu_title'	=> __( 'menu Title', 'textdomain' ),
 		'description'	=> '',
 		'capability'	=> 'manage_options'
 		'default_tab'	=> 'tab-one',
@@ -237,8 +240,8 @@ $sap->add_section(
 	$page_id,
 	$args = array(
 		'id'            => 'basic-details-section',
-		'title'         => __( 'Basic Details', SAP_TEXTDOMAIN ),
-		'description'   => __( 'This section includes some basic details for you to configure.', SAP_TEXTDOMAIN )
+		'title'         => __( 'Basic Details', 'textdomain' ),
+		'description'   => __( 'This section includes some basic details for you to configure.', 'textdomain' )
 	)
 );
 ```
@@ -252,8 +255,8 @@ $sap->add_section(
 	$page_id,
 	$args = array(
 		'id'            => 'tab-one',
-		'title'         => __( 'Tab One', SAP_TEXTDOMAIN ),
-		'description'   => __( 'This tab includes some settings for you to configure.', SAP_TEXTDOMAIN ),
+		'title'         => __( 'Tab One', 'textdomain' ),
+		'description'   => __( 'This tab includes some settings for you to configure.', 'textdomain' ),
 		'is_tab'		=> true,
 	)
 );
@@ -265,8 +268,8 @@ $sap->add_section(
 	$page_id,
 	$args = array(
 		'id'            => 'section-one-under-tab-one',
-		'title'         => __( 'Section One', SAP_TEXTDOMAIN ),
-		'description'   => __( 'This section includes some settings for you to configure.', SAP_TEXTDOMAIN ),
+		'title'         => __( 'Section One', 'textdomain' ),
+		'description'   => __( 'This section includes some settings for you to configure.', 'textdomain' ),
 		'tab'			=> 'tab-one',
 	)
 );
@@ -327,8 +330,8 @@ $sap->add_setting(
 	$type,
 	array(
 		'id'            => 'my-first-setting',
-		'title'         => __( 'My First Setting', SAP_TEXTDOMAIN ),
-		'description'	=> __( 'A demonstration of my first setting', SAP_TEXTDOMAIN );
+		'title'         => __( 'My First Setting', 'textdomain' ),
+		'description'	=> __( 'A demonstration of my first setting', 'textdomain' );
 		...
 	)
 );
@@ -367,6 +370,18 @@ $all_page_settings[ $my_setting_id ];
 ```
 
 ## Changelog
+
+- 2_0_a_8 - 2014-11-12
+	- SelectPost: Use WP_Query instead of get_posts() so that filters can effect the list
+	- Require translateable strings to be declared when adding the setting so the library can conform to the upcoming single textdomain best practice in the .org repos
+
+- 2_0_a_7 - 2014-08-20
+	- Only enqueue assets on appropriate admin pages to prevent version conflicts and be a good citizen
+	- Enforce stored date/time formats so date format is reliable
+
+- 2.0.a.6 - 2014-08-12
+	- Add Google Map Address component
+	- Custom settings loaded through the extension path should not use versions
 
 - 2.0.a.5 - 2014-05-15
 	- Fix a bug with the Textarea component callback

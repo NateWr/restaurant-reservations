@@ -25,7 +25,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingOpeningHours_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
+class sapAdminPageSettingOpeningHours_2_0_a_8 extends sapAdminPageSetting_2_0_a_8 {
 
 	public $sanitize_callback = 'sanitize_text_field';
 	

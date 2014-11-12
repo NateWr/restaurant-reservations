@@ -44,11 +44,6 @@ if ( !function_exists( 'sap_initialize_library' ) ) {
 			return null;
 		}
 
-		// Set the textdomain for translation
-		if ( !defined( 'SAP_TEXTDOMAIN' ) ) {
-			define( 'SAP_TEXTDOMAIN', 'sapdomain' );
-		}
-
 		$lib_class_name = 'sapLibrary_' . str_replace( '.', '_', $args['version'] );
 
 		return new $lib_class_name( $args );

@@ -206,7 +206,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		require_once( RTB_PLUGIN_DIR . '/lib/simple-admin-pages/simple-admin-pages.php' );
 		$sap = sap_initialize_library(
 			$args = array(
-				'version'       => '2.0.a.7',
+				'version'       => '2.0.a.8',
 				'lib_url'       => RTB_PLUGIN_URL . '/lib/simple-admin-pages/',
 			)
 		);
@@ -323,6 +323,33 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
+		// Translateable strings for scheduler components
+		$scheduler_strings = array(
+			'add_rule'			=> __( 'Add new scheduling rule', RTB_TEXTDOMAIN ),
+			'weekly'			=> _x( 'Weekly', 'Format of a scheduling rule', RTB_TEXTDOMAIN ),
+			'monthly'			=> _x( 'Monthly', 'Format of a scheduling rule', RTB_TEXTDOMAIN ),
+			'date'				=> _x( 'Date', 'Format of a scheduling rule', RTB_TEXTDOMAIN ),
+			'weekdays'			=> _x( 'Days of the week', 'Label for selecting days of the week in a scheduling rule', RTB_TEXTDOMAIN ),
+			'month_weeks'		=> _x( 'Weeks of the month', 'Label for selecting weeks of the month in a scheduling rule', RTB_TEXTDOMAIN ),
+			'date_label'		=> _x( 'Date', 'Label to select a date for a scheduling rule', RTB_TEXTDOMAIN ),
+			'time_label'		=> _x( 'Time', 'Label to select a time slot for a scheduling rule', RTB_TEXTDOMAIN ),
+			'allday'			=> _x( 'All day', 'Label to set a scheduling rule to last all day', RTB_TEXTDOMAIN ),
+			'start'				=> _x( 'Start', 'Label for the starting time of a scheduling rule', RTB_TEXTDOMAIN ),
+			'end'				=> _x( 'End', 'Label for the ending time of a scheduling rule', RTB_TEXTDOMAIN ),
+			'set_time_prompt'	=> _x( 'All day long. Want to %sset a time slot%s?', 'Prompt displayed when a scheduling rule is set without any time restrictions', RTB_TEXTDOMAIN ),
+			'toggle'			=> _x( 'Open and close this rule', 'Toggle a scheduling rule open and closed', RTB_TEXTDOMAIN ),
+			'delete'			=> _x( 'Delete rule', 'Delete a scheduling rule', RTB_TEXTDOMAIN ),
+			'delete_schedule'	=> __( 'Delete scheduling rule', RTB_TEXTDOMAIN ),
+			'never'				=> _x( 'Never', 'Brief default description of a scheduling rule when no weekdays or weeks are included in the rule', RTB_TEXTDOMAIN ),
+			'weekly_always'	=> _x( 'Every day', 'Brief default description of a scheduling rule when all the weekdays/weeks are included in the rule', RTB_TEXTDOMAIN ),
+			'monthly_weekdays'	=> _x( '%s on the %s week of the month', 'Brief default description of a scheduling rule when some weekdays are included on only some weeks of the month. %s should be left alone and will be replaced by a comma-separated list of days and weeks in the following format: M, T, W on the first, second week of the month', RTB_TEXTDOMAIN ),
+			'monthly_weeks'		=> _x( '%s week of the month', 'Brief default description of a scheduling rule when some weeks of the month are included but all or no weekdays are selected. %s should be left alone and will be replaced by a comma-separated list of weeks in the following format: First, second week of the month', RTB_TEXTDOMAIN ),
+			'all_day'			=> _x( 'All day', 'Brief default description of a scheduling rule when no times are set', RTB_TEXTDOMAIN ),
+			'before'			=> _x( 'Ends at', 'Brief default description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm', RTB_TEXTDOMAIN ),
+			'after'				=> _x( 'Starts at', 'Brief default description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm', RTB_TEXTDOMAIN ),
+			'separator'			=> _x( '&mdash;', 'Separator between times of a scheduling rule', RTB_TEXTDOMAIN ),
+		);
+
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-schedule',
@@ -344,9 +371,11 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'date_format'	=> $this->get_setting( 'date-format' ),
 				'disable_weeks'	=> true,
 				'disable_date'	=> true,
+				'strings' => $scheduler_strings,
 			)
 		);
 
+		$scheduler_strings['all_day'] = _x( 'Closed all day', 'Brief default description of a scheduling exception when no times are set', RTB_TEXTDOMAIN );
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-schedule',
@@ -359,9 +388,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'date_format'		=> $this->get_setting( 'date-format' ),
 				'disable_weekdays'	=> true,
 				'disable_weeks'		=> true,
-				'instance_schedule_summaries' => array(
-					'all_day'	=> _x( 'Closed all day', 'Brief description of a scheduling exception when no times are set', SAP_TEXTDOMAIN ),
-				),
+				'strings' => $scheduler_strings,
 			)
 		);
 

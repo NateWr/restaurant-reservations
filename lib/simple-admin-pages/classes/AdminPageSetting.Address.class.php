@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingAddress_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
+class sapAdminPageSettingAddress_2_0_a_8 extends sapAdminPageSetting_2_0_a_8 {
 
 	/*
 	 * Size of this textarea
@@ -32,6 +32,27 @@ class sapAdminPageSettingAddress_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
 	);
 
 	public $sanitize_callback = 'sanitize_text_field';
+
+	/**
+	 * Translateable strings required for this component
+	 * @since 2.0.a.8
+	 */
+	public $strings = array(
+		'sep-action-links'	=> null, // _x( ' | ', 'separator between admin action links in address component', 'textdomain' ),
+		'sep-lat-lon'		=> null, // _x( ', ', 'separates latitude and longitude', 'textdomain' ),
+		'no-setting'		=> null, // __( 'No map coordinates set.', 'textdomain' ),
+		'retrieving'		=> null, // __( 'Requesting new coordinates', 'textdomain' ),
+		'select'			=> null, // __( 'Select a match below', 'textdomain' ),
+		'view'				=> null, // __( 'View', 'textdomain' ),
+		'retrieve'			=> null, // __( 'Retrieve map coordinates', 'textdomain' ),
+		'remove'			=> null, // __( 'Remove map coordinates', 'textdomain' ),
+		'try_again'			=> null, // __( 'Try again?', 'textdomain' ),
+		'result_error'		=> null, // __( 'Error', 'textdomain' ),
+		'result_invalid'	=> null, // __( 'Invalid request. Be sure to fill out the address field before retrieving coordinates.', 'textdomain' ),
+		'result_denied'		=> null, // __( 'Request denied.', 'textdomain' ),
+		'result_limit'		=> null, // __( 'Request denied because you are over your request quota.', 'textdomain' ),
+		'result_empty'		=> null, // __( 'Nothing was found at that address', 'textdomain' ),
+	);
 
 	/**
 	 * Escape the value to display it safely HTML textarea fields
@@ -77,28 +98,12 @@ class sapAdminPageSettingAddress_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
 	 * @since 2.0.a.5
 	 */
 	public function display_setting() {
-	
-		$strings = array(
-			'sep-lat-lon'		=> _x( ', ', 'separates latitude and longitude', SAP_TEXTDOMAIN ),
-			'no-setting'		=> __( 'No map coordinates set.', SAP_TEXTDOMAIN ),
-			'retrieving'		=> __( 'Requesting new coordinates', SAP_TEXTDOMAIN ),
-			'select'			=> __( 'Select a match below', SAP_TEXTDOMAIN ),
-			'view'				=> __( 'View', SAP_TEXTDOMAIN ),
-			'retrieve'			=> __( 'Retrieve map coordinates', SAP_TEXTDOMAIN ),
-			'remove'			=> __( 'Remove map coordinates', SAP_TEXTDOMAIN ),
-			'try_again'			=> __( 'Try again?', SAP_TEXTDOMAIN ),
-			'result_error'		=> __( 'Error', SAP_TEXTDOMAIN ),
-			'result_invalid'	=> __( 'Invalid request. Be sure to fill out the address field before retrieving coordinates.', SAP_TEXTDOMAIN ),
-			'result_denied'		=> __( 'Request denied.', SAP_TEXTDOMAIN ),
-			'result_limit'		=> __( 'Request denied because you are over your request quota.', SAP_TEXTDOMAIN ),
-			'result_empty'		=> __( 'Nothing was found at that address', SAP_TEXTDOMAIN ),
-		);
 
 		wp_localize_script(
 			'sap-address',
 			'sap_address',
 			array(
-				'strings' => $strings,
+				'strings' => $this->strings,
 			)
 		);
 
@@ -112,20 +117,20 @@ class sapAdminPageSettingAddress_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
 				<span class="dashicons dashicons-location-alt"></span>
 				<span class="sap-map-coords">
 				<?php if ( empty( $this->value['lat'] ) || empty( $this->value['lon'] ) ) : ?>
-					<?php echo $strings['no-setting']; ?>
+					<?php echo $this->strings['no-setting']; ?>
 				<?php else : ?>
-					<?php echo $this->value['lat'] . $strings['sep-lat-lon'] . $this->value['lon']; ?>
-					<a href="//maps.google.com/maps?q=<?php echo esc_attr( $this->value['lat'] ) . ',' . esc_attr( $this->value['lon'] ); ?>" class="sap-view-coords" target="_blank"><?php echo $strings['view']; ?></a>
+					<?php echo $this->value['lat'] . $this->strings['sep-lat-lon'] . $this->value['lon']; ?>
+					<a href="//maps.google.com/maps?q=<?php echo esc_attr( $this->value['lat'] ) . ',' . esc_attr( $this->value['lon'] ); ?>" class="sap-view-coords" target="_blank"><?php echo $this->strings['view']; ?></a>
 				<?php endif; ?>
 				</span>
 			</p>
 			<p class="sap-coords-action-wrapper">
 				<a href="#" class="sap-get-coords">
-					<?php echo $strings['retrieve']; ?>
+					<?php echo $this->strings['retrieve']; ?>
 				</a>
-				<?php _ex( ' | ', 'separator between admin action links in address component', SAP_TEXTDOMAIN ); ?>
+				<?php echo $this->strings['sep-action-links']; ?>
 				<a href="#" class="sap-remove-coords">
-					<?php echo $strings['remove']; ?>
+					<?php echo $this->strings['remove']; ?>
 				</a>
 			</p>
 			<input type="hidden" class="lat" name="<?php echo $this->get_input_name(); ?>[lat]" value="<?php echo $this->value['lat']; ?>">

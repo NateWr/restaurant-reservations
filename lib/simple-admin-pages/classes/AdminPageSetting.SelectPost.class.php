@@ -17,7 +17,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingSelectPost_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 {
+class sapAdminPageSettingSelectPost_2_0_a_8 extends sapAdminPageSetting_2_0_a_8 {
 
 	public $sanitize_callback = 'intval';
 
@@ -36,7 +36,7 @@ class sapAdminPageSettingSelectPost_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 
 	 */
 	public function display_setting() {
 
-		$posts = get_posts( $this->args );
+		$posts = new WP_Query( $this->args );
 
 		?>
 
@@ -46,13 +46,15 @@ class sapAdminPageSettingSelectPost_2_0_a_7 extends sapAdminPageSetting_2_0_a_7 
 					<option></option>
 				<?php endif; ?>
 
-				<?php foreach ( $posts as $post  ) : ?>
-					<option value="<?php echo esc_attr( $post->ID ); ?>"<?php if( $this->value == $post->ID ) : ?> selected="selected"<?php endif; ?>><?php echo esc_html( $post->post_title ); ?></option>
-				<?php endforeach; ?>
+				<?php while( $posts->have_posts() ) : $posts->next_post(); ?>
+					<option value="<?php echo absint( $posts->post->ID ); ?>" <?php selected( $this->value, $posts->post->ID ); ?>><?php echo esc_attr( $posts->post->post_title ); ?></option>
+				<?php endwhile; ?>
 
 			</select>
 
 		<?php
+
+		wp_reset_postdata();
 
 		$this->display_description();
 
