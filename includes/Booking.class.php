@@ -382,18 +382,50 @@ class rtbBooking {
 		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-phone'] ) );
 		$this->message = empty( $_POST['rtb-message'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-message'] ) );
 
+		// Check if any required fields are empty
+		$required_fields = $rtb_controller->settings->get_required_fields();
+		foreach( $required_fields as $slug => $field ) {
+			if ( !$this->field_has_error( $slug ) && empty( $_POST[ 'rtb-' . $slug ] ) ) {
+				$this->validation_errors[] = array(
+					'field'			=> $slug,
+					'post_variable'	=> '',
+					'message'	=> __( 'Please complete this field to request a booking.', 'restaurant-reservations' ),
+				);
+			}
+		}
+
 		do_action( 'rtb_validate_booking_submission', $this );
 
 	}
 
 	/**
 	 * Check if submission is valid
+	 * 
 	 * @since 0.0.1
 	 */
 	public function is_valid_submission() {
+
 		if ( !count( $this->validation_errors ) ) {
 			return true;
 		}
+
+		return false;
+	}
+
+	/**
+	 * Check if a field already has an error attached to it
+	 *
+	 * @field string Field slug
+	 * @since 1.3
+	 */
+	public function field_has_error( $field_slug ) {
+
+		foreach( $this->validation_errors as $error ) {
+			if ( $error['field'] == $field_slug ) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 

@@ -715,11 +715,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 						'title'			=> __( 'Date', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->request_date ) ? '' : $request->request_date,
 						'callback'		=> 'rtb_print_form_text_field',
+						'required'		=> true,
 					),
 					'time'		=> array(
 						'title'			=> __( 'Time', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->request_time ) ? '' : $request->request_time,
 						'callback'		=> 'rtb_print_form_text_field',
+						'required'		=> true,
 					),
 					'party'		=> array(
 						'title'			=> __( 'Party', 'restaurant-reservations' ),
@@ -727,7 +729,8 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 						'callback'		=> 'rtb_print_form_select_field',
 						'callback_args'	=> array(
 							'options'	=> $this->get_form_party_options(),
-						)
+						),
+						'required'		=> true,
 					),
 				),
 			),
@@ -740,11 +743,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 						'title'			=> __( 'Name', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->name ) ? '' : $request->name,
 						'callback'		=> 'rtb_print_form_text_field',
+						'required'		=> true,
 					),
 					'email'		=> array(
 						'title'			=> __( 'Email', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->email ) ? '' : $request->email,
 						'callback'		=> 'rtb_print_form_text_field',
+						'required'		=> true,
 					),
 					'phone'		=> array(
 						'title'			=> __( 'Phone', 'restaurant-reservations' ),
@@ -766,6 +771,33 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		);
 
 		return apply_filters( 'rtb_booking_form_fields', $fields, $request );
+	}
+
+	/**
+	 * Get required fields
+	 *
+	 * Filters the fields array to return just those marked required
+	 * @since 1.3
+	 */
+	public function get_required_fields() {
+
+		$required_fields = array();
+
+		$fieldsets = $this->get_booking_form_fields();
+		foreach ( $fieldsets as $fieldset ) {
+			$required_fields = array_merge( $required_fields, array_filter( $fieldset['fields'], array( $this, 'is_field_required' ) ) );
+		}
+
+		return $required_fields;
+	}
+
+	/**
+	 * Check if a field is required
+	 *
+	 * @since 1.3
+	 */
+	public function is_field_required( $field ) {
+		return !empty( $field['required'] );
 	}
 
 	/**
