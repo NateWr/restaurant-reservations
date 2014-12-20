@@ -282,7 +282,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'date-format',
 				'title'         => __( 'Date Format', 'restaurant-reservations' ),
-				'description'   => __( 'Define how the date should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/date.htm#formatting-rules">Formatting rules</a>', 'restaurant-reservations' ),
+				'description'   => sprintf( __( 'Define how the date is formatted on the booking form. %sFormatting rules%s. This only changes the format on the booking form. To change the date format in notification messages, modify your general %sWordPress Settings%s.', 'restaurant-reservations' ), '<a href="http://amsul.ca/pickadate.js/date.htm#formatting-rules">', '</a>', '<a href="' . admin_url( 'options-general.php' ) . '">', '</a>' ),
 				'placeholder'	=> $this->defaults['date-format'],
 			)
 		);
@@ -294,7 +294,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'time-format',
 				'title'         => __( 'Time Format', 'restaurant-reservations' ),
-				'description'   => __( 'Define how the time should appear after it has been selected. <a href="http://amsul.ca/pickadate.js/time.htm#formatting-rules">Formatting rules</a>', 'restaurant-reservations' ),
+				'description'   => sprintf( __( 'Define how the time is formatted on the booking form. %sFormatting rules%s. This only changes the format on the booking form. To change the time format in notification messages, modify your general %sWordPress Settings%s.', 'restaurant-reservations' ), '<a href="http://amsul.ca/pickadate.js/time.htm#formatting-rules">', '</a>', '<a href="' . admin_url( 'options-general.php' ) . '">', '</a>' ),
 				'placeholder'	=> $this->defaults['time-format'],
 			)
 		);
