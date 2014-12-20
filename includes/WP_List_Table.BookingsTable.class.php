@@ -169,9 +169,9 @@ class rtbBookingsTable extends WP_List_Table {
 		$schedule_query_string = remove_query_arg( array( 'schedule', 'start-date', 'end-date' ), $this->query_string );
 
 		$views = array(
-			'all'		=> sprintf( '<a href="%s"%s>%s</a>', $schedule_query_string, $schedule == '' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
+			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'schedule' ), $schedule_query_string ) ), $schedule === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
 			'today'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'today', 'paged' => FALSE ), $schedule_query_string ), $schedule === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
-			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'upcoming', 'paged' => FALSE ), remove_query_arg( array( 'order' ), $schedule_query_string ) ), $schedule === 'upcoming' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
+			'all'		=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'all', 'paged' => FALSE ), $schedule_query_string ), $schedule == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
 		);
 
 		if ( $schedule == 'custom' ) {
@@ -520,14 +520,16 @@ class rtbBookingsTable extends WP_List_Table {
 				$end_date = new DateTime( $this->filter_end_date );
 				$where .= " AND p.post_date <= '" . $end_date->format( 'Y-m-d H:i:s' ) . "'";
 			}
+
 		} elseif ( !empty( $_GET['schedule'] ) ) {
 
 			if ( $_GET['schedule'] ==  'today' ) {
 				$where .= " AND p.post_date >= '" . date( 'Y-m-d' ) . "' AND p.post_date <= '" . date( 'Y-m-d', current_time( 'timestamp' ) + 86400 ) . "'";
-
-			} elseif ( $_GET['schedule'] ==  'upcoming' ) {
-				$where .= " AND p.post_date >= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) - 3600 ) . "'";
 			}
+
+		// Default date setting is to show upcoming bookings
+		} else {
+			$where .= " AND p.post_date >= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) - 3600 ) . "'";
 		}
 
 
@@ -569,7 +571,7 @@ class rtbBookingsTable extends WP_List_Table {
 			$args['orderby'] = $_GET['orderby'];
 		}
 
-		$args['order'] = isset( $_GET['order'] ) ? $_GET['order'] : 'ASC';
+		$args['order'] = !empty( $_GET['order'] ) ? $_GET['order'] : 'ASC';
 
 		if ( $this->filter_start_date !== null || $this->filter_end_date !== null ) {
 
@@ -587,7 +589,7 @@ class rtbBookingsTable extends WP_List_Table {
 				$args['date_query'] = $date_query;
 			}
 
-		} elseif ( isset( $_GET['schedule'] ) ) {
+		} elseif ( !empty( $_GET['schedule'] ) ) {
 
 			if ( $_GET['schedule'] == 'today' ) {
 				$today = getdate();
@@ -596,16 +598,17 @@ class rtbBookingsTable extends WP_List_Table {
 				$args['day'] = $today['mday'];
 			}
 
-			if ( $_GET['schedule'] == 'upcoming' ) {
-				$args['date_query'] = array(
-					array(
-						'after' => '-1 hour', // show bookings that have just passed
-					)
-				);
-				if ( empty( $_GET['order'] ) ) {
-					$args['order'] = 'ASC';
-				}
+		// Default date setting is to show upcoming bookings
+		} elseif ( empty( $_GET['schedule'] ) ) {
+			$args['date_query'] = array(
+				array(
+					'after' => '-1 hour', // show bookings that have just passed
+				)
+			);
+			if ( empty( $_GET['order'] ) ) {
+				$args['order'] = 'ASC';
 			}
+
 		}
 
 		$args = apply_filters( 'rtb_bookings_table_query_args', $args );
