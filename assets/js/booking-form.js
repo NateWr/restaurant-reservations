@@ -1,138 +1,143 @@
 /* Javascript for Restaurant Reservations booking form */
+
+var rtb_booking_form = rtb_booking_form || {};
+
 jQuery(document).ready(function ($) {
 
 	/**
-	 * Scroll to the first error message on the booking form
+	 * Initialize the booking form when loaded
 	 */
-	if ( $( '.rtb-booking-form .rtb-error' ).length ) {
-		$('html, body').animate({
-			scrollTop: $( '.rtb-booking-form .rtb-error' ).first().offset().top + -40
-		}, 500);
-	}
+	rtb_booking_form.init = function() {
 
-	/**
-	 * Show the message field on the booking form
-	 */
-	$( '.rtb-booking-form .add-message a' ).click( function() {
-		$(this).hide();
-		$(this).parent().siblings( '.message' ).addClass( 'message-open' );
-
-		return false;
-	});
-
-	/**
-	 * Enable datepickers on load
-	 */
-	if ( typeof rtb_pickadate !== 'undefined' ) {
-
-		// Declare datepicker
-		var date_input = $( '#rtb-date' ).pickadate({
-			format: rtb_pickadate.date_format,
-			formatSubmit: 'yyyy/mm/dd',
-			hiddenName: true,
-			min: true,
-			container: 'body',
-
-			// Select the value when loaded if a value has been set
-			onStart: function() {
-				if ( $( '#rtb-date' ).val()	!== '' ) {
-					var date = new Date( $( '#rtb-date' ).val() );
-					if ( Object.prototype.toString.call( date ) === "[object Date]" ) {
-						this.set( 'select', date );
-					}
-				}
-			}
-		});
-
-		// Declare timepicker
-		var time_input = $( '#rtb-time' ).pickatime({
-			format: rtb_pickadate.time_format,
-			formatSubmit: 'h:i A',
-			hiddenName: true,
-			interval: parseInt( rtb_pickadate.time_interval, 10 ),
-			container: 'body',
-
-			// Select the value when loaded if a value has been set
-			onStart: function() {
-				if ( $( '#rtb-time' ).val()	!== '' ) {
-					var today = new Date();
-					var today_date = today.getFullYear() + '/' + ( today.getMonth() + 1 ) + '/' + today.getDate();
-					var time = new Date( today_date + ' ' + $( '#rtb-time' ).val() );
-					if ( Object.prototype.toString.call( time ) === "[object Date]" ) {
-						this.set( 'select', time );
-					}
-				}
-			}
-		});
-
-		var datepicker = date_input.pickadate( 'picker' );
-		var timepicker = time_input.pickatime( 'picker' );
-
-		if ( typeof datepicker == 'undefined' ) {
-			return;
+		// Scroll to the first error message on the booking form
+		if ( $( '.rtb-booking-form .rtb-error' ).length ) {
+			$('html, body').animate({
+				scrollTop: $( '.rtb-booking-form .rtb-error' ).first().offset().top + -40
+			}, 500);
 		}
 
-		// Pass conditional configuration parameters
-		if ( rtb_pickadate.disable_dates.length ) {
+		// Show the message field on the booking form
+		$( '.rtb-booking-form .add-message a' ).click( function() {
+			$(this).hide();
+			$(this).parent().siblings( '.message' ).addClass( 'message-open' );
 
-			// Update weekday dates if start of the week has been modified
-			if ( typeof datepicker.component.settings.firstDay == 'number' ) {
-				var weekday_num = 0;
-				for ( var disable_key in rtb_pickadate.disable_dates ) {
-					if ( typeof rtb_pickadate.disable_dates[disable_key] == 'number' ) {
-						weekday_num = rtb_pickadate.disable_dates[disable_key] - datepicker.component.settings.firstDay;
-						if ( weekday_num < 1 ) {
-							weekday_num = 7;
+			return false;
+		});
+
+		// Enable datepickers on load
+		if ( typeof rtb_pickadate !== 'undefined' ) {
+
+			// Declare datepicker
+			var date_input = $( '#rtb-date' ).pickadate({
+				format: rtb_pickadate.date_format,
+				formatSubmit: 'yyyy/mm/dd',
+				hiddenName: true,
+				min: true,
+				container: 'body',
+
+				// Select the value when loaded if a value has been set
+				onStart: function() {
+					if ( $( '#rtb-date' ).val()	!== '' ) {
+						var date = new Date( $( '#rtb-date' ).val() );
+						if ( Object.prototype.toString.call( date ) === "[object Date]" ) {
+							this.set( 'select', date );
 						}
-						rtb_pickadate.disable_dates[disable_key] = weekday_num;
+					}
+				}
+			});
+
+			// Declare timepicker
+			var time_input = $( '#rtb-time' ).pickatime({
+				format: rtb_pickadate.time_format,
+				formatSubmit: 'h:i A',
+				hiddenName: true,
+				interval: parseInt( rtb_pickadate.time_interval, 10 ),
+				container: 'body',
+
+				// Select the value when loaded if a value has been set
+				onStart: function() {
+					if ( $( '#rtb-time' ).val()	!== '' ) {
+						var today = new Date();
+						var today_date = today.getFullYear() + '/' + ( today.getMonth() + 1 ) + '/' + today.getDate();
+						var time = new Date( today_date + ' ' + $( '#rtb-time' ).val() );
+						if ( Object.prototype.toString.call( time ) === "[object Date]" ) {
+							this.set( 'select', time );
+						}
+					}
+				}
+			});
+
+			rtb_booking_form.datepicker = date_input.pickadate( 'picker' );
+			rtb_booking_form.timepicker = time_input.pickatime( 'picker' );
+
+			if ( typeof rtb_booking_form.datepicker == 'undefined' ) {
+				return;
+			}
+
+			// Pass conditional configuration parameters
+			if ( rtb_pickadate.disable_dates.length ) {
+
+				// Update weekday dates if start of the week has been modified
+				if ( typeof rtb_booking_form.datepicker.component.settings.firstDay == 'number' ) {
+					var weekday_num = 0;
+					for ( var disable_key in rtb_pickadate.disable_dates ) {
+						if ( typeof rtb_pickadate.disable_dates[disable_key] == 'number' ) {
+							weekday_num = rtb_pickadate.disable_dates[disable_key] - rtb_booking_form.datepicker.component.settings.firstDay;
+							if ( weekday_num < 1 ) {
+								weekday_num = 7;
+							}
+							rtb_pickadate.disable_dates[disable_key] = weekday_num;
+						}
+					}
+				}
+
+				rtb_booking_form.datepicker.set( 'disable', rtb_pickadate.disable_dates );
+			}
+
+			if ( rtb_pickadate.late_bookings === '1440' ) {
+				rtb_booking_form.datepicker.set( 'min', 1 );
+			}
+
+			// If no date has been set, select today's date if it's a valid
+			// date. User may opt not to do this in the settings.
+			if ( $( '#rtb-date' ).val() === '' && !$( '.rtb-booking-form .date .rtb-error' ).length ) {
+
+				if ( rtb_pickadate.date_onload == 'soonest' ) {
+					rtb_booking_form.datepicker.set( 'select', new Date() );
+				} else if ( rtb_pickadate.date_onload !== 'empty' ) {
+					var dateToVerify = rtb_booking_form.datepicker.component.create( new Date() );
+					var isDisabled = rtb_booking_form.datepicker.component.disabled( dateToVerify );
+					if ( !isDisabled ) {
+						rtb_booking_form.datepicker.set( 'select', dateToVerify );
 					}
 				}
 			}
 
-			datepicker.set( 'disable', rtb_pickadate.disable_dates );
-		}
-
-		if ( rtb_pickadate.late_bookings === '1440' ) {
-			datepicker.set( 'min', 1 );
-		}
-
-		// If no date has been set, select today's date if it's a valid
-		// date. User may opt not to do this in the settings.
-		if ( $( '#rtb-date' ).val() === '' && !$( '.rtb-booking-form .date .rtb-error' ).length ) {
-
-			if ( rtb_pickadate.date_onload == 'soonest' ) {
-				datepicker.set( 'select', new Date() );
-			} else if ( rtb_pickadate.date_onload !== 'empty' ) {
-				var dateToVerify = datepicker.component.create( new Date() );
-				var isDisabled = datepicker.component.disabled( dateToVerify );
-				if ( !isDisabled ) {
-					datepicker.set( 'select', dateToVerify );
+			// Update timepicker on pageload and whenever the datepicker is closed
+			rtb_booking_form.update_timepicker_range();
+			rtb_booking_form.datepicker.on( {
+				close: function() {
+					rtb_booking_form.update_timepicker_range();
 				}
-			}
+			});
 		}
+	};
 
-		// Update timepicker on pageload and whenever the datepicker is closed
-		rtb_update_timepicker_range();
-		datepicker.on( {
-			close: function() {
-				rtb_update_timepicker_range();
-			}
-		});
-	}
-
-	// Update the timepicker's range based on the currently selected date
-	function rtb_update_timepicker_range() {
-
+	/**
+	 * Update the timepicker's range based on the currently selected date
+	 */
+	rtb_booking_form.update_timepicker_range = function() {
+	
 		// Reset enabled/disabled rules on this timepicker
-		timepicker.set( 'enable', false );
-		timepicker.set( 'disable', false );
+		rtb_booking_form.timepicker.set( 'enable', false );
+		rtb_booking_form.timepicker.set( 'disable', false );
 
-		if ( datepicker.get() === '' ) {
-			timepicker.set( 'disable', true );
+		if ( rtb_booking_form.datepicker.get() === '' ) {
+			rtb_booking_form.timepicker.set( 'disable', true );
 			return;
 		}
 
-		selected_date = new Date( datepicker.get( 'select', 'yyyy/mm/dd' ) );
+		selected_date = new Date( rtb_booking_form.datepicker.get( 'select', 'yyyy/mm/dd' ) );
 		var selected_date_year = selected_date.getFullYear();
 		var selected_date_month = selected_date.getMonth();
 		var selected_date_date = selected_date.getDate();
@@ -161,7 +166,7 @@ jQuery(document).ready(function ($) {
 
 					// Closed all day
 					if ( typeof rtb_pickadate.schedule_closed[closed_key].time == 'undefined' ) {
-						timepicker.set( 'disable', [ true ] );
+						rtb_booking_form.timepicker.set( 'disable', [ true ] );
 
 						return;
 					}
@@ -188,7 +193,7 @@ jQuery(document).ready(function ($) {
 
 			// Exit early if this date is an exception
 			if ( valid_times.length > 1 ) {
-				timepicker.set( 'disable', valid_times );
+				rtb_booking_form.timepicker.set( 'disable', valid_times );
 
 				return;
 			}
@@ -221,7 +226,7 @@ jQuery(document).ready(function ($) {
 
 							// Closed all day
 							if ( typeof rtb_pickadate.schedule_open[open_key].time == 'undefined' ) {
-								timepicker.set( 'disable', [ true ] );
+								rtb_booking_form.timepicker.set( 'disable', [ true ] );
 
 								return;
 							}
@@ -251,7 +256,7 @@ jQuery(document).ready(function ($) {
 
 			// Pass any valid times located
 			if ( valid_times.length > 1 ) {
-				timepicker.set( 'disable', valid_times );
+				rtb_booking_form.timepicker.set( 'disable', valid_times );
 
 				return;
 			}
@@ -259,10 +264,11 @@ jQuery(document).ready(function ($) {
 		}
 
 		// Set it to always open if no rules have been defined
-		timepicker.set( 'enable', true );
-		timepicker.set( 'disable', false );
+		rtb_booking_form.timepicker.set( 'enable', true );
+		rtb_booking_form.timepicker.set( 'disable', false );
 
 		return;
-	}
-
+	};
+	
+	rtb_booking_form.init();
 });
