@@ -23,6 +23,11 @@ jQuery(document).ready(function ($) {
 
 			return false;
 		});
+		
+		// Show the message field on load if not empty
+		if ( $.trim( $( '.rtb-booking-form .message textarea' ).val() ) ) {
+			$( '.rtb-booking-form .add-message a' ).trigger( 'click' );
+		}
 
 		// Enable datepickers on load
 		if ( typeof rtb_pickadate !== 'undefined' ) {
