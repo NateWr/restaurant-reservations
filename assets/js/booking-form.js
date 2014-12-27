@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
 
 			return false;
 		});
-		
+
 		// Show the message field on load if not empty
 		if ( $.trim( $( '.rtb-booking-form .message textarea' ).val() ) ) {
 			$( '.rtb-booking-form .add-message a' ).trigger( 'click' );
@@ -132,7 +132,7 @@ jQuery(document).ready(function ($) {
 	 * Update the timepicker's range based on the currently selected date
 	 */
 	rtb_booking_form.update_timepicker_range = function() {
-	
+
 		// Reset enabled/disabled rules on this timepicker
 		rtb_booking_form.timepicker.set( 'enable', false );
 		rtb_booking_form.timepicker.set( 'disable', false );
@@ -274,6 +274,6 @@ jQuery(document).ready(function ($) {
 
 		return;
 	};
-	
+
 	rtb_booking_form.init();
 });
