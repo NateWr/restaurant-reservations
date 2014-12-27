@@ -19,6 +19,35 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
+	// Register clicks on edit/delete links
+	$( '#rtb-bookings-table .column-date .actions' ).click( function(e) {
+
+		var target = $(e.target);
+
+		if ( target.data( 'action' ) == 'edit' ) {
+			var cell = target.parent().parent();
+			rtb_booking_loading_spinner( true, cell );
+			rtb_get_booking( $(e.target).data( 'id' ), cell );
+
+		// @todo send to trash
+		} else if ( target.data( 'action' ) == 'trash' ) {
+			console.log( 'delete' + $(e.target).data( 'id' ) );
+		}
+
+		e.preventDefault();
+	});
+
+	/**
+	 * Show/hide loading spinner when edit/delete link clicked
+	 */
+	function rtb_booking_loading_spinner( loading, cell ) {
+		if ( loading ) {
+			cell.addClass( 'loading' );
+		} else {
+			cell.removeClass( 'loading' );
+		}
+	}
+
 	/**
 	 * Modal to add/edit bookings from the admin
 	 */
@@ -27,25 +56,53 @@ jQuery(document).ready(function ($) {
 	var rtb_booking_modal_submit = rtb_booking_modal.find( 'button' );
 	var rtb_booking_modal_cancel = rtb_booking_modal.find( '#rtb-cancel-booking-modal' );
 	var rtb_booking_modal_action_status = rtb_booking_modal.find( '.action-status' );
+	var rtb_booking_modal_error = $( '#rtb-booking-modal-error' );
+	var rtb_booking_modal_error_msg = rtb_booking_modal_error.find( '.rtb-error-msg' );
 
 	/**
 	 * Show or hide the booking form modal
 	 */
-	function rtb_toggle_booking_form_modal( show, booking ) {
+	function rtb_toggle_booking_form_modal( show, fields, booking ) {
 
 		if ( show ) {
 			rtb_booking_modal.scrollTop( 0 ).addClass( 'is-visible' );
+
+			if ( typeof fields !== 'undefined' ) {
+				rtb_booking_modal_fields.html( fields );
+				rtb_booking_form.init();
+				rtb_init_booking_form_modal_fields();
+			}
 
 			if ( typeof booking == 'undefined' ) {
 				rtb_booking_modal_submit.html( rtb_admin.strings.add_booking );
 			} else {
 				rtb_booking_modal_submit.html( rtb_admin.strings.edit_booking );
+				rtb_booking_modal.find( 'input[name=ID]' ).val( booking.ID );
 			}
 
 		} else {
 			rtb_booking_modal.removeClass( 'is-visible' );
 			rtb_booking_modal.find( '.notifications-description' ).removeClass( 'is-visible' );
 			rtb_booking_modal_action_status.removeClass( 'is-visible' );
+			rtb_reset_booking_form_modal_fields();
+			rtb_booking_modal_submit.removeData( 'id' );
+			rtb_booking_modal_submit.removeAttr( 'disabled' );
+			rtb_booking_modal_cancel.removeAttr( 'disabled' );
+			rtb_booking_modal.find( 'input[name=ID]' ).val( '' );
+		}
+	}
+
+	/**
+	 * Show or hide the booking form error modal
+	 */
+	function rtb_toggle_booking_form_error_modal( show, msg ) {
+
+		if ( show ) {
+			rtb_booking_modal_error_msg.html( msg );
+			rtb_booking_modal_error.addClass( 'is-visible' );
+
+		} else {
+			rtb_booking_modal_error.removeClass( 'is-visible' );
 		}
 	}
 
@@ -57,6 +114,47 @@ jQuery(document).ready(function ($) {
 		// Show full description for notifications toggle
 		rtb_booking_modal_fields.find( '.rtb-description-prompt' ).click( function() {
 			$(this).parent().siblings( '.rtb-description' ).addClass( 'is-visible' );
+		});
+	}
+
+	/**
+	 * Reset booking form fields
+	 */
+	function rtb_reset_booking_form_modal_fields() {
+		rtb_booking_modal_fields.find( 'input, select, textarea' ).val( '' );
+		rtb_booking_modal_fields.find( 'input[name=rtb-notifications]' ).removeAttr( 'checked', '' );
+	}
+
+	/**
+	 * Retrieve booking from the database
+	 */
+	function rtb_get_booking( id, cell ) {
+
+		var params = {};
+
+		params.action = 'rtb-admin-booking-modal';
+		params.nonce = rtb_admin.nonce;
+		params.booking = {
+			'ID':	id
+		};
+
+		var data = $.param( params );
+
+		var jqhxr = $.get( ajaxurl, data, function( r ) {
+
+			if ( r.success ) {
+				rtb_toggle_booking_form_modal( true, r.data.fields, r.data.booking );
+
+			} else {
+
+				if ( typeof r.data.error == 'undefined' ) {
+					rtb_toggle_booking_form_error_modal( true, rtb_admin.strings.error_unspecified );
+				} else {
+					rtb_toggle_booking_form_error_modal( true, r.data.msg );
+				}
+			}
+
+			rtb_booking_loading_spinner( false, cell );
 		});
 	}
 
@@ -95,10 +193,18 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	// Close booking form modal when ESC is keyed
+	// Close booking form modal and error modal when ESC is keyed
 	$(document).keyup( function(e) {
 		if ( e.which == '27' ) {
 			rtb_toggle_booking_form_modal( false );
+			rtb_toggle_booking_form_error_modal( false );
+		}
+	});
+
+	// Close booking form error modal when background or cancel button is clicked
+	rtb_booking_modal_error.click( function(e) {
+		if ( $(e.target).is( rtb_booking_modal_error ) || $(e.target).is( rtb_booking_modal_error.find( 'a.button' ) ) ) {
+			rtb_toggle_booking_form_error_modal( false );
 		}
 	});
 

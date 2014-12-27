@@ -85,6 +85,55 @@
 	width: 5em;
 }
 
+#rtb-bookings-table .column-date .actions {
+	line-height: 28px;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0;
+	-moz-transition: opacity 0.3s 0;
+	transition: opacity 0.3s 0;
+}
+
+#rtb-bookings-table tr:hover .column-date .actions {
+	opacity: 1;
+}
+
+#rtb-bookings-table .column-date .actions .trash {
+	color: #a00;
+}
+
+#rtb-bookings-table .column-date .actions .trash:hover {
+	color: red;
+}
+
+#rtb-bookings-table .column-date .status {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	line-height: 28px;
+	opacity: 0;
+	-webkit-transition: opacity 0.6s 0;
+	-moz-transition: opacity 0.6s 0;
+	transition: opacity 0.6s 0;
+}
+
+#rtb-bookings-table .column-date .status .spinner {
+	display: inline-block;
+	float: left;
+	margin: 4px 4px 0 0;
+	vertical-align: middle;
+}
+
+#rtb-bookings-table .column-date.loading .actions {
+	display: none;
+}
+
+#rtb-bookings-table .column-date.loading .status {
+	width: auto;
+	height: auto;
+	overflow: visible;
+	opacity: 0.5;
+}
+
 @media screen and (max-width: 782px) {
 
 	#rtb-bookings-table .fixed .column-date {
@@ -98,7 +147,8 @@
 }
 
 /* Add/edit bookings modal */
-#rtb-booking-modal {
+#rtb-booking-modal,
+#rtb-booking-modal-error {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -115,7 +165,8 @@
 	transition: opacity 0.3s 0, visibility 0 0.3s;
 }
 
-#rtb-booking-modal.is-visible {
+#rtb-booking-modal.is-visible,
+#rtb-booking-modal-error.is-visible {
 	visibility: visible;
 	opacity: 1;
 	-webkit-transition: opacity 0.3s 0, visibility 0 0;
@@ -123,7 +174,8 @@
 	transition: opacity 0.3s 0, visibility 0 0;
 }
 
-#rtb-booking-modal.is-visible .rtb-booking-form {
+#rtb-booking-modal.is-visible .rtb-booking-form,
+#rtb-booking-modal-error.is-visible .rtb-error {
 	-webkit-transform: translateY(0);
 	-moz-transform: translateY(0);
 	-ms-transform: translateY(0);
@@ -131,7 +183,8 @@
 	transform: translateY(0);
 }
 
-#rtb-booking-modal .rtb-booking-form {
+#rtb-booking-modal .rtb-booking-form,
+#rtb-booking-modal-error .rtb-error {
 	position: relative;
 	width: 90%;
 	max-width: 20em;
@@ -249,6 +302,10 @@
 
 .rtb-description.is-visible {
 	max-height: 20em;
+}
+
+#rtb-booking-modal-error .rtb-error-msg {
+	margin-bottom: 1em;
 }
 
 /* Settings Pages (most of this is handled by the Simple Admin Pages library) */

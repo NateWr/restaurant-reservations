@@ -93,6 +93,7 @@ class rtbAdminBookings {
 			<div class="rtb-booking-form">
 				<form method="POST">
 					<input type="hidden" name="action" value="admin_booking_request">
+					<input type="hidden" name="ID" value="">
 
 					<?php
 					/**
@@ -119,6 +120,13 @@ class rtbAdminBookings {
 						<span class="dashicons dashicons-yes success"></span>
 					</div>
 				</form>
+			</div>
+		</div>
+		<!-- Restaurant Reservations error message modal -->
+		<div id="rtb-booking-modal-error">
+			<div class="rtb-error">
+				<div class="rtb-error-msg"></div>
+				<a href="#" class="button"><?php _e( 'Close', 'restaurant-reservations' ); ?>
 			</div>
 		</div>
 
@@ -264,33 +272,83 @@ class rtbAdminBookings {
 			$this->admin_booking_modal_nopriv_ajax();
 		}
 
-		// Set up $_POST object for validation
-		if ( !empty( $_POST['booking'] ) ) {
+		// Retrieve a booking with a GET request
+		if ( !empty( $_GET['booking'] ) && !empty( $_GET['booking']['ID'] ) ) {
+
+			$id = (int) $_GET['booking']['ID'];
+
+			require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
+			$rtb_controller->request = new rtbBooking();
+			$result = $rtb_controller->request->load_post( $id );
+
+			if ( $result ) {
+
+				// Don't allow editing of trashed bookings. This wil force
+				// appropriate use of the trash status and (hopefully) prevent
+				// mistakes in booking management.
+				if ( $rtb_controller->request->post_status == 'trash' ) {
+					wp_send_json_error(
+						array(
+							'error'		=> 'booking_trashed',
+							'msg'		=> sprintf( __( 'This booking has been sent to the %sTrash%s where it can not be edited. Set the booking to Pending or Confirmed to edit it.', 'restaurant-reservations' ), '<a href="' . admin_url( 'admin.php?page=rtb-bookings&status=trash' ) . '">', '</a>' ),
+						)
+					);
+				}
+
+				$rtb_controller->request->prepare_request_data();
+				wp_send_json_success(
+					array(
+						'booking'	=> $rtb_controller->request,
+						'fields'	=> $this->print_booking_form_fields(),
+					)
+				);
+
+			} else {
+				wp_send_json_error(
+					array(
+						'error'		=> 'booking_not_found',
+						'msg'		=> __( 'The booking could not be retrieved. Please reload the page and try again.', 'restaurant-reservations' ),
+					)
+				);
+			}
+
+		// Insert or update a booking with a POST request
+		} elseif ( !empty( $_POST['booking'] ) ) {
+
+			// Set up $_POST object for validation
 			foreach( $_POST['booking'] as $field ) {
 				$_POST[ $field['name'] ] = $field['value'];
 			}
+
+			require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
+			$rtb_controller->request = new rtbBooking();
+
+			// Add an ID if we're updating the post
+			if ( !empty( $_POST['ID'] ) ) {
+				$rtb_controller->request->ID = (int) $_POST['ID'];
+			}
+
+			$result = $rtb_controller->request->insert_booking();
+
+			if ( $result ) {
+				wp_send_json_success(
+					array(
+						'booking'	=> $rtb_controller->request,
+					)
+				);
+			} else {
+				wp_send_json_error(
+					array(
+						'error'		=> 'invalid_booking_data',
+						'booking'	=> $rtb_controller->request,
+						'fields'	=> $this->print_booking_form_fields(),
+					)
+				);
+			}
 		}
 
-		require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
-		$rtb_controller->request = new rtbBooking();
-
-		$result = $rtb_controller->request->insert_booking();
-
-		if ( $result ) {
-			wp_send_json_success(
-				array(
-					'booking'	=> $rtb_controller->request,
-				)
-			);
-		} else {
-			wp_send_json_error(
-				array(
-					'error'		=> 'invalid_booking_data',
-					'booking'	=> $rtb_controller->request,
-					'fields'	=> $this->print_booking_form_fields(),
-				)
-			);
-		}
+		// Fallback to a valid error
+		wp_send_json_error();
 	}
 
 	/**

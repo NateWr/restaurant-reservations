@@ -102,6 +102,22 @@ class rtbBooking {
 	}
 
 	/**
+	 * Prepare booking data loaded from the database for display in a booking
+	 * form as request fields. This is used, eg, for splitting datetime values
+	 * into date and time fields.
+	 * @since 1.3
+	 */
+	public function prepare_request_data() {
+
+		// Split $date to $request_date and $request_time
+		if ( empty( $this->request_date ) || empty( $this->request_time ) ) {
+			$date = new DateTime( $this->date );
+			$this->request_date = $date->format( 'Y/m/d' );
+			$this->request_time = $date->format( 'h:i A' );
+		}
+	}
+
+	/**
 	 * Format date
 	 * @since 0.0.1
 	 */
@@ -448,6 +464,10 @@ class rtbBooking {
 			'post_date'		=> $this->date,
 			'post_status'	=> 'pending',
 		);
+
+		if ( !empty( $this->ID ) ) {
+			$args['ID'] = $this->ID;
+		}
 
 		$args = apply_filters( 'rtb_insert_booking_data', $args, $this );
 

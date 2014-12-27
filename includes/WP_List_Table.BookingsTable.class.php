@@ -295,6 +295,15 @@ class rtbBookingsTable extends WP_List_Table {
 		switch ( $column_name ) {
 			case 'date' :
 				$value = $booking->format_date( $booking->date );
+				$value .= '<div class="status"><span class="spinner"></span> ' . __( 'Loading', 'restaurant-reservations' ) . '</div>';
+
+				if ( $booking->post_status !== 'trash' ) {
+					$value .= '<div class="actions">';
+					$value .= '<a href="#" data-id="' . esc_attr( $booking->ID ) . '" data-action="edit">' . __( 'Edit', 'restaurant-reservations' ) . '</a>';
+//@todo				$value .= ' | <a href="#" class="trash" data-id="' . esc_attr( $booking->ID ) . '" data-action="trash">' . __( 'Trash', 'restaurant-reservations' ) . '</a>';
+					$value .= '</div>';
+				}
+
 				break;
 			case 'party' :
 				$value = $booking->party;
