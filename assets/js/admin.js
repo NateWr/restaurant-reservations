@@ -23,15 +23,16 @@ jQuery(document).ready(function ($) {
 	$( '#rtb-bookings-table .column-date .actions' ).click( function(e) {
 
 		var target = $(e.target);
+		var cell = target.parent().parent();
+
+		rtb_booking_loading_spinner( true, cell );
 
 		if ( target.data( 'action' ) == 'edit' ) {
-			var cell = target.parent().parent();
-			rtb_booking_loading_spinner( true, cell );
-			rtb_get_booking( $(e.target).data( 'id' ), cell );
+			rtb_get_booking( target.data( 'id' ), cell );
 
 		// @todo send to trash
 		} else if ( target.data( 'action' ) == 'trash' ) {
-			console.log( 'delete' + $(e.target).data( 'id' ) );
+			rtb_trash_booking( target.data( 'id' ), cell );
 		}
 
 		e.preventDefault();
@@ -156,6 +157,45 @@ jQuery(document).ready(function ($) {
 
 			rtb_booking_loading_spinner( false, cell );
 		});
+	}
+
+	/**
+	 * Trash booking
+	 */
+	function rtb_trash_booking( id, cell ) {
+
+		var params = {};
+
+		params.action = 'rtb-admin-trash-booking';
+		params.nonce = rtb_admin.nonce;
+		params.booking = id;
+
+		var data = $.param( params );
+
+		var jqhxr = $.post( ajaxurl, data, function( r ) {
+
+			if ( r.success ) {
+
+				cell.parent().fadeOut( 500, function() {
+					$(this).remove();
+				});
+
+				var trash_count_el = $( '#rtb-bookings-table .subsubsub .trash .count' );
+				var trash_count = parseInt( trash_count_el.html().match(/\d+/), 10 ) + 1;
+				trash_count_el.html( '(' + trash_count + ')' );
+
+			} else {
+
+				if ( typeof r.data == 'undefined' || typeof r.data.error == 'undefined' ) {
+					rtb_toggle_booking_form_error_modal( true, rtb_admin.strings.error_unspecified );
+				} else {
+					rtb_toggle_booking_form_error_modal( true, r.data.msg );
+				}
+			}
+
+			rtb_booking_loading_spinner( false, cell );
+		});
+
 	}
 
 	/**

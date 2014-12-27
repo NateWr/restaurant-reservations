@@ -300,7 +300,7 @@ class rtbBookingsTable extends WP_List_Table {
 				if ( $booking->post_status !== 'trash' ) {
 					$value .= '<div class="actions">';
 					$value .= '<a href="#" data-id="' . esc_attr( $booking->ID ) . '" data-action="edit">' . __( 'Edit', 'restaurant-reservations' ) . '</a>';
-//@todo				$value .= ' | <a href="#" class="trash" data-id="' . esc_attr( $booking->ID ) . '" data-action="trash">' . __( 'Trash', 'restaurant-reservations' ) . '</a>';
+					$value .= ' | <a href="#" class="trash" data-id="' . esc_attr( $booking->ID ) . '" data-action="trash">' . __( 'Trash', 'restaurant-reservations' ) . '</a>';
 					$value .= '</div>';
 				}
 

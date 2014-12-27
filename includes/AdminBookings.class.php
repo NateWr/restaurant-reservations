@@ -20,9 +20,11 @@ class rtbAdminBookings {
 		// Add post status and notification fields to admin booking form
 		add_filter( 'rtb_booking_form_fields', array( $this, 'add_admin_fields' ), 20, 2 );
 
-		// Receive Ajax requests from booking modal
-		add_action( 'wp_ajax_nopriv_rtb-admin-booking-modal' , array( $this , 'booking_modal_nopriv_ajax' ) );
+		// Receive Ajax requests
+		add_action( 'wp_ajax_nopriv_rtb-admin-booking-modal' , array( $this , 'nopriv_ajax' ) );
 		add_action( 'wp_ajax_rtb-admin-booking-modal', array( $this, 'booking_modal_ajax' ) );
+		add_action( 'wp_ajax_nopriv_rtb-admin-trash-booking' , array( $this , 'nopriv_ajax' ) );
+		add_action( 'wp_ajax_rtb-admin-trash-booking', array( $this, 'trash_booking_ajax' ) );
 
 		// Validate post status and notification fields
 		add_action( 'rtb_validate_booking_submission', array( $this, 'validate_admin_fields' ) );
@@ -249,7 +251,7 @@ class rtbAdminBookings {
 	 * Handle ajax requests from the admin bookings area from logged out users
 	 * @since 1.3
 	 */
-	public function booking_modal_nopriv_ajax() {
+	public function nopriv_ajax() {
 
 		wp_send_json_error(
 			array(
@@ -269,7 +271,7 @@ class rtbAdminBookings {
 
 		// Authenticate request
 		if ( !check_ajax_referer( 'rtb-admin', 'nonce' ) || !current_user_can( 'manage_bookings' ) ) {
-			$this->admin_booking_modal_nopriv_ajax();
+			$this->nopriv_ajax();
 		}
 
 		// Retrieve a booking with a GET request
@@ -349,6 +351,43 @@ class rtbAdminBookings {
 
 		// Fallback to a valid error
 		wp_send_json_error();
+	}
+
+	/**
+	 * Set booking status to trash
+	 * @since 1.3
+	 */
+	public function trash_booking_ajax() {
+
+		global $rtb_controller;
+
+		// Authenticate request
+		if ( !check_ajax_referer( 'rtb-admin', 'nonce' ) || !current_user_can( 'manage_bookings' ) || empty( $_POST['booking'] ) ) {
+			$this->nopriv_ajax();
+		}
+
+		$id = (int) $_POST['booking'];
+
+		$result = wp_trash_post( $id );
+
+		if ( $result === false ) {
+			wp_send_json_error(
+				array(
+					'error'		=> 'trash_failed',
+					'msg'		=> __( 'Unable to trash this post. Please try again. If you continue to have trouble, please refresh the page.', 'restaurant-reservations' ),
+				)
+			);
+
+		} else {
+			wp_send_json_success(
+				array(
+					'booking'	=> $id,
+				)
+			);
+		}
+
+
+
 	}
 
 	/**
