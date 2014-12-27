@@ -56,8 +56,8 @@
 }
 
 #rtb-bookings-table tr.closed {
-	opacity: 0.7;
-	filter: opacity(alpha=70);
+	opacity: 0.6;
+	filter: opacity(alpha=60);
 }
 #rtb-bookings-table tr.closed:hover {
 	opacity: 1;
@@ -69,10 +69,31 @@
 	border-left: 4px solid #dd3d36;
 }
 
+#rtb-bookings-table tr.pending .check-column input[type=checkbox] {
+	margin-left: 4px;
+}
+
+#rtb-bookings-table th#date {
+	width: auto;
+}
+
+#rtb-bookings-table th#party {
+	width: 3em;
+}
+
+#rtb-bookings-table th#message {
+	width: 5em;
+}
+
 @media screen and (max-width: 782px) {
 
 	#rtb-bookings-table .fixed .column-date {
 		display: table-cell;
+	}
+
+	#rtb-bookings-table th#party,
+	#rtb-bookings-table th#message {
+		width: auto;
 	}
 }
 
