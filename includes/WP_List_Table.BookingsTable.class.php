@@ -225,7 +225,6 @@ class rtbBookingsTable extends WP_List_Table {
 	/**
 	 * Retrieve the view types
 	 * @since 0.0.1
-	 * @todo it would be nice if the default view showed all upcoming pending + confirmed bookings, but not closed ones.
 	 */
 	public function get_views() {
 

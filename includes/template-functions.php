@@ -96,9 +96,9 @@ function rtb_print_booking_form() {
 		<?php endforeach; ?>
 
 		<?php do_action( 'rtb_booking_form_after_fields' ); ?>
-		
+
 		<button type="submit"><?php echo apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', 'restaurant-reservations' ) ); ?></button>
-		
+
 	</form>
 	<?php endif; ?>
 </div>
@@ -119,6 +119,8 @@ function rtb_print_booking_form() {
  */
 if ( !function_exists( 'rtb_enqueue_assets' ) ) {
 function rtb_enqueue_assets() {
+
+	global $wp_scripts;
 
 	wp_enqueue_style( 'rtb-booking-form' );
 
@@ -231,7 +233,7 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 	$value = esc_attr( $value );
 
 	?>
-	
+
 	<div class="<?php echo $slug; ?>">
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
@@ -255,7 +257,7 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 	$slug = esc_attr( $slug );
 
 	?>
-	
+
 	<div class="<?php echo $slug; ?>">
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
@@ -263,7 +265,7 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 		</label>
 		<textarea name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>"><?php echo $value; ?></textarea>
 	</div>
-			
+
 	<?php
 
 }
@@ -281,7 +283,7 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 	$options = $args['options'];
 
 	?>
-	
+
 	<div class="<?php echo $slug; ?>">
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
@@ -310,13 +312,13 @@ function rtb_print_form_message_link( $slug, $title, $value, $args = array() ) {
 	$value = esc_attr( $value );
 
 	?>
-	
+
 	<div class="<?php echo $slug; ?>">
 		<a href="#">
 			<?php echo $title; ?>
 		</a>
 	</div>
-			
+
 	<?php
 
 }

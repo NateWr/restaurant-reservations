@@ -23,6 +23,12 @@ class rtbBooking {
 	 */
 	public $request_inserted = false;
 
+	/**
+	 * Whether or not to send notifications with this booking
+	 * @since 1.3
+	 */
+	public $send_notifications = true;
+
 	public function __construct() {}
 
 	/**
@@ -400,7 +406,7 @@ class rtbBooking {
 
 	/**
 	 * Check if submission is valid
-	 * 
+	 *
 	 * @since 0.0.1
 	 */
 	public function is_valid_submission() {

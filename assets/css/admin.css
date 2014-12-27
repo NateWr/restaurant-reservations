@@ -76,6 +76,160 @@
 	}
 }
 
+/* Add/edit bookings modal */
+#rtb-booking-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 3;
+	overflow-y: auto;
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0, visibility 0 0.3s;
+	-moz-transition: opacity 0.3s 0, visibility 0 0.3s;
+	transition: opacity 0.3s 0, visibility 0 0.3s;
+}
+
+#rtb-booking-modal.is-visible {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: opacity 0.3s 0, visibility 0 0;
+	-moz-transition: opacity 0.3s 0, visibility 0 0;
+	transition: opacity 0.3s 0, visibility 0 0;
+}
+
+#rtb-booking-modal.is-visible .rtb-booking-form {
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	-o-transform: translateY(0);
+	transform: translateY(0);
+}
+
+#rtb-booking-modal .rtb-booking-form {
+	position: relative;
+	width: 90%;
+	max-width: 20em;
+	padding: 2em;
+	background: #FFF;
+	margin: 3em auto 4em;
+	cursor: auto;
+	border-radius: 0.25em;
+	-webkit-transform: translateY(-30px);
+	-moz-transform: translateY(-30px);
+	-ms-transform: translateY(-30px);
+	-o-transform: translateY(-30px);
+	transform: translateY(-30px);
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	transition-property: transform;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}
+
+#rtb-booking-modal fieldset {
+	padding: 0;
+}
+
+#rtb-booking-modal label {
+	color: #777;
+	font-style: italic;
+}
+
+#rtb-booking-modal button {
+	margin-top: 1em;
+	margin-right: 1em;
+}
+
+#rtb-booking-modal .button {
+	margin-top: 1em;
+}
+
+#rtb-booking-modal button,
+#rtb-booking-modal .button {
+	opacity: 1;
+	transition: opacity .25s ease-in-out;
+	-moz-transition: opacity .25s ease-in-out;
+	-webkit-transition: opacity .25s ease-in-out;
+}
+
+#rtb-booking-modal button:disabled,
+#rtb-booking-modal .button:disabled {
+	opacity: 0.5;
+	transition: opacity .25s ease-in-out;
+	-moz-transition: opacity .25s ease-in-out;
+	-webkit-transition: opacity .25s ease-in-out;
+}
+
+#rtb-booking-modal .action-status {
+	display: inline-block;
+	float: right;
+	margin-top: 1em;
+	opacity: 0;
+	transition: opacity .25s ease-in-out;
+	-moz-transition: opacity .25s ease-in-out;
+	-webkit-transition: opacity .25s ease-in-out;
+}
+
+#rtb-booking-modal .action-status.is-visible {
+	opacity: 1;
+}
+
+#rtb-booking-modal .action-status > span {
+	display: none;
+	background-position: 4px;
+	margin: 0;
+	height: 28px;
+	width: 28px;
+	line-height: 28px;
+	font-size: 28px;
+}
+
+#rtb-booking-modal .action-status > .spinner {
+	display: block;
+}
+
+#rtb-booking-modal .action-status > .success {
+	color: #7ad03a;
+}
+
+#rtb-booking-modal .action-status > .error {
+	color: #dd3d36;
+}
+
+#rtb-booking-modal .rtb-error {
+	background: #dd3d36;
+}
+
+#rtb-booking-modal .rtb-error a  {
+	color: #fff;
+}
+
+#rtb-booking-modal input[type="text"],
+#rtb-booking-modal input[type="email"],
+#rtb-booking-modal textarea {
+	max-width: 100%;
+}
+
+.rtb-description {
+	margin: 0.5em 0;
+	color: #777;
+	max-height: 0;
+	overflow: hidden;
+	-webkit-transition: max-height 0.5s 0;
+	-moz-transition: max-height 0.5s 0;
+	transition: max-height 0.5s 0;
+}
+
+.rtb-description.is-visible {
+	max-height: 20em;
+}
+
 /* Settings Pages (most of this is handled by the Simple Admin Pages library) */
 .rtb-template-tags-box {
 	margin-top: 0.5em;

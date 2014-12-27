@@ -15,13 +15,160 @@ jQuery(document).ready(function ($) {
 			$( '#' + message_id ).fadeIn();
 			$(this).children( '.dashicons' ).removeClass( 'dashicons-testimonial' ).addClass( 'dashicons-welcome-comments' );
 		}
-			
+
 		return false;
+	});
+
+	/**
+	 * Modal to add/edit bookings from the admin
+	 */
+	var rtb_booking_modal = $( '#rtb-booking-modal' );
+	var rtb_booking_modal_fields = rtb_booking_modal.find( '#rtb-booking-form-fields' );
+	var rtb_booking_modal_submit = rtb_booking_modal.find( 'button' );
+	var rtb_booking_modal_cancel = rtb_booking_modal.find( '#rtb-cancel-booking-modal' );
+	var rtb_booking_modal_action_status = rtb_booking_modal.find( '.action-status' );
+
+	/**
+	 * Show or hide the booking form modal
+	 */
+	function rtb_toggle_booking_form_modal( show, booking ) {
+
+		if ( show ) {
+			rtb_booking_modal.scrollTop( 0 ).addClass( 'is-visible' );
+
+			if ( typeof booking == 'undefined' ) {
+				rtb_booking_modal_submit.html( rtb_admin.strings.add_booking );
+			} else {
+				rtb_booking_modal_submit.html( rtb_admin.strings.edit_booking );
+			}
+
+		} else {
+			rtb_booking_modal.removeClass( 'is-visible' );
+			rtb_booking_modal.find( '.notifications-description' ).removeClass( 'is-visible' );
+			rtb_booking_modal_action_status.removeClass( 'is-visible' );
+		}
+	}
+
+	/**
+	 * Initialize form field events
+	 */
+	function rtb_init_booking_form_modal_fields() {
+
+		// Show full description for notifications toggle
+		rtb_booking_modal_fields.find( '.rtb-description-prompt' ).click( function() {
+			$(this).parent().siblings( '.rtb-description' ).addClass( 'is-visible' );
+		});
+	}
+
+	/**
+	 * Show the appropriate result status icon
+	 */
+	function rtb_show_action_status( status ) {
+
+		rtb_booking_modal_action_status.find( 'span' ).hide();
+
+		if ( status === true ) {
+			rtb_booking_modal_action_status.find( '.success' ).show();
+		} else if ( status === false ) {
+			rtb_booking_modal_action_status.find( '.error' ).show();
+		} else {
+			rtb_booking_modal_action_status.find( '.spinner' ).show();
+		}
+	}
+
+	// Initialize form field events on load
+	rtb_init_booking_form_modal_fields();
+
+	// Show booking form modal
+	$( '.add-booking' ).click( function() {
+		rtb_toggle_booking_form_modal( true );
+	});
+
+	// Close booking form modal when background or cancel button is clicked
+	rtb_booking_modal.click( function(e) {
+		if ( $(e.target).is( rtb_booking_modal ) ) {
+			rtb_toggle_booking_form_modal( false );
+		}
+
+		if ( $(e.target).is( rtb_booking_modal_cancel ) && typeof rtb_booking_modal_cancel.attr( 'disabled' ) == 'undefined' ) {
+			rtb_toggle_booking_form_modal( false );
+		}
+	});
+
+	// Close booking form modal when ESC is keyed
+	$(document).keyup( function(e) {
+		if ( e.which == '27' ) {
+			rtb_toggle_booking_form_modal( false );
+		}
+	});
+
+	// Submit booking form modal
+	rtb_booking_modal_submit.click( function(e) {
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		if ( typeof $(this).attr( 'disabled' ) !== 'undefined' ) {
+			return;
+		}
+
+		// Loading
+		rtb_booking_modal_submit.attr( 'disabled', 'disabled' );
+		rtb_booking_modal_cancel.attr( 'disabled', 'disabled' );
+		rtb_booking_modal_action_status.addClass( 'is-visible' );
+		rtb_show_action_status( 'loading' );
+
+		var params = {};
+
+		params.action = 'rtb-admin-booking-modal';
+		params.nonce = rtb_admin.nonce;
+		params.booking = rtb_booking_modal.find( 'form' ).serializeArray();
+
+		var data = $.param( params );
+
+		var jqhxr = $.post( ajaxurl, data, function( r ) {
+
+			if ( r.success ) {
+
+				// Refresh the page so that the new details are visible
+				window.location.reload();
+
+			} else {
+
+				// Validation failed
+				if ( r.data.error == 'invalid_booking_data' ) {
+
+					// Replace form fields with HTML returned
+					rtb_booking_modal_fields.html( r.data.fields );
+					rtb_booking_form.init();
+					rtb_init_booking_form_modal_fields();
+
+					rtb_booking_modal_submit.removeAttr( 'disabled' );
+
+				// Logged out
+				} else if ( r.data.error == 'loggedout' ) {
+					rtb_booking_modal_fields.after( '<div class="rtb-error">' + r.data.msg + '</div>' );
+
+				// Unspecified error
+				} else {
+					rtb_booking_modal_fields.after( '<div class="rtb-error">' + rtb_admin.strings.error_unspecified + '</div>' );
+				}
+
+				rtb_booking_modal_cancel.removeAttr( 'disabled' );
+			}
+
+			rtb_show_action_status( r.success );
+
+			// Hide result status icon after a few seconds
+			setTimeout( function() {
+				rtb_booking_modal.find( '.action-status' ).removeClass( 'is-visible' );
+			}, 4000 );
+		});
 	});
 
 	// Show the addons
 	if ( $( '#rtb-addons' ).length ) {
-		
+
 		var rtbAddons = {
 
 			el: $( '#rtb-addons' ),
@@ -45,7 +192,7 @@ jQuery(document).ready(function ($) {
 							rtbAddons.showError( r );
 						}
 					});
-						
+
 
 				});
 			},
@@ -86,19 +233,19 @@ jQuery(document).ready(function ($) {
 				} else if ( typeof addon.img !== 'undefind' ) {
 					html += '<img src="' + addon.img + '">';
 				}
-				
+
 				html += '<h3>' + addon.title + '</h3>';
 
 				html += '<div class="details">';
-				
+
 				if ( typeof addon.description !== 'undefined' ) {
 					html += '<div class="description">' + addon.description + '</div>';
 				}
-				
+
 				if ( typeof addon.status !== 'undefined' ) {
 
 					html += '<div class="action">';
-					
+
 					if ( addon.status === 'released' && typeof addon.url !== 'undefined' ) {
 						html += '<a href="' + addon.url + '" class="button button-primary" target="_blank">';
 
@@ -119,7 +266,7 @@ jQuery(document).ready(function ($) {
 
 					html += '</div>'; // .action
 				}
-				
+
 				html += '</div>'; // .details
 
 				html += '</div>'; // .addon
@@ -127,7 +274,7 @@ jQuery(document).ready(function ($) {
 				return html;
 			}
 		};
-		
+
 		rtbAddons.load();
 	}
 
