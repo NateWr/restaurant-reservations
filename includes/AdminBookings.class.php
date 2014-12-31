@@ -420,7 +420,7 @@ class rtbAdminBookings {
 
 		// Validate user request
 		if ( !$_POST['action'] || $_POST['action'] !== 'admin_booking_request' || !current_user_can( 'manage_bookings' ) ) {
-			return;
+			return $args;
 		}
 
 		if ( !empty( $booking->post_status ) ) {
