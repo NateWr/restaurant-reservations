@@ -667,7 +667,7 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function display_rows() {
 
-		if ( $_GET['status'] == 'trash' ) :
+		if ( !empty( $_GET['status'] ) && $_GET['status'] == 'trash' ) :
 		?>
 
 		<tr class="notice trash"><td colspan="<?php echo count( $this->get_columns() ); ?>"><?php _e( "You're viewing items in the trash. Change a booking's status to remove it from the trash.", 'restaurant-reservations' ); ?></td></tr>
