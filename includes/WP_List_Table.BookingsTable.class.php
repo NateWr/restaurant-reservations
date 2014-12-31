@@ -245,7 +245,7 @@ class rtbBookingsTable extends WP_List_Table {
 	 * Generates content for a single row of the table
 	 * @since 0.0.1
 	 */
-	function single_row( $item ) {
+	public function single_row( $item ) {
 		static $row_class = '';
 		$row_class = ( $row_class == '' ? 'alternate' : '' );
 
@@ -659,6 +659,23 @@ class rtbBookingsTable extends WP_List_Table {
 				'total_pages' => ceil( $total_items / $this->per_page )
 			)
 		);
+	}
+
+	/**
+	 * Add notification rows to the table before or after bookings
+	 * @since 1.3
+	 */
+	public function display_rows() {
+
+		if ( $_GET['status'] == 'trash' ) :
+		?>
+
+		<tr class="notice trash"><td colspan="<?php echo count( $this->get_columns() ); ?>"><?php _e( "You're viewing items in the trash. Change a booking's status to remove it from the trash.", 'restaurant-reservations' ); ?></td></tr>
+
+		<?php
+		endif;
+
+		parent::display_rows();
 	}
 }
 } // endif;

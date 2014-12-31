@@ -134,6 +134,11 @@
 	opacity: 0.5;
 }
 
+#rtb-bookings-table tr.notice.trash td {
+	background: #dd3d36;
+	color: #fff;
+}
+
 @media screen and (max-width: 782px) {
 
 	#rtb-bookings-table .fixed .column-date {
