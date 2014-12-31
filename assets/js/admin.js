@@ -81,6 +81,8 @@ jQuery(document).ready(function ($) {
 				rtb_booking_modal.find( 'input[name=ID]' ).val( booking.ID );
 			}
 
+			$( 'body' ).addClass( 'rtb-hide-body-scroll' );
+
 		} else {
 			rtb_booking_modal.removeClass( 'is-visible' );
 			rtb_booking_modal.find( '.notifications-description' ).removeClass( 'is-visible' );
@@ -90,6 +92,8 @@ jQuery(document).ready(function ($) {
 			rtb_booking_modal_submit.removeAttr( 'disabled' );
 			rtb_booking_modal_cancel.removeAttr( 'disabled' );
 			rtb_booking_modal.find( 'input[name=ID]' ).val( '' );
+
+			$( 'body' ).removeClass( 'rtb-hide-body-scroll' );
 		}
 	}
 

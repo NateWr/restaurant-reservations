@@ -307,6 +307,10 @@
 #rtb-booking-modal-error .rtb-error-msg {
 	margin-bottom: 1em;
 }
+/* Hide the outer scrollbar when the modal is open */
+.rtb-hide-body-scroll {
+	overflow: hidden !important;
+}
 
 /* Settings Pages (most of this is handled by the Simple Admin Pages library) */
 .rtb-template-tags-box {
