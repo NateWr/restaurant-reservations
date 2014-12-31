@@ -751,12 +751,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 						'title'			=> __( 'Email', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->email ) ? '' : $request->email,
 						'callback'		=> 'rtb_print_form_text_field',
+						'callback_args'	=> array(
+							'input_type'	=> 'email',
+						),
 						'required'		=> true,
 					),
 					'phone'		=> array(
 						'title'			=> __( 'Phone', 'restaurant-reservations' ),
 						'request_input'	=> empty( $request->phone ) ? '' : $request->phone,
 						'callback'		=> 'rtb_print_form_text_field',
+						'callback_args'	=> array(
+							'input_type'	=> 'tel',
+						),
 					),
 					'add-message'	=> array(
 						'title'		=> __( 'Add a Message', 'restaurant-reservations' ),

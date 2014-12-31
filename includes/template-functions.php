@@ -231,6 +231,7 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
+	$type = empty( $args['input_type'] ) ? 'text' : esc_attr( $args['input_type'] );
 
 	?>
 
@@ -239,7 +240,7 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
 		</label>
-		<input type="text" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo $value; ?>">
+		<input type="<?php echo $type; ?>" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo $value; ?>">
 	</div>
 
 	<?php
