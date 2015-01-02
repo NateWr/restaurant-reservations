@@ -134,9 +134,13 @@
 	opacity: 0.5;
 }
 
+#rtb-bookings-table tr.notice td {
+	background: #2ea2cc;
+	color: #fff;
+}
+
 #rtb-bookings-table tr.notice.trash td {
 	background: #dd3d36;
-	color: #fff;
 }
 
 @media screen and (max-width: 782px) {

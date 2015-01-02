@@ -128,6 +128,20 @@ class rtbBookingsTable extends WP_List_Table {
 	}
 
 	/**
+	 * Get the current date range
+	 *
+	 * @since 1.3
+	 */
+	public function get_current_date_range() {
+
+		$range = empty( $this->filter_start_date ) ? _x( '*', 'No date limit in a date range, eg 2014-* would mean any date from 2014 or after', 'restaurant-reservations' ) : $this->filter_start_date;
+		$range .= empty( $this->filter_start_date ) || empty( $this->filter_end_date ) ? '' : _x( '&mdash;', 'Separator between two dates in a date range', 'restaurant-reservations' );
+		$range .= empty( $this->filter_end_date ) ? _x( '*', 'No date limit in a date range, eg 2014-* would mean any date from 2014 or after', 'restaurant-reservations' ) : $this->filter_end_date;
+
+		return $range;
+	}
+
+	/**
 	 * Strip unwanted query vars from the query string or ensure the correct
 	 * vars are passed around and those we don't want to preserve are discarded.
 	 *
@@ -175,9 +189,7 @@ class rtbBookingsTable extends WP_List_Table {
 		);
 
 		if ( $schedule == 'custom' ) {
-			$start_date = !empty( $this->filter_start_date ) ? $this->filter_start_date : '*';
-			$end_date = !empty( $this->filter_end_date ) ? $this->filter_end_date : '*';
-			$views['custom'] = '<span class="current">' . $start_date . _x( '&mdash;', 'Separator between two dates in a date range', 'restaurant-reservations' ) . $end_date . '</span>';
+			$views['custom'] = '<span class="current">' . $this->get_current_date_range() . '</span>';
 		}
 
 		$views = apply_filters( 'rtn_bookings_table_views_schedule', $views );
@@ -662,20 +674,47 @@ class rtbBookingsTable extends WP_List_Table {
 	}
 
 	/**
-	 * Add notification rows to the table before or after bookings
+	 * Add notifications above the table to indicate which bookings are
+	 * being shown.
 	 * @since 1.3
 	 */
-	public function display_rows() {
+	public function display_rows_or_placeholder() {
 
-		if ( !empty( $_GET['status'] ) && $_GET['status'] == 'trash' ) :
+		global $rtb_controller;
+
+		$notifications = array();
+
+		if ( !empty( $_GET['status'] ) ) {
+			if ( $_GET['status'] == 'trash' ) {
+				$notifications['status'] = __( "You're viewing bookings that have been moved to the trash.", 'restaurant-reservations' );
+			} elseif ( !empty( $rtb_controller->cpts->booking_statuses[ $_GET['status'] ] ) ) {
+				$notifications['status'] = sprintf( _x( "You're viewing bookings that have been marked as %s.", 'Indicates which booking status is currently being filtered in the list of bookings.', 'restaurant-reservations' ), $rtb_controller->cpts->booking_statuses[ $_GET['status'] ]['label'] );
+			}
+		}
+
+		if ( !empty( $this->filter_start_date ) || !empty( $this->filter_end_date ) ) {
+			$notifications['date'] = sprintf( _x( 'Only bookings from %s are being shown.', 'Notification of booking date range, eg - bookings from 2014-12-02-2014-12-05', 'restaurant-reservations' ), $this->get_current_date_range() );
+		} elseif ( !empty( $_GET['schedule'] ) && $_GET['schedule'] == 'today' ) {
+			$notifications['date'] = __( "Only today's bookings are being shown.", 'restaurant-reservations' );
+		} elseif ( empty( $_GET['schedule'] ) ) {
+			$notifications['date'] = __( 'Only upcoming bookings are being shown.', 'restaurant-reservations' );
+		}
+
+		$notifications = apply_filters( 'rtb_admin_bookings_table_filter_notifications', $notifications );
+
+		if ( !empty( $notifications ) ) :
 		?>
 
-		<tr class="notice trash"><td colspan="<?php echo count( $this->get_columns() ); ?>"><?php _e( "You're viewing items in the trash. Change a booking's status to remove it from the trash.", 'restaurant-reservations' ); ?></td></tr>
+			<tr class="notice <?php echo esc_attr( $_GET['status'] ); ?>">
+				<td colspan="<?php echo count( $this->get_columns() ); ?>">
+					<?php echo join( ' ', $notifications ); ?>
+				</td>
+			</tr>
 
 		<?php
 		endif;
 
-		parent::display_rows();
+		parent::display_rows_or_placeholder();
 	}
 }
 } // endif;
