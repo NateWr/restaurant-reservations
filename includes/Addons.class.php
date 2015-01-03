@@ -78,8 +78,17 @@ class rtbAddons {
 	 */
 	public function enqueue_admin_assets() {
 
+		// Use the page reference in $admin_page_hooks because
+		// it changes in SOME hooks when it is translated.
+		// https://core.trac.wordpress.org/ticket/18857
+		global $admin_page_hooks;
+
 		$screen = get_current_screen();
-		if ( $screen->base == 'bookings_page_rtb-addons' ) {
+		if ( empty( $screen ) || empty( $admin_page_hooks['rtb-bookings'] ) ) {
+			return;
+		}
+
+		if ( $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-addons' ) {
 			wp_localize_script(
 				'rtb-admin',
 				'rtb_addons',

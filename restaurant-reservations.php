@@ -195,12 +195,17 @@ class rtbInit {
 	 */
 	public function enqueue_admin_assets() {
 
+		// Use the page reference in $admin_page_hooks because
+		// it changes in SOME hooks when it is translated.
+		// https://core.trac.wordpress.org/ticket/18857
+		global $admin_page_hooks;
+
 		$screen = get_current_screen();
-		if ( empty( $screen ) ) {
+		if ( empty( $screen ) || empty( $admin_page_hooks['rtb-bookings'] ) ) {
 			return;
 		}
 
-		if ( $screen->base == 'toplevel_page_rtb-bookings' || $screen->base == 'bookings_page_rtb-settings' || $screen->base == 'bookings_page_rtb-addons' ) {
+		if ( $screen->base == 'toplevel_page_rtb-bookings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-settings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-addons' ) {
 			wp_enqueue_style( 'rtb-admin', RTB_PLUGIN_URL . '/assets/css/admin.css' );
 			wp_enqueue_script( 'rtb-admin', RTB_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '', true );
 			wp_localize_script(
