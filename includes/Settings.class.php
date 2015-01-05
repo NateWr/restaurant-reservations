@@ -530,7 +530,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'id'            => 'rtb-notifications-templates',
 				'title'         => __( 'Email Templates', 'restaurant-reservations' ),
 				'tab'			=> 'rtb-notifications',
-				'description'	=> 'Adjust the messages that are emailed to users and admins during the booking process.',
+				'description'	=> __( 'Adjust the messages that are emailed to users and admins during the booking process.', 'restaurant-reservations' ),
 			)
 		);
 
