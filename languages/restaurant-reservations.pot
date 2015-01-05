@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Restaurant Reservations 1.2.3\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/restaurant-reservations\n"
-"POT-Creation-Date: 2015-01-02 18:32:51+00:00\n"
+"POT-Creation-Date: 2015-01-05 17:05:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,26 +25,26 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: includes/Addons.class.php:89
+#: includes/Addons.class.php:98
 #: includes/WP_List_Table.BookingsTable.class.php:310
 msgid "Loading"
 msgstr ""
 
-#: includes/Addons.class.php:126
+#: includes/Addons.class.php:135
 msgid "Addons for Restaurant Reservations"
 msgstr ""
 
-#: includes/Addons.class.php:148
+#: includes/Addons.class.php:157
 msgid "You have been logged out. Please login again to retrieve the addons."
 msgstr ""
 
-#: includes/Addons.class.php:164
+#: includes/Addons.class.php:173
 msgid ""
 "You do not have permission to access this page. Please login to an "
 "administrator account if you have one."
 msgstr ""
 
-#: includes/Addons.class.php:190
+#: includes/Addons.class.php:199
 msgid ""
 "The addons list could not be retrieved. Please <a href=\"\">try again</a>. "
 "If the problem persists over time, please report it on the <a "
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Add New"
 msgstr ""
 
-#: includes/AdminBookings.class.php:114 restaurant-reservations.php:212
+#: includes/AdminBookings.class.php:114 restaurant-reservations.php:217
 msgid "Add Booking"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Add New Booking"
 msgstr ""
 
-#: includes/CustomPostTypes.class.php:44 restaurant-reservations.php:213
+#: includes/CustomPostTypes.class.php:44 restaurant-reservations.php:218
 msgid "Edit Booking"
 msgstr ""
 
@@ -504,6 +504,12 @@ msgstr ""
 
 #: includes/Settings.class.php:531
 msgid "Email Templates"
+msgstr ""
+
+#: includes/Settings.class.php:533
+msgid ""
+"Adjust the messages that are emailed to users and admins during the booking "
+"process."
 msgstr ""
 
 #: includes/Settings.class.php:543
@@ -829,17 +835,17 @@ msgstr ""
 msgid "Booking Manager"
 msgstr ""
 
-#: restaurant-reservations.php:214
+#: restaurant-reservations.php:219
 msgid ""
 "An unspecified error occurred. Please try again. If the problem persists, "
 "try logging out and logging back in."
 msgstr ""
 
-#: restaurant-reservations.php:276
+#: restaurant-reservations.php:281
 msgid "View the help documentation for Restaurant Reservations"
 msgstr ""
 
-#: restaurant-reservations.php:276
+#: restaurant-reservations.php:281
 msgid "Help"
 msgstr ""
 
@@ -862,37 +868,37 @@ msgstr ""
 msgid "Theme of the Crop"
 msgstr ""
 
-#: includes/Addons.class.php:90
+#: includes/Addons.class.php:99
 msgctxt "Error message when retrieving list of addons"
 msgid "An unknown error occured."
 msgstr ""
 
-#: includes/Addons.class.php:91
+#: includes/Addons.class.php:100
 msgctxt "Label for an addon that is already installed and activated."
 msgid "Already Installed"
 msgstr ""
 
-#: includes/Addons.class.php:92
+#: includes/Addons.class.php:101
 msgctxt "Label for an addon that is not yet released."
 msgid "Coming Soon"
 msgstr ""
 
-#: includes/Addons.class.php:93
+#: includes/Addons.class.php:102
 msgctxt "Label for an addon that is free."
 msgid "Free"
 msgstr ""
 
-#: includes/Addons.class.php:94
+#: includes/Addons.class.php:103
 msgctxt "Label for an addon that is released."
 msgid "Get It"
 msgstr ""
 
-#: includes/Addons.class.php:108
+#: includes/Addons.class.php:117
 msgctxt "Title of addons page"
 msgid "Addons"
 msgstr ""
 
-#: includes/Addons.class.php:109
+#: includes/Addons.class.php:118
 msgctxt "Title of addons page in the admin menu"
 msgid "Addons"
 msgstr ""
