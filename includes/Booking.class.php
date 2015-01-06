@@ -23,12 +23,6 @@ class rtbBooking {
 	 */
 	public $request_inserted = false;
 
-	/**
-	 * Whether or not to send notifications with this booking
-	 * @since 1.3
-	 */
-	public $send_notifications = true;
-
 	public function __construct() {}
 
 	/**
@@ -143,6 +137,12 @@ class rtbBooking {
 
 		$this->request_processed = true;
 
+		if ( empty( $this->ID ) ) {
+			$action = 'insert';
+		} else {
+			$action = 'update';
+		}
+
 		$this->validate_submission();
 		if ( $this->is_valid_submission() === false ) {
 			return false;
@@ -154,7 +154,7 @@ class rtbBooking {
 			$this->request_inserted = true;
 		}
 
-		do_action( 'rtb_insert_booking', $this );
+		do_action( 'rtb_' . $action . '_booking', $this );
 
 		return true;
 	}

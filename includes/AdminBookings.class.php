@@ -330,6 +330,9 @@ class rtbAdminBookings {
 				$rtb_controller->request->ID = (int) $_POST['ID'];
 			}
 
+			// Disable notifications
+			$this->maybe_disable_notifications();
+
 			$result = $rtb_controller->request->insert_booking();
 
 			if ( $result ) {
@@ -419,7 +422,7 @@ class rtbAdminBookings {
 	public function insert_booking_data( $args, $booking ) {
 
 		// Validate user request
-		if ( !$_POST['action'] || $_POST['action'] !== 'admin_booking_request' || !current_user_can( 'manage_bookings' ) ) {
+		if ( empty( $_POST['action'] ) || $_POST['action'] !== 'admin_booking_request' || !current_user_can( 'manage_bookings' ) ) {
 			return $args;
 		}
 
@@ -428,6 +431,27 @@ class rtbAdminBookings {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Maybe disable notifications when adding/editing bookings from the
+	 * admin booking modal
+	 * @since 1.3
+	 */
+	public function maybe_disable_notifications() {
+
+		// Don't disable notifications if they have opted to send them
+		if ( !empty( $_POST['rtb-notifications'] ) ) {
+			return;
+		}
+
+		// Disable all notifications. This filter is here in case a
+		// third-party sets up a notification that they don't want to be
+		// disabled even if the user has opted not to send notifications
+		// To exempt a notification, hook into the filter and copy it
+		// from $rtb_notifications to the empty array.
+		global $rtb_controller;
+		$rtb_controller->notifications->notifications = apply_filters( 'rtb_admin_disabled_notifications_exemption', array(), $rtb_controller->notifications->notifications );
 	}
 }
 } // endif;

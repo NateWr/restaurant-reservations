@@ -29,23 +29,21 @@ class rtbNotifications {
 	public $notifications;
 
 	/**
-	 * Hooks to execute notifications on
-	 *
-	 * Post Status Transitions and other hooks.
-	 * See: http://codex.wordpress.org/Post_Status_Transitions
-	 *
-	 * @var array
-	 * @since 0.0.1
-	 */
-	public $hooks;
-
-	/**
-	 * Set up notifications
+	 * Register notifications hook early so that other early hooks can
+	 * be used by the notification system.
 	 * @since 0.0.1
 	 */
 	public function __construct() {
+		add_action( 'init', array( $this, 'register_notifications' ) );
+	}
 
-		// Hook into all status changes that require notifications
+	/**
+	 * Register notifications
+	 * @since 0.0.1
+	 */
+	public function register_notifications() {
+
+		// Hook into all events that require notifications
 		$hooks = array(
 			'rtb_insert_booking'	=> array( $this, 'new_submission' ), 		// Booking submitted
 			'pending_to_confirmed'	=> array( $this, 'pending_to_confirmed' ), 	// Booking confirmed
@@ -59,15 +57,6 @@ class rtbNotifications {
 		}
 
 		// Register notifications
-		add_action( 'init', array( $this, 'register_notifications' ) );
-	}
-
-	/**
-	 * Register notifications
-	 * @since 0.0.1
-	 */
-	public function register_notifications() {
-
 		require_once( RTB_PLUGIN_DIR . '/includes/Notification.class.php' );
 		require_once( RTB_PLUGIN_DIR . '/includes/Notification.Email.class.php' );
 

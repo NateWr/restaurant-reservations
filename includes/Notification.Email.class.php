@@ -56,11 +56,6 @@ class rtbNotificationEmail extends rtbNotification {
 	 * @since 0.0.1
 	 */
 	public function prepare_notification() {
-	
-		// Check if notifications are disabled
-		if ( empty( $this->booking->send_notifications ) ) {
-			return false;
-		}
 
 		$this->set_to_email();
 		$this->set_from_email();
