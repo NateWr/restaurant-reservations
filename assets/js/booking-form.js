@@ -151,7 +151,7 @@ jQuery(document).ready(function ($) {
 		// times subsequently declared are valid. Any time that doesn't fall
 		// within those declarations is invalid.
 		// See: http://amsul.ca/pickadate.js/time.htm#disable-times-all
-		var valid_times = [ { from: [0, 0], to: [24, 0] } ];
+		var valid_times = [ rtb_booking_form.get_outer_time_range() ];
 
 		// Check if this date is an exception to the rules
 		if ( typeof rtb_pickadate.schedule_closed != 'undefined' ) {
@@ -273,6 +273,31 @@ jQuery(document).ready(function ($) {
 		rtb_booking_form.timepicker.set( 'disable', false );
 
 		return;
+	};
+
+	/**
+	 * Get the outer times to exclude based on the time interval
+	 *
+	 * This is a work-around for a bug in pickadate.js
+	 * https://github.com/amsul/pickadate.js/issues/614
+	 */
+	rtb_booking_form.get_outer_time_range = function() {
+
+		var interval = rtb_booking_form.timepicker.get( 'interval' );
+
+		var hour = 24;
+
+		while ( interval >= 60 ) {
+			hour--;
+			interval -= 60;
+		}
+
+		if ( interval > 0 ) {
+			hour--;
+			interval = 60 - interval;
+		}
+
+		return { from: [0, 0], to: [ hour, interval ] };
 	};
 
 	rtb_booking_form.init();
