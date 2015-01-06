@@ -256,6 +256,8 @@ if ( !function_exists( 'rtb_print_form_textarea_field' ) ) {
 function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
+	// Strip out <br> tags when placing in a textarea
+	$value = preg_replace('/\<br(\s*)?\/?\>/i', '', $value);
 
 	?>
 

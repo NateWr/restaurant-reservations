@@ -66,7 +66,7 @@ class rtbBooking {
 		$this->ID = $post->ID;
 		$this->name = $post->post_title;
 		$this->date = $post->post_date;
-		$this->message = apply_filters( 'the_content', $post->post_content );
+		$this->message = $post->post_content;
 		$this->post_status = $post->post_status;
 
 		$this->load_post_metadata();
@@ -402,7 +402,7 @@ class rtbBooking {
 
 		// Phone/Message
 		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-phone'] ) );
-		$this->message = empty( $_POST['rtb-message'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-message'] ) );
+		$this->message = empty( $_POST['rtb-message'] ) ? '' : nl2br( wp_kses_post( stripslashes_deep( $_POST['rtb-message'] ) ) );
 
 		// Check if any required fields are empty
 		$required_fields = $rtb_controller->settings->get_required_fields();
