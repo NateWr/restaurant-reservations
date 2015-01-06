@@ -17,9 +17,6 @@ class rtbAdminBookings {
 		// Print the booking form modal
 		add_action( 'admin_footer-toplevel_page_rtb-bookings', array( $this, 'print_booking_form_modal' ) );
 
-		// Add post status and notification fields to admin booking form
-		add_filter( 'rtb_booking_form_fields', array( $this, 'add_admin_fields' ), 20, 2 );
-
 		// Receive Ajax requests
 		add_action( 'wp_ajax_nopriv_rtb-admin-booking-modal' , array( $this , 'nopriv_ajax' ) );
 		add_action( 'wp_ajax_rtb-admin-booking-modal', array( $this, 'booking_modal_ajax' ) );
@@ -145,6 +142,9 @@ class rtbAdminBookings {
 
 		global $rtb_controller;
 
+		// Add post status and notification fields to admin booking form
+		add_filter( 'rtb_booking_form_fields', array( $this, 'add_admin_fields' ), 20, 2 );
+
 		// Retrieve the form fields
 		$fields = $rtb_controller->settings->get_booking_form_fields( $rtb_controller->request );
 
@@ -163,6 +163,9 @@ class rtbAdminBookings {
 				?>
 			</fieldset>
 			<?php endforeach;
+
+		// Remove the admin fields filter
+		remove_filter( 'rtb_booking_form_fields', array( $this, 'add_admin_fields' ) );
 
 		return ob_get_clean();
 	}
