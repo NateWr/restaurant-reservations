@@ -684,10 +684,12 @@ class rtbBookingsTable extends WP_List_Table {
 
 		$notifications = array();
 
+		$status = '';
 		if ( !empty( $_GET['status'] ) ) {
-			if ( $_GET['status'] == 'trash' ) {
+			$status = $_GET['status'];
+			if ( $status == 'trash' ) {
 				$notifications['status'] = __( "You're viewing bookings that have been moved to the trash.", 'restaurant-reservations' );
-			} elseif ( !empty( $rtb_controller->cpts->booking_statuses[ $_GET['status'] ] ) ) {
+			} elseif ( !empty( $rtb_controller->cpts->booking_statuses[ $status ] ) ) {
 				$notifications['status'] = sprintf( _x( "You're viewing bookings that have been marked as %s.", 'Indicates which booking status is currently being filtered in the list of bookings.', 'restaurant-reservations' ), $rtb_controller->cpts->booking_statuses[ $_GET['status'] ]['label'] );
 			}
 		}
@@ -705,7 +707,7 @@ class rtbBookingsTable extends WP_List_Table {
 		if ( !empty( $notifications ) ) :
 		?>
 
-			<tr class="notice <?php echo esc_attr( $_GET['status'] ); ?>">
+			<tr class="notice <?php echo esc_attr( $status ); ?>">
 				<td colspan="<?php echo count( $this->get_columns() ); ?>">
 					<?php echo join( ' ', $notifications ); ?>
 				</td>
