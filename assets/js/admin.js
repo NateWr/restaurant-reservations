@@ -85,6 +85,7 @@ jQuery(document).ready(function ($) {
 
 		} else {
 			rtb_booking_modal.removeClass( 'is-visible' );
+			rtb_booking_modal.find( '.rtb-error' ).remove();
 			rtb_booking_modal.find( '.notifications-description' ).removeClass( 'is-visible' );
 			rtb_booking_modal_action_status.removeClass( 'is-visible' );
 			rtb_reset_booking_form_modal_fields();
