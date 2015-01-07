@@ -98,10 +98,16 @@ class rtbNotifications {
 			return;
 		}
 
-		$this->booking = $booking;
+		// If the post status is not pending, trigger a post status
+		// transition as though it's gone from pending_to_{status}
+		if ( $booking->status != 'pending' ) {
+			do_action( 'pending_to_' . $booking->status, get_post( $booking->ID ) );
 
-		$this->event( 'new_submission' );
-
+		// Otherwise proceed with the new_submission event
+		} else {
+			$this->booking = $booking;
+			$this->event( 'new_submission' );
+		}
 	}
 
 	/**
