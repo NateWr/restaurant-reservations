@@ -75,6 +75,7 @@ jQuery(document).ready(function ($) {
 			}
 
 			if ( typeof booking == 'undefined' ) {
+				rtb_booking_modal_fields.find( '#rtb-post-status' ).val( 'confirmed' );
 				rtb_booking_modal_submit.html( rtb_admin.strings.add_booking );
 			} else {
 				rtb_booking_modal_submit.html( rtb_admin.strings.edit_booking );
