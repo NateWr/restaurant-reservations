@@ -129,7 +129,7 @@ jQuery(document).ready(function ($) {
 	 */
 	function rtb_reset_booking_form_modal_fields() {
 		rtb_booking_modal_fields.find( 'input, select, textarea' ).val( '' );
-		rtb_booking_modal_fields.find( 'input[name=rtb-notifications]' ).removeAttr( 'checked', '' );
+		rtb_booking_modal_fields.find( 'input[name=rtb-notifications]' ).removeAttr( 'checked' );
 	}
 
 	/**
