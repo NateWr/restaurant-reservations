@@ -404,6 +404,13 @@ class rtbBooking {
 		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-phone'] ) );
 		$this->message = empty( $_POST['rtb-message'] ) ? '' : nl2br( wp_kses_post( stripslashes_deep( $_POST['rtb-message'] ) ) );
 
+		// Post Status (define a default post status is none passed)
+		if ( !empty( $_POST['rtb-post-status'] ) && array_key_exists( $_POST['rtb-post-status'], $rtb_controller->cpts->booking_statuses ) ) {
+			$this->status = sanitize_text_field( stripslashes_deep( $_POST['rtb-post-status'] ) );
+		} else {
+			$this->status = 'pending';
+		}
+
 		// Check if any required fields are empty
 		$required_fields = $rtb_controller->settings->get_required_fields();
 		foreach( $required_fields as $slug => $field ) {
@@ -462,7 +469,7 @@ class rtbBooking {
 			'post_title'	=> $this->name,
 			'post_content'	=> $this->message,
 			'post_date'		=> $this->date,
-			'post_status'	=> 'pending',
+			'post_status'	=> $this->status,
 		);
 
 		if ( !empty( $this->ID ) ) {

@@ -409,11 +409,6 @@ class rtbAdminBookings {
 
 		global $rtb_controller;
 
-		// Post Status
-		if ( !empty( $_POST['rtb-post-status'] ) && array_key_exists( $_POST['rtb-post-status'], $rtb_controller->cpts->booking_statuses ) ) {
-			$booking->post_status = esc_attr( $_POST['rtb-post-status'] );
-		}
-
 		// Disable Notifications
 		$booking->send_notifications = empty( $_POST['rtb-notifications'] ) ? false : true;
 	}
