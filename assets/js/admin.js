@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
 	var rtb_booking_modal_submit = rtb_booking_modal.find( 'button' );
 	var rtb_booking_modal_cancel = rtb_booking_modal.find( '#rtb-cancel-booking-modal' );
 	var rtb_booking_modal_action_status = rtb_booking_modal.find( '.action-status' );
-	var rtb_booking_modal_error = $( '#rtb-booking-modal-error' );
+	var rtb_booking_modal_error = $( '#rtb-error-modal' );
 	var rtb_booking_modal_error_msg = rtb_booking_modal_error.find( '.rtb-error-msg' );
 
 	/**

@@ -122,7 +122,7 @@ class rtbAdminBookings {
 			</div>
 		</div>
 		<!-- Restaurant Reservations error message modal -->
-		<div id="rtb-booking-modal-error">
+		<div id="rtb-error-modal">
 			<div class="rtb-error">
 				<div class="rtb-error-msg"></div>
 				<a href="#" class="button"><?php _e( 'Close', 'restaurant-reservations' ); ?></a>

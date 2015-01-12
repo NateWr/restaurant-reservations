@@ -157,7 +157,7 @@
 
 /* Add/edit bookings modal */
 #rtb-booking-modal,
-#rtb-booking-modal-error {
+#rtb-error-modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -175,7 +175,7 @@
 }
 
 #rtb-booking-modal.is-visible,
-#rtb-booking-modal-error.is-visible {
+#rtb-error-modal.is-visible {
 	visibility: visible;
 	opacity: 1;
 	-webkit-transition: opacity 0.3s 0, visibility 0 0;
@@ -184,7 +184,7 @@
 }
 
 #rtb-booking-modal.is-visible .rtb-booking-form,
-#rtb-booking-modal-error.is-visible .rtb-error {
+#rtb-error-modal.is-visible .rtb-error {
 	-webkit-transform: translateY(0);
 	-moz-transform: translateY(0);
 	-ms-transform: translateY(0);
@@ -193,7 +193,7 @@
 }
 
 #rtb-booking-modal .rtb-booking-form,
-#rtb-booking-modal-error .rtb-error {
+#rtb-error-modal .rtb-error {
 	position: relative;
 	width: 90%;
 	max-width: 20em;
@@ -313,7 +313,7 @@
 	max-height: 20em;
 }
 
-#rtb-booking-modal-error .rtb-error-msg {
+#rtb-error-modal .rtb-error-msg {
 	margin-bottom: 1em;
 }
 /* Hide the outer scrollbar when the modal is open */
