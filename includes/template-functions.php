@@ -76,10 +76,10 @@ function rtb_print_booking_form() {
 		<?php do_action( 'rtb_booking_form_before_fields' ); ?>
 
 		<?php foreach( $fields as $fieldset => $contents ) : ?>
-		<fieldset class="<?php echo $fieldset; ?>">
+		<fieldset <?php echo rtb_print_element_class( $fieldset, $contents['callback_args']['fieldset_classes'] ); ?>>
 
 			<?php if ( !empty( $contents['legend'] ) ) : ?>
-			<legend>
+			<legend <?php echo rtb_print_element_class( '', $contents['callback_args']['legend_classes'] ); ?>>
 				<?php echo $contents['legend']; ?>
 			</legend>
 			<?php endif; ?>
@@ -343,5 +343,17 @@ function rtb_print_form_error( $field ) {
 			}
 		}
 	}
+}
+} // endif;
+
+/**
+ * Print a class attribute based on the slug and optional classes, provided with arguments
+ * @since 1.3.0
+ */
+if ( !function_exists( 'rtb_print_element_class' ) ) {
+function rtb_print_element_class( $slug, $additional_classes ) {
+	$classes = empty( $additional_classes ) ? array() : $additional_classes;
+	array_push( $classes, $slug );
+	return 'class="' . join( ' ', $classes ) .'"';
 }
 } // endif;

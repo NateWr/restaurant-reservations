@@ -673,7 +673,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	 * @since 1.3
 	 */
 	public function get_form_party_options() {
-	
+
 		$party_size = (int) $this->get_setting( 'party-size' );
 
 		$max = empty( $party_size ) ? apply_filters( 'rtb_party_size_upper_limit', 100 ) : (int) $this->get_setting( 'party-size' );
@@ -712,6 +712,10 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			// Reservation details fieldset
 			'reservation'	=> array(
 				'legend'	=> __( 'Book a table', 'restaurant-reservations' ),
+				'callback_args' => array(
+					'fieldset_classes' => array(),
+					'legend_classes' => array(),
+				),
 				'fields'	=> array(
 					'date'		=> array(
 						'title'			=> __( 'Date', 'restaurant-reservations' ),
@@ -740,6 +744,10 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			// Contact details fieldset
 			'contact'	=> array(
 				'legend'	=> __( 'Contact Details', 'restaurant-reservations' ),
+				'callback_args' => array(
+					'fieldset_classes' => array(),
+					'legend_classes' => array(),
+				),
 				'fields'	=> array(
 					'name'		=> array(
 						'title'			=> __( 'Name', 'restaurant-reservations' ),
