@@ -88,8 +88,8 @@ class rtbAdminBookings {
 	public function print_booking_form_modal() {
 		?>
 
-		<div id="rtb-booking-modal">
-			<div class="rtb-booking-form">
+		<div id="rtb-booking-modal" class="rtb-admin-modal">
+			<div class="rtb-booking-form rtb-container">
 				<form method="POST">
 					<input type="hidden" name="action" value="admin_booking_request">
 					<input type="hidden" name="ID" value="">
@@ -122,8 +122,8 @@ class rtbAdminBookings {
 			</div>
 		</div>
 		<!-- Restaurant Reservations error message modal -->
-		<div id="rtb-error-modal">
-			<div class="rtb-error">
+		<div id="rtb-error-modal" class="rtb-admin-modal">
+			<div class="rtb-error rtb-container">
 				<div class="rtb-error-msg"></div>
 				<a href="#" class="button"><?php _e( 'Close', 'restaurant-reservations' ); ?></a>
 			</div>

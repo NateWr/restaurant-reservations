@@ -156,8 +156,7 @@
 }
 
 /* Add/edit bookings modal */
-#rtb-booking-modal,
-#rtb-error-modal {
+.rtb-admin-modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -174,8 +173,7 @@
 	transition: opacity 0.3s 0, visibility 0 0.3s;
 }
 
-#rtb-booking-modal.is-visible,
-#rtb-error-modal.is-visible {
+.rtb-admin-modal.is-visible {
 	visibility: visible;
 	opacity: 1;
 	-webkit-transition: opacity 0.3s 0, visibility 0 0;
@@ -183,8 +181,7 @@
 	transition: opacity 0.3s 0, visibility 0 0;
 }
 
-#rtb-booking-modal.is-visible .rtb-booking-form,
-#rtb-error-modal.is-visible .rtb-error {
+.rtb-admin-modal.is-visible .rtb-container {
 	-webkit-transform: translateY(0);
 	-moz-transform: translateY(0);
 	-ms-transform: translateY(0);
@@ -192,8 +189,7 @@
 	transform: translateY(0);
 }
 
-#rtb-booking-modal .rtb-booking-form,
-#rtb-error-modal .rtb-error {
+.rtb-admin-modal .rtb-container {
 	position: relative;
 	width: 90%;
 	max-width: 20em;
