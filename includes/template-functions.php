@@ -232,10 +232,11 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$type = empty( $args['input_type'] ) ? 'text' : esc_attr( $args['input_type'] );
+	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -258,10 +259,11 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 	$slug = esc_attr( $slug );
 	// Strip out <br> tags when placing in a textarea
 	$value = preg_replace('/\<br(\s*)?\/?\>/i', '', $value);
+	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -284,10 +286,11 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$options = $args['options'];
+	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -313,10 +316,11 @@ function rtb_print_form_message_link( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
+	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
 		<a href="#">
 			<?php echo $title; ?>
 		</a>
