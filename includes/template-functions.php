@@ -60,16 +60,6 @@ function rtb_print_booking_form() {
 	// Retrieve the form fields
 	$fields = $rtb_controller->settings->get_booking_form_fields( $rtb_controller->request );
 
-	// Submit button
-	$submit_button = apply_filters( 'rtb_booking_form_submit_button', array(
-		'tag' => 'button',
-		'attributes' => array(
-			'type'  => 'submit',
-			'classes' => array(),
-		),
-		'label' => __( 'Request Booking', 'restaurant-reservations' ),
-	) );
-
 	ob_start();
 
 	?>
@@ -107,7 +97,15 @@ function rtb_print_booking_form() {
 
 		<?php do_action( 'rtb_booking_form_after_fields' ); ?>
 
-		<?php rtb_print_form_submit_button( $submit_button ); ?>
+		<?php
+			$button = sprintf(
+				'<button type="submit">%s</button>',
+				__( 'Request Booking', 'restaurant-reservations' )
+			);
+
+			echo apply_filters( 'rtb_booking_form_submit_button', $button );
+		?>
+
 
 	</form>
 	<?php endif; ?>
@@ -357,44 +355,6 @@ function rtb_print_form_error( $field ) {
 			}
 		}
 	}
-}
-} // endif;
-
-
-/**
- * Print the submit button for the form
- * @since 1.3
- */
-if ( !function_exists( 'rtb_print_form_submit_button' ) ) {
-function rtb_print_form_submit_button( $args ) {
-
-	// class attribute
-	$additional_classes = isset( $args['attributes']['classes'] ) ? $args['attributes']['classes'] : array();
-
-	// all other attributes
-	unset( $args['attributes']['classes'] ); // because we set it before already
-	$attributes = array();
-
-	foreach ( $args['attributes'] as $attr => $value ) {
-		$attributes[] = sprintf( '%s="%s"', sanitize_key( $attr ), esc_attr( $value ) );
-	}
-
-	// wrapper
-	$wrapper = array(
-		'start' => isset( $args['wrapper']['start'] ) ? $args['wrapper']['start'] : '',
-		'end'   => isset( $args['wrapper']['end'] ) ? $args['wrapper']['end'] : '',
-	);
-
-	printf(
-		'%5$s<%1$s %3$s %4$s>%2$s</%1$s>%6$s', // format
-		sanitize_key( $args['tag'] ), // 1: tag
-		$args['label'], // 2: label
-		rtb_print_element_class( '', $additional_classes ), // 3: class attr
-		join( ' ', $attributes ), // 4: all other attributes
-		$wrapper['start'], // 5: wrapper element start
-		$wrapper['end'] // 6: wrapper element end
-	);
-
 }
 } // endif;
 
