@@ -75,11 +75,14 @@ function rtb_print_booking_form() {
 
 		<?php do_action( 'rtb_booking_form_before_fields' ); ?>
 
-		<?php foreach( $fields as $fieldset => $contents ) : ?>
-		<fieldset <?php echo rtb_print_element_class( $fieldset, $contents['callback_args']['fieldset_classes'] ); ?>>
+		<?php foreach( $fields as $fieldset => $contents ) :
+			$fieldset_classes = isset( $contents['callback_args']['classes'] ) ? $contents['callback_args']['classes'] : array();
+			$legend_classes = isset( $contents['callback_args']['legend_classes'] ) ? $contents['callback_args']['legend_classes'] : array();
+		?>
+		<fieldset <?php echo rtb_print_element_class( $fieldset, $fieldset_classes ); ?>>
 
 			<?php if ( !empty( $contents['legend'] ) ) : ?>
-			<legend <?php echo rtb_print_element_class( '', $contents['callback_args']['legend_classes'] ); ?>>
+			<legend <?php echo rtb_print_element_class( '', $legend_classes ); ?>>
 				<?php echo $contents['legend']; ?>
 			</legend>
 			<?php endif; ?>
@@ -240,11 +243,11 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$type = empty( $args['input_type'] ) ? 'text' : esc_attr( $args['input_type'] );
-	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -267,11 +270,11 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 	$slug = esc_attr( $slug );
 	// Strip out <br> tags when placing in a textarea
 	$value = preg_replace('/\<br(\s*)?\/?\>/i', '', $value);
-	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -294,11 +297,11 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$options = $args['options'];
-	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -324,11 +327,11 @@ function rtb_print_form_message_link( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
-	$additional_classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div <?php echo rtb_print_element_class( $slug, $additional_classes ); ?>>
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<a href="#">
 			<?php echo $title; ?>
 		</a>
@@ -365,15 +368,14 @@ function rtb_print_form_error( $field ) {
 if ( !function_exists( 'rtb_print_element_class' ) ) {
 function rtb_print_element_class( $slug, $additional_classes ) {
 	$classes = empty( $additional_classes ) ? array() : $additional_classes;
-	array_push( $classes, $slug );
+
+	if ( ! empty( $slug ) ) {
+		array_push( $classes, $slug );
+	}
 
 	$class_attr = esc_attr( join( ' ', $classes ) );
 
-	if ( empty( $class_attr ) ) {
-		return '';
-	} else {
-		return sprintf( 'class="%s"', $class_attr );
-	}
+	return empty( $class_attr ) ? '' : sprintf( 'class="%s"', $class_attr );
 
 }
 } // endif;
