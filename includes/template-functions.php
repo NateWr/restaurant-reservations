@@ -103,7 +103,7 @@ function rtb_print_booking_form() {
 		<?php
 			$button = sprintf(
 				'<button type="submit">%s</button>',
-				__( 'Request Booking', 'restaurant-reservations' )
+				apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', 'restaurant-reservations' ) )
 			);
 
 			echo apply_filters( 'rtb_booking_form_submit_button', $button );
