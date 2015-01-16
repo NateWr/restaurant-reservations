@@ -366,7 +366,7 @@ function rtb_print_form_error( $field ) {
  * @since 1.3
  */
 if ( !function_exists( 'rtb_print_element_class' ) ) {
-function rtb_print_element_class( $slug, $additional_classes ) {
+function rtb_print_element_class( $slug, $additional_classes = array() ) {
 	$classes = empty( $additional_classes ) ? array() : $additional_classes;
 
 	if ( ! empty( $slug ) ) {
