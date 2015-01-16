@@ -673,7 +673,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	 * @since 1.3
 	 */
 	public function get_form_party_options() {
-	
+
 		$party_size = (int) $this->get_setting( 'party-size' );
 
 		$max = empty( $party_size ) ? apply_filters( 'rtb_party_size_upper_limit', 100 ) : (int) $this->get_setting( 'party-size' );

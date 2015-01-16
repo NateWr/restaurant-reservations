@@ -75,11 +75,14 @@ function rtb_print_booking_form() {
 
 		<?php do_action( 'rtb_booking_form_before_fields' ); ?>
 
-		<?php foreach( $fields as $fieldset => $contents ) : ?>
-		<fieldset class="<?php echo $fieldset; ?>">
+		<?php foreach( $fields as $fieldset => $contents ) :
+			$fieldset_classes = isset( $contents['callback_args']['classes'] ) ? $contents['callback_args']['classes'] : array();
+			$legend_classes = isset( $contents['callback_args']['legend_classes'] ) ? $contents['callback_args']['legend_classes'] : array();
+		?>
+		<fieldset <?php echo rtb_print_element_class( $fieldset, $fieldset_classes ); ?>>
 
 			<?php if ( !empty( $contents['legend'] ) ) : ?>
-			<legend>
+			<legend <?php echo rtb_print_element_class( '', $legend_classes ); ?>>
 				<?php echo $contents['legend']; ?>
 			</legend>
 			<?php endif; ?>
@@ -97,7 +100,15 @@ function rtb_print_booking_form() {
 
 		<?php do_action( 'rtb_booking_form_after_fields' ); ?>
 
-		<button type="submit"><?php echo apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', 'restaurant-reservations' ) ); ?></button>
+		<?php
+			$button = sprintf(
+				'<button type="submit">%s</button>',
+				apply_filters( 'rtb_booking_form_submit_label', __( 'Request Booking', 'restaurant-reservations' ) )
+			);
+
+			echo apply_filters( 'rtb_booking_form_submit_button', $button );
+		?>
+
 
 	</form>
 	<?php endif; ?>
@@ -232,10 +243,11 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$type = empty( $args['input_type'] ) ? 'text' : esc_attr( $args['input_type'] );
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -258,10 +270,11 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 	$slug = esc_attr( $slug );
 	// Strip out <br> tags when placing in a textarea
 	$value = preg_replace('/\<br(\s*)?\/?\>/i', '', $value);
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -284,10 +297,11 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$options = $args['options'];
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<?php echo $title; ?>
@@ -313,10 +327,11 @@ function rtb_print_form_message_link( $slug, $title, $value, $args = array() ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
 
-	<div class="<?php echo $slug; ?>">
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
 		<a href="#">
 			<?php echo $title; ?>
 		</a>
@@ -343,5 +358,24 @@ function rtb_print_form_error( $field ) {
 			}
 		}
 	}
+}
+} // endif;
+
+/**
+ * Print a class attribute based on the slug and optional classes, provided with arguments
+ * @since 1.3
+ */
+if ( !function_exists( 'rtb_print_element_class' ) ) {
+function rtb_print_element_class( $slug, $additional_classes = array() ) {
+	$classes = empty( $additional_classes ) ? array() : $additional_classes;
+
+	if ( ! empty( $slug ) ) {
+		array_push( $classes, $slug );
+	}
+
+	$class_attr = esc_attr( join( ' ', $classes ) );
+
+	return empty( $class_attr ) ? '' : sprintf( 'class="%s"', $class_attr );
+
 }
 } // endif;
