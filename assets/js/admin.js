@@ -30,7 +30,6 @@ jQuery(document).ready(function ($) {
 		if ( target.data( 'action' ) == 'edit' ) {
 			rtb_get_booking( target.data( 'id' ), cell );
 
-		// @todo send to trash
 		} else if ( target.data( 'action' ) == 'trash' ) {
 			rtb_trash_booking( target.data( 'id' ), cell );
 		}
@@ -91,8 +90,8 @@ jQuery(document).ready(function ($) {
 			rtb_booking_modal_action_status.removeClass( 'is-visible' );
 			rtb_reset_booking_form_modal_fields();
 			rtb_booking_modal_submit.removeData( 'id' );
-			rtb_booking_modal_submit.removeAttr( 'disabled' );
-			rtb_booking_modal_cancel.removeAttr( 'disabled' );
+			rtb_booking_modal_submit.prop( 'disabled', false );
+			rtb_booking_modal_cancel.prop( 'disabled', false );
 			rtb_booking_modal.find( 'input[name=ID]' ).val( '' );
 
 			$( 'body' ).removeClass( 'rtb-hide-body-scroll' );
@@ -223,6 +222,12 @@ jQuery(document).ready(function ($) {
 	// Initialize form field events on load
 	rtb_init_booking_form_modal_fields();
 
+	// Reset the form on load
+	// This fixes a strange bug in Firefox where disabled buttons would
+	// persist after the page refreshed. I'm guessing its a cache issue
+	// but this will just reset everything again
+	rtb_toggle_booking_form_modal( false );
+
 	// Show booking form modal
 	$( '.add-booking' ).click( function() {
 		rtb_toggle_booking_form_modal( true );
@@ -234,7 +239,7 @@ jQuery(document).ready(function ($) {
 			rtb_toggle_booking_form_modal( false );
 		}
 
-		if ( $(e.target).is( rtb_booking_modal_cancel ) && typeof rtb_booking_modal_cancel.attr( 'disabled' ) == 'undefined' ) {
+		if ( $(e.target).is( rtb_booking_modal_cancel ) && rtb_booking_modal_cancel.prop( 'disabled' ) === false ) {
 			rtb_toggle_booking_form_modal( false );
 		}
 	});
@@ -260,13 +265,13 @@ jQuery(document).ready(function ($) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		if ( typeof $(this).attr( 'disabled' ) !== 'undefined' ) {
+		if ( $(this).prop( 'disabled' ) === true ) {
 			return;
 		}
 
 		// Loading
-		rtb_booking_modal_submit.attr( 'disabled', 'disabled' );
-		rtb_booking_modal_cancel.attr( 'disabled', 'disabled' );
+		rtb_booking_modal_submit.prop( 'disabled', true );
+		rtb_booking_modal_cancel.prop( 'disabled', true );
 		rtb_booking_modal_action_status.addClass( 'is-visible' );
 		rtb_show_action_status( 'loading' );
 
@@ -295,8 +300,6 @@ jQuery(document).ready(function ($) {
 					rtb_booking_form.init();
 					rtb_init_booking_form_modal_fields();
 
-					rtb_booking_modal_submit.removeAttr( 'disabled' );
-
 				// Logged out
 				} else if ( r.data.error == 'loggedout' ) {
 					rtb_booking_modal_fields.after( '<div class="rtb-error">' + r.data.msg + '</div>' );
@@ -306,7 +309,8 @@ jQuery(document).ready(function ($) {
 					rtb_booking_modal_fields.after( '<div class="rtb-error">' + rtb_admin.strings.error_unspecified + '</div>' );
 				}
 
-				rtb_booking_modal_cancel.removeAttr( 'disabled' );
+				rtb_booking_modal_cancel.prop( 'disabled', false );
+				rtb_booking_modal_submit.prop( 'disabled', false );
 			}
 
 			rtb_show_action_status( r.success );
