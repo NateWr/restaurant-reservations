@@ -132,7 +132,7 @@ jQuery(document).ready(function ($) {
 			// https://github.com/amsul/pickadate.js/issues/609
 			rtb_booking_form.datepicker.on( {
 				close: function() {
-					var body = $( 'body' );
+					var body = $( 'html,body' );
 
 					if ( !body.hasClass( 'rtb-hide-body-scroll' ) ) {
 						body.animate({
@@ -143,7 +143,7 @@ jQuery(document).ready(function ($) {
 			});
 			rtb_booking_form.timepicker.on( {
 				close: function() {
-					var body = $( 'body' );
+					var body = $( 'html,body' );
 
 					if ( !body.hasClass( 'rtb-hide-body-scroll' ) ) {
 						body.animate({
