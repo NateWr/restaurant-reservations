@@ -179,14 +179,16 @@ class rtbAddons {
 			$ch = curl_init();
 			curl_setopt( $ch, CURLOPT_URL, $url );
 			curl_setopt( $ch, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json' ) );
-			curl_setopt( $ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0' );       
+			curl_setopt( $ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0' );
 			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 			curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
 			$result = curl_exec($ch);
 			curl_close($ch);
-			
-		} else {
+
+		} elseif ( ini_get( 'allow_url_fopen' ) ) {
 			$result = @file_get_contents( $url );
+		} else {
+			$result = @file_get_contents( RTB_PLUGIN_DIR . '/assets/addons-backup.json' );
 		}
 
 		if ( $result ) {
