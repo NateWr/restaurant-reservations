@@ -700,13 +700,42 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			$request = $rtb_controller->request;
 		}
 
-		// This array defines the field details and a callback function to
-		// render each field. To customize the form output, modify the
-		// callback functions to point to your custom function. Don't forget
-		// to output an error message in your custom callback function. You
-		// can use rtb_print_form_error( $slug ) to do this.
-		//
-		// See /includes/template-functions.php
+		/**
+		 * This array defines the field details and a callback function to
+		 * render each field. To customize the form output, modify the
+		 * callback functions to point to your custom function. Don't forget
+		 * to output an error message in your custom callback function. You
+		 * can use rtb_print_form_error( $slug ) to do this.
+		 *
+		 * In addition to the parameters described below, each fieldset
+		 * and field can accept a `classes` array in the callback args since
+		 * v1.3. These classes will be appended to the <fieldset> and
+		 * <div> elements for each field. A fieldset can also take a
+		 * `legend_classes` array in the callback_args which will be
+		 * added to the legend element.
+		 *
+		 * Example:
+		 *
+		 * 	$fields = array(
+		 * 		'fieldset'	=> array(
+		 * 			'legend'	=> __( 'My Legend', 'restaurant-reservations' ),
+		 * 			'callback_args'	=> array(
+		 * 				'classes'		=> array( 'fieldset-class', 'other-fieldset-class' ),
+		 * 				'legend_classes	=> array( 'legend-class' ),
+		 *			),
+		 * 			'fields'	=> array(
+		 * 				'my-field'	=> array(
+		 * 					...
+		 * 					'callback_args'	=> array(
+		 * 						'classes'	=> array( 'field-class' ),
+		 *					)
+		 * 				)
+		 * 			)
+		 * 		)
+		 * 	);
+		 *
+		 * See /includes/template-functions.php
+		 */
 		$fields = array(
 
 			// Reservation details fieldset
