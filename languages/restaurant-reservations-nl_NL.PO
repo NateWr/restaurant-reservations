@@ -1,0 +1,1183 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Restaurant Reservations\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu Jul 17 2014 15:43:57 GMT+0100 (GMT Daylight Time)\n"
+"PO-Revision-Date: Fri Jan 16 2015 08:51:34 GMT+0100 (West-Europa "
+"(standaardtijd))\n"
+"Last-Translator: Dick <massimo@studio020.com>\n"
+"Language-Team: \n"
+"Language: Dutch\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: nl_NL"
+
+#: ../includes/Settings.class.php:283
+msgid "Date Format"
+msgstr "Datum notatie"
+
+#: ../includes/Settings.class.php:284
+msgid ""
+"Define how the date should appear after it has been selected. <a href=\"http:"
+"//amsul.ca/pickadate.js/date.htm#formatting-rules\">Formatting rules</a>"
+msgstr ""
+"Bepaal hoe de datum moet worden weergegeven nadat deze is geselecteerd. <a "
+"href=\"http://amsul.ca/pickadate.js/date.htm#formatting-"
+"rules\">formatteringsregels</a>"
+
+#: ../includes/Settings.class.php:295
+msgid "Time Format"
+msgstr "Tijdsaanduiding"
+
+#: ../includes/Settings.class.php:296
+msgid ""
+"Define how the time should appear after it has been selected. <a href=\"http:"
+"//amsul.ca/pickadate.js/time.htm#formatting-rules\">Formatting rules</a>"
+msgstr ""
+"Bepaal hoe de tijd moet worden weergegeven nadat deze is geselecteerd. <a "
+"href=\"http://amsul.ca/pickadate.js/time.htm#formatting-"
+"rules\">formatteringsregels</a>"
+
+#: ../includes/Settings.class.php:309
+msgid "Language"
+msgstr "Taal"
+
+#: ../includes/Settings.class.php:310
+msgid ""
+"Select a language to use for the booking form datepicker if it is different "
+"than your WordPress language setting."
+msgstr ""
+"Selecteer een taal om te gebruiken voor het boekingsformulier datepicker als "
+"het is anders dan je WordPress taalinstelling."
+
+#: ../includes/Settings.class.php:320
+msgid "Booking Schedule"
+msgstr "Reserveringsschema"
+
+#: ../includes/Settings.class.php:331
+msgid "Schedule"
+msgstr "Schema"
+
+#: ../includes/Settings.class.php:332
+msgid "Define the weekly schedule during which you accept bookings."
+msgstr "Bepaal het wekelijkse schema waarin je reserveringen accepteerd."
+
+#: ../includes/Settings.class.php:334
+msgctxt "Monday abbreviation"
+msgid "Mo"
+msgstr "Ma"
+
+#: ../includes/Settings.class.php:335
+msgctxt "Tuesday abbreviation"
+msgid "Tu"
+msgstr "Di"
+
+#: ../includes/Settings.class.php:336
+msgctxt "Wednesday abbreviation"
+msgid "We"
+msgstr "Wo"
+
+#: ../includes/Settings.class.php:337
+msgctxt "Thursday abbreviation"
+msgid "Th"
+msgstr "Do"
+
+#: ../includes/Settings.class.php:338
+msgctxt "Friday abbreviation"
+msgid "Fr"
+msgstr "Vr"
+
+#: ../includes/Settings.class.php:339
+msgctxt "Saturday abbreviation"
+msgid "Sa"
+msgstr "Zat"
+
+#: ../includes/Settings.class.php:340
+msgctxt "Sunday abbreviation"
+msgid "Su"
+msgstr "Zon"
+
+#: ../includes/Settings.class.php:355
+msgid "Exceptions"
+msgstr "Uitzonderingen"
+
+#: ../includes/Settings.class.php:356
+msgid ""
+"Define special opening hours for holidays, events or other needs. Leave the "
+"time empty if you're closed all day."
+msgstr ""
+"Definieer speciale openingstijden voor de feestdagen, evenementen of andere "
+"dagen. Laat de tijd leeg als je de hele dag gesloten zijn."
+
+#: ../includes/Settings.class.php:362
+msgctxt "Brief description of a scheduling exception when no times are set"
+msgid "Closed all day"
+msgstr "Gehele dag gesloten"
+
+#: ../includes/Settings.class.php:373
+msgid "Early Bookings"
+msgstr "Vroege reserveringen"
+
+#: ../includes/Settings.class.php:374
+msgid "Select how early customers can make their booking."
+msgstr "Selecteer hoe vroeg klanten kunnen hun boeking te maken."
+
+#: ../includes/Settings.class.php:377
+msgid "Any time"
+msgstr "Altijd"
+
+#: ../includes/Settings.class.php:378
+msgid "Up to 1 day in advance"
+msgstr "Tot 1 dag van tevoren"
+
+#: ../includes/Settings.class.php:379
+msgid "Up to 1 week in advance"
+msgstr "Tot 1 week van tevoren"
+
+#: ../includes/Settings.class.php:380
+msgid "Up to 2 weeks in advance"
+msgstr "Tot 1 weken van tevoren"
+
+#: ../includes/Settings.class.php:381
+msgid "Up to 30 days in advance"
+msgstr "Tot 30 dagen van tevoren"
+
+#: ../includes/Settings.class.php:382
+msgid "Up to 90 days in advance"
+msgstr "Tot 90 dagen van tevoren"
+
+#: ../includes/Settings.class.php:393
+msgid "Late Bookings"
+msgstr "Late reserveringen"
+
+#: ../includes/Settings.class.php:394
+msgid "Select how late customers can make their booking."
+msgstr "Selecteer op welke tijd klanten kunnen hun reserveringen kunnen doen."
+
+#: ../includes/Settings.class.php:397
+msgid "Up to the last minute"
+msgstr "Tot op de laatste minuut"
+
+#: ../includes/Settings.class.php:398
+msgid "At least 15 minutes in advance"
+msgstr "Ten minste 15 minuten vooraf"
+
+#: ../includes/Settings.class.php:399
+msgid "At least 30 minutes in advance"
+msgstr "Ten minste 30 minuten vooraf"
+
+#: ../includes/Settings.class.php:400
+msgid "At least 45 minutes in advance"
+msgstr "Ten minste 45 minuten vooraf"
+
+#: ../includes/Settings.class.php:401
+msgid "At least 1 hour in advance"
+msgstr "Ten minste 1 uur vooraf"
+
+#: ../includes/Settings.class.php:402
+msgid "At least 4 hours in advance"
+msgstr "Ten minste 4 uur vooraf"
+
+#: ../includes/Settings.class.php:403
+msgid "At least 1 day in advance"
+msgstr "Ten minste 1 dag vooraf"
+
+#: ../includes/Settings.class.php:414
+msgid "Date Pre-selection"
+msgstr "Datum voor-selectie"
+
+#: ../includes/Settings.class.php:415
+msgid ""
+"When the booking form is loaded, should it automatically attempt to select a "
+"valid date?"
+msgstr ""
+"Wanneer het reserveringssformulier is geladen, moet het automatisch proberen "
+"om een geldige datum te selecteren?"
+
+#: ../includes/Settings.class.php:418
+msgid "Select today or soonest valid date"
+msgstr "Kies vandaag of eerstvolgende geldige datum"
+
+#: ../includes/Settings.class.php:419
+msgid "Leave empty"
+msgstr "Laat leeg"
+
+#: ../includes/Settings.class.php:430
+msgid "Time Interval"
+msgstr "Tijdsintervak"
+
+#: ../includes/Settings.class.php:431
+msgid "Select the number of minutes between each available time."
+msgstr "Selecteer het aantal minuten tussen elke beschikbare tijd."
+
+#: ../includes/Settings.class.php:434
+msgid "Every 30 minutes"
+msgstr "Elke 30 minuten"
+
+#: ../includes/Settings.class.php:435
+msgid "Every 15 minutes"
+msgstr "Elke 15 minuten"
+
+#: ../includes/Settings.class.php:436
+msgid "Every 10 minutes"
+msgstr "Elke 10 minuten"
+
+#: ../includes/Settings.class.php:437
+msgid "Every 5 minutes"
+msgstr "Elke 5 minuten"
+
+#: ../includes/Settings.class.php:446
+msgid "Notifications"
+msgstr "Notificaties"
+
+#: ../includes/Settings.class.php:457
+msgid "Reply-To Name"
+msgstr "Reply-To Naam"
+
+#: ../includes/Settings.class.php:458
+msgid "The name which should appear in the Reply-To field of a notification email"
+msgstr "De naam die in het veld Reply-To van een notificatiemail moet verschijnen"
+
+#: ../includes/Settings.class.php:469
+msgid "Reply-To Email Address"
+msgstr "Reply-To Email Adres"
+
+#: ../includes/Settings.class.php:470
+msgid ""
+"The email address which should appear in the Reply-To field of a "
+"notification email."
+msgstr ""
+"Het e-mailadres, die in het veld Reply-To van een e-mail notificatie moeten "
+"verschijnen."
+
+#: ../includes/Settings.class.php:481
+msgid "Admin Notification"
+msgstr "Admin Notificatie"
+
+#: ../includes/Settings.class.php:482
+msgid ""
+"Send an email notification to an administrator when a new booking is "
+"requested."
+msgstr ""
+"Stuur een e-mailbericht naar een beheerder wanneer een nieuwe reservering "
+"wordt gevraagd."
+
+#: ../includes/Settings.class.php:492
+msgid "Admin Email Address"
+msgstr "Admin Email Adres"
+
+#: ../includes/Settings.class.php:493
+msgid "The email address where admin notifications should be sent."
+msgstr "Het e-mailadres waar admin notificaties moeten worden toegezonden."
+
+#: ../includes/Settings.class.php:502
+msgid "Email Templates"
+msgstr "Email Templates"
+
+#: ../includes/Settings.class.php:516
+msgid "Template Tags"
+msgstr "Template Tags"
+
+#: ../includes/Settings.class.php:518
+msgid ""
+"Use the following tags to automatically add booking information to the "
+"emails."
+msgstr ""
+"Gebruik de volgende tags om automatisch reserveringsinformatie aan de e-"
+"mails toe te voegen."
+
+#: ../includes/Settings.class.php:520
+msgid "Name of the user who made the booking"
+msgstr "Naam van de gebruiker die de reservering heeft gedaan"
+
+#: ../includes/Settings.class.php:523
+msgid "Number of people booked"
+msgstr "Aantal personen voor de reservering"
+
+#: ../includes/Settings.class.php:526
+msgid "Date and time of the booking"
+msgstr "datum en tijd van de reservering"
+
+#: ../includes/Settings.class.php:529
+msgid "Phone number if supplied with the request"
+msgstr "Telefoonnummer als het is opgegeven in de aanvraag"
+
+#: ../includes/Settings.class.php:532
+msgid "Message added to the request"
+msgstr "Bericht van de reserveringsaanvraag"
+
+#: ../includes/Settings.class.php:535
+msgid "A link to the admin panel showing pending bookings"
+msgstr "A link to the admin panel showing pending bookings"
+
+#: ../includes/Settings.class.php:538
+msgid "A link to confirm this booking. Only include this in admin notifications"
+msgstr "A link to confirm this booking. Only include this in admin notifications"
+
+#: ../includes/Settings.class.php:541
+msgid "A link to reject this booking. Only include this in admin notifications"
+msgstr "A link to reject this booking. Only include this in admin notifications"
+
+#: ../includes/Settings.class.php:544
+msgid "The name of this website"
+msgstr "De naam van deze website"
+
+#: ../includes/Settings.class.php:547
+msgid "A link to this website"
+msgstr "Een link naar deze website"
+
+#: ../includes/Settings.class.php:550
+msgid "Current date and time"
+msgstr "Huidige datum en tijd"
+
+#: ../includes/Settings.class.php:561
+msgid "Admin Notification Subject"
+msgstr "Admin notificatie onderwerp"
+
+#: ../includes/Settings.class.php:562
+msgid "The email subject for admin notifications."
+msgstr "The email subject for admin notifications."
+
+#: ../includes/Settings.class.php:573
+msgid "Admin Notification Email"
+msgstr "Admin Notificatie Email"
+
+#: ../includes/Settings.class.php:574
+msgid ""
+"Enter the email an admin should receive when an initial booking request is "
+"made."
+msgstr ""
+"Voer het email adresin dat de admin moet ontvangen wanneer de "
+"reserveringsaanvraag is geinitieerd"
+
+#: ../includes/Settings.class.php:585
+msgid "New Request Email Subject"
+msgstr "Nieuwe aanvraag email onderwerp"
+
+#: ../includes/Settings.class.php:586
+msgid ""
+"The email subject a user should receive when they make an initial booking "
+"request."
+msgstr ""
+"Voer het email onderwerp in dat de aanvrager moet ontvangen wanneer de "
+"reserveringsaanvraag is geinitieerd"
+
+#: ../includes/Settings.class.php:597
+msgid "New Request Email"
+msgstr "Nieuwe aanvraag email"
+
+#: ../includes/Settings.class.php:598
+msgid ""
+"Enter the email a user should receive when they make an initial booking "
+"request."
+msgstr ""
+
+#: ../includes/Settings.class.php:609
+msgid "Confirmed Email Subject"
+msgstr ""
+
+#: ../includes/Settings.class.php:610
+msgid ""
+"The email subject a user should receive when their booking has been "
+"confirmed."
+msgstr ""
+
+#: ../includes/Settings.class.php:621
+msgid "Confirmed Email"
+msgstr ""
+
+#: ../includes/Settings.class.php:622
+msgid "Enter the email a user should receive when their booking has been confirmed."
+msgstr ""
+
+#: ../includes/Settings.class.php:633
+msgid "Rejected Email Subject"
+msgstr ""
+
+#: ../includes/Settings.class.php:634
+msgid "The email subject a user should receive when their booking has been rejected."
+msgstr ""
+
+#: ../includes/Settings.class.php:645
+msgid "Rejected Email"
+msgstr ""
+
+#: ../includes/Settings.class.php:646
+msgid "Enter the email a user should receive when their booking has been rejected."
+msgstr ""
+
+#: ../restaurant-reservations.php:127
+msgid "Booking Manager"
+msgstr "Reserverings Manager"
+
+#: ../restaurant-reservations.php:155
+msgctxt "Title of admin page that lists bookings"
+msgid "Bookings"
+msgstr "Reserveringen"
+
+#: ../restaurant-reservations.php:156
+msgctxt "Title of bookings admin menu item"
+msgid "Bookings"
+msgstr "Reserveringen"
+
+#: ../restaurant-reservations.php:178
+msgid "Restaurant Bookings"
+msgstr "Restaurant reserveringen"
+
+#: ../restaurant-reservations.php:279
+msgid "View the help documentation for Restaurant Reservations"
+msgstr "Bekijk de help documentatie voor Restaurant Reservations"
+
+#: ../restaurant-reservations.php:279
+msgid "Help"
+msgstr "Help"
+
+#: ../includes/Booking.class.php:154
+msgid "Please enter the date you would like to book."
+msgstr "Vult u uw gewenste reserveringsdatum in"
+
+#: ../includes/Booking.class.php:164
+msgid ""
+"The date you entered is not valid. Please select from one of the dates in "
+"the calendar."
+msgstr "De ingevoerde datum is niet juist. Selecteer een datum uit de kalender"
+
+#: ../includes/Booking.class.php:175
+msgid "Please enter the time you would like to book."
+msgstr "Vult u uw gewenste reserveringstijdstip"
+
+#: ../includes/Booking.class.php:185
+msgid ""
+"The time you entered is not valid. Please select from one of the times "
+"provided."
+msgstr "De ingevoerde tijd is niet juist. Selecteer een van de opgegeven tijden."
+
+#: ../includes/Booking.class.php:204
+#, php-format
+msgid "Sorry, bookings can not be made more than %s days in advance."
+msgstr "Sorry, reserveringen kunnen niet gedaan worden dan %s dagen van tevoren."
+
+#: ../includes/Booking.class.php:215
+msgid "Sorry, bookings can not be made in the past."
+msgstr "Sorry, reserveringen kunnen niet in het verleden gedaan worden."
+
+#: ../includes/Booking.class.php:223
+#, php-format
+msgid "Sorry, bookings must be made more than %s days in advance."
+msgstr "Sorry, reserveringen moeten meer dan %s dagen van te voren gedaan worden."
+
+#: ../includes/Booking.class.php:225
+#, php-format
+msgid "Sorry, bookings must be made more than %s hours in advance."
+msgstr "Sorry, reserveringen moeten meer dan %s uur van te voren gedaan worden."
+
+#: ../includes/Booking.class.php:227
+#, php-format
+msgid "Sorry, bookings must be made more than %s mings in advance."
+msgstr "Sorry, reserveringen moeten meer dan %s minuten van te voren gedaan worden."
+
+#: ../includes/Booking.class.php:266
+msgid "Sorry, no bookings are being accepted then."
+msgstr "Sorry, we kunnen op dat moment niet voor u reserveren."
+
+#: ../includes/Booking.class.php:318
+msgid "Sorry, no bookings are being accepted on that date."
+msgstr "Sorry, we kunnen op die datum niet voor u reserveren."
+
+#: ../includes/Booking.class.php:324
+msgid "Sorry, no bookings are being accepted at that time."
+msgstr "Sorry, we kunnen op dat tijdstip niet voor u reserveren."
+
+#: ../includes/Booking.class.php:346
+msgid "Please enter a name for this booking."
+msgstr "Vult u een naam in voor uw reservering."
+
+#: ../includes/Booking.class.php:356
+msgid "Please let us know how many people will be in your party."
+msgstr "Laat ons weten voor hoeveel personen u reserveerd. "
+
+#: ../includes/Booking.class.php:370
+#, php-format
+msgid "We only accept bookings for parties of up to %d people."
+msgstr "We kunnen alleen voor %d personen of meer reserveren."
+
+#: ../includes/Booking.class.php:381
+msgid "Please enter an email address so we can confirm your booking."
+msgstr "Vult u uw emailadres in zodat we uw reservering kunnen bevestigen."
+
+#: ../includes/CustomPostTypes.class.php:38 ../includes/CustomPostTypes.class.php:
+#: 40 ../includes/CustomPostTypes.class.php:41 ../includes/WP_List_Table.
+#: BookingsTable.class.php:76
+msgid "Bookings"
+msgstr "Reserveringen"
+
+#: ../includes/CustomPostTypes.class.php:39 ../includes/WP_List_Table.
+#: BookingsTable.class.php:75
+msgid "Booking"
+msgstr "Reservering"
+
+#: ../includes/CustomPostTypes.class.php:42
+msgid "Add New"
+msgstr "Voeg nieuwe toe"
+
+#: ../includes/CustomPostTypes.class.php:43
+msgid "Add New Booking"
+msgstr "Voeg nieuwe reservering toe"
+
+#: ../includes/CustomPostTypes.class.php:44
+msgid "Edit Booking"
+msgstr "Bewerk reservering"
+
+#: ../includes/CustomPostTypes.class.php:45
+msgid "New Booking"
+msgstr "Nieuwe reservering"
+
+#: ../includes/CustomPostTypes.class.php:46
+msgid "View Booking"
+msgstr "Bekijk reservering"
+
+#: ../includes/CustomPostTypes.class.php:47
+msgid "Search Bookings"
+msgstr "Zoek reservering"
+
+#: ../includes/CustomPostTypes.class.php:48
+msgid "No bookings found"
+msgstr "Geen reserveringen gevonden"
+
+#: ../includes/CustomPostTypes.class.php:49
+msgid "No bookings found in trash"
+msgstr "Geen reserveringen gevonden in de prullemand"
+
+#: ../includes/CustomPostTypes.class.php:50
+msgid "All Bookings"
+msgstr "Alle reserveringen"
+
+#: ../includes/CustomPostTypes.class.php:80
+msgctxt "Booking status when it is pending review"
+msgid "Pending"
+msgstr "In afwachting"
+
+#: ../includes/CustomPostTypes.class.php:86
+msgctxt "Booking status for a confirmed booking"
+msgid "Confirmed"
+msgstr "Bevestigd"
+
+#: ../includes/CustomPostTypes.class.php:93
+#, php-format
+msgid "Confirmed <span class=\"count\">(%s)</span>"
+msgid_plural "Confirmed <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+"Bevestigd \n"
+"<span class=\"count\">(%s)</span>"
+msgstr[1] ""
+"Bevestigd \n"
+"<span class=\"count\">(%s)</span>"
+
+#: ../includes/CustomPostTypes.class.php:97
+msgctxt "Booking status for a closed booking"
+msgid "Closed"
+msgstr "Gesloten"
+
+#: ../includes/CustomPostTypes.class.php:104
+#, php-format
+msgid "Closed <span class=\"count\">(%s)</span>"
+msgid_plural "Closed <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+"Gesloten \n"
+"<span class=\"count\">(%s)</span>"
+msgstr[1] ""
+"Gesloten \n"
+"<span class=\"count\">(%s)</span>"
+
+#: ../includes/Notification.class.php:87
+msgid "View pending bookings"
+msgstr "Bekijk nog niet bevestigde reserveringen"
+
+#: ../includes/Notification.class.php:88
+msgid "Confirm this booking"
+msgstr "Bevestig deze reservering"
+
+#: ../includes/Notification.class.php:89
+msgid "Reject this booking"
+msgstr "Weiger deze reservering"
+
+#: ../includes/Settings.class.php:83
+msgid ""
+"Thanks, your booking request is waiting to be confirmed. Updates will be "
+"sent to the email address you provided."
+msgstr ""
+"Vriendelijk bedankt, \n"
+"uw reserveringsaanvraag is in afwachting om te worden bevestigd."
+
+#: ../includes/Settings.class.php:84
+msgctxt ""
+"Default date format for display. Must match formatting rules at http://amsul."
+"ca/pickadate.js/date.htm#formatting-rules"
+msgid "mmmm d, yyyy"
+msgstr ""
+"d \n"
+"mmmm, yyyy"
+
+#: ../includes/Settings.class.php:85
+msgctxt ""
+"Default time format for display. Must match formatting rules at http://amsul."
+"ca/pickadate.js/time.htm#formats"
+msgid "h:i A"
+msgstr "h:i A"
+
+#: ../includes/Settings.class.php:86
+msgctxt "Default interval in minutes when selecting a time."
+msgid "30"
+msgstr "30"
+
+#: ../includes/Settings.class.php:96
+msgctxt "Default email subject for admin notifications of new bookings"
+msgid "New Booking Request"
+msgstr "Nieuwe reserverings aanvraag"
+
+#: ../includes/Settings.class.php:97
+msgctxt ""
+"Default email sent to the admin when a new booking request is made. The tags "
+"in {brackets} will be replaced by the appropriate content and should be left "
+"in place. HTML is allowed, but be aware that many email clients do not "
+"handle HTML very well."
+msgid ""
+"A new booking request has been made at {site_name}:\n"
+"\n"
+"{user_name}\n"
+"{party} people\n"
+"{date}\n"
+"\n"
+"{bookings_link}\n"
+"{confirm_link}\n"
+"{close_link}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>This message was sent by {site_link} on {current_time}.</em>"
+msgstr ""
+"Een nieuwe reserveringsaanvraag is gedaan op {site_name}:\n"
+"\n"
+"{user_name}\n"
+"{party} personen\n"
+"{date}\n"
+"\n"
+"{bookings_link}\n"
+"{confirm_link}\n"
+"{close_link}\n"
+"\n"
+"&nbsp;"
+
+#: ../includes/Settings.class.php:115
+#, php-format
+msgctxt ""
+"Default email subject sent to user when they request a booking. %s will be "
+"replaced by the website name"
+msgid "Your booking at %s is pending"
+msgstr "Uw reservering voor %s is in afwachting van bevestiging"
+
+#: ../includes/Settings.class.php:116
+msgctxt ""
+"Default email sent to users when they make a new booking request. The tags "
+"in {brackets} will be replaced by the appropriate content and should be left "
+"in place. HTML is allowed, but be aware that many email clients do not "
+"handle HTML very well."
+msgid ""
+"Thanks {user_name},\n"
+"\n"
+"Your booking request is <strong>waiting to be confirmed</strong>.\n"
+"\n"
+"Give us a few moments to make sure that we've got space for you. You will "
+"receive another email from us soon. If this request was made outside of our "
+"normal working hours, we may not be able to confirm it until we're open "
+"again.\n"
+"\n"
+"<strong>Your request details:</strong>\n"
+"{user_name}\n"
+"{party} people\n"
+"{date}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>This message was sent by {site_link} on {current_time}.</em>"
+msgstr ""
+"Beadankt {user_name},\n"
+"\n"
+"Uw reservering is <strong>wachtende op bevestiging</strong>.\n"
+"\n"
+"\n"
+"Geef ons een momentje om te zien of we nog ruimte hebben voor u . U zal een "
+"andere e-mail zo snel mogelijk van ons ontvangen. Als dit verzoek werd "
+"gedaan werd buiten onze normale werktijden , kunnen we niet in staat zijn om "
+"het te bevestigen totdat we weer geopend zijn.\n"
+"\n"
+"\n"
+"<strong>Uw reservering details:</strong>\n"
+"{user_name}\n"
+"{party} personen\n"
+"{date}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>Dit bericht is verzonden door {site_link} op {current_time}.</em>"
+
+#: ../includes/Settings.class.php:135
+#, php-format
+msgctxt ""
+"Default email subject sent to user when their booking is confirmed. %s will "
+"be replaced by the website name"
+msgid "Your booking at %s is confirmed"
+msgstr "Uw reservering op %s is bevestigd"
+
+#: ../includes/Settings.class.php:136
+msgctxt ""
+"Default email sent to users when they make a new booking request. The tags "
+"in {brackets} will be replaced by the appropriate content and should be left "
+"in place. HTML is allowed, but be aware that many email clients do not "
+"handle HTML very well."
+msgid ""
+"Hi {user_name},\n"
+"\n"
+"Your booking request has been <strong>confirmed</strong>. We look forward to "
+"seeing you soon.\n"
+"\n"
+"<strong>Your booking:</strong>\n"
+"{user_name}\n"
+"{party} people\n"
+"{date}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>This message was sent by {site_link} on {current_time}.</em>"
+msgstr ""
+"Hallo {user_name},\n"
+"\n"
+"Uw reservering is<strong>bevestigd</strong>. We kijken er naar julie komst "
+"uit.\n"
+"\n"
+"<strong>Uw reservering:</strong>\n"
+"{user_name}\n"
+"{party} personen\n"
+"{date}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>\n"
+"Dit bericht is verzonden door {site_link} op {current_time}.\n"
+"</em>"
+
+#: ../includes/Settings.class.php:153
+#, php-format
+msgctxt ""
+"Default email subject sent to user when their booking is rejected. %s will "
+"be replaced by the website name"
+msgid "Your booking at %s was not accepted"
+msgstr "Uw reservering op %s is helaas niet mogelijk"
+
+#: ../includes/Settings.class.php:154
+msgctxt ""
+"Default email sent to users when they make a new booking request. The tags "
+"in {brackets} will be replaced by the appropriate content and should be left "
+"in place. HTML is allowed, but be aware that many email clients do not "
+"handle HTML very well."
+msgid ""
+"Hi {user_name},\n"
+"\n"
+"Sorry, we could not accomodate your booking request. We're full or not open "
+"at the time you requested:\n"
+"\n"
+"{user_name}\n"
+"{party} people\n"
+"{date}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>This message was sent by {site_link} on {current_time}.</em>"
+msgstr ""
+"Hallo {user_name},\n"
+"\n"
+"\n"
+"Sorry , we kunnen uw reservering verzoek \n"
+"niet \n"
+"bevestigen. We zijn vol of niet geopend op het moment dat u wilde reserveren:"
+"\n"
+"\n"
+"\n"
+"{user_name}\n"
+"{party} personen\n"
+"{date}\n"
+"\n"
+"&nbsp;\n"
+"\n"
+"<em>\n"
+"Dit bericht is verzonden door {site_link} op {current_time}.\n"
+"</em>"
+
+#: ../includes/Settings.class.php:218 ../includes/Settings.class.php:219
+msgid "Settings"
+msgstr "Instellingen"
+
+#: ../includes/Settings.class.php:231
+msgid "General"
+msgstr "Algemeen"
+
+#: ../includes/Settings.class.php:242
+msgid "Booking Page"
+msgstr "Reserveringspagina"
+
+#: ../includes/Settings.class.php:243
+msgid ""
+"Select a page on your site to automatically display the booking form and "
+"confirmation message."
+msgstr ""
+"Selecteer een pagina op uw site om het boekingsformulier en de bevestiging "
+"automatisch weer te geven."
+
+#: ../includes/Settings.class.php:259
+msgid "Max Party Size"
+msgstr "Maximum aantal personen"
+
+#: ../includes/Settings.class.php:260
+msgid ""
+"Set a maximum allowed party size for bookings. Leave it empty to allow "
+"parties of any size."
+msgstr ""
+"Stel een maximum toegestaan aantal personen voor reserveringen. Laat dit "
+"veld leeg om partijen van elke omvang mogelijk te maken."
+
+#: ../includes/Settings.class.php:261
+msgid "No limit"
+msgstr "Geen limiet"
+
+#: ../includes/Settings.class.php:271
+msgid "Success Message"
+msgstr "Bericht geslaagd"
+
+#: ../includes/Settings.class.php:272
+msgid "Enter the message to display when a booking request is made."
+msgstr ""
+"Voer hier het bericht in dat wordt weergegeven wanneer een reservering "
+"verzoek wordt ingediend."
+
+#: ../includes/template-functions.php:84
+msgid "Book a table"
+msgstr "Reserveer een tafel "
+
+#: ../includes/template-functions.php:89 ../includes/WP_List_Table.BookingsTable.
+#: class.php:267 ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.
+#: class.php:365
+msgid "Date"
+msgstr "Datum"
+
+#: ../includes/template-functions.php:96
+msgid "Time"
+msgstr "Tijd"
+
+#: ../includes/template-functions.php:103 ../includes/WP_List_Table.BookingsTable.
+#: class.php:268
+msgid "Party"
+msgstr "Aantal personen (vul een getal in)"
+
+#: ../includes/template-functions.php:110
+msgid "Contact Details"
+msgstr "Contact Gegevens"
+
+#: ../includes/template-functions.php:115 ../includes/WP_List_Table.BookingsTable.
+#: class.php:269
+msgid "Name"
+msgstr "Naam"
+
+#: ../includes/template-functions.php:122 ../includes/WP_List_Table.BookingsTable.
+#: class.php:270
+msgid "Email"
+msgstr "Email"
+
+#: ../includes/template-functions.php:129 ../includes/WP_List_Table.BookingsTable.
+#: class.php:271
+msgid "Phone"
+msgstr "Telefoonnummer"
+
+#: ../includes/template-functions.php:135
+msgid "Add a Message"
+msgstr "Voeg een bericht toe"
+
+#: ../includes/template-functions.php:141 ../includes/WP_List_Table.BookingsTable.
+#: class.php:272
+msgid "Message"
+msgstr "Bericht"
+
+#: ../includes/template-functions.php:146
+msgid "Request Booking"
+msgstr "Vraag reservering aan"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:172 ..
+#: includes/WP_List_Table.BookingsTable.class.php:235
+msgid "All"
+msgstr "Alle"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:173
+msgid "Today"
+msgstr "Vandaag"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:174
+msgid "Upcoming"
+msgstr "Aanstaande"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:180
+msgctxt "Separator between two dates in a date range"
+msgid "&mdash;"
+msgstr "&mdash;"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:192
+msgid "Start Date:"
+msgstr "Start datum:"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:193
+msgid "Start Date"
+msgstr "Start datum"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:194
+msgid "End Date:"
+msgstr "Eind datum:"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:195
+msgid "End Date"
+msgstr "Eind datum"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:196
+msgid "Apply"
+msgstr "Pas toe"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:198
+msgid "Clear Filter"
+msgstr "Verwijder filter"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:236
+msgid "Pending"
+msgstr "In afwachting"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:237
+msgid "Confirmed"
+msgstr "Bevestigd"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:238
+msgid "Closed"
+msgstr "Gesloten"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:239
+msgid "Trash"
+msgstr "Prullebak"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:273
+msgid "Status"
+msgstr "Status"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:324
+msgctxt "Status label for bookings put in the trash"
+msgid "Trash"
+msgstr "Prullebak"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:356
+msgid "Delete"
+msgstr "Verwijder"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:357
+msgid "Set To Confirmed"
+msgstr "Ingesteld voor bevestiging"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:358
+msgid "Set To Pending Review"
+msgstr "Ingesteld in afwachting van bevestiging"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:359
+msgid "Set To Closed"
+msgstr "Ingesteld om gesloten te worden"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:471
+#, php-format
+msgid "%d booking deleted successfully."
+msgid_plural "%d bookings deleted successfully."
+msgstr[0] "%d reservering succesvol verwijderd"
+msgstr[1] "%d reserveringen succesvol verwijderd"
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:474
+#, php-format
+msgid "%d booking confirmed."
+msgid_plural "%d bookings confirmed."
+msgstr[0] "%d reservering bevestigd."
+msgstr[1] "%d reserveringen bevestigd."
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:477
+#, php-format
+msgid "%d booking set to pending."
+msgid_plural "%d bookings set to pending."
+msgstr[0] "%d reserveringsstatus is in wachtende op bevestiging."
+msgstr[1] "%d reserveringenstatus is in wachtende op bevestiging."
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:480
+#, php-format
+msgid "%d booking closed."
+msgid_plural "%d bookings closed."
+msgstr[0] "%d reservering gesloten."
+msgstr[1] "%d reserveringen gesloten."
+
+#: ../includes/WP_List_Table.BookingsTable.class.php:492
+#, php-format
+msgid "%d booking had errors and could not be processed."
+msgid_plural "%d bookings had errors and could not be processed."
+msgstr[0] "%d uw reservering heeft fouten en kan niet worden verwerkt."
+msgstr[1] "%d uw reserveringen heben fouten en kunnen niet worden verwerkt."
+
+#: ../includes/WP_Widget.BookingFormWidget.class.php:25
+msgid "Booking Form"
+msgstr "Reserveringsformulier"
+
+#: ../includes/WP_Widget.BookingFormWidget.class.php:26
+msgid "Display a form to accept bookings."
+msgstr "Toon een formulier om reserveringen te aanvaarden."
+
+#: ../includes/WP_Widget.BookingFormWidget.class.php:64
+msgid "Title"
+msgstr "Titel"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:266
+msgid "Add new scheduling rule"
+msgstr "Voeg een nieuwe planningsregel toe"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:293 ..
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:306
+msgctxt "Format of a scheduling rule"
+msgid "Weekly"
+msgstr "Wekelijks"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:295 ..
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:314
+msgctxt "Format of a scheduling rule"
+msgid "Monthly"
+msgstr "Maandelijks"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:297 ..
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:322
+msgctxt "Format of a scheduling rule"
+msgid "Date"
+msgstr "Datum"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:333
+msgctxt "Label for selecting days of the week in a scheduling rule"
+msgid "Days of the week"
+msgstr "Dagen van de week"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:349
+msgctxt "Label for selecting weeks of the month in a scheduling rule"
+msgid "Weeks of the month"
+msgstr "Weken van de maand"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:380
+msgctxt "Label to select time slot for a scheduling rule"
+msgid "Time"
+msgstr "Tijd"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:385
+msgctxt "Label to set a scheduling rule to last all day"
+msgid "All day"
+msgstr "Gehele dag"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:394
+msgctxt "Label for the starting time of a scheduling rule"
+msgid "Start"
+msgstr "Start"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:402
+msgctxt "Label for the ending time of a scheduling rule"
+msgid "End"
+msgstr "Eind"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:411
+msgctxt "Prompt displayed when a scheduling rule is set without any time restrictions."
+msgid ""
+"All day long. Want to <a href=\"#\" data-format=\"time-slot\">set a time "
+"slot</a>?"
+msgstr ""
+"Ghele dag. Wilt u  <a href=\"#\" data-format=\"time-slot\">een tijdsperiode "
+"instellen</a>?"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:430 ..
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:433
+msgid "Open and close this rule"
+msgstr "Openen en sluiten van deze regel"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:436
+msgid "Delete rule"
+msgstr "Verwijder regel"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:439
+msgid "Delete scheduling rule"
+msgstr "Verwijder planningsregel"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:523
+msgctxt ""
+"Brief default description of a scheduling rule when no weekdays or weeks are "
+"included in the rule."
+msgid "Never"
+msgstr "Nooit"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:524
+msgctxt ""
+"Brief default description of a scheduling rule when all the weekdays/weeks "
+"are included in the rule."
+msgid "Every day"
+msgstr "Elke dag"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:525
+msgctxt ""
+"Brief default description of a scheduling rule when some weekdays are "
+"included on only some weeks of the month. The {days} and {weeks} bits should "
+"be left alone and will be replaced by a comma-separated list of days (the "
+"first one) and weeks (the second one) in the following format: M, T, W on "
+"the first, second week of the month"
+msgid "{days} on the {weeks} week of the month"
+msgstr "{days} van de {weeks} week van de maand"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:526
+msgctxt ""
+"Brief description of a scheduling rule when some weeks of the month are "
+"included but all or no weekdays are selected.  {weeks}  should be left alone "
+"and will be replaced by a comma-separated list of weeks (the second one) in "
+"the following format: First, second week of the month"
+msgid "{weeks} week of the month"
+msgstr "{weeks} week van de maand"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:527
+msgctxt "Brief default description of a scheduling rule when no times are set"
+msgid "All day"
+msgstr "Elke dag"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:528
+msgctxt ""
+"Brief default description of a scheduling rule when an end time is set but "
+"no start time. If the end time is 6pm, it will read: Ends at 6pm."
+msgid "Ends at"
+msgstr "Eindigd op"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:529
+msgctxt ""
+"Brief default description of a scheduling rule when a start time is set but "
+"no end time. If the start time is 6pm, it will read: Starts at 6pm."
+msgid "Starts at"
+msgstr "Begint op"
+
+#: ../lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:530
+msgctxt "Default separator between times of a scheduling rule."
+msgid "&mdash;"
+msgstr "&mdash;"
