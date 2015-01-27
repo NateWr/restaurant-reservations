@@ -83,12 +83,14 @@ class rtbNotificationEmail extends rtbNotification {
 	public function set_to_email() {
 
 		if ( $this->target == 'user' ) {
-			$this->to_email = empty( $this->booking->email ) ? null : $this->booking->email;
+			$to_email = empty( $this->booking->email ) ? null : $this->booking->email;
 
 		} else {
 			global $rtb_controller;
-			$this->to_email = $rtb_controller->settings->get_setting( 'admin-email-address' );
+			$to_email = $rtb_controller->settings->get_setting( 'admin-email-address' );
 		}
+
+		$this->to_email = apply_filters( 'rtb_notification_email_to_email', $to_email, $this );
 
 	}
 
@@ -101,12 +103,15 @@ class rtbNotificationEmail extends rtbNotification {
 		global $rtb_controller;
 
 		if ( $this->target == 'user' ) {
-			$this->from_email = $rtb_controller->settings->get_setting( 'reply-to-address' );
-			$this->from_name = $rtb_controller->settings->get_setting( 'reply-to-name' );
+			$from_email = $rtb_controller->settings->get_setting( 'reply-to-address' );
+			$from_name = $rtb_controller->settings->get_setting( 'reply-to-name' );
 		} else {
-			$this->from_email = $this->booking->email;
-			$this->from_name = $this->booking->name;
+			$from_email = $this->booking->email;
+			$from_name = $this->booking->name;
 		}
+
+		$this->from_email = apply_filters( 'rtb_notification_email_from_email', $from_email, $this );
+		$this->from_name = apply_filters( 'rtb_notification_email_from_name', $from_name, $this );
 
 	}
 
@@ -120,17 +125,21 @@ class rtbNotificationEmail extends rtbNotification {
 
 		if( $this->event == 'new_submission' ) {
 			if ( $this->target == 'admin' ) {
-				$this->subject = $this->process_subject_template( $rtb_controller->settings->get_setting( 'subject-booking-admin' ) );
+				$subject = $rtb_controller->settings->get_setting( 'subject-booking-admin' );
 			} elseif ( $this->target == 'user' ) {
-				$this->subject = $this->process_subject_template( $rtb_controller->settings->get_setting( 'subject-booking-user' ) );
+				$subject = $rtb_controller->settings->get_setting( 'subject-booking-user' );
 			}
 
 		} elseif ( $this->event == 'pending_to_confirmed' ) {
-			$this->subject = $this->process_subject_template( $rtb_controller->settings->get_setting( 'subject-confirmed-user' ) );
+			$subject = $rtb_controller->settings->get_setting( 'subject-confirmed-user' );
 
 		} elseif ( $this->event == 'pending_to_closed' ) {
-			$this->subject = $this->process_subject_template( $rtb_controller->settings->get_setting( 'subject-rejected-user' ) );
+			$subject = $rtb_controller->settings->get_setting( 'subject-rejected-user' );
+		} else {
+			$subject = '';
 		}
+
+		$this->subject = $this->process_subject_template( apply_filters( 'rtb_notification_email_subject', $subject, $this ) );
 
 	}
 
@@ -145,6 +154,7 @@ class rtbNotificationEmail extends rtbNotification {
 		$headers = "From: " . stripslashes_deep( html_entity_decode( $rtb_controller->settings->get_setting( 'reply-to-name' ), ENT_COMPAT, 'UTF-8' ) ) . " <" . apply_filters( 'rtb_notification_email_header_from_email', get_option( 'admin_email' ) ) . ">\r\n";
 		$headers .= "Reply-To: " . stripslashes_deep( html_entity_decode( $this->from_name, ENT_COMPAT, 'UTF-8' ) ) . " <" . $this->from_email . ">\r\n";
 		$headers .= "Content-Type: text/html; charset=utf-8\r\n";
+
 		$this->headers = apply_filters( 'rtb_notification_email_headers', $headers, $this );
 
 	}
@@ -159,26 +169,30 @@ class rtbNotificationEmail extends rtbNotification {
 
 		if ( $this->event == 'new_submission' ) {
 			if ( $this->target == 'user' ) {
-				$template = 'template-booking-user';
+				$template = $this->get_template( 'template-booking-user' );
 			} elseif ( $this->target == 'admin' ) {
-				$template = 'template-booking-admin';
+				$template = $this->get_template( 'template-booking-admin' );
 			}
 
 		} elseif ( $this->event == 'pending_to_confirmed' ) {
 			if ( $this->target == 'user' ) {
-				$template = 'template-confirmed-user';
+				$template = $this->get_template( 'template-confirmed-user' );
 			}
 
 		} elseif ( $this->event == 'pending_to_closed' ) {
 			if ( $this->target == 'user' ) {
-				$template = 'template-rejected-user';
+				$template = $this->get_template( 'template-rejected-user' );
 			}
+		} else {
+			$template = '';
 		}
 
-		if ( !isset( $template ) ) {
+		$template = apply_filters( 'rtb_notification_email_template', $template, $this );
+
+		if ( empty( $template ) ) {
 			$this->message = '';
 		} else {
-			$this->message = wpautop( $this->process_template( $this->get_template( $template ) ) );
+			$this->message = wpautop( $this->process_template( $template ) );
 		}
 
 	}
