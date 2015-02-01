@@ -125,33 +125,6 @@ jQuery(document).ready(function ($) {
 					rtb_booking_form.update_timepicker_range();
 				}
 			});
-
-			// Scroll the browser to the date/time input area when the
-			// picker is closed. This is a temporary fix for a bug in
-			// Firefox/IE and should be removed once 3.5.5 is shipped.
-			// https://github.com/amsul/pickadate.js/issues/609
-			rtb_booking_form.datepicker.on( {
-				close: function() {
-					var body = $( 'html,body' );
-
-					if ( !body.hasClass( 'rtb-hide-body-scroll' ) ) {
-						body.animate({
-							scrollTop: ( $( '#rtb-date' ).offset().top - 100 ),
-						}, 600);
-					}
-				}
-			});
-			rtb_booking_form.timepicker.on( {
-				close: function() {
-					var body = $( 'html,body' );
-
-					if ( !body.hasClass( 'rtb-hide-body-scroll' ) ) {
-						body.animate({
-							scrollTop: ( $( '#rtb-time' ).offset().top - 100 ),
-						}, 600);
-					}
-				}
-			});
 		}
 	};
 
