@@ -22,6 +22,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Custom user role to manage bookings
 * Add your booking form to any page, post or widget area
 * Customize all notification messages, and date and time formats
+* Add and edit bookings from the admin panel
 
 More features will be added to this plugin and addons will be created which extend the functionality or integrate with third-party services. Follow future developments at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
 
@@ -87,9 +88,25 @@ If you make a translation, please help others out by adding it to the [GitHub re
 6. Customize the admin notification email when a new booking request is made. Add a quick link to confirm or reject a request straight from the email.
 7. Customize the notification email sent to a user when they make a new booking request.
 8. Customize the notification email sent to a user when their booking is confirmed. You can also customize the email sent when a booking is rejected.
-9. Access a short guide from your Plugins list to help you get started quickly.
+9. Add and edit bookings from an admin panel.
+10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.3 (2015-02-03) =
+* Add and edit bookings from the admin area
+* Add complete German translation from scolast34
+* Add partial Dutch and Chilean translations
+* Change Party text field to a dropdown selection
+* Bookings admin panel shows upcoming bookings by default
+* Use new HTML5 input types for email and phone
+* Change textdomain to comply with upcoming translation standards
+* Improve WPML compatibility
+* New support for assigning custom classes to fields, fieldsets and legends. h/t Primoz Cigler
+* New filters for email notifications
+* Fix: some bookings menu pages don't load when screen names are translated
+* Fix: addons list won't load if allow_url_fopen is disabled
+
 
 = 1.2.3 (2014-11-04) =
 * Add a {user_email} notification template tag
@@ -150,11 +167,14 @@ If you make a translation, please help others out by adding it to the [GitHub re
 
 == Upgrade Notice ==
 
+= 1.3 =
+This update adds support for adding and editing bookings from the admin panel. The bookings panel now shows upcoming bookings by default. The Party field in the booking form is now a dropdown selection. Plus a bunch of new features and fixes. Read the full changelog for details.
+
 = 1.2.3 =
 This update adds a {user_email} notification template tag and improves the mail headers on notifications to mitigate spam risk. It also adds the missing translation for the Clear button in the time picker for many languages. More minor bug fixes listed in the changelog.
 
 = 1.2.2 =
-This update adds support for a new MailChimp addon that will be released soon. An addons page is now available under the Bookings menu. A bug in which custom date/time formats could cause validation errors has been fixed. New hooks are now in place so that it's easier to customize the form output. 
+This update adds support for a new MailChimp addon that will be released soon. An addons page is now available under the Bookings menu. A bug in which custom date/time formats could cause validation errors has been fixed. New hooks are now in place so that it's easier to customize the form output.
 
 = 1.2.1 =
 This is a minor maintenance update which fixes a couple of small bugs.
