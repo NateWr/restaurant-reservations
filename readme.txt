@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.2.3
+Stable tag: 1.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -95,6 +95,7 @@ If you make a translation, please help others out by adding it to the [GitHub re
 
 = 1.3 (2015-02-03) =
 * Add and edit bookings from the admin area
+* Fix: date and time pickers broken on iOS 8 devices
 * Add complete German translation from scolast34
 * Add partial Dutch and Chilean translations
 * Change Party text field to a dropdown selection
