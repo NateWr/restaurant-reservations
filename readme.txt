@@ -16,9 +16,9 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 Accept restaurant reservations and table bookings online. Quickly confirm or reject bookings, send out custom email notifications, restrict booking times and more.
 
 * Quickly confirm or reject a booking
-* Admin email notification when a booking request is made
-* Customer email notifications when their request is confirmed or rejected
-* Limit available booking times
+* Receive an email notification when a booking request is made
+* Notify a customer by email when their request is confirmed or rejected
+* Automatically block bookings when you're closed, including holidays and one-off openings
 * Custom user role to manage bookings
 * Add your booking form to any page, post or widget area
 * Customize all notification messages, and date and time formats
@@ -30,7 +30,7 @@ This plugin is part of a group of plugins for restaurants. Check out the [Food a
 
 = How to use =
 
-There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? One of the [screenshots](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
+There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? The last [screenshot](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
 
 = Addons =
 [MailChimp for Restaurant Reservations](http://themeofthecrop.com/plugin/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
