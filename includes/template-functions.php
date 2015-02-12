@@ -296,7 +296,7 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
-	$options = $args['options'];
+	$options = is_array( $args['options'] ) ? $args['options'] : array();
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
 	?>
@@ -311,6 +311,92 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 			<option value="<?php echo esc_attr( $opt_value ); ?>" <?php selected( $opt_value, $value ); ?>><?php echo esc_attr( $opt_label ); ?></option>
 			<?php endforeach; ?>
 		</select>
+	</div>
+
+	<?php
+
+}
+} // endif;
+
+/**
+ * Print a checkbox form field
+ *
+ * @uses rtb_print_form_tick_field
+ * @since 1.3.1
+ */
+if ( !function_exists( 'rtb_print_form_checkbox_field' ) ) {
+function rtb_print_form_checkbox_field( $slug, $title, $value, $args ) {
+	$args['type'] = 'checkbox';
+	rtb_print_form_tick_field( $slug, $title, $value, $args );
+}
+} // endif;
+
+/**
+ * Print a radio button form field
+ *
+ * @uses rtb_print_form_tick_field
+ * @since 1.3.1
+ */
+if ( !function_exists( 'rtb_print_form_radio_field' ) ) {
+function rtb_print_form_radio_field( $slug, $title, $value, $args ) {
+	$args['type'] = 'radio';
+	rtb_print_form_tick_field( $slug, $title, $value, $args );
+}
+} // endif;
+
+/**
+ * Print a checkbox/radio button form field
+ *
+ * @since 1.3.1
+ */
+if ( !function_exists( 'rtb_print_form_tick_field' ) ) {
+function rtb_print_form_tick_field( $slug, $title, $value, $args ) {
+
+	$slug = esc_attr( $slug );
+	$value = esc_attr( $value );
+	$options = is_array( $args['options'] ) ? $args['options'] : array();
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$type = isset( $args['type'] ) ? esc_attr( $args['type'] ) : 'checkbox';
+
+	?>
+
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
+		<?php echo rtb_print_form_error( $slug ); ?>
+		<label>
+			<?php echo $title; ?>
+		</label>
+		<?php foreach ( $options as $opt_value => $opt_label ) : ?>
+		<label>
+			<input type="<?php echo $type; ?>" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo esc_attr( $opt_value ); ?>" <?php checked( $opt_value, $value ); ?>>
+			<?php echo $opt_label; ?>
+		</label>
+		<?php endforeach; ?>
+	</div>
+
+	<?php
+
+}
+} // endif;
+
+/**
+ * Print a confirm prompt form field
+ *
+ * @since 1.3.1
+ */
+if ( !function_exists( 'rtb_print_form_confirm_field' ) ) {
+function rtb_print_form_confirm_field( $slug, $title, $value, $args ) {
+
+	$slug = esc_attr( $slug );
+	$value = esc_attr( $value );
+	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+
+	?>
+
+	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
+		<label for="rtb-<?php echo $slug; ?>">
+			<input type="checkbox" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="1" <?php checked( $value, 1 ); ?>>
+			<?php echo $title; ?>
+		</label>
 	</div>
 
 	<?php
