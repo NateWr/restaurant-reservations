@@ -367,7 +367,7 @@ function rtb_print_form_tick_field( $slug, $title, $value, $args ) {
 		</label>
 		<?php foreach ( $options as $opt_value => $opt_label ) : ?>
 		<label>
-			<input type="<?php echo $type; ?>" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo esc_attr( $opt_value ); ?>" <?php checked( $opt_value, $value ); ?>>
+			<input type="<?php echo $type; ?>" name="rtb-<?php echo $slug; echo $type == 'checkbox' ? '[]' : ''; ?>" id="rtb-<?php echo $slug; ?>" value="<?php echo esc_attr( $opt_value ); ?>" <?php checked( $opt_value, $value ); ?>>
 			<?php echo $opt_label; ?>
 		</label>
 		<?php endforeach; ?>
