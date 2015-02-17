@@ -328,7 +328,7 @@ if ( !function_exists( 'rtb_print_form_checkbox_field' ) ) {
 function rtb_print_form_checkbox_field( $slug, $title, $value, $args ) {
 
 	$slug = esc_attr( $slug );
-	$value = array_map( 'esc_attr', $value );
+	$value = !empty( $value ) ? array_map( 'esc_attr', $value ) : array();
 	$options = is_array( $args['options'] ) ? $args['options'] : array();
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
 
@@ -341,7 +341,7 @@ function rtb_print_form_checkbox_field( $slug, $title, $value, $args ) {
 		</label>
 		<?php foreach ( $options as $opt_value => $opt_label ) : ?>
 		<label>
-			<input type="checkbox" name="rtb-<?php echo $slug; ?>[]" id="rtb-<?php echo $slug; ?>" value="<?php echo esc_attr( $opt_value ); ?>"<?php echo in_array( $opt_value, $value ) ? ' checked' : ''; ?>>
+			<input type="checkbox" name="rtb-<?php echo $slug; ?>[]" id="rtb-<?php echo $slug; ?>" value="<?php echo esc_attr( $opt_value ); ?>"<?php echo !empty( $value ) && in_array( $opt_value, $value ) ? ' checked' : ''; ?>>
 			<?php echo $opt_label; ?>
 		</label>
 		<?php endforeach; ?>
