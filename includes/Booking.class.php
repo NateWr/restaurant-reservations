@@ -414,7 +414,7 @@ class rtbBooking {
 		// Check if any required fields are empty
 		$required_fields = $rtb_controller->settings->get_required_fields();
 		foreach( $required_fields as $slug => $field ) {
-			if ( !$this->field_has_error( $slug ) && empty( $_POST[ 'rtb-' . $slug ] ) ) {
+			if ( !$this->field_has_error( $slug ) && $this->is_field_empty( $slug ) ) {
 				$this->validation_errors[] = array(
 					'field'			=> $slug,
 					'post_variable'	=> '',
@@ -453,6 +453,24 @@ class rtbBooking {
 			if ( $error['field'] == $field_slug ) {
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if a field is missing
+	 *
+	 * Checks for empty strings and arrays, but accepts '0'
+	 * @since 0.1
+	 */
+	public function is_field_empty( $slug ) {
+
+		$input = isset( $_POST['rtb-' . $slug ] ) ? $_POST['rtb-' . $slug] : '';
+
+		if ( ( is_string( $input ) && trim( $input ) == '' ) ||
+			( is_array( $input ) && empty( $input ) ) ) {
+			return true;
 		}
 
 		return false;
