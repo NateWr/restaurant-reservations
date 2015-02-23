@@ -22,6 +22,8 @@ class rtbAdminBookings {
 		add_action( 'wp_ajax_rtb-admin-booking-modal', array( $this, 'booking_modal_ajax' ) );
 		add_action( 'wp_ajax_nopriv_rtb-admin-trash-booking' , array( $this , 'nopriv_ajax' ) );
 		add_action( 'wp_ajax_rtb-admin-trash-booking', array( $this, 'trash_booking_ajax' ) );
+		add_action( 'wp_ajax_nopriv_rtb-admin-email-modal' , array( $this , 'nopriv_ajax' ) );
+		add_action( 'wp_ajax_rtb-admin-email-modal', array( $this, 'email_modal_ajax' ) );
 
 		// Validate post status and notification fields
 		add_action( 'rtb_validate_booking_submission', array( $this, 'validate_admin_fields' ) );
@@ -86,8 +88,11 @@ class rtbAdminBookings {
 	 * @since 0.0.1
 	 */
 	public function print_booking_form_modal() {
+
+		global $rtb_controller;
 		?>
 
+		<!-- Restaurant Reservations add/edit booking modal -->
 		<div id="rtb-booking-modal" class="rtb-admin-modal">
 			<div class="rtb-booking-form rtb-container">
 				<form method="POST">
@@ -111,6 +116,47 @@ class rtbAdminBookings {
 						<?php _e( 'Add Booking', 'restaurant-reservations' ); ?>
 					</button>
 					<a href="#" class="button" id="rtb-cancel-booking-modal">
+						<?php _e( 'Cancel', 'restaurant-reservations' ); ?>
+					</a>
+					<div class="action-status">
+						<span class="spinner loading"></span>
+						<span class="dashicons dashicons-no-alt error"></span>
+						<span class="dashicons dashicons-yes success"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- Restaurant Reservations send email modal -->
+		<div id="rtb-email-modal" class="rtb-admin-modal">
+			<div class="rtb-email-form rtb-container">
+				<form method="POST">
+					<input type="hidden" name="action" value="admin_send_email">
+					<input type="hidden" name="ID" value="">
+					<input type="hidden" name="name" value="">
+					<input type="hidden" name="email" value="">
+
+					<fieldset>
+						<legend><?php _e( 'Send Email', 'retaurant-reservations' ); ?></legend>
+
+						<div class="to">
+							<label for="rtb-email-to"><?php _ex( 'To', 'Label next to the email address to which an email will be sent', 'restaurant-reservations' ); ?></label>
+							<span class="rtb-email-to"></span>
+						</div>
+						<div class="subject">
+							<label for="rtb-email-subject"><?php _e( 'Subject', 'restaurant-reservations' ); ?></label>
+							<input type="text" name="rtb-email-subject" placeholder="<?php echo $rtb_controller->settings->get_setting( 'subject-admin-notice'); ?>">
+						</div>
+						<div class="message">
+							<label for="rtb-email-message"><?php _e( 'Message', 'restaurant-reservations' ); ?></label>
+							<textarea name="rtb-email-message" id="rtb-email-message"></textarea>
+						</div>
+					</fieldset>
+
+					<button type="submit" class="button-primary">
+						<?php _e( 'Add Booking', 'restaurant-reservations' ); ?>
+					</button>
+					<a href="#" class="button" id="rtb-cancel-email-modal">
 						<?php _e( 'Cancel', 'restaurant-reservations' ); ?>
 					</a>
 					<div class="action-status">
@@ -391,10 +437,78 @@ class rtbAdminBookings {
 				)
 			);
 		}
-
-
-
 	}
+
+	/**
+	 * Handle ajax requests to send an email
+	 *
+	 * @since 1.3.1
+	 */
+	public function email_modal_ajax() {
+
+		global $rtb_controller;
+
+		// Authenticate request
+		if ( !check_ajax_referer( 'rtb-admin', 'nonce' ) || !current_user_can( 'manage_bookings' ) ) {
+			$this->nopriv_ajax();
+		}
+
+		// Set up $_POST object for validation
+		foreach( $_POST['email'] as $field ) {
+			$_POST[ $field['name'] ] = $field['value'];
+		}
+
+		$id = (int) $_POST['ID'];
+		$name = sanitize_text_field( $_POST['name'] );
+		$email = sanitize_text_field( $_POST['email'] );
+		$subject = sanitize_text_field( $_POST['rtb-email-subject'] );
+		$message = wp_kses_post( $_POST['rtb-email-message'] );
+
+		if ( empty( $message ) ) {
+			wp_send_json_error(
+				array(
+					'error'		=> 'email_missing_message',
+					'msg'		=> __( 'Please enter a message before sending the email.', 'restaurant-reservations' ),
+				)
+			);
+		}
+
+		if ( empty( $id ) || empty( $name ) || empty( $email ) ) {
+			wp_send_json_error(
+				array(
+					'error'		=> 'email_missing_data',
+					'msg'		=> __( 'The email could not be sent because some critical information was missing.', 'restaurant-reservations' ),
+				)
+			);
+		}
+
+		require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
+		$booking = new rtbBooking();
+
+		if ( !$booking->load_post( $id ) ) {
+			wp_send_json_error(
+				array(
+					'error'		=> 'email_missing_booking',
+					'msg'		=> __( 'There was an error loading the booking and the email was not sent.', 'restaurant-reservations' ),
+				)
+			);
+		}
+
+		$email = new rtbNotificationEmail( 'admin_email_notice', 'user' );
+		$email->subject = $rtb_controller->settings->get_setting( 'subject-admin-notice' );
+		$email->message = $message;
+		$email->set_booking( $booking );
+		if ( $email->prepare_notification() ) {
+			$email->send_notification();
+		}
+
+		// Store email in postmeta for log
+		$booking->add_log( 'email', $email->subject, $email->message );
+		$booking->insert_post_data();
+
+		wp_send_json_success();
+	}
+
 
 	/**
 	 * Validate post status and notification fields

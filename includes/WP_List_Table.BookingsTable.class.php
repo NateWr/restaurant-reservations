@@ -325,6 +325,9 @@ class rtbBookingsTable extends WP_List_Table {
 				break;
 			case 'email' :
 				$value = $booking->email;
+				$value .= '<div class="actions">';
+				$value .= '<a href="#" data-id="' . esc_attr( $booking->ID ) . '" data-action="email" data-email="' . esc_attr( $booking->email ) . '" data-name="' . $booking->name . '">' . __( 'Send Email', 'restaurant-reservations' ) . '</a>';
+				$value .= '</div>';
 				break;
 			case 'phone' :
 				$value = $booking->phone;

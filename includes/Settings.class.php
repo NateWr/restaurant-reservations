@@ -165,6 +165,9 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'Default email sent to users when they make a new booking request. The tags in {brackets} will be replaced by the appropriate content and should be left in place. HTML is allowed, but be aware that many email clients do not handle HTML very well.',
 				'restaurant-reservations'
 			),
+
+			// Email sent to a user with a custom update notice from the admin
+			'subject-admin-notice'			=> sprintf( _x( 'Update regarding your booking at %s', 'Default email subject sent to users when the admin sends a custom notice email from the bookings panel.', 'restaurant-reservations' ), get_bloginfo( 'name' ) ),
 		);
 
 		$i8n = str_replace( '-', '_', get_bloginfo( 'language' ) );
@@ -640,6 +643,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'title'			=> __( 'Rejected Email', 'restaurant-reservations' ),
 				'description'	=> __( 'Enter the email a user should receive when their booking has been rejected.', 'restaurant-reservations' ),
 				'default'		=> $this->defaults['template-rejected-user'],
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-notifications-templates',
+			'text',
+			array(
+				'id'			=> 'subject-admin-notice',
+				'title'			=> __( 'Admin Update Subject', 'restaurant-reservations' ),
+				'description'	=> sprintf( __( 'The email subject a user should receive when an admin sends them a custom email message from the %sbookings panel%s.', 'restaurant-reservations' ), '<a href="' . admin_url( '?page=rtb-bookings' ) . '">', '</a>' ),
+				'placeholder'	=> $this->defaults['subject-admin-notice'],
 			)
 		);
 

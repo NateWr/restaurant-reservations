@@ -100,8 +100,8 @@ class rtbNotifications {
 
 		// If the post status is not pending, trigger a post status
 		// transition as though it's gone from pending_to_{status}
-		if ( $booking->status != 'pending' ) {
-			do_action( 'pending_to_' . $booking->status, get_post( $booking->ID ) );
+		if ( $booking->post_status != 'pending' ) {
+			do_action( 'pending_to_' . $booking->post_status, get_post( $booking->ID ) );
 
 		// Otherwise proceed with the new_submission event
 		} else {

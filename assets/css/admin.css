@@ -85,7 +85,7 @@
 	width: 5em;
 }
 
-#rtb-bookings-table .column-date .actions {
+#rtb-bookings-table td .actions {
 	line-height: 28px;
 	opacity: 0;
 	-webkit-transition: opacity 0.3s 0;
@@ -93,7 +93,7 @@
 	transition: opacity 0.3s 0;
 }
 
-#rtb-bookings-table tr:hover .column-date .actions {
+#rtb-bookings-table tr:hover td .actions {
 	opacity: 1;
 }
 
@@ -211,41 +211,55 @@
 	transition-duration: 0.3s;
 }
 
-#rtb-booking-modal fieldset {
+.rtb-admin-modal fieldset {
 	padding: 0;
 }
 
-#rtb-booking-modal label {
-	color: #777;
-	font-style: italic;
+.rtb-admin-modal fieldset > div {
+	margin-top: 1em;
 }
 
-#rtb-booking-modal button {
+.rtb-admin-modal legend {
+	font-size: 1.5em;
+	margin: 0 0 0.83em;
+	font-weight: 400;
+	padding: 0;
+}
+
+.rtb-admin-modal label {
+	color: #777;
+	font-style: italic;
+	display: block;
+}
+
+#rtb-booking-modal button,
+#rtb-email-modal button {
 	margin-top: 1em;
 	margin-right: 1em;
 }
 
-#rtb-booking-modal .button {
+#rtb-booking-modal .button,
+#rtb-email-modal .button {
 	margin-top: 1em;
 }
 
-#rtb-booking-modal button,
-#rtb-booking-modal .button {
+.rtb-admin-modal button,
+.rtb-admin-modal .button {
 	opacity: 1;
 	transition: opacity .25s ease-in-out;
 	-moz-transition: opacity .25s ease-in-out;
 	-webkit-transition: opacity .25s ease-in-out;
 }
 
-#rtb-booking-modal button:disabled,
-#rtb-booking-modal .button:disabled {
+.rtb-admin-modal button:disabled,
+.rtb-admin-modal .button:disabled {
 	opacity: 0.5;
 	transition: opacity .25s ease-in-out;
 	-moz-transition: opacity .25s ease-in-out;
 	-webkit-transition: opacity .25s ease-in-out;
 }
 
-#rtb-booking-modal .action-status {
+.rtb-admin-modal .action-status {
 	display: inline-block;
 	float: right;
 	margin-top: 1em;
@@ -255,11 +269,11 @@
 	-webkit-transition: opacity .25s ease-in-out;
 }
 
-#rtb-booking-modal .action-status.is-visible {
+.rtb-admin-modal .action-status.is-visible {
 	opacity: 1;
 }
 
-#rtb-booking-modal .action-status > span {
+.rtb-admin-modal .action-status > span {
 	display: none;
 	background-position: 4px;
 	margin: 0;
@@ -269,30 +283,41 @@
 	font-size: 28px;
 }
 
-#rtb-booking-modal .action-status > .spinner {
+.rtb-admin-modal .action-status > .spinner {
 	display: block;
 }
 
-#rtb-booking-modal .action-status > .success {
+.rtb-admin-modal .action-status > .success {
 	color: #7ad03a;
 }
 
-#rtb-booking-modal .action-status > .error {
+.rtb-admin-modal .action-status > .error {
 	color: #dd3d36;
 }
 
-#rtb-booking-modal .rtb-error {
+#rtb-booking-form .rtb-error {
 	background: #dd3d36;
 }
 
-#rtb-booking-modal .rtb-error a  {
+#rtb-booking-form .rtb-error a  {
 	color: #fff;
 }
 
-#rtb-booking-modal input[type="text"],
-#rtb-booking-modal input[type="email"],
-#rtb-booking-modal textarea {
+.rtb-admin-modal input[type="text"],
+.rtb-admin-modal input[type="email"],
+.rtb-admin-modal input[type="tel"],
+.rtb-admin-modal textarea {
 	max-width: 100%;
+	width: 100%;
+}
+
+#rtb-email-modal .rtb-email-to {
+	font-weight: 700;
+	color: #777;
+}
+
+#rtb-email-modal textarea {
+	min-height: 12em;
 }
 
 .rtb-description {

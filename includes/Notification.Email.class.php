@@ -72,7 +72,7 @@ class rtbNotificationEmail extends rtbNotification {
 				empty( $this->message) ) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -135,8 +135,10 @@ class rtbNotificationEmail extends rtbNotification {
 
 		} elseif ( $this->event == 'pending_to_closed' ) {
 			$subject = $rtb_controller->settings->get_setting( 'subject-rejected-user' );
+
+		// Use a subject that's been appended manually if available
 		} else {
-			$subject = '';
+			$subject = empty( $this->subject ) ? '' : $this->subject;
 		}
 
 		$this->subject = $this->process_subject_template( apply_filters( 'rtb_notification_email_subject', $subject, $this ) );
@@ -183,8 +185,10 @@ class rtbNotificationEmail extends rtbNotification {
 			if ( $this->target == 'user' ) {
 				$template = $this->get_template( 'template-rejected-user' );
 			}
+
+		// Use a message that's been appended manually if available
 		} else {
-			$template = '';
+			$template = empty( $this->message ) ? '' : $this->message;
 		}
 
 		$template = apply_filters( 'rtb_notification_email_template', $template, $this );

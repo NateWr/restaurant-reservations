@@ -79,6 +79,7 @@ class rtbBooking {
 			'email' => '',
 			'phone' => '',
 			'date_submission' => '',
+			'logs' => array(),
 		);
 
 		$meta_defaults = apply_filters( 'rtb_booking_metadata_defaults', $meta_defaults );
@@ -93,6 +94,7 @@ class rtbBooking {
 		$this->email = $meta['email'];
 		$this->phone = $meta['phone'];
 		$this->date_submission = $meta['date_submission'];
+		$this->logs = $meta['logs'];
 	}
 
 	/**
@@ -406,9 +408,9 @@ class rtbBooking {
 
 		// Post Status (define a default post status is none passed)
 		if ( !empty( $_POST['rtb-post-status'] ) && array_key_exists( $_POST['rtb-post-status'], $rtb_controller->cpts->booking_statuses ) ) {
-			$this->status = sanitize_text_field( stripslashes_deep( $_POST['rtb-post-status'] ) );
+			$this->post_status = sanitize_text_field( stripslashes_deep( $_POST['rtb-post-status'] ) );
 		} else {
-			$this->status = 'pending';
+			$this->post_status = 'pending';
 		}
 
 		// Check if any required fields are empty
@@ -477,7 +479,25 @@ class rtbBooking {
 	}
 
 	/**
-	 * Insert post data for a new booking.
+	 * Add a log entry to the booking
+	 *
+	 * @since 1.3.1
+	 */
+	public function add_log( $type, $title, $message = '', $datetime = null ) {
+
+		if ( empty( $datetime ) ) {
+			$datetime = date( 'Y-m-d H:i:s');
+		}
+
+		if ( empty( $this->logs ) ) {
+			$this->logs = array();
+		}
+
+		array_push( $this->logs, array( $type, $title, $message, $datetime ) );
+	}
+
+	/**
+	 * Insert post data for a new booking or update a booking
 	 * @since 0.0.1
 	 */
 	public function insert_post_data() {
@@ -487,7 +507,7 @@ class rtbBooking {
 			'post_title'	=> $this->name,
 			'post_content'	=> $this->message,
 			'post_date'		=> $this->date,
-			'post_status'	=> $this->status,
+			'post_status'	=> $this->post_status,
 		);
 
 		if ( !empty( $this->ID ) ) {
@@ -510,6 +530,7 @@ class rtbBooking {
 			'email' 			=> $this->email,
 			'phone' 			=> $this->phone,
 			'date_submission' 	=> current_time( 'timestamp' ),
+			'logs'				=> $this->logs,
 		);
 
 		$meta = apply_filters( 'rtb_insert_booking_metadata', $meta, $this );

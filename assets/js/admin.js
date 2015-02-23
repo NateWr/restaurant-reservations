@@ -19,19 +19,30 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
-	// Register clicks on edit/delete links
-	$( '#rtb-bookings-table .column-date .actions' ).click( function(e) {
+	// Register clicks on action links
+	$( '#rtb-bookings-table tr .actions' ).click( function(e) {
+
+		e.stopPropagation();
 
 		var target = $(e.target);
+		var action = target.data( 'action' );
+
+		if ( !action ) {
+			return;
+		}
+
 		var cell = target.parent().parent();
 
-		rtb_booking_loading_spinner( true, cell );
-
 		if ( target.data( 'action' ) == 'edit' ) {
+			rtb_booking_loading_spinner( true, cell );
 			rtb_get_booking( target.data( 'id' ), cell );
 
 		} else if ( target.data( 'action' ) == 'trash' ) {
+			rtb_booking_loading_spinner( true, cell );
 			rtb_trash_booking( target.data( 'id' ), cell );
+
+		} else if ( target.data( 'action' ) == 'email') {
+			rtb_toggle_email_modal( true, target.data( 'id'), target.data( 'email' ), target.data( 'name' ) );
 		}
 
 		e.preventDefault();
@@ -56,6 +67,10 @@ jQuery(document).ready(function ($) {
 	var rtb_booking_modal_submit = rtb_booking_modal.find( 'button' );
 	var rtb_booking_modal_cancel = rtb_booking_modal.find( '#rtb-cancel-booking-modal' );
 	var rtb_booking_modal_action_status = rtb_booking_modal.find( '.action-status' );
+	var rtb_email_modal = $( '#rtb-email-modal' );
+	var rtb_email_modal_submit = rtb_email_modal.find( 'button' );
+	var rtb_email_modal_cancel = rtb_email_modal.find( '#rtb-cancel-email-modal' );
+	var rtb_email_modal_action_status = rtb_email_modal.find( '.action-status' );
 	var rtb_booking_modal_error = $( '#rtb-error-modal' );
 	var rtb_booking_modal_error_msg = rtb_booking_modal_error.find( '.rtb-error-msg' );
 
@@ -109,6 +124,31 @@ jQuery(document).ready(function ($) {
 
 		} else {
 			rtb_booking_modal_error.removeClass( 'is-visible' );
+		}
+	}
+
+	/**
+	 * Show or hide the email form modal
+	 */
+	function rtb_toggle_email_modal( show, id, email, name ) {
+
+		if ( show ) {
+			rtb_email_modal.scrollTop( 0 ).addClass( 'is-visible' );
+			rtb_email_modal.find( 'input[name=ID]' ).val( id );
+			rtb_email_modal.find( 'input[name=email]' ).val( email );
+			rtb_email_modal.find( 'input[name=name]' ).val( name );
+			rtb_email_modal.find( '.rtb-email-to' ).html( name + ' &lt;' + email + '&gt;' );
+
+			$( 'body' ).addClass( 'rtb-hide-body-scroll' );
+
+		} else {
+			rtb_email_modal.removeClass( 'is-visible' );
+			rtb_email_modal.find( '.rtb-email-to' ).html( '' );
+			rtb_email_modal.find( 'textarea, input[type="hidden"], input[type="text"]' ).val( '' );
+			rtb_email_modal_submit.prop( 'disabled', false );
+			rtb_email_modal_cancel.prop( 'disabled', false );
+
+			$( 'body' ).removeClass( 'rtb-hide-body-scroll' );
 		}
 	}
 
@@ -206,27 +246,28 @@ jQuery(document).ready(function ($) {
 	/**
 	 * Show the appropriate result status icon
 	 */
-	function rtb_show_action_status( status ) {
+	function rtb_show_action_status( el, status ) {
 
-		rtb_booking_modal_action_status.find( 'span' ).hide();
+		el.find( 'span' ).hide();
 
 		if ( status === true ) {
-			rtb_booking_modal_action_status.find( '.success' ).show();
+			el.find( '.success' ).show();
 		} else if ( status === false ) {
-			rtb_booking_modal_action_status.find( '.error' ).show();
+			el.find( '.error' ).show();
 		} else {
-			rtb_booking_modal_action_status.find( '.spinner' ).show();
+			el.find( '.spinner' ).show();
 		}
 	}
 
 	// Initialize form field events on load
 	rtb_init_booking_form_modal_fields();
 
-	// Reset the form on load
+	// Reset the forms on load
 	// This fixes a strange bug in Firefox where disabled buttons would
 	// persist after the page refreshed. I'm guessing its a cache issue
 	// but this will just reset everything again
 	rtb_toggle_booking_form_modal( false );
+	rtb_toggle_email_modal( false );
 
 	// Show booking form modal
 	$( '.add-booking' ).click( function() {
@@ -244,17 +285,29 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	// Close booking form modal and error modal when ESC is keyed
-	$(document).keyup( function(e) {
-		if ( e.which == '27' ) {
-			rtb_toggle_booking_form_modal( false );
-			rtb_toggle_booking_form_error_modal( false );
+	// Close email modal when background or cancel button is clicked
+	rtb_email_modal.click( function(e) {
+		if ( $(e.target).is( rtb_email_modal ) ) {
+			rtb_toggle_email_modal( false );
+		}
+
+		if ( $(e.target).is( rtb_email_modal_cancel ) && rtb_email_modal_cancel.prop( 'disabled' ) === false ) {
+			rtb_toggle_email_modal( false );
 		}
 	});
 
 	// Close booking form error modal when background or cancel button is clicked
 	rtb_booking_modal_error.click( function(e) {
 		if ( $(e.target).is( rtb_booking_modal_error ) || $(e.target).is( rtb_booking_modal_error.find( 'a.button' ) ) ) {
+			rtb_toggle_booking_form_error_modal( false );
+		}
+	});
+
+	// Close modals when ESC is keyed
+	$(document).keyup( function(e) {
+		if ( e.which == '27' ) {
+			rtb_toggle_booking_form_modal( false );
+			rtb_toggle_email_modal( false );
 			rtb_toggle_booking_form_error_modal( false );
 		}
 	});
@@ -273,7 +326,7 @@ jQuery(document).ready(function ($) {
 		rtb_booking_modal_submit.prop( 'disabled', true );
 		rtb_booking_modal_cancel.prop( 'disabled', true );
 		rtb_booking_modal_action_status.addClass( 'is-visible' );
-		rtb_show_action_status( 'loading' );
+		rtb_show_action_status( rtb_booking_modal_action_status, 'loading' );
 
 		var params = {};
 
@@ -313,12 +366,69 @@ jQuery(document).ready(function ($) {
 				rtb_booking_modal_submit.prop( 'disabled', false );
 			}
 
-			rtb_show_action_status( r.success );
+			rtb_show_action_status( rtb_booking_modal_action_status, r.success );
 
 			// Hide result status icon after a few seconds
 			setTimeout( function() {
 				rtb_booking_modal.find( '.action-status' ).removeClass( 'is-visible' );
 			}, 4000 );
+		});
+	});
+
+	// Submit email form modal
+	rtb_email_modal_submit.click( function(e) {
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		if ( $(this).prop( 'disabled' ) === true ) {
+			return;
+		}
+
+		// Loading
+		rtb_email_modal_submit.prop( 'disabled', true );
+		rtb_email_modal_cancel.prop( 'disabled', true );
+		rtb_email_modal_action_status.addClass( 'is-visible' );
+		rtb_show_action_status( rtb_email_modal_action_status, 'loading' );
+
+		var params = {};
+
+		params.action = 'rtb-admin-email-modal';
+		params.nonce = rtb_admin.nonce;
+		params.email = rtb_email_modal.find( 'form' ).serializeArray();
+
+		var data = $.param( params );
+
+		var jqhxr = $.post( ajaxurl, data, function( r ) {
+
+			if ( r.success ) {
+
+				rtb_show_action_status( rtb_email_modal_action_status, r.success );
+
+				// Hide result status icon after a few seconds
+				setTimeout( function() {
+					rtb_email_modal.find( '.action-status' ).removeClass( 'is-visible' );
+					rtb_toggle_email_modal( false );
+				}, 1000 );
+
+			} else {
+
+				if ( typeof r.data == 'unspecified' || typeof r.data.error == 'unspecified' ) {
+					rtb_toggle_booking_form_error_modal( true, rtb_admin.strings.error_unspecified );
+				} else {
+					rtb_toggle_booking_form_error_modal( true, r.data.msg );
+				}
+
+				rtb_email_modal_cancel.prop( 'disabled', false );
+				rtb_email_modal_submit.prop( 'disabled', false );
+
+				rtb_show_action_status( rtb_email_modal_action_status, false );
+
+				// Hide result status icon after a few seconds
+				setTimeout( function() {
+					rtb_email_modal.find( '.action-status' ).removeClass( 'is-visible' );
+				}, 4000 );
+			}
 		});
 	});
 
