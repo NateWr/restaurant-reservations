@@ -246,7 +246,7 @@ class rtbBooking {
 					} elseif ( $late_bookings >= 60 ) {
 						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s hours in advance.', 'restaurant-reservations' ), $late_bookings / 60 );
 					} else {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s mings in advance.', 'restaurant-reservations' ), $late_bookings );
+						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s minutes in advance.', 'restaurant-reservations' ), $late_bookings );
 					}
 					$this->validation_errors[] = array(
 						'field'		=> 'time',
