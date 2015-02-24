@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the Restaurant Reservations package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Restaurant Reservations 1.2.3\n"
+"Project-Id-Version: Restaurant Reservations 1.4\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/restaurant-reservations\n"
-"POT-Creation-Date: 2015-01-23 11:25:35+00:00\n"
+"POT-Creation-Date: 2015-02-24 15:16:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,134 +52,161 @@ msgid ""
 "target=\"_blank\">support forums</a>."
 msgstr ""
 
-#: includes/AdminBookings.class.php:65
+#: includes/AdminBookings.class.php:67
 msgid "Restaurant Bookings"
 msgstr ""
 
-#: includes/AdminBookings.class.php:66 includes/CustomPostTypes.class.php:42
+#: includes/AdminBookings.class.php:68 includes/CustomPostTypes.class.php:42
 msgid "Add New"
 msgstr ""
 
-#: includes/AdminBookings.class.php:111 restaurant-reservations.php:217
+#: includes/AdminBookings.class.php:116 includes/AdminBookings.class.php:157
+#: restaurant-reservations.php:217
 msgid "Add Booking"
 msgstr ""
 
-#: includes/AdminBookings.class.php:114
+#: includes/AdminBookings.class.php:119 includes/AdminBookings.class.php:160
 msgid "Cancel"
 msgstr ""
 
-#: includes/AdminBookings.class.php:128
+#: includes/AdminBookings.class.php:140
+#: includes/WP_List_Table.BookingsTable.class.php:329
+msgid "Send Email"
+msgstr ""
+
+#: includes/AdminBookings.class.php:147
+msgid "Subject"
+msgstr ""
+
+#: includes/AdminBookings.class.php:151 includes/Settings.class.php:817
+#: includes/WP_List_Table.BookingsTable.class.php:283
+msgid "Message"
+msgstr ""
+
+#: includes/AdminBookings.class.php:174
 msgid "Close"
 msgstr ""
 
-#: includes/AdminBookings.class.php:194
+#: includes/AdminBookings.class.php:240
 msgid "Booking Status"
 msgstr ""
 
-#: includes/AdminBookings.class.php:202
+#: includes/AdminBookings.class.php:248
 msgid "Send notifications"
 msgstr ""
 
-#: includes/AdminBookings.class.php:207
+#: includes/AdminBookings.class.php:253
 msgid "Learn more"
 msgstr ""
 
-#: includes/AdminBookings.class.php:208
+#: includes/AdminBookings.class.php:254
 msgid ""
 "When adding a booking or changing a booking's status with this form, no "
 "email notifications will be sent. Check this option if you want to send "
 "email notifications."
 msgstr ""
 
-#: includes/AdminBookings.class.php:262
+#: includes/AdminBookings.class.php:308
 msgid "You have been logged out. Please %slogin again%s."
 msgstr ""
 
-#: includes/AdminBookings.class.php:298
+#: includes/AdminBookings.class.php:344
 msgid ""
 "This booking has been sent to the %sTrash%s where it can not be edited. Set "
 "the booking to Pending or Confirmed to edit it."
 msgstr ""
 
-#: includes/AdminBookings.class.php:315
+#: includes/AdminBookings.class.php:361
 msgid "The booking could not be retrieved. Please reload the page and try again."
 msgstr ""
 
-#: includes/AdminBookings.class.php:383
+#: includes/AdminBookings.class.php:429
 msgid ""
 "Unable to trash this post. Please try again. If you continue to have "
 "trouble, please refresh the page."
 msgstr ""
 
-#: includes/Booking.class.php:178
+#: includes/AdminBookings.class.php:471
+msgid "Please enter a message before sending the email."
+msgstr ""
+
+#: includes/AdminBookings.class.php:480
+msgid "The email could not be sent because some critical information was missing."
+msgstr ""
+
+#: includes/AdminBookings.class.php:492
+msgid "There was an error loading the booking and the email was not sent."
+msgstr ""
+
+#: includes/Booking.class.php:180
 msgid "Please enter the date you would like to book."
 msgstr ""
 
-#: includes/Booking.class.php:188
+#: includes/Booking.class.php:190
 msgid ""
 "The date you entered is not valid. Please select from one of the dates in "
 "the calendar."
 msgstr ""
 
-#: includes/Booking.class.php:199
+#: includes/Booking.class.php:201
 msgid "Please enter the time you would like to book."
 msgstr ""
 
-#: includes/Booking.class.php:209
+#: includes/Booking.class.php:211
 msgid ""
 "The time you entered is not valid. Please select from one of the times "
 "provided."
 msgstr ""
 
-#: includes/Booking.class.php:226
+#: includes/Booking.class.php:228
 msgid "Sorry, bookings can not be made more than %s days in advance."
 msgstr ""
 
-#: includes/Booking.class.php:237
+#: includes/Booking.class.php:239
 msgid "Sorry, bookings can not be made in the past."
 msgstr ""
 
-#: includes/Booking.class.php:245
+#: includes/Booking.class.php:247
 msgid "Sorry, bookings must be made more than %s days in advance."
 msgstr ""
 
-#: includes/Booking.class.php:247
+#: includes/Booking.class.php:249
 msgid "Sorry, bookings must be made more than %s hours in advance."
 msgstr ""
 
-#: includes/Booking.class.php:249
-msgid "Sorry, bookings must be made more than %s mings in advance."
+#: includes/Booking.class.php:251
+msgid "Sorry, bookings must be made more than %s minutes in advance."
 msgstr ""
 
-#: includes/Booking.class.php:288
+#: includes/Booking.class.php:290
 msgid "Sorry, no bookings are being accepted then."
 msgstr ""
 
-#: includes/Booking.class.php:340
+#: includes/Booking.class.php:342
 msgid "Sorry, no bookings are being accepted on that date."
 msgstr ""
 
-#: includes/Booking.class.php:346
+#: includes/Booking.class.php:348
 msgid "Sorry, no bookings are being accepted at that time."
 msgstr ""
 
-#: includes/Booking.class.php:368
+#: includes/Booking.class.php:370
 msgid "Please enter a name for this booking."
 msgstr ""
 
-#: includes/Booking.class.php:378
+#: includes/Booking.class.php:380
 msgid "Please let us know how many people will be in your party."
 msgstr ""
 
-#: includes/Booking.class.php:388
+#: includes/Booking.class.php:390
 msgid "We only accept bookings for parties of up to %d people."
 msgstr ""
 
-#: includes/Booking.class.php:399
+#: includes/Booking.class.php:401
 msgid "Please enter an email address so we can confirm your booking."
 msgstr ""
 
-#: includes/Booking.class.php:421
+#: includes/Booking.class.php:423
 msgid "Please complete this field to request a booking."
 msgstr ""
 
@@ -250,448 +277,453 @@ msgstr ""
 msgid "Reject this booking"
 msgstr ""
 
-#: includes/Settings.class.php:218 includes/Settings.class.php:219
+#: includes/Settings.class.php:221 includes/Settings.class.php:222
 msgid "Settings"
 msgstr ""
 
-#: includes/Settings.class.php:231
+#: includes/Settings.class.php:234
 msgid "General"
 msgstr ""
 
-#: includes/Settings.class.php:242
+#: includes/Settings.class.php:245
 msgid "Booking Page"
 msgstr ""
 
-#: includes/Settings.class.php:243
+#: includes/Settings.class.php:246
 msgid ""
 "Select a page on your site to automatically display the booking form and "
 "confirmation message."
 msgstr ""
 
-#: includes/Settings.class.php:259
+#: includes/Settings.class.php:262
 msgid "Max Party Size"
 msgstr ""
 
-#: includes/Settings.class.php:260
+#: includes/Settings.class.php:263
 msgid "Set a maximum allowed party size for bookings."
 msgstr ""
 
-#: includes/Settings.class.php:272
+#: includes/Settings.class.php:275
 msgid "Success Message"
 msgstr ""
 
-#: includes/Settings.class.php:273
+#: includes/Settings.class.php:276
 msgid "Enter the message to display when a booking request is made."
 msgstr ""
 
-#: includes/Settings.class.php:284
+#: includes/Settings.class.php:287
 msgid "Date Format"
 msgstr ""
 
-#: includes/Settings.class.php:285
+#: includes/Settings.class.php:288
 msgid ""
 "Define how the date is formatted on the booking form. %sFormatting rules%s. "
 "This only changes the format on the booking form. To change the date format "
 "in notification messages, modify your general %sWordPress Settings%s."
 msgstr ""
 
-#: includes/Settings.class.php:296
+#: includes/Settings.class.php:299
 msgid "Time Format"
 msgstr ""
 
-#: includes/Settings.class.php:297
+#: includes/Settings.class.php:300
 msgid ""
 "Define how the time is formatted on the booking form. %sFormatting rules%s. "
 "This only changes the format on the booking form. To change the time format "
 "in notification messages, modify your general %sWordPress Settings%s."
 msgstr ""
 
-#: includes/Settings.class.php:310
+#: includes/Settings.class.php:313
 msgid "Language"
 msgstr ""
 
-#: includes/Settings.class.php:311
+#: includes/Settings.class.php:314
 msgid ""
 "Select a language to use for the booking form datepicker if it is different "
 "than your WordPress language setting."
 msgstr ""
 
-#: includes/Settings.class.php:321
+#: includes/Settings.class.php:324
 msgid "Booking Schedule"
 msgstr ""
 
-#: includes/Settings.class.php:328
+#: includes/Settings.class.php:331
 msgid "Add new scheduling rule"
 msgstr ""
 
-#: includes/Settings.class.php:342
+#: includes/Settings.class.php:345
 msgid "Delete scheduling rule"
 msgstr ""
 
-#: includes/Settings.class.php:359
+#: includes/Settings.class.php:362
 msgid "Schedule"
 msgstr ""
 
-#: includes/Settings.class.php:360
+#: includes/Settings.class.php:363
 msgid "Define the weekly schedule during which you accept bookings."
 msgstr ""
 
-#: includes/Settings.class.php:385
+#: includes/Settings.class.php:388
 msgid "Exceptions"
 msgstr ""
 
-#: includes/Settings.class.php:386
+#: includes/Settings.class.php:389
 msgid ""
 "Define special opening hours for holidays, events or other needs. Leave the "
 "time empty if you're closed all day."
 msgstr ""
 
-#: includes/Settings.class.php:401
+#: includes/Settings.class.php:404
 msgid "Early Bookings"
 msgstr ""
 
-#: includes/Settings.class.php:402
+#: includes/Settings.class.php:405
 msgid "Select how early customers can make their booking."
 msgstr ""
 
-#: includes/Settings.class.php:405
+#: includes/Settings.class.php:408
 msgid "Any time"
 msgstr ""
 
-#: includes/Settings.class.php:406
+#: includes/Settings.class.php:409
 msgid "Up to 1 day in advance"
 msgstr ""
 
-#: includes/Settings.class.php:407
+#: includes/Settings.class.php:410
 msgid "Up to 1 week in advance"
 msgstr ""
 
-#: includes/Settings.class.php:408
+#: includes/Settings.class.php:411
 msgid "Up to 2 weeks in advance"
 msgstr ""
 
-#: includes/Settings.class.php:409
+#: includes/Settings.class.php:412
 msgid "Up to 30 days in advance"
 msgstr ""
 
-#: includes/Settings.class.php:410
+#: includes/Settings.class.php:413
 msgid "Up to 90 days in advance"
 msgstr ""
 
-#: includes/Settings.class.php:421
+#: includes/Settings.class.php:424
 msgid "Late Bookings"
 msgstr ""
 
-#: includes/Settings.class.php:422
+#: includes/Settings.class.php:425
 msgid "Select how late customers can make their booking."
 msgstr ""
 
-#: includes/Settings.class.php:425
+#: includes/Settings.class.php:428
 msgid "Up to the last minute"
 msgstr ""
 
-#: includes/Settings.class.php:426
+#: includes/Settings.class.php:429
 msgid "At least 15 minutes in advance"
 msgstr ""
 
-#: includes/Settings.class.php:427
+#: includes/Settings.class.php:430
 msgid "At least 30 minutes in advance"
 msgstr ""
 
-#: includes/Settings.class.php:428
+#: includes/Settings.class.php:431
 msgid "At least 45 minutes in advance"
 msgstr ""
 
-#: includes/Settings.class.php:429
+#: includes/Settings.class.php:432
 msgid "At least 1 hour in advance"
 msgstr ""
 
-#: includes/Settings.class.php:430
+#: includes/Settings.class.php:433
 msgid "At least 4 hours in advance"
 msgstr ""
 
-#: includes/Settings.class.php:431
+#: includes/Settings.class.php:434
 msgid "At least 1 day in advance"
 msgstr ""
 
-#: includes/Settings.class.php:442
+#: includes/Settings.class.php:445
 msgid "Date Pre-selection"
 msgstr ""
 
-#: includes/Settings.class.php:443
+#: includes/Settings.class.php:446
 msgid ""
 "When the booking form is loaded, should it automatically attempt to select "
 "a valid date?"
 msgstr ""
 
-#: includes/Settings.class.php:446
+#: includes/Settings.class.php:449
 msgid "Select today if valid"
 msgstr ""
 
-#: includes/Settings.class.php:447
+#: includes/Settings.class.php:450
 msgid "Select today or next valid date"
 msgstr ""
 
-#: includes/Settings.class.php:448
+#: includes/Settings.class.php:451
 msgid "Leave empty"
 msgstr ""
 
-#: includes/Settings.class.php:459
+#: includes/Settings.class.php:462
 msgid "Time Interval"
 msgstr ""
 
-#: includes/Settings.class.php:460
+#: includes/Settings.class.php:463
 msgid "Select the number of minutes between each available time."
 msgstr ""
 
-#: includes/Settings.class.php:463
+#: includes/Settings.class.php:466
 msgid "Every 30 minutes"
 msgstr ""
 
-#: includes/Settings.class.php:464
+#: includes/Settings.class.php:467
 msgid "Every 15 minutes"
 msgstr ""
 
-#: includes/Settings.class.php:465
+#: includes/Settings.class.php:468
 msgid "Every 10 minutes"
 msgstr ""
 
-#: includes/Settings.class.php:466
+#: includes/Settings.class.php:469
 msgid "Every 5 minutes"
 msgstr ""
 
-#: includes/Settings.class.php:475
+#: includes/Settings.class.php:478
 msgid "Notifications"
 msgstr ""
 
-#: includes/Settings.class.php:486
+#: includes/Settings.class.php:489
 msgid "Reply-To Name"
 msgstr ""
 
-#: includes/Settings.class.php:487
+#: includes/Settings.class.php:490
 msgid ""
 "The name which should appear in the Reply-To field of a user notification "
 "email"
 msgstr ""
 
-#: includes/Settings.class.php:498
+#: includes/Settings.class.php:501
 msgid "Reply-To Email Address"
 msgstr ""
 
-#: includes/Settings.class.php:499
+#: includes/Settings.class.php:502
 msgid ""
 "The email address which should appear in the Reply-To field of a user "
 "notification email."
 msgstr ""
 
-#: includes/Settings.class.php:510
+#: includes/Settings.class.php:513
 msgid "Admin Notification"
 msgstr ""
 
-#: includes/Settings.class.php:511
+#: includes/Settings.class.php:514
 msgid ""
 "Send an email notification to an administrator when a new booking is "
 "requested."
 msgstr ""
 
-#: includes/Settings.class.php:521
+#: includes/Settings.class.php:524
 msgid "Admin Email Address"
 msgstr ""
 
-#: includes/Settings.class.php:522
+#: includes/Settings.class.php:525
 msgid "The email address where admin notifications should be sent."
 msgstr ""
 
-#: includes/Settings.class.php:531
+#: includes/Settings.class.php:534
 msgid "Email Templates"
 msgstr ""
 
-#: includes/Settings.class.php:533
+#: includes/Settings.class.php:536
 msgid ""
 "Adjust the messages that are emailed to users and admins during the booking "
 "process."
 msgstr ""
 
-#: includes/Settings.class.php:543
+#: includes/Settings.class.php:546
 msgid "Template Tags"
 msgstr ""
 
-#: includes/Settings.class.php:545
+#: includes/Settings.class.php:548
 msgid ""
 "Use the following tags to automatically add booking information to the "
 "emails. Tags labeled with an asterisk (*) can be used in the email subject "
 "as well."
 msgstr ""
 
-#: includes/Settings.class.php:556
+#: includes/Settings.class.php:559
 msgid "Admin Notification Subject"
 msgstr ""
 
-#: includes/Settings.class.php:557
+#: includes/Settings.class.php:560
 msgid "The email subject for admin notifications."
 msgstr ""
 
-#: includes/Settings.class.php:568
+#: includes/Settings.class.php:571
 msgid "Admin Notification Email"
 msgstr ""
 
-#: includes/Settings.class.php:569
+#: includes/Settings.class.php:572
 msgid ""
 "Enter the email an admin should receive when an initial booking request is "
 "made."
 msgstr ""
 
-#: includes/Settings.class.php:580
+#: includes/Settings.class.php:583
 msgid "New Request Email Subject"
 msgstr ""
 
-#: includes/Settings.class.php:581
+#: includes/Settings.class.php:584
 msgid ""
 "The email subject a user should receive when they make an initial booking "
 "request."
 msgstr ""
 
-#: includes/Settings.class.php:592
+#: includes/Settings.class.php:595
 msgid "New Request Email"
 msgstr ""
 
-#: includes/Settings.class.php:593
+#: includes/Settings.class.php:596
 msgid ""
 "Enter the email a user should receive when they make an initial booking "
 "request."
 msgstr ""
 
-#: includes/Settings.class.php:604
+#: includes/Settings.class.php:607
 msgid "Confirmed Email Subject"
 msgstr ""
 
-#: includes/Settings.class.php:605
+#: includes/Settings.class.php:608
 msgid ""
 "The email subject a user should receive when their booking has been "
 "confirmed."
 msgstr ""
 
-#: includes/Settings.class.php:616
+#: includes/Settings.class.php:619
 msgid "Confirmed Email"
 msgstr ""
 
-#: includes/Settings.class.php:617
+#: includes/Settings.class.php:620
 msgid "Enter the email a user should receive when their booking has been confirmed."
 msgstr ""
 
-#: includes/Settings.class.php:628
+#: includes/Settings.class.php:631
 msgid "Rejected Email Subject"
 msgstr ""
 
-#: includes/Settings.class.php:629
+#: includes/Settings.class.php:632
 msgid ""
 "The email subject a user should receive when their booking has been "
 "rejected."
 msgstr ""
 
-#: includes/Settings.class.php:640
+#: includes/Settings.class.php:643
 msgid "Rejected Email"
 msgstr ""
 
-#: includes/Settings.class.php:641
+#: includes/Settings.class.php:644
 msgid "Enter the email a user should receive when their booking has been rejected."
 msgstr ""
 
-#: includes/Settings.class.php:659
+#: includes/Settings.class.php:655
+msgid "Admin Update Subject"
+msgstr ""
+
+#: includes/Settings.class.php:656
+msgid ""
+"The email subject a user should receive when an admin sends them a custom "
+"email message from the %sbookings panel%s."
+msgstr ""
+
+#: includes/Settings.class.php:674
 msgid "Any size"
 msgstr ""
 
-#: includes/Settings.class.php:743
+#: includes/Settings.class.php:758
 msgid "Book a table"
 msgstr ""
 
-#: includes/Settings.class.php:746
+#: includes/Settings.class.php:761
 #: includes/WP_List_Table.BookingsTable.class.php:278
 msgid "Date"
 msgstr ""
 
-#: includes/Settings.class.php:752
+#: includes/Settings.class.php:767
 msgid "Time"
 msgstr ""
 
-#: includes/Settings.class.php:758
+#: includes/Settings.class.php:773
 #: includes/WP_List_Table.BookingsTable.class.php:279
 msgid "Party"
 msgstr ""
 
-#: includes/Settings.class.php:771
+#: includes/Settings.class.php:786
 msgid "Contact Details"
 msgstr ""
 
-#: includes/Settings.class.php:774
+#: includes/Settings.class.php:789
 #: includes/WP_List_Table.BookingsTable.class.php:280
 msgid "Name"
 msgstr ""
 
-#: includes/Settings.class.php:780
+#: includes/Settings.class.php:795
 #: includes/WP_List_Table.BookingsTable.class.php:281
 msgid "Email"
 msgstr ""
 
-#: includes/Settings.class.php:789
+#: includes/Settings.class.php:804
 #: includes/WP_List_Table.BookingsTable.class.php:282
 msgid "Phone"
 msgstr ""
 
-#: includes/Settings.class.php:797
+#: includes/Settings.class.php:812
 msgid "Add a Message"
 msgstr ""
 
-#: includes/Settings.class.php:802
-#: includes/WP_List_Table.BookingsTable.class.php:283
-msgid "Message"
-msgstr ""
-
-#: includes/Settings.class.php:847
+#: includes/Settings.class.php:862
 msgid "Email of the user who made the booking"
 msgstr ""
 
-#: includes/Settings.class.php:848
+#: includes/Settings.class.php:863
 msgid "* Name of the user who made the booking"
 msgstr ""
 
-#: includes/Settings.class.php:849
+#: includes/Settings.class.php:864
 msgid "* Number of people booked"
 msgstr ""
 
-#: includes/Settings.class.php:850
+#: includes/Settings.class.php:865
 msgid "* Date and time of the booking"
 msgstr ""
 
-#: includes/Settings.class.php:851
+#: includes/Settings.class.php:866
 msgid "Phone number if supplied with the request"
 msgstr ""
 
-#: includes/Settings.class.php:852
+#: includes/Settings.class.php:867
 msgid "Message added to the request"
 msgstr ""
 
-#: includes/Settings.class.php:853
+#: includes/Settings.class.php:868
 msgid "A link to the admin panel showing pending bookings"
 msgstr ""
 
-#: includes/Settings.class.php:854
+#: includes/Settings.class.php:869
 msgid "A link to confirm this booking. Only include this in admin notifications"
 msgstr ""
 
-#: includes/Settings.class.php:855
+#: includes/Settings.class.php:870
 msgid "A link to reject this booking. Only include this in admin notifications"
 msgstr ""
 
-#: includes/Settings.class.php:856
+#: includes/Settings.class.php:871
 msgid "The name of this website"
 msgstr ""
 
-#: includes/Settings.class.php:857
+#: includes/Settings.class.php:872
 msgid "A link to this website"
 msgstr ""
 
-#: includes/Settings.class.php:858
+#: includes/Settings.class.php:873
 msgid "Current date and time"
 msgstr ""
 
@@ -757,61 +789,61 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:376
+#: includes/WP_List_Table.BookingsTable.class.php:379
 msgid "Delete"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:377
+#: includes/WP_List_Table.BookingsTable.class.php:380
 msgid "Set To Confirmed"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:378
+#: includes/WP_List_Table.BookingsTable.class.php:381
 msgid "Set To Pending Review"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:379
+#: includes/WP_List_Table.BookingsTable.class.php:382
 msgid "Set To Closed"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:494
+#: includes/WP_List_Table.BookingsTable.class.php:497
 msgid "%d booking deleted successfully."
 msgid_plural "%d bookings deleted successfully."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:497
+#: includes/WP_List_Table.BookingsTable.class.php:500
 msgid "%d booking confirmed."
 msgid_plural "%d bookings confirmed."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:500
+#: includes/WP_List_Table.BookingsTable.class.php:503
 msgid "%d booking set to pending."
 msgid_plural "%d bookings set to pending."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:503
+#: includes/WP_List_Table.BookingsTable.class.php:506
 msgid "%d booking closed."
 msgid_plural "%d bookings closed."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:515
+#: includes/WP_List_Table.BookingsTable.class.php:518
 msgid "%d booking had errors and could not be processed."
 msgid_plural "%d bookings had errors and could not be processed."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:691
+#: includes/WP_List_Table.BookingsTable.class.php:694
 msgid "You're viewing bookings that have been moved to the trash."
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:700
+#: includes/WP_List_Table.BookingsTable.class.php:703
 msgid "Only today's bookings are being shown."
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:702
+#: includes/WP_List_Table.BookingsTable.class.php:705
 msgid "Only upcoming bookings are being shown."
 msgstr ""
 
@@ -853,9 +885,9 @@ msgstr ""
 msgid "Restaurant Reservations"
 msgstr ""
 
-#. #-#-#-#-#  restaurant-reservations.pot (Restaurant Reservations 1.2.3)  #-#-#-#-#
+#. #-#-#-#-#  restaurant-reservations.pot (Restaurant Reservations 1.4)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  restaurant-reservations.pot (Restaurant Reservations 1.2.3)  #-#-#-#-#
+#. #-#-#-#-#  restaurant-reservations.pot (Restaurant Reservations 1.4)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "http://themeofthecrop.com"
 msgstr ""
@@ -903,14 +935,19 @@ msgctxt "Title of addons page in the admin menu"
 msgid "Addons"
 msgstr ""
 
-#: includes/AdminBookings.class.php:41
+#: includes/AdminBookings.class.php:43
 msgctxt "Title of admin page that lists bookings"
 msgid "Bookings"
 msgstr ""
 
-#: includes/AdminBookings.class.php:42
+#: includes/AdminBookings.class.php:44
 msgctxt "Title of bookings admin menu item"
 msgid "Bookings"
+msgstr ""
+
+#: includes/AdminBookings.class.php:143
+msgctxt "Label next to the email address to which an email will be sent"
+msgid "To"
 msgstr ""
 
 #: includes/CustomPostTypes.class.php:80
@@ -1071,86 +1108,93 @@ msgctxt ""
 msgid "Your booking at %s was not accepted"
 msgstr ""
 
-#: includes/Settings.class.php:329
+#: includes/Settings.class.php:170
+msgctxt ""
+"Default email subject sent to users when the admin sends a custom notice "
+"email from the bookings panel."
+msgid "Update regarding your booking at %s"
+msgstr ""
+
+#: includes/Settings.class.php:332
 msgctxt "Format of a scheduling rule"
 msgid "Weekly"
 msgstr ""
 
-#: includes/Settings.class.php:330
+#: includes/Settings.class.php:333
 msgctxt "Format of a scheduling rule"
 msgid "Monthly"
 msgstr ""
 
-#: includes/Settings.class.php:331
+#: includes/Settings.class.php:334
 msgctxt "Format of a scheduling rule"
 msgid "Date"
 msgstr ""
 
-#: includes/Settings.class.php:332
+#: includes/Settings.class.php:335
 msgctxt "Label for selecting days of the week in a scheduling rule"
 msgid "Days of the week"
 msgstr ""
 
-#: includes/Settings.class.php:333
+#: includes/Settings.class.php:336
 msgctxt "Label for selecting weeks of the month in a scheduling rule"
 msgid "Weeks of the month"
 msgstr ""
 
-#: includes/Settings.class.php:334
+#: includes/Settings.class.php:337
 msgctxt "Label to select a date for a scheduling rule"
 msgid "Date"
 msgstr ""
 
-#: includes/Settings.class.php:335
+#: includes/Settings.class.php:338
 msgctxt "Label to select a time slot for a scheduling rule"
 msgid "Time"
 msgstr ""
 
-#: includes/Settings.class.php:336
+#: includes/Settings.class.php:339
 msgctxt "Label to set a scheduling rule to last all day"
 msgid "All day"
 msgstr ""
 
-#: includes/Settings.class.php:337
+#: includes/Settings.class.php:340
 msgctxt "Label for the starting time of a scheduling rule"
 msgid "Start"
 msgstr ""
 
-#: includes/Settings.class.php:338
+#: includes/Settings.class.php:341
 msgctxt "Label for the ending time of a scheduling rule"
 msgid "End"
 msgstr ""
 
-#: includes/Settings.class.php:339
+#: includes/Settings.class.php:342
 msgctxt "Prompt displayed when a scheduling rule is set without any time restrictions"
 msgid "All day long. Want to %sset a time slot%s?"
 msgstr ""
 
-#: includes/Settings.class.php:340
+#: includes/Settings.class.php:343
 msgctxt "Toggle a scheduling rule open and closed"
 msgid "Open and close this rule"
 msgstr ""
 
-#: includes/Settings.class.php:341
+#: includes/Settings.class.php:344
 msgctxt "Delete a scheduling rule"
 msgid "Delete rule"
 msgstr ""
 
-#: includes/Settings.class.php:343
+#: includes/Settings.class.php:346
 msgctxt ""
 "Brief default description of a scheduling rule when no weekdays or weeks "
 "are included in the rule"
 msgid "Never"
 msgstr ""
 
-#: includes/Settings.class.php:344
+#: includes/Settings.class.php:347
 msgctxt ""
 "Brief default description of a scheduling rule when all the weekdays/weeks "
 "are included in the rule"
 msgid "Every day"
 msgstr ""
 
-#: includes/Settings.class.php:345
+#: includes/Settings.class.php:348
 msgctxt ""
 "Brief default description of a scheduling rule when some weekdays are "
 "included on only some weeks of the month. %s should be left alone and will "
@@ -1159,7 +1203,7 @@ msgctxt ""
 msgid "%s on the %s week of the month"
 msgstr ""
 
-#: includes/Settings.class.php:346
+#: includes/Settings.class.php:349
 msgctxt ""
 "Brief default description of a scheduling rule when some weeks of the month "
 "are included but all or no weekdays are selected. %s should be left alone "
@@ -1168,66 +1212,66 @@ msgctxt ""
 msgid "%s week of the month"
 msgstr ""
 
-#: includes/Settings.class.php:347
+#: includes/Settings.class.php:350
 msgctxt "Brief default description of a scheduling rule when no times are set"
 msgid "All day"
 msgstr ""
 
-#: includes/Settings.class.php:348
+#: includes/Settings.class.php:351
 msgctxt ""
 "Brief default description of a scheduling rule when an end time is set but "
 "no start time. If the end time is 6pm, it will read: Ends at 6pm"
 msgid "Ends at"
 msgstr ""
 
-#: includes/Settings.class.php:349
+#: includes/Settings.class.php:352
 msgctxt ""
 "Brief default description of a scheduling rule when a start time is set but "
 "no end time. If the start time is 6pm, it will read: Starts at 6pm"
 msgid "Starts at"
 msgstr ""
 
-#: includes/Settings.class.php:350
+#: includes/Settings.class.php:353
 msgctxt "Separator between times of a scheduling rule"
 msgid "&mdash;"
 msgstr ""
 
-#: includes/Settings.class.php:362
+#: includes/Settings.class.php:365
 msgctxt "Monday abbreviation"
 msgid "Mo"
 msgstr ""
 
-#: includes/Settings.class.php:363
+#: includes/Settings.class.php:366
 msgctxt "Tuesday abbreviation"
 msgid "Tu"
 msgstr ""
 
-#: includes/Settings.class.php:364
+#: includes/Settings.class.php:367
 msgctxt "Wednesday abbreviation"
 msgid "We"
 msgstr ""
 
-#: includes/Settings.class.php:365
+#: includes/Settings.class.php:368
 msgctxt "Thursday abbreviation"
 msgid "Th"
 msgstr ""
 
-#: includes/Settings.class.php:366
+#: includes/Settings.class.php:369
 msgctxt "Friday abbreviation"
 msgid "Fr"
 msgstr ""
 
-#: includes/Settings.class.php:367
+#: includes/Settings.class.php:370
 msgctxt "Saturday abbreviation"
 msgid "Sa"
 msgstr ""
 
-#: includes/Settings.class.php:368
+#: includes/Settings.class.php:371
 msgctxt "Sunday abbreviation"
 msgid "Su"
 msgstr ""
 
-#: includes/Settings.class.php:378
+#: includes/Settings.class.php:381
 msgctxt "Brief default description of a scheduling exception when no times are set"
 msgid "Closed all day"
 msgstr ""
@@ -1245,19 +1289,19 @@ msgctxt "Separator between two dates in a date range"
 msgid "&mdash;"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:344
+#: includes/WP_List_Table.BookingsTable.class.php:347
 msgctxt "Status label for bookings put in the trash"
 msgid "Trash"
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:693
+#: includes/WP_List_Table.BookingsTable.class.php:696
 msgctxt ""
 "Indicates which booking status is currently being filtered in the list of "
 "bookings."
 msgid "You're viewing bookings that have been marked as %s."
 msgstr ""
 
-#: includes/WP_List_Table.BookingsTable.class.php:698
+#: includes/WP_List_Table.BookingsTable.class.php:701
 msgctxt "Notification of booking date range, eg - bookings from 2014-12-02-2014-12-05"
 msgid "Only bookings from %s are being shown."
 msgstr ""
