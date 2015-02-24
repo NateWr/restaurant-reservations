@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -23,6 +23,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Add your booking form to any page, post or widget area
 * Customize all notification messages, and date and time formats
 * Add and edit bookings from the admin panel
+* Send customers an email about their booking from the admin panel
 
 More features will be added to this plugin and addons will be created which extend the functionality or integrate with third-party services. Follow future developments at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
 
@@ -92,6 +93,12 @@ If you make a translation, please help others out by adding it to the [GitHub re
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4 (2015-02-24) =
+* Add: Send a custom email from the bookings list
+* Add: Hebrew translation. h/t Ahrale
+* Add: Default template functions for checkbox, radio and confirmation fields
+* Fix: Replace dialect with more common German in translation file. h/t Roland Stumpp
 
 = 1.3 (2015-02-03) =
 * Add and edit bookings from the admin area
@@ -167,6 +174,9 @@ If you make a translation, please help others out by adding it to the [GitHub re
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4 =
+Thanks to sponsorship from Gemini Design, the plugin now supports sending an email directly to customers from the list of bookings, so you can request more details or suggest an alternative booking time. This update also improves the German translation and adds a Hebrew translation. Read the full changelog for details.
 
 = 1.3 =
 This update adds support for adding and editing bookings from the admin panel. The bookings panel now shows upcoming bookings by default. The Party field in the booking form is now a dropdown selection. Plus a bunch of new features and fixes. Read the full changelog for details.
