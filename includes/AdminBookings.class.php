@@ -461,8 +461,8 @@ class rtbAdminBookings {
 		$id = (int) $_POST['ID'];
 		$name = sanitize_text_field( $_POST['name'] );
 		$email = sanitize_text_field( $_POST['email'] );
-		$subject = sanitize_text_field( $_POST['rtb-email-subject'] );
-		$message = wp_kses_post( $_POST['rtb-email-message'] );
+		$subject = stripcslashes( sanitize_text_field( $_POST['rtb-email-subject'] ) );
+		$message = stripcslashes( wp_kses_post( $_POST['rtb-email-message'] ) );
 
 		if ( empty( $message ) ) {
 			wp_send_json_error(
@@ -495,7 +495,7 @@ class rtbAdminBookings {
 		}
 
 		$email = new rtbNotificationEmail( 'admin_email_notice', 'user' );
-		$email->subject = $rtb_controller->settings->get_setting( 'subject-admin-notice' );
+		$email->subject = empty( $subject ) ? $rtb_controller->settings->get_setting( 'subject-admin-notice' ) : $subject;
 		$email->message = $message;
 		$email->set_booking( $booking );
 		if ( $email->prepare_notification() ) {
