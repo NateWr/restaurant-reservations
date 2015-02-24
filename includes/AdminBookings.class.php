@@ -154,7 +154,7 @@ class rtbAdminBookings {
 					</fieldset>
 
 					<button type="submit" class="button-primary">
-						<?php _e( 'Add Booking', 'restaurant-reservations' ); ?>
+						<?php _e( 'Send Email', 'restaurant-reservations' ); ?>
 					</button>
 					<a href="#" class="button" id="rtb-cancel-email-modal">
 						<?php _e( 'Cancel', 'restaurant-reservations' ); ?>
