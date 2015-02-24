@@ -530,8 +530,11 @@ class rtbBooking {
 			'email' 			=> $this->email,
 			'phone' 			=> $this->phone,
 			'date_submission' 	=> current_time( 'timestamp' ),
-			'logs'				=> $this->logs,
 		);
+
+		if ( !empty( $this->logs ) ) {
+			$meta['logs'] = $this->logs;
+		}
 
 		$meta = apply_filters( 'rtb_insert_booking_metadata', $meta, $this );
 
