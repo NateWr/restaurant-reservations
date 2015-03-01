@@ -258,12 +258,18 @@ class rtbBookingsTable extends WP_List_Table {
 	 * @since 0.0.1
 	 */
 	public function single_row( $item ) {
-		static $row_class = '';
-		$row_class = ( $row_class == '' ? 'alternate' : '' );
+		static $row_alternate_class = '';
+		$row_alternate_class = ( $row_alternate_class == '' ? 'alternate' : '' );
 
-		echo '<tr class="' . esc_attr( $item->post_status );
-		echo $row_class == '' ? '' : ' ' . $row_class;
-		echo '">';
+		$row_classes = array( esc_attr( $item->post_status ) );
+
+		if ( !empty( $row_alternate_class ) ) {
+			$row_classes[] = $row_alternate_class;
+		}
+
+		$row_classes = apply_filters( 'rtb_admin_bookings_list_row_classes', $row_classes, $item );
+
+		echo '<tr class="' . implode( ' ', $row_classes ) . '">';
 		$this->single_row_columns( $item );
 		echo '</tr>';
 	}
