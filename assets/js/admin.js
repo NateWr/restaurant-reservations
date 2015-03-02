@@ -167,7 +167,7 @@ jQuery(document).ready(function ($) {
 	 * Reset booking form fields
 	 */
 	function rtb_reset_booking_form_modal_fields() {
-		rtb_booking_modal_fields.find( 'input, select, textarea' ).val( '' );
+		rtb_booking_modal_fields.find( 'input,select, textarea' ).not( 'input[type="checkbox"],input[type="radio"]' ).val( '' );
 		rtb_booking_modal_fields.find( 'input[name=rtb-notifications]' ).removeAttr( 'checked' );
 	}
 

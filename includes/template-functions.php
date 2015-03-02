@@ -341,7 +341,7 @@ function rtb_print_form_checkbox_field( $slug, $title, $value, $args ) {
 		</label>
 		<?php foreach ( $options as $opt_value => $opt_label ) : ?>
 		<label>
-			<input type="checkbox" name="rtb-<?php echo $slug; ?>[]" id="rtb-<?php echo $slug; ?>" value="<?php echo esc_attr( $opt_value ); ?>"<?php echo !empty( $value ) && in_array( $opt_value, $value ) ? ' checked' : ''; ?>>
+			<input type="checkbox" name="rtb-<?php echo $slug; ?>[]" id="rtb-<?php echo $slug; ?>-<?php echo esc_attr( $opt_value ); ?>" value="<?php echo esc_attr( $opt_value ); ?>"<?php echo !empty( $value ) && in_array( $opt_value, $value ) ? ' checked' : ''; ?>>
 			<?php echo $opt_label; ?>
 		</label>
 		<?php endforeach; ?>

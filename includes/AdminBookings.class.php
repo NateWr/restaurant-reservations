@@ -368,7 +368,21 @@ class rtbAdminBookings {
 
 			// Set up $_POST object for validation
 			foreach( $_POST['booking'] as $field ) {
-				$_POST[ $field['name'] ] = $field['value'];
+
+				// $field is setup by jQuery's serializeArray(), which will preserve
+				// array indicators in field names. So name[] is passed as "name[]"
+				// instead of "name". Let's strip out any trailing brackets to match
+				// the normal behaviour  when receiving $_POST data on the server.
+				if ( substr( $field['name'], -2 ) === '[]' ) {
+					$name = substr( $field['name'], 0, -2 );
+					if ( !isset( $_POST[ $name ] ) ) {
+						$_POST[ $name ] = array();
+					}
+					$_POST[ $name ][] = $field['value'];
+				} else {
+					$_POST[ $field['name'] ] = $field['value'];
+				}
+
 			}
 
 			require_once( RTB_PLUGIN_DIR . '/includes/Booking.class.php' );
