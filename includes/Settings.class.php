@@ -1,7 +1,7 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) exit;
 
-if ( !class_exists( 'rtbBooking' ) ) {
+if ( !class_exists( 'rtbSettings' ) ) {
 /**
  * Class to handle configurable settings for Restaurant Reservations
  *
