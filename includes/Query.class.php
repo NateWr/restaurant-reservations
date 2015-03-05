@@ -106,11 +106,11 @@ class rtbQuery {
 			$date_query = array();
 
 			if ( !empty( $args['start_date'] ) ) {
-				$date_query['after'] = sanitize_text( $args['start_date'] );
+				$date_query['after'] = sanitize_text_field( $args['start_date'] );
 			}
 
 			if ( !empty( $args['end_date'] ) ) {
-				$date_query['before'] = sanitize_text( $args['end_date'] );
+				$date_query['before'] = sanitize_text_field( $args['end_date'] );
 			}
 
 			if ( count( $date_query ) ) {

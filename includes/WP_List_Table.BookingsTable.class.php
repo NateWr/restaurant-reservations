@@ -603,6 +603,14 @@ class rtbBookingsTable extends WP_List_Table {
 			'posts_per_page'	=> $this->per_page,
 		);
 
+		if ( !empty( $this->filter_start_date ) ) {
+			$args['start_date'] = $this->filter_start_date;
+		}
+
+		if ( !empty( $this->filter_end_date ) ) {
+			$args['end_date'] = $this->filter_end_date;
+		}
+
 		$query = new rtbQuery( $args, 'bookings-table' );
 		$query->parse_request_args();
 		$query->prepare_args();
