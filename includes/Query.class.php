@@ -148,12 +148,12 @@ class rtbQuery {
 			$args['order'] = $_REQUEST['orderby'];
 		}
 
-		if ( !empty( $this->filter_start_date ) ) {
-			$args['start_date'] = $this->filter_start_date;
+		if ( !empty( $_REQUEST['start_date'] ) ) {
+			$args['start_date'] = sanitize_text_field( $_REQUEST['start_date'] );
 		}
 
-		if ( !empty( $this->filter_end_date ) ) {
-			$args['end_date'] = $this->filter_end_date;
+		if ( !empty( $_REQUEST['end_date'] ) ) {
+			$args['end_date'] = sanitize_text_field( $_REQUEST['end_date'] );
 		}
 
 		if ( !empty( $_REQUEST['schedule'] ) ) {
