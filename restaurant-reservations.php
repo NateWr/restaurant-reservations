@@ -62,6 +62,9 @@ class rtbInit {
 		$this->request->request_processed = false;
 		$this->request->request_inserted = false;
 
+		// Load query class
+		require_once( RTB_PLUGIN_DIR . '/includes/Query.class.php' );
+
 		// Add custom roles and capabilities
 		add_action( 'init', array( $this, 'add_roles' ) );
 
