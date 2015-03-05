@@ -254,6 +254,16 @@ class rtbBookingsTable extends WP_List_Table {
 	}
 
 	/**
+	 * Extra controls to be displayed between bulk actions and pagination
+	 *
+	 * @param string pos Position of this tablenav: `top` or `btm`
+	 * @since 1.4.1
+	 */
+	public function extra_tablenav( $pos ) {
+		do_action( 'rtb_bookings_table_actions', $pos );
+	}
+
+	/**
 	 * Generates content for a single row of the table
 	 * @since 0.0.1
 	 */
