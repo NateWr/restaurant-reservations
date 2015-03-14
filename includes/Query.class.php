@@ -45,7 +45,7 @@ class rtbQuery {
 	 * short-hand arguments for common needs. Short-hands
 	 * include:
 	 *
-	 * schedule string today|upcoming
+	 * date_range string today|upcoming|dates
 	 * start_date string don't get bookings before this
 	 * end_date string don't get bookings after this
 	 *
@@ -62,7 +62,7 @@ class rtbQuery {
 		$defaults = array(
 			'post_type'			=> RTB_BOOKING_POST_TYPE,
 			'posts_per_page'	=> 10,
-			'schedule'			=> 'upcoming',
+			'date_range'		=> 'upcoming',
 			'post_status'		=> array_keys( $rtb_controller->cpts->booking_statuses ),
 			'order'				=> 'ASC',
 			'paged'				=> 1,
@@ -84,37 +84,50 @@ class rtbQuery {
 
 		$args = $this->args;
 
-		if ( is_string( $args['schedule'] ) ) {
+		if ( is_string( $args['date_range'] ) ) {
 
-			if ( $args['schedule'] === 'today' ) {
+			if ( $args['date_range'] === 'today' ) {
 				$today = getdate();
 				$args['year'] = $today['year'];
 				$args['monthnum'] = $today['mon'];
 				$args['day'] = $today['mday'];
 
-			} elseif ( $args['schedule'] === 'upcoming' ) {
+			} elseif ( $args['date_range'] === 'upcoming' ) {
 				$args['date_query'] = array(
 					array(
 						'after' => '-1 hour', // show bookings that have just passed
 					)
 				);
+			} elseif ( !empty( $args['start_date'] ) || !empty( $args['end_date'] ) ) {
+				$date_query = array( 'inclusive' => true );
+
+				if ( !empty( $args['start_date'] ) ) {
+					$date_query['after'] = sanitize_text_field( $args['start_date'] );
+				}
+
+				if ( !empty( $args['end_date'] ) ) {
+					$date_query['before'] = sanitize_text_field( $args['end_date'] );
+				}
+
+				if ( count( $date_query ) ) {
+					$args['date_query'] = $date_query;
+				}
 			}
 		}
 
-		if ( !empty( $args['start_date'] ) || !empty( $args['end_date'] ) ) {
+		if ( !empty( $args['post_status'] ) ) {
+			if ( is_string( $args['post_status'] ) ) {
 
-			$date_query = array();
-
-			if ( !empty( $args['start_date'] ) ) {
-				$date_query['after'] = sanitize_text_field( $args['start_date'] );
-			}
-
-			if ( !empty( $args['end_date'] ) ) {
-				$date_query['before'] = sanitize_text_field( $args['end_date'] );
-			}
-
-			if ( count( $date_query ) ) {
-				$args['date_query'] = $date_query;
+				// Parse a comma-separated string of statuses
+				if ( strpos( $args['post_status'], ',' ) !== false ) {
+					$statuses = explode( ',', $args['post_status'] );
+					$args['post_status'] = array();
+					foreach( $statuses as $status ) {
+						$args['post_status'][] = sanitize_key( $status );
+					}
+				} else {
+					$args['post_status'] = sanitize_key( $_REQUEST['status'] );
+				}
 			}
 		}
 
@@ -136,8 +149,19 @@ class rtbQuery {
 			$args['paged'] = (int) $_REQUEST['paged'];
 		}
 
+		if ( !empty( $_REQUEST['posts_per_page'] ) ) {
+			$args['posts_per_page'] = (int) $_REQUEST['posts_per_page'];
+		}
+
 		if ( !empty( $_REQUEST['status'] ) ) {
-			$args['post_status'] = sanitize_key( $_REQUEST['status'] );
+			if ( is_string( $_REQUEST['status'] ) ) {
+				$args['post_status'] = sanitize_text_field( $_REQUEST['status'] );
+			} elseif ( is_array( $_REQUEST['status'] ) ) {
+				$args['post_status'] = array();
+				foreach( $_REQUEST['status'] as $status ) {
+					$args['post_status'][] = sanitize_key( $status );
+				}
+			}
 		}
 
 		if ( !empty( $_REQUEST['orderby'] ) ) {
@@ -156,8 +180,16 @@ class rtbQuery {
 			$args['end_date'] = sanitize_text_field( $_REQUEST['end_date'] );
 		}
 
-		if ( !empty( $_REQUEST['schedule'] ) ) {
-			$args['schedule'] = sanitize_key( $_REQUEST['schedule'] );
+		if ( !empty( $_REQUEST['date_range'] ) ) {
+			$args['date_range'] = sanitize_key( $_REQUEST['date_range'] );
+		}
+
+		if ( !empty( $_REQUEST['start_date'] ) ) {
+			$args['start_date'] = sanitize_text_field( $_REQUEST['start_date'] );
+		}
+
+		if ( !empty( $_REQUEST['end_date'] ) ) {
+			$args['end_date'] = sanitize_text_field( $_REQUEST['end_date'] );
 		}
 
 		$this->args = array_merge( $this->args, $args );
