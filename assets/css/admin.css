@@ -436,3 +436,18 @@
 		margin: 0;
 	}
 }
+
+/* License page */
+.rtb-license-setting .status {
+	display: inline-block;
+	padding: 4px;
+	color: #fff;
+}
+
+.rtb-license-setting .status.valid {
+	background: #069106;
+}
+
+.rtb-license-setting .status.inactive {
+	background: #BE0A0A;
+}

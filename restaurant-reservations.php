@@ -103,6 +103,12 @@ class rtbInit {
 		// Add links to plugin listing
 		add_filter('plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2);
 
+		// Load the license handling
+		if ( file_exists( RTB_PLUGIN_DIR . '/includes/Licenses.class.php' ) ) {
+			require_once( RTB_PLUGIN_DIR . '/includes/Licenses.class.php' );
+			$this->licenses = new rtbLicenses();
+		}
+
 		// Add the addons page
 		require_once( RTB_PLUGIN_DIR . '/includes/Addons.class.php' );
 		new rtbAddons(
@@ -208,7 +214,7 @@ class rtbInit {
 			return;
 		}
 
-		if ( $screen->base == 'toplevel_page_rtb-bookings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-settings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-addons' ) {
+		if ( $screen->base == 'toplevel_page_rtb-bookings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-addons' ) {
 			wp_enqueue_style( 'rtb-admin', RTB_PLUGIN_URL . '/assets/css/admin.css' );
 			wp_enqueue_script( 'rtb-admin', RTB_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '', true );
 			wp_localize_script(
