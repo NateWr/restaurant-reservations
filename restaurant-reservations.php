@@ -214,7 +214,7 @@ class rtbInit {
 			return;
 		}
 
-		if ( $screen->base == 'toplevel_page_rtb-bookings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-addons' ) {
+		if ( $screen->base == 'toplevel_page_rtb-bookings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-settings' || $screen->base == $admin_page_hooks['rtb-bookings'] . '_page_rtb-addons' ) {
 			wp_enqueue_style( 'rtb-admin', RTB_PLUGIN_URL . '/assets/css/admin.css' );
 			wp_enqueue_script( 'rtb-admin', RTB_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '', true );
 			wp_localize_script(
