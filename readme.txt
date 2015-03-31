@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -79,6 +79,10 @@ Yes, everything in this plugin can be translated using the standard translation 
 
 If you make a translation, please help others out by adding it to the [GitHub repository](https://github.com/NateWr/restaurant-reservations) so that I can distribute it for others.
 
+= I want to add a field to the form. Can I do that? =
+
+I'm working on an addon that will allow you to customize the booking form and add fields through your WordPress admin panel. Until that's ready, the only way to accomplish this is by using the built-in hooks. Developers who are comfortable writing plugins for WordPress can find a rough guide in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
+
 == Screenshots ==
 
 1. Easily manage bookings. View today's bookings or upcoming bookings at-a-glance. Confirm or reject bookings quickly.
@@ -93,6 +97,15 @@ If you make a translation, please help others out by adding it to the [GitHub re
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.1 (2015-03-31) =
+* Add: rtbQuery class for fetching bookings
+* Add: Centralized system for handling extension licenses
+* Add: Several filters for the bookings admin list table
+* Add: French translation h/t I-Visio
+* Add: Italian translation h/t Pierfilippo Trevisan
+* Updated: German translation h/t Roland Stumpp
+* Fix: Button label in send email modal
 
 = 1.4 (2015-02-24) =
 * Add: Send a custom email from the bookings list
@@ -174,6 +187,9 @@ If you make a translation, please help others out by adding it to the [GitHub re
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.1 =
+This update is a maintenance release that fixes a couple minor issues, adds French and Italian translations, and includes some under-the-hood changes to support upcoming extensions.
 
 = 1.4 =
 Thanks to sponsorship from Gemini Design, the plugin now supports sending an email directly to customers from the list of bookings, so you can request more details or suggest an alternative booking time. This update also improves the German translation and adds a Hebrew translation. Read the full changelog for details.
