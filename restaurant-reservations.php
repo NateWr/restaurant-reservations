@@ -181,7 +181,7 @@ class rtbInit {
 	 */
 	function append_to_content( $content ) {
 
-		if ( !is_main_query() || !in_the_loop() ) {
+		if ( !is_main_query() || !in_the_loop() || post_password_required() ) {
 			return $content;
 		}
 
