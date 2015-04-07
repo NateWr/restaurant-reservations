@@ -21,6 +21,9 @@ class rtbCompatibility {
 		// Load a .mo file for an old textdomain if one exists
 		add_filter( 'load_textdomain_mofile', array( $this, 'load_old_textdomain' ), 10, 2 );
 
+		// Run a filter deprecrated in 1.4.3
+		add_filter( 'rtb_bookings_table_views_date_range', array( $this, 'rtn_bookings_table_views_schedule' ) );
+
 	}
 
 	/**
@@ -41,6 +44,16 @@ class rtbCompatibility {
 		}
 
 		return $mofile;
+	}
+
+	/**
+	 * Run a filter on the admin bookings page display views that was
+	 * deprecrated in v1.4.3
+	 *
+	 * @since 1.4.3
+	 */
+	public function rtn_bookings_table_views_schedule( $views ) {
+		return apply_filters( 'rtn_bookings_table_views_schedule', $views );
 	}
 
 }

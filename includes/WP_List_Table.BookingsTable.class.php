@@ -117,13 +117,13 @@ class rtbBookingsTable extends WP_List_Table {
 		$this->filter_end_date = $end_date;
 
 		if ( $start_date === null ) {
-			$this->filter_start_date = !empty( $_GET['start-date'] ) ? sanitize_text_field( $_GET['start-date'] ) : null;
-			$this->filter_start_date = !empty( $_POST['start-date'] ) ? sanitize_text_field( $_POST['start-date'] ) : $this->filter_start_date;
+			$this->filter_start_date = !empty( $_GET['start_date'] ) ? sanitize_text_field( $_GET['start_date'] ) : null;
+			$this->filter_start_date = !empty( $_POST['start_date'] ) ? sanitize_text_field( $_POST['start_date'] ) : $this->filter_start_date;
 		}
 
 		if ( $end_date === null ) {
-			$this->filter_end_date = !empty( $_GET['end-date'] ) ? sanitize_text_field( $_GET['end-date'] ) : null;
-			$this->filter_end_date = !empty( $_POST['end-date'] ) ? sanitize_text_field( $_POST['end-date'] ) : $this->filter_end_date;
+			$this->filter_end_date = !empty( $_GET['end_date'] ) ? sanitize_text_field( $_GET['end_date'] ) : null;
+			$this->filter_end_date = !empty( $_POST['end_date'] ) ? sanitize_text_field( $_POST['end_date'] ) : $this->filter_end_date;
 		}
 	}
 
@@ -149,14 +149,14 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function query_string_maintenance() {
 
-		$this->query_string = remove_query_arg( array( 'action', 'start-date', 'end-date' ) );
+		$this->query_string = remove_query_arg( array( 'action', 'start_date', 'end_date' ) );
 
 		if ( $this->filter_start_date !== null ) {
-			$this->query_string = add_query_arg( array( 'start-date' => $this->filter_start_date ), $this->query_string );
+			$this->query_string = add_query_arg( array( 'start_date' => $this->filter_start_date ), $this->query_string );
 		}
 
 		if ( $this->filter_end_date !== null ) {
-			$this->query_string = add_query_arg( array( 'end-date' => $this->filter_end_date ), $this->query_string );
+			$this->query_string = add_query_arg( array( 'end_date' => $this->filter_end_date ), $this->query_string );
 		}
 
 	}
@@ -167,44 +167,44 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function advanced_filters() {
 
-		// Show the schedule views (today, upcoming, all)
-		if ( !empty( $_GET['schedule'] ) ) {
-			$schedule = sanitize_text_field( $_GET['schedule'] );
+		// Show the date_range views (today, upcoming, all)
+		if ( !empty( $_GET['date_range'] ) ) {
+			$date_range = sanitize_text_field( $_GET['date_range'] );
 		} else {
-			$schedule = '';
+			$date_range = '';
 		}
 
-		// Use a custom schedule if a date range has been entered
+		// Use a custom date_range if a date range has been entered
 		if ( $this->filter_start_date !== null || $this->filter_end_date !== null ) {
-			$schedule = 'custom';
+			$date_range = 'custom';
 		}
 
-		// Strip out existing date filters from the schedule view urls
-		$schedule_query_string = remove_query_arg( array( 'schedule', 'start-date', 'end-date' ), $this->query_string );
+		// Strip out existing date filters from the date_range view urls
+		$date_range_query_string = remove_query_arg( array( 'date_range', 'start_date', 'end_date' ), $this->query_string );
 
 		$views = array(
-			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'schedule' ), $schedule_query_string ) ), $schedule === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
-			'today'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'today', 'paged' => FALSE ), $schedule_query_string ), $schedule === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
-			'all'		=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'schedule' => 'all', 'paged' => FALSE ), $schedule_query_string ), $schedule == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
+			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'date_range' ), $date_range_query_string ) ), $date_range === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
+			'today'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
+			'all'		=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'date_range' => 'all', 'paged' => FALSE ), $date_range_query_string ), $date_range == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
 		);
 
-		if ( $schedule == 'custom' ) {
+		if ( $date_range == 'custom' ) {
 			$views['custom'] = '<span class="current">' . $this->get_current_date_range() . '</span>';
 		}
 
-		$views = apply_filters( 'rtn_bookings_table_views_schedule', $views );
+		$views = apply_filters( 'rtb_bookings_table_views_date_range', $views );
 		?>
 
 		<div id="rtb-filters" class="clearfix">
-			<ul class="subsubsub rtb-views-schedule">
+			<ul class="subsubsub rtb-views-date_range">
 				<li><?php echo join( ' | </li><li>', $views ); ?></li>
 			</ul>
 
 			<div class="date-filters">
 				<label for="start-date" class="screen-reader-text"><?php _e( 'Start Date:', 'restaurant-reservations' ); ?></label>
-				<input type="text" id="start-date" name="start-date" class="datepicker" value="<?php echo esc_attr( $this->filter_start_date ); ?>" placeholder="<?php _e( 'Start Date', 'restaurant-reservations' ); ?>" />
+				<input type="text" id="start-date" name="start_date" class="datepicker" value="<?php echo esc_attr( $this->filter_start_date ); ?>" placeholder="<?php _e( 'Start Date', 'restaurant-reservations' ); ?>" />
 				<label for="end-date" class="screen-reader-text"><?php _e( 'End Date:', 'restaurant-reservations' ); ?></label>
-				<input type="text" id="end-date" name="end-date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', 'restaurant-reservations' ); ?>" />
+				<input type="text" id="end-date" name="end_date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', 'restaurant-reservations' ); ?>" />
 				<input type="submit" class="button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
 				<?php if( !empty( $start_date ) || !empty( $end_date ) ) : ?>
 				<a href="<?php echo add_query_arg( array( 'action' => 'clear_date_filters' ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
@@ -560,9 +560,9 @@ class rtbBookingsTable extends WP_List_Table {
 				$where .= " AND p.post_date <= '" . $end_date->format( 'Y-m-d H:i:s' ) . "'";
 			}
 
-		} elseif ( !empty( $_GET['schedule'] ) ) {
+		} elseif ( !empty( $_GET['date_range'] ) ) {
 
-			if ( $_GET['schedule'] ==  'today' ) {
+			if ( $_GET['date_range'] ==  'today' ) {
 				$where .= " AND p.post_date >= '" . date( 'Y-m-d' ) . "' AND p.post_date <= '" . date( 'Y-m-d', current_time( 'timestamp' ) + 86400 ) . "'";
 			}
 
@@ -666,9 +666,9 @@ class rtbBookingsTable extends WP_List_Table {
 
 		if ( !empty( $this->filter_start_date ) || !empty( $this->filter_end_date ) ) {
 			$notifications['date'] = sprintf( _x( 'Only bookings from %s are being shown.', 'Notification of booking date range, eg - bookings from 2014-12-02-2014-12-05', 'restaurant-reservations' ), $this->get_current_date_range() );
-		} elseif ( !empty( $_GET['schedule'] ) && $_GET['schedule'] == 'today' ) {
+		} elseif ( !empty( $_GET['date_range'] ) && $_GET['date_range'] == 'today' ) {
 			$notifications['date'] = __( "Only today's bookings are being shown.", 'restaurant-reservations' );
-		} elseif ( empty( $_GET['schedule'] ) ) {
+		} elseif ( empty( $_GET['date_range'] ) ) {
 			$notifications['date'] = __( 'Only upcoming bookings are being shown.', 'restaurant-reservations' );
 		}
 

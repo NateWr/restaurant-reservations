@@ -86,19 +86,7 @@ class rtbQuery {
 
 		if ( is_string( $args['date_range'] ) ) {
 
-			if ( $args['date_range'] === 'today' ) {
-				$today = getdate();
-				$args['year'] = $today['year'];
-				$args['monthnum'] = $today['mon'];
-				$args['day'] = $today['mday'];
-
-			} elseif ( $args['date_range'] === 'upcoming' ) {
-				$args['date_query'] = array(
-					array(
-						'after' => '-1 hour', // show bookings that have just passed
-					)
-				);
-			} elseif ( !empty( $args['start_date'] ) || !empty( $args['end_date'] ) ) {
+			if ( !empty( $args['start_date'] ) || !empty( $args['end_date'] ) ) {
 				$date_query = array( 'inclusive' => true );
 
 				if ( !empty( $args['start_date'] ) ) {
@@ -112,6 +100,18 @@ class rtbQuery {
 				if ( count( $date_query ) ) {
 					$args['date_query'] = $date_query;
 				}
+			} elseif ( $args['date_range'] === 'today' ) {
+				$today = getdate();
+				$args['year'] = $today['year'];
+				$args['monthnum'] = $today['mon'];
+				$args['day'] = $today['mday'];
+
+			} elseif ( $args['date_range'] === 'upcoming' ) {
+				$args['date_query'] = array(
+					array(
+						'after' => '-1 hour', // show bookings that have just passed
+					)
+				);
 			}
 		}
 
@@ -170,14 +170,6 @@ class rtbQuery {
 
 		if ( !empty( $_REQUEST['order'] ) && $_REQUEST['order'] === 'DESC' ) {
 			$args['order'] = $_REQUEST['orderby'];
-		}
-
-		if ( !empty( $_REQUEST['start_date'] ) ) {
-			$args['start_date'] = sanitize_text_field( $_REQUEST['start_date'] );
-		}
-
-		if ( !empty( $_REQUEST['end_date'] ) ) {
-			$args['end_date'] = sanitize_text_field( $_REQUEST['end_date'] );
 		}
 
 		if ( !empty( $_REQUEST['date_range'] ) ) {
