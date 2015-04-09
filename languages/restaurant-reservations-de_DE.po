@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Restaurant Reservations 1.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-02 13:17+0100\n"
-"PO-Revision-Date: 2015-03-02 13:30+0100\n"
-"Last-Translator: admin <admin@example.com>\n"
+"POT-Creation-Date: 2015-04-09 11:06+0100\n"
+"PO-Revision-Date: 2015-04-09 11:13+0100\n"
+"Last-Translator: Roland Stumpp <support@mediaoffice.de>\n"
 "Language-Team: mediaOffice GbR <support@mediaoffice.de>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../includes/Addons.class.php:98
-#: ../includes/WP_List_Table.BookingsTable.class.php:310
+#: ../includes/WP_List_Table.BookingsTable.class.php:326
 msgid "Loading"
 msgstr "Lade ..."
 
@@ -112,8 +112,7 @@ msgstr "Reservierungen"
 msgid "Add New"
 msgstr "Neu hinzufügen"
 
-#: ../includes/AdminBookings.class.php:116
-#: ../includes/AdminBookings.class.php:157 ../restaurant-reservations.php:217
+#: ../includes/AdminBookings.class.php:116 ../restaurant-reservations.php:226
 msgid "Add Booking"
 msgstr "Reservierung hinzufügen"
 
@@ -123,7 +122,8 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: ../includes/AdminBookings.class.php:140
-#: ../includes/WP_List_Table.BookingsTable.class.php:329
+#: ../includes/AdminBookings.class.php:157
+#: ../includes/WP_List_Table.BookingsTable.class.php:345
 msgid "Send Email"
 msgstr "E-Mail senden"
 
@@ -137,7 +137,7 @@ msgid "Subject"
 msgstr "Betreff"
 
 #: ../includes/AdminBookings.class.php:151 ../includes/Settings.class.php:817
-#: ../includes/WP_List_Table.BookingsTable.class.php:283
+#: ../includes/WP_List_Table.BookingsTable.class.php:299
 msgid "Message"
 msgstr "Meldung"
 
@@ -189,7 +189,7 @@ msgstr ""
 "Ihre Reservierung konnte nicht geladen werden. Bitte laden Sie die Seite neu "
 "und versuchen Sie es noch einmal."
 
-#: ../includes/AdminBookings.class.php:429
+#: ../includes/AdminBookings.class.php:443
 msgid ""
 "Unable to trash this post. Please try again. If you continue to have "
 "trouble, please refresh the page."
@@ -198,21 +198,25 @@ msgstr ""
 "versuchen Sie es nocheinmal. Falls Sie dann immer noch Probleme haben, laden "
 "Sie die Seite neu."
 
-#: ../includes/AdminBookings.class.php:471
+#: ../includes/AdminBookings.class.php:485
 msgid "Please enter a message before sending the email."
 msgstr "Bitte geben Sie eine Nachricht ein bevor Sie die E-Mail verschicken."
 
-#: ../includes/AdminBookings.class.php:480
+#: ../includes/AdminBookings.class.php:494
 msgid ""
 "The email could not be sent because some critical information was missing."
 msgstr ""
 "Die E-Mail konnte nicht gesendet werden, weil einige wichtige Informationen "
 "fehlten."
 
-#: ../includes/AdminBookings.class.php:492
+#: ../includes/AdminBookings.class.php:506
 msgid "There was an error loading the booking and the email was not sent."
 msgstr ""
 "Fehler beim Laden der Reservierungsdaten. Es wurde keine E-Mail verschickt."
+
+#: ../includes/AdminPageSettingLicenseKey.class.php:193
+msgid "Invalid"
+msgstr "Ungültig"
 
 #: ../includes/Booking.class.php:180
 msgid "Please enter the date you would like to book."
@@ -331,7 +335,7 @@ msgstr "Reservierung"
 msgid "Add New Booking"
 msgstr "Neue Reservierung hinzufügen"
 
-#: ../includes/CustomPostTypes.class.php:44 ../restaurant-reservations.php:218
+#: ../includes/CustomPostTypes.class.php:44 ../restaurant-reservations.php:227
 msgid "Edit Booking"
 msgstr "Reservierung bearbeiten"
 
@@ -387,6 +391,39 @@ msgid "Closed <span class=\"count\">(%s)</span>"
 msgid_plural "Closed <span class=\"count\">(%s)</span>"
 msgstr[0] "Geschlossen für <span class=\"count\">(%s)</span>"
 msgstr[1] "Geschlossen für <span class=\"count\">(%s)</span>"
+
+#: ../includes/Licenses.class.php:119
+msgid "Licenses"
+msgstr "Lizenzen"
+
+#: ../includes/Licenses.class.php:200
+msgid ""
+"Your attempt to deactivate a license key failed. Please try again later or "
+"contact support for help."
+msgstr ""
+"Ihr Versuch, einen Lizenzschlüssel zu deaktivieren ist fehlgeschlagen. Bitte "
+"versuchen Sie es später noch einmal oder kontaktieren Sie den Support um "
+"Hilfe."
+
+#: ../includes/Licenses.class.php:204
+#, php-format
+msgid ""
+"You have reached the activation limit for this license. If you have the "
+"license activated on other sites you will need to deactivate them or "
+"purchase more license keys from %sTheme of the Crop%s."
+msgstr ""
+"Sie haben das Aktivierungslimit für diese Lizenz erreicht. Wenn Sie die "
+"Lizenz auf anderen Websites verwenden, müssen Sie entweder eine Lizenz "
+"deaktivieren oder sie kaufen zur Aktivierung mehr Lizenzschlüssel bei "
+"% sTheme of the Crop% s."
+
+#: ../includes/Licenses.class.php:206
+msgid ""
+"Your attempt to activate a license key failed. Please check the license key "
+"and try again."
+msgstr ""
+"Ihr Versuch, einen Lizenzschlüssel zu aktivieren ist fehlgeschlagen. Bitte "
+"überprüfen Sie denLizenzschlüssel und versuchen Sie es erneut."
 
 #: ../includes/Notification.class.php:88
 msgid "View pending bookings"
@@ -1212,7 +1249,7 @@ msgid "Book a table"
 msgstr "Reservierungsdaten"
 
 #: ../includes/Settings.class.php:761
-#: ../includes/WP_List_Table.BookingsTable.class.php:278
+#: ../includes/WP_List_Table.BookingsTable.class.php:294
 msgid "Date"
 msgstr "Datum"
 
@@ -1221,7 +1258,7 @@ msgid "Time"
 msgstr "Uhrzeit"
 
 #: ../includes/Settings.class.php:773
-#: ../includes/WP_List_Table.BookingsTable.class.php:279
+#: ../includes/WP_List_Table.BookingsTable.class.php:295
 msgid "Party"
 msgstr "Personen"
 
@@ -1230,17 +1267,17 @@ msgid "Contact Details"
 msgstr "Kontaktdaten"
 
 #: ../includes/Settings.class.php:789
-#: ../includes/WP_List_Table.BookingsTable.class.php:280
+#: ../includes/WP_List_Table.BookingsTable.class.php:296
 msgid "Name"
 msgstr "Vor- und Zuname"
 
 #: ../includes/Settings.class.php:795
-#: ../includes/WP_List_Table.BookingsTable.class.php:281
+#: ../includes/WP_List_Table.BookingsTable.class.php:297
 msgid "Email"
 msgstr "E-Mail"
 
 #: ../includes/Settings.class.php:804
-#: ../includes/WP_List_Table.BookingsTable.class.php:282
+#: ../includes/WP_List_Table.BookingsTable.class.php:298
 msgid "Phone"
 msgstr "Telefonnummer"
 
@@ -1364,68 +1401,68 @@ msgid "Closed"
 msgstr "Abgelehnt"
 
 #: ../includes/WP_List_Table.BookingsTable.class.php:250
-#: ../includes/WP_List_Table.BookingsTable.class.php:315
+#: ../includes/WP_List_Table.BookingsTable.class.php:331
 msgid "Trash"
 msgstr "Papierkorb"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:284
+#: ../includes/WP_List_Table.BookingsTable.class.php:300
 msgid "Status"
 msgstr "Status"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:314
+#: ../includes/WP_List_Table.BookingsTable.class.php:330
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:347
+#: ../includes/WP_List_Table.BookingsTable.class.php:363
 msgctxt "Status label for bookings put in the trash"
 msgid "Trash"
 msgstr "Papierkorb"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:379
+#: ../includes/WP_List_Table.BookingsTable.class.php:395
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:380
+#: ../includes/WP_List_Table.BookingsTable.class.php:396
 msgid "Set To Confirmed"
 msgstr "Auf \"Bestätigt\" gestellt"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:381
+#: ../includes/WP_List_Table.BookingsTable.class.php:397
 msgid "Set To Pending Review"
 msgstr "Auf \"Unbestätigt\" gestellt"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:382
+#: ../includes/WP_List_Table.BookingsTable.class.php:398
 msgid "Set To Closed"
 msgstr "Auf \"Abgelehnt\" gestellt"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:497
+#: ../includes/WP_List_Table.BookingsTable.class.php:513
 #, php-format
 msgid "%d booking deleted successfully."
 msgid_plural "%d bookings deleted successfully."
 msgstr[0] "%d Reservierung erfolgreich gelöscht "
 msgstr[1] "%d Reservierungen erfolgreich gelöscht "
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:500
+#: ../includes/WP_List_Table.BookingsTable.class.php:516
 #, php-format
 msgid "%d booking confirmed."
 msgid_plural "%d bookings confirmed."
 msgstr[0] "%d Reservierung bestätigt "
 msgstr[1] "%d Reservierungen bestätigt "
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:503
+#: ../includes/WP_List_Table.BookingsTable.class.php:519
 #, php-format
 msgid "%d booking set to pending."
 msgid_plural "%d bookings set to pending."
 msgstr[0] "%d Reservierung unbestätigt gestellt"
 msgstr[1] "%d Reservierungen unbestätigt gestellt"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:506
+#: ../includes/WP_List_Table.BookingsTable.class.php:522
 #, php-format
 msgid "%d booking closed."
 msgid_plural "%d bookings closed."
 msgstr[0] "%d Reservierung abgelehnt"
 msgstr[1] "%d Reservierungen abgelehnt"
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:518
+#: ../includes/WP_List_Table.BookingsTable.class.php:534
 #, php-format
 msgid "%d booking had errors and could not be processed."
 msgid_plural "%d bookings had errors and could not be processed."
@@ -1433,11 +1470,11 @@ msgstr[0] "%d Reservierung hatte Fehler und konnte nicht verarbeitet werden."
 msgstr[1] ""
 "%d Reservierungen hatten Fehler und konnten nicht verarbeitet werden."
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:694
+#: ../includes/WP_List_Table.BookingsTable.class.php:661
 msgid "You're viewing bookings that have been moved to the trash."
 msgstr "Sie sehen Reservierungen die in den Papierkorb verschoben worden sind."
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:696
+#: ../includes/WP_List_Table.BookingsTable.class.php:663
 #, php-format
 msgctxt ""
 "Indicates which booking status is currently being filtered in the list of "
@@ -1445,18 +1482,18 @@ msgctxt ""
 msgid "You're viewing bookings that have been marked as %s."
 msgstr "Sie sehen eine Reservierung die als %s markiert wurde."
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:701
+#: ../includes/WP_List_Table.BookingsTable.class.php:668
 #, php-format
 msgctxt ""
 "Notification of booking date range, eg - bookings from 2014-12-02-2014-12-05"
 msgid "Only bookings from %s are being shown."
 msgstr "Es werden nur Reservierungen im Zeitraum %s angezeigt."
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:703
+#: ../includes/WP_List_Table.BookingsTable.class.php:670
 msgid "Only today's bookings are being shown."
 msgstr "Es werden nur Reservierungen von heute angezeigt."
 
-#: ../includes/WP_List_Table.BookingsTable.class.php:705
+#: ../includes/WP_List_Table.BookingsTable.class.php:672
 msgid "Only upcoming bookings are being shown."
 msgstr "Es werden nur zukünfitige Reservierungen angezeigt."
 
@@ -1476,11 +1513,11 @@ msgstr "Titel"
 msgid "Request Booking"
 msgstr "Anfrage absenden"
 
-#: ../restaurant-reservations.php:148
+#: ../restaurant-reservations.php:157
 msgid "Booking Manager"
 msgstr "Reservierungsverwaltung"
 
-#: ../restaurant-reservations.php:219
+#: ../restaurant-reservations.php:228
 msgid ""
 "An unspecified error occurred. Please try again. If the problem persists, "
 "try logging out and logging back in."
@@ -1489,11 +1526,11 @@ msgstr ""
 "erneut. Falls das Problem dann immer noch besteht, versuchen Sie es mit Aus- "
 "und Einloggen."
 
-#: ../restaurant-reservations.php:281
+#: ../restaurant-reservations.php:290
 msgid "View the help documentation for Restaurant Reservations"
 msgstr "Hilfe für das Plugin Restaurant Reservierungen"
 
-#: ../restaurant-reservations.php:281
+#: ../restaurant-reservations.php:290
 msgid "Help"
 msgstr "Hilfe"
 
