@@ -64,6 +64,9 @@
 }
 
 /* Compatibility styles for pickadate on common themes */
+.picker {
+	outline: 0;
+}
 #rtb-date_root .picker__button--clear,
 #rtb-date_root .picker__button--today {
 	/* don't adopt the theme's button text color */
