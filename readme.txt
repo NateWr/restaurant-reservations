@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -101,6 +101,16 @@ I'm working on an addon that will allow you to customize the booking form and ad
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.3 (2015-04-20) =
+* Add: Datepickers for start/end date filters in admin bookings list
+* Fix: Disabled weekdays get offset when editing bookings
+* Fix: Start/end date filters in admin bookings list
+* Fix: Booking form shouldn't appear on password-protected posts
+* Fix: Dutch translation
+* Updated: Dutch and German translations
+* Updated: pickadate.js lib now at v3.5.6
+
 
 = 1.4.2 (2015-03-31) =
 * Fix: Speed issue if licensed addon active
