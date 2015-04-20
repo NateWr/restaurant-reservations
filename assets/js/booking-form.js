@@ -83,6 +83,7 @@ jQuery(document).ready(function ($) {
 			if ( rtb_pickadate.disable_dates.length ) {
 
 				// Update weekday dates if start of the week has been modified
+				var disable_dates = jQuery.extend( true, [], rtb_pickadate.disable_dates );
 				if ( typeof rtb_booking_form.datepicker.component.settings.firstDay == 'number' ) {
 					var weekday_num = 0;
 					for ( var disable_key in rtb_pickadate.disable_dates ) {
@@ -91,12 +92,12 @@ jQuery(document).ready(function ($) {
 							if ( weekday_num < 1 ) {
 								weekday_num = 7;
 							}
-							rtb_pickadate.disable_dates[disable_key] = weekday_num;
+							disable_dates[disable_key] =  weekday_num;
 						}
 					}
 				}
 
-				rtb_booking_form.datepicker.set( 'disable', rtb_pickadate.disable_dates );
+				rtb_booking_form.datepicker.set( 'disable', disable_dates );
 			}
 
 			if ( rtb_pickadate.late_bookings === '1440' ) {

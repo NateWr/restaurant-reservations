@@ -84,7 +84,6 @@ jQuery(document).ready(function ($) {
 
 			if ( typeof fields !== 'undefined' ) {
 				rtb_booking_modal_fields.html( fields );
-				rtb_booking_form.init();
 				rtb_init_booking_form_modal_fields();
 			}
 
@@ -156,6 +155,9 @@ jQuery(document).ready(function ($) {
 	 * Initialize form field events
 	 */
 	function rtb_init_booking_form_modal_fields() {
+
+		// Run init on the form
+		rtb_booking_form.init();
 
 		// Show full description for notifications toggle
 		rtb_booking_modal_fields.find( '.rtb-description-prompt' ).click( function() {
@@ -259,9 +261,6 @@ jQuery(document).ready(function ($) {
 		}
 	}
 
-	// Initialize form field events on load
-	rtb_init_booking_form_modal_fields();
-
 	// Reset the forms on load
 	// This fixes a strange bug in Firefox where disabled buttons would
 	// persist after the page refreshed. I'm guessing its a cache issue
@@ -350,7 +349,6 @@ jQuery(document).ready(function ($) {
 
 					// Replace form fields with HTML returned
 					rtb_booking_modal_fields.html( r.data.fields );
-					rtb_booking_form.init();
 					rtb_init_booking_form_modal_fields();
 
 				// Logged out
