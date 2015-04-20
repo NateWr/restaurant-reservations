@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -102,6 +102,9 @@ I'm working on an addon that will allow you to customize the booking form and ad
 
 == Changelog ==
 
+= 1.4.4 (2015-04-20) =
+* Fix: low-risk XSS security vulnerability with escaped URLs on admin bookings page
+
 = 1.4.3 (2015-04-20) =
 * Add: Datepickers for start/end date filters in admin bookings list
 * Fix: Disabled weekdays get offset when editing bookings
@@ -110,7 +113,6 @@ I'm working on an addon that will allow you to customize the booking form and ad
 * Fix: Dutch translation
 * Updated: Dutch and German translations
 * Updated: pickadate.js lib now at v3.5.6
-
 
 = 1.4.2 (2015-03-31) =
 * Fix: Speed issue if licensed addon active
@@ -204,6 +206,12 @@ I'm working on an addon that will allow you to customize the booking form and ad
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.4 =
+This update fixes a low-risk XSS security vulnerability. It is low-risk because in order to exploit this vulnerability a user would need to have access to the bookings management panel in the admin area, which only trusted users should have.
+
+= 1.4.3 =
+This update adds datepickers to the start/end date filters in the admin bookings list and fixes a small error with the filters. It also fixes an issue with disabled weekdays when editing bookings. Dutch and German translation updates.
 
 = 1.4.2 =
 This update is a maintenance release that fixes a couple minor issues, adds French and Italian translations, and includes some under-the-hood changes to support upcoming extensions. 1.4.1-1.4.2 fixes a rare but vital performance issue in the admin.
