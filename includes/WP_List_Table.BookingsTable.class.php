@@ -183,9 +183,9 @@ class rtbBookingsTable extends WP_List_Table {
 		$date_range_query_string = remove_query_arg( array( 'date_range', 'start_date', 'end_date' ), $this->query_string );
 
 		$views = array(
-			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'date_range' ), $date_range_query_string ) ), $date_range === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
-			'today'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
-			'all'		=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'date_range' => 'all', 'paged' => FALSE ), $date_range_query_string ), $date_range == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
+			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'date_range' ), $date_range_query_string ) ) ), $date_range === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
+			'today'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ) ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
+			'all'		=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'all', 'paged' => FALSE ), $date_range_query_string ) ), $date_range == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
 		);
 
 		if ( $date_range == 'custom' ) {
@@ -207,7 +207,7 @@ class rtbBookingsTable extends WP_List_Table {
 				<input type="text" id="end-date" name="end_date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', 'restaurant-reservations' ); ?>" />
 				<input type="submit" class="button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
 				<?php if( !empty( $start_date ) || !empty( $end_date ) ) : ?>
-				<a href="<?php echo add_query_arg( array( 'action' => 'clear_date_filters' ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
+				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'clear_date_filters' ) ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
 				<?php endif; ?>
 			</div>
 
@@ -243,11 +243,11 @@ class rtbBookingsTable extends WP_List_Table {
 		$current = isset( $_GET['status'] ) ? $_GET['status'] : '';
 
 		$views = array(
-			'all'		=> sprintf( '<a href="%s"%s>%s</a>', remove_query_arg( array( 'status', 'paged' ), $this->query_string ), $current === 'all' || $current == '' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['total'] . ')</span>' ),
-			'pending'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'pending', 'paged' => FALSE ), $this->query_string ), $current === 'pending' ? ' class="current"' : '', __( 'Pending', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['pending'] . ')</span>' ),
-			'confirmed'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'confirmed', 'paged' => FALSE ), $this->query_string ), $current === 'confirmed' ? ' class="current"' : '', __( 'Confirmed', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['confirmed'] . ')</span>' ),
-			'closed'	=> sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'closed', 'paged' => FALSE ), $this->query_string ), $current === 'closed' ? ' class="current"' : '', __( 'Closed', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['closed'] . ')</span>' ),
-			'trash' => sprintf( '<a href="%s"%s>%s</a>', add_query_arg( array( 'status' => 'trash', 'paged' => FALSE ), $this->query_string ), $current === 'trash' ? ' class="current"' : '', __( 'Trash', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['trash'] . ')</span>' ),
+			'all'		=> sprintf( '<a href="%s"%s>%s</a>', esc_url( remove_query_arg( array( 'status', 'paged' ), $this->query_string ) ), $current === 'all' || $current == '' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['total'] . ')</span>' ),
+			'pending'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'status' => 'pending', 'paged' => FALSE ), $this->query_string ) ), $current === 'pending' ? ' class="current"' : '', __( 'Pending', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['pending'] . ')</span>' ),
+			'confirmed'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'status' => 'confirmed', 'paged' => FALSE ), $this->query_string ) ), $current === 'confirmed' ? ' class="current"' : '', __( 'Confirmed', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['confirmed'] . ')</span>' ),
+			'closed'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'status' => 'closed', 'paged' => FALSE ), $this->query_string ) ), $current === 'closed' ? ' class="current"' : '', __( 'Closed', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['closed'] . ')</span>' ),
+			'trash' => sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'status' => 'trash', 'paged' => FALSE ), $this->query_string ) ), $current === 'trash' ? ' class="current"' : '', __( 'Trash', 'restaurant-reservations' ) . ' <span class="count">(' . $this->booking_counts['trash'] . ')</span>' ),
 		);
 
 		return apply_filters( 'rtb_bookings_table_views_status', $views );

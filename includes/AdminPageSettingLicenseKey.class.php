@@ -342,7 +342,7 @@ class rtbAdminPageSettingLicenseKey {
 		if ( is_wp_error( $response ) ) {
 			$url = remove_query_arg( array( 'id', 'action' ) );
 			$url = add_query_arg( 'license_result', 'response_wp_error', $url );
-			header( 'Location: ' . $url );
+			header( 'Location: ' . esc_url_raw( $url ) );
 		}
 
 		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
@@ -369,7 +369,7 @@ class rtbAdminPageSettingLicenseKey {
 			$url = add_query_arg( 'result_error', $license_data->error, $url );
 		}
 
-		header( 'Location: ' . $url );
+		header( 'Location: ' . esc_url_raw( $url ) );
 
 	}
 
