@@ -40,17 +40,6 @@ jQuery(document).ready(function ($) {
 				min: true,
 				container: 'body',
 
-				// Workaround bug in current version of pickadate.js
-				// https://github.com/amsul/pickadate.js/issues/609
-				onOpen:			function() {
-					input = document.getElementById( 'rtb-date' );
-					window.scrollTo( 0, input.offsetTop );
-				},
-				onClose:		function() {
-					input = document.getElementById( 'rtb-date' );
-					window.scrollTo( 0, input.offsetTop );
-				},
-
 				// Select the value when loaded if a value has been set
 				onStart: function() {
 					if ( $( '#rtb-date' ).val()	!== '' ) {
@@ -69,17 +58,6 @@ jQuery(document).ready(function ($) {
 				hiddenName: true,
 				interval: parseInt( rtb_pickadate.time_interval, 10 ),
 				container: 'body',
-
-				// Workaround bug in current version of pickadate.js
-				// https://github.com/amsul/pickadate.js/issues/609
-				onOpen:			function() {
-					input = document.getElementById( 'rtb-time' );
-					window.scrollTo( 0, input.offsetTop );
-				},
-				onClose:		function() {
-					input = document.getElementById( 'rtb-time' );
-					window.scrollTo( 0, input.offsetTop );
-				},
 
 				// Select the value when loaded if a value has been set
 				onStart: function() {
