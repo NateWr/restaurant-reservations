@@ -244,6 +244,7 @@ function rtb_print_form_text_field( $slug, $title, $value, $args = array() ) {
 	$value = esc_attr( $value );
 	$type = empty( $args['input_type'] ) ? 'text' : esc_attr( $args['input_type'] );
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes[] = 'rtb-text';
 
 	?>
 
@@ -271,6 +272,7 @@ function rtb_print_form_textarea_field( $slug, $title, $value, $args = array() )
 	// Strip out <br> tags when placing in a textarea
 	$value = preg_replace('/\<br(\s*)?\/?\>/i', '', $value);
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes[] = 'rtb-textarea';
 
 	?>
 
@@ -298,6 +300,7 @@ function rtb_print_form_select_field( $slug, $title, $value, $args ) {
 	$value = esc_attr( $value );
 	$options = is_array( $args['options'] ) ? $args['options'] : array();
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes[] = 'rtb-select';
 
 	?>
 
@@ -331,6 +334,7 @@ function rtb_print_form_checkbox_field( $slug, $title, $value, $args ) {
 	$value = !empty( $value ) ? array_map( 'esc_attr', $value ) : array();
 	$options = is_array( $args['options'] ) ? $args['options'] : array();
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes[] = 'rtb-checkbox';
 
 	?>
 
@@ -364,6 +368,7 @@ function rtb_print_form_radio_field( $slug, $title, $value, $args ) {
 	$value = esc_attr( $value );
 	$options = is_array( $args['options'] ) ? $args['options'] : array();
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes[] = 'rtb-radio';
 
 	?>
 
@@ -395,6 +400,7 @@ function rtb_print_form_confirm_field( $slug, $title, $value, $args ) {
 	$slug = esc_attr( $slug );
 	$value = esc_attr( $value );
 	$classes = isset( $args['classes'] ) ? $args['classes'] : array();
+	$classes[] = 'rtb-confirm';
 
 	?>
 
