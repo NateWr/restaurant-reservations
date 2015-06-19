@@ -117,6 +117,11 @@ class rtbLicenses {
 			array(
 				'id'            => 'rtb-licenses',
 				'title'         => __( 'Licenses', 'restaurant-reservations' ),
+				'description'	=> sprintf(
+					__( 'Activate license keys for any commercial addons you have purchased. %sView all addons%s.', 'restaurant-reservations' ),
+					'<a href="' . admin_url( 'admin.php?page=rtb-addons' ) . '">',
+					'</a>'
+				),
 				'is_tab'		=> true,
 			)
 		);
