@@ -405,6 +405,7 @@ function rtb_print_form_confirm_field( $slug, $title, $value, $args ) {
 	?>
 
 	<div <?php echo rtb_print_element_class( $slug, $classes ); ?>>
+		<?php echo rtb_print_form_error( $slug ); ?>
 		<label for="rtb-<?php echo $slug; ?>">
 			<input type="checkbox" name="rtb-<?php echo $slug; ?>" id="rtb-<?php echo $slug; ?>" value="1" <?php checked( $value, 1 ); ?>>
 			<?php echo $title; ?>
