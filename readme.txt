@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 4.2
+Tested Up To: 4.2.2
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -103,6 +103,14 @@ I'm working on an addon that will allow you to customize the booking form and ad
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.6 (2015-06-20) =
+* Add: Remove old schedule exceptions and sort exceptions by date
+* Add: CSS class indicating type of booking form field
+* Fix: Extended Latin can cause Reply-To email headers to fail in some clients
+* Fix: PHP Warning when performing bulk or quick action in bookings panel
+* Fix: Message row lingers after booking trashed in admin panel
+* Updated .pot file
 
 = 1.4.5 (2015-04-23) =
 * Fix: Loading spinner not visible due to 4.2 changes
@@ -212,6 +220,9 @@ I'm working on an addon that will allow you to customize the booking form and ad
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.6 =
+This update improves compatibility with an upcoming Custom Fields addon. It also fixes some minor bugs with extended Latin characters in emails and the admin list table, and removes expired schedule exceptions.
 
 = 1.4.5 =
 This update fixes a non-critical issue with the display of the loading spinner in the upcoming 4.2 version of WordPress.
