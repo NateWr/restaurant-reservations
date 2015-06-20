@@ -58,3 +58,68 @@ class rtbCompatibility {
 
 }
 } // endif
+
+/**
+ * This adds a function missing in PHP versions less than 5.3 which is used to
+ * properly format non-standard Latin characters in the name portion of an
+ * email's Reply-To headers. The name variable is passed through this function
+ * before being added to the headers.
+ *
+ * If it detects that the function already exists, it will do nothing.
+ *
+ * From: http://php.net/manual/en/function.quoted-printable-encode.php#115840#
+ */
+if ( !function_exists( 'quoted_printable_encode' ) ) {
+function quoted_printable_encode($str) {
+    $php_qprint_maxl = 75;
+    $lp = 0;
+    $ret = '';
+    $hex = "0123456789ABCDEF";
+    $length = strlen($str);
+    $str_index = 0;
+
+    while ($length--) {
+        if ((($c = $str[$str_index++]) == "\015") && ($str[$str_index] == "\012") && $length > 0) {
+            $ret .= "\015";
+            $ret .= $str[$str_index++];
+            $length--;
+            $lp = 0;
+        } else {
+            if (ctype_cntrl($c)
+                || (ord($c) == 0x7f)
+                || (ord($c) & 0x80)
+                || ($c == '=')
+                || (($c == ' ') && ($str[$str_index] == "\015")))
+            {
+                if (($lp += 3) > $php_qprint_maxl)
+                {
+                    $ret .= '=';
+                    $ret .= "\015";
+                    $ret .= "\012";
+                    $lp = 3;
+                }
+                $ret .= '=';
+                $ret .= $hex[ord($c) >> 4];
+                $ret .= $hex[ord($c) & 0xf];
+            }
+            else
+            {
+                if ((++$lp) > $php_qprint_maxl)
+                {
+                    $ret .= '=';
+                    $ret .= "\015";
+                    $ret .= "\012";
+                    $lp = 1;
+                }
+                $ret .= $c;
+                if($lp == 1 && $c == '.') {
+                    $ret .= '.';
+                    $lp++;
+                }
+            }
+        }
+    }
+
+    return $ret;
+}
+} // endif
