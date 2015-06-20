@@ -70,6 +70,9 @@ class rtbSettings {
 
 		add_action( 'init', array( $this, 'load_settings_panel' ) );
 
+		// Order schedule exceptions and remove past exceptions
+		add_filter( 'sanitize_option_rtb-settings', array( $this, 'clean_schedule_exceptions' ), 100 );
+
 	}
 
 	/**
@@ -884,6 +887,51 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Sort the schedule exceptions and remove past exceptions before saving
+	 *
+	 * @since 1.4.6
+	 */
+	public function clean_schedule_exceptions( $val ) {
+
+		if ( empty( $val['schedule-closed'] ) ) {
+			return $val;
+		}
+
+		// Sort by date
+		$schedule_closed = $val['schedule-closed'];
+		usort( $schedule_closed, array( $this, 'sort_by_date' ) );
+
+		// Remove exceptions more than a week old
+		$week_ago = time() - 604800;
+		for( $i = 0; $i < count( $schedule_closed ); $i++ ) {
+			if ( strtotime( $schedule_closed[$i]['date'] ) > $week_ago ) {
+				break;
+			}
+		}
+		if ( $i ) {
+			$schedule_closed = array_slice( $schedule_closed, $i );
+		}
+
+		$val['schedule-closed'] = $schedule_closed;
+
+		return $val;
+	}
+
+	/**
+	 * Sort an associative array by the value's date parameter
+	 *
+	 * @usedby self::clean_schedule_exceptions()
+	 * @since 0.1
+	 */
+	public function sort_by_date( $a, $b ) {
+
+		$ad = empty( $a['date'] ) ? 0 : strtotime( $a['date'] );
+		$bd = empty( $b['date'] ) ? 0 : strtotime( $b['date'] );
+
+		return $ad - $bd;
 	}
 
 }
