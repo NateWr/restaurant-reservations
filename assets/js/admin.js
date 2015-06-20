@@ -243,7 +243,12 @@ jQuery(document).ready(function ($) {
 
 			if ( r.success ) {
 
-				cell.parent().fadeOut( 500, function() {
+				var rows = cell.parent();
+				var next = rows.next();
+				if ( next.hasClass( 'message-row' ) ) {
+					rows = rows.add( next );
+				}
+				rows.fadeOut( 500, function() {
 					$(this).remove();
 				});
 
