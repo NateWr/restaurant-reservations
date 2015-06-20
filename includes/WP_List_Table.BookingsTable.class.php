@@ -66,6 +66,27 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public $query_string;
 
+	/**
+	 * Results of a bulk or quick action
+	 *
+	 * @var array
+	 * @since 1.4.6
+	 */
+	public $action_result = array();
+
+	/**
+	 * Type of nulk or quick action last performed
+	 *
+	 * @var string
+	 * @since 1.4.6
+	 */
+	public $last_action = '';
+
+	/**
+	 * Initialize the table and perform any requested actions
+	 *
+	 * @since 0.0.1
+	 */
 	public function __construct() {
 
 		global $status, $page;
@@ -447,11 +468,10 @@ class rtbBookingsTable extends WP_List_Table {
 		}
 
 		if( count( $results ) ) {
-			$this->results = $results;
+			$this->action_result = $results;
 			$this->last_action = $action;
 			add_action( 'rtb_bookings_table_top', array( $this, 'admin_notice_bulk_actions' ) );
 		}
-
 	}
 
 	/**
@@ -483,7 +503,7 @@ class rtbBookingsTable extends WP_List_Table {
 		}
 
 		if( count( $results ) ) {
-			$this->results = $results;
+			$this->action_result = $results;
 			add_action( 'rtb_bookings_table_top', array( $this, 'admin_notice_bulk_actions' ) );
 		}
 	}
@@ -496,7 +516,7 @@ class rtbBookingsTable extends WP_List_Table {
 
 		$success = 0;
 		$failure = 0;
-		foreach( $this->results as $id => $result ) {
+		foreach( $this->action_result as $id => $result ) {
 			if ( $result === true || $result === null ) {
 				$success++;
 			} else {
