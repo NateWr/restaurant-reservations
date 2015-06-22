@@ -515,6 +515,9 @@ jQuery(document).ready(function ($) {
 					return;
 				}
 
+				// Set campaign parameters for addons
+				addon.url += '?utm_source=Plugin&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations';
+
 				var html = '<div class="addon ' + addon.id + '">';
 
 				if ( typeof addon.url !== 'undefined' && typeof addon.img !== 'undefined' ) {
