@@ -34,6 +34,8 @@ This plugin is part of a group of plugins for restaurants. Check out the [Food a
 There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? The last [screenshot](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
 
 = Addons =
+[Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
+
 [Export Bookings for Restaurant Reservations](http://themeofthecrop.com/plugin/export-bookings-for-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
 
 [MailChimp for Restaurant Reservations](http://themeofthecrop.com/plugin/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
