@@ -89,7 +89,7 @@ If you make a translation, please help others out by adding it to the [GitHub re
 
 = I want to add a field to the form. Can I do that? =
 
-I'm working on an addon that will allow you to customize the booking form and add fields through your WordPress admin panel. Until that's ready, the only way to accomplish this is by using the built-in hooks. Developers who are comfortable writing plugins for WordPress can find a rough guide in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
+The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
 
 == Screenshots ==
 
