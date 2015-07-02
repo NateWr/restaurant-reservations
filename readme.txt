@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.2.2
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,14 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.7 (2015-07-02) =
+* Add: Spanish translation from Joaqin Sanz Boixader
+* Fix: Sorting of bookings by date and name in list table broken
+* Fix: Custom late bookings values more than one day aren't reflected in date picker
+* Fix: Norwegian doesn't include time picker translation for some strings
+* Updated: German translation from Roland Stumpp
+* Updated: pickadate.js language translations
 
 = 1.4.6 (2015-06-20) =
 * Add: Remove old schedule exceptions and sort exceptions by date
@@ -222,6 +230,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.7 =
+This update fixes a bug that prevented bookings from being sorted by date or name in the admin panel. It also updates some translations and improves support for custom late bookings values.
 
 = 1.4.6 =
 This update improves compatibility with an upcoming Custom Fields addon. It also fixes some minor bugs with extended Latin characters in emails and the admin list table, and removes expired schedule exceptions.
