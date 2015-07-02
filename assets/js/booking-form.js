@@ -100,8 +100,10 @@ jQuery(document).ready(function ($) {
 				rtb_booking_form.datepicker.set( 'disable', disable_dates );
 			}
 
-			if ( rtb_pickadate.late_bookings === '1440' ) {
-				rtb_booking_form.datepicker.set( 'min', 1 );
+			rtb_pickadate.late_bookings = parseInt( rtb_pickadate.late_bookings, 10 );
+			if ( rtb_pickadate.late_bookings >= 1440 ) {
+				var min = Math.floor( rtb_pickadate.late_bookings / 1440 );
+				rtb_booking_form.datepicker.set( 'min', min );
 			}
 
 			// If no date has been set, select today's date if it's a valid
