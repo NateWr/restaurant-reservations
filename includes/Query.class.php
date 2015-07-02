@@ -168,7 +168,7 @@ class rtbQuery {
 			$args['orderby'] = sanitize_key( $_REQUEST['orderby'] );
 		}
 
-		if ( !empty( $_REQUEST['order'] ) && $_REQUEST['order'] === 'DESC' ) {
+		if ( !empty( $_REQUEST['order'] ) && $_REQUEST['order'] === 'desc' ) {
 			$args['order'] = $_REQUEST['orderby'];
 		}
 
