@@ -4,9 +4,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/restaurant-"
 "reservations\n"
 "POT-Creation-Date: 2015-03-31 09:08:36+00:00\n"
-"PO-Revision-Date: 2015-04-09 11:20+0100\n"
+"PO-Revision-Date: 2015-07-03 20:29+0200\n"
 "Last-Translator: Dick <massimo@studio020.com>\n"
-"Language-Team: \n"
+"Language-Team: Roy van den Houten <r.vandenhouten@gmx.net>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +19,7 @@ msgstr ""
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Loco-Target-Locale: nl_NL\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -446,7 +446,7 @@ msgid ""
 "Define special opening hours for holidays, events or other needs. Leave the "
 "time empty if you're closed all day."
 msgstr ""
-"Definieer speciale openingstijden voor de feestdagen, evenementen of andere "
+"Definieer speciale openingstijden voor feestdagen, evenementen of andere "
 "dagen. Laat de tijd leeg als u de hele dag gesloten bent."
 
 #: includes/Settings.class.php:404
@@ -526,8 +526,8 @@ msgid ""
 "When the booking form is loaded, should it automatically attempt to select a "
 "valid date?"
 msgstr ""
-"Wilt u, wanneer het reserveringssformulier is geladen, het proberen om "
-"automatisch een geldige datum te selecteren?"
+"Als het reserveringssformulier is geladen, automatisch een geldige datum "
+"selecteren?"
 
 #: includes/Settings.class.php:449
 msgid "Select today if valid"
@@ -882,7 +882,7 @@ msgstr "Bevestigd"
 
 #: includes/WP_List_Table.BookingsTable.class.php:249
 msgid "Closed"
-msgstr "Gesloten"
+msgstr "Geannuleerd"
 
 #: includes/WP_List_Table.BookingsTable.class.php:250
 #: includes/WP_List_Table.BookingsTable.class.php:331
@@ -911,7 +911,7 @@ msgstr "In afwachting"
 
 #: includes/WP_List_Table.BookingsTable.class.php:398
 msgid "Set To Closed"
-msgstr "Afgewezen"
+msgstr "Annuleren"
 
 #: includes/WP_List_Table.BookingsTable.class.php:513
 msgid "%d booking deleted successfully."
@@ -934,8 +934,8 @@ msgstr[1] "%d reserveringenstatus is in wachtende op bevestiging."
 #: includes/WP_List_Table.BookingsTable.class.php:522
 msgid "%d booking closed."
 msgid_plural "%d bookings closed."
-msgstr[0] "%d reservering gesloten."
-msgstr[1] "%d reserveringen gesloten."
+msgstr[0] "%d reservering afgewezen."
+msgstr[1] "%d reserveringen afgewezen."
 
 #: includes/WP_List_Table.BookingsTable.class.php:534
 msgid "%d booking had errors and could not be processed."
@@ -1071,7 +1071,7 @@ msgstr "Bevestigd"
 #: includes/CustomPostTypes.class.php:97
 msgctxt "Booking status for a closed booking"
 msgid "Closed"
-msgstr "Afgesloten"
+msgstr "Geannuleerd"
 
 #: includes/Settings.class.php:83
 msgctxt "restaurant-reservations"
