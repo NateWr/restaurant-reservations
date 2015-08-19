@@ -146,13 +146,9 @@
 
 @media screen and (max-width: 782px) {
 
+	/* Prevent date column from being hidden in WP versions < 4.3 */
 	#rtb-bookings-table .fixed .column-date {
 		display: table-cell;
-	}
-
-	#rtb-bookings-table th#party,
-	#rtb-bookings-table th#message {
-		width: auto;
 	}
 }
 
