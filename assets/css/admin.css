@@ -150,6 +150,15 @@
 	#rtb-bookings-table .fixed .column-date {
 		display: table-cell;
 	}
+
+	/* Always display message data in mobile views */
+	#rtb-bookings-table .column-message .rtb-message-data {
+		display: block;
+	}
+
+	#rtb-bookings-table .column-message .rtb-show-message {
+		display: none;
+	}
 }
 
 /* Add/edit bookings modal */

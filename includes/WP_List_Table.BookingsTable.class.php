@@ -372,7 +372,7 @@ class rtbBookingsTable extends WP_List_Table {
 			case 'message' :
 				$value = '';
 				if ( trim( $booking->message ) ) {
-					$value = '<a href="#" data-id="message-' . esc_attr( $booking->ID ) . '"><span class="dashicons dashicons-testimonial"></span></a>';
+					$value = '<a href="#" class="rtb-show-message" data-id="message-' . esc_attr( $booking->ID ) . '"><span class="dashicons dashicons-testimonial"></span></a>';
 					$value .= '<div class="rtb-message-data">' . $booking->message . '</div>';
 				}
 				break;
