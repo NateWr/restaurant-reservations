@@ -132,7 +132,7 @@ class rtbAddons {
 		?>
 
 		<div class="wrap">
-			<h2><?php _e( 'Addons for Restaurant Reservations', 'restaurant-reservations' ); ?></h2>
+			<h1><?php _e( 'Addons for Restaurant Reservations', 'restaurant-reservations' ); ?></h1>
 			<?php do_action( 'rtb_addons_pre' ); ?>
 			<div id="rtb-addons">
 				<div class="rtb-loading">

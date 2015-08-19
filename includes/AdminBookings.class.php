@@ -63,10 +63,10 @@ class rtbAdminBookings {
 		?>
 
 		<div class="wrap">
-			<h2>
+			<h1>
 				<?php _e( 'Restaurant Bookings', 'restaurant-reservations' ); ?>
-				<a href="#" class="add-new-h2 add-booking"><?php _e( 'Add New', 'restaurant-reservations' ); ?></a>
-			</h2>
+				<a href="#" class="add-new-h2 page-title-action add-booking"><?php _e( 'Add New', 'restaurant-reservations' ); ?></a>
+			</h1>
 
 			<?php do_action( 'rtb_bookings_table_top' ); ?>
 			<form id="rtb-bookings-table" method="POST" action="">
