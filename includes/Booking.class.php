@@ -218,43 +218,47 @@ class rtbBooking {
 
 			$request = new DateTime( $date->format( 'Y-m-d' ) . ' ' . $time->format( 'H:i:s' ) );
 
-			$early_bookings = $rtb_controller->settings->get_setting( 'early-bookings' );
-			if ( !empty( $early_bookings ) ) {
-				$early_bookings_seconds = $early_bookings * 24 * 60 * 60; // Advanced bookings allowance in seconds
-				if ( $request->format( 'U' ) > ( current_time( 'timestamp' ) + $early_bookings_seconds ) ) {
-					$this->validation_errors[] = array(
-						'field'		=> 'time',
-						'error_msg'	=> 'Booking request too far in the future',
-						'message'	=> sprintf( __( 'Sorry, bookings can not be made more than %s days in advance.', 'restaurant-reservations' ), $early_bookings ),
-					);
-				}
-			}
+			// Exempt Bookings Managers from the early and late bookings restrictions
+			if ( !current_user_can( 'manage_bookings' ) ) {
 
-			$late_bookings = $rtb_controller->settings->get_setting( 'late-bookings' );
-			if ( empty( $late_bookings ) ) {
-				if ( $request->format( 'U' ) < current_time( 'timestamp' ) ) {
-					$this->validation_errors[] = array(
-						'field'		=> 'time',
-						'error_msg'	=> 'Booking request in the past',
-						'message'	=> __( 'Sorry, bookings can not be made in the past.', 'restaurant-reservations' ),
-					);
-				}
-
-			} else {
-				$late_bookings_seconds = $late_bookings * 60; // Late bookings allowance in seconds
-				if ( $request->format( 'U' ) < ( current_time( 'timestamp' ) + $late_bookings_seconds ) ) {
-					if ( $late_bookings >= 1440 ) {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s days in advance.', 'restaurant-reservations' ), $late_bookings / 1440 );
-					} elseif ( $late_bookings >= 60 ) {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s hours in advance.', 'restaurant-reservations' ), $late_bookings / 60 );
-					} else {
-						$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s minutes in advance.', 'restaurant-reservations' ), $late_bookings );
+				$early_bookings = $rtb_controller->settings->get_setting( 'early-bookings' );
+				if ( !empty( $early_bookings ) ) {
+					$early_bookings_seconds = $early_bookings * 24 * 60 * 60; // Advanced bookings allowance in seconds
+					if ( $request->format( 'U' ) > ( current_time( 'timestamp' ) + $early_bookings_seconds ) ) {
+						$this->validation_errors[] = array(
+							'field'		=> 'time',
+							'error_msg'	=> 'Booking request too far in the future',
+							'message'	=> sprintf( __( 'Sorry, bookings can not be made more than %s days in advance.', 'restaurant-reservations' ), $early_bookings ),
+						);
 					}
-					$this->validation_errors[] = array(
-						'field'		=> 'time',
-						'error_msg'	=> 'Booking request made too close to the reserved time',
-						'message'	=> $late_bookings_message,
-					);
+				}
+
+				$late_bookings = $rtb_controller->settings->get_setting( 'late-bookings' );
+				if ( empty( $late_bookings ) ) {
+					if ( $request->format( 'U' ) < current_time( 'timestamp' ) ) {
+						$this->validation_errors[] = array(
+							'field'		=> 'time',
+							'error_msg'	=> 'Booking request in the past',
+							'message'	=> __( 'Sorry, bookings can not be made in the past.', 'restaurant-reservations' ),
+						);
+					}
+
+				} else {
+					$late_bookings_seconds = $late_bookings * 60; // Late bookings allowance in seconds
+					if ( $request->format( 'U' ) < ( current_time( 'timestamp' ) + $late_bookings_seconds ) ) {
+						if ( $late_bookings >= 1440 ) {
+							$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s days in advance.', 'restaurant-reservations' ), $late_bookings / 1440 );
+						} elseif ( $late_bookings >= 60 ) {
+							$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s hours in advance.', 'restaurant-reservations' ), $late_bookings / 60 );
+						} else {
+							$late_bookings_message = sprintf( __( 'Sorry, bookings must be made more than %s minutes in advance.', 'restaurant-reservations' ), $late_bookings );
+						}
+						$this->validation_errors[] = array(
+							'field'		=> 'time',
+							'error_msg'	=> 'Booking request made too close to the reserved time',
+							'message'	=> $late_bookings_message,
+						);
+					}
 				}
 			}
 

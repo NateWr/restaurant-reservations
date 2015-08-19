@@ -158,8 +158,8 @@ function rtb_enqueue_assets() {
 			'disable_dates'	=> rtb_get_datepicker_rules(),
 			'schedule_open' => $rtb_controller->settings->get_setting( 'schedule-open' ),
 			'schedule_closed' => $rtb_controller->settings->get_setting( 'schedule-closed' ),
-			'early_bookings' => $rtb_controller->settings->get_setting( 'early-bookings' ),
-			'late_bookings' => $rtb_controller->settings->get_setting( 'late-bookings' ),
+			'early_bookings' => current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'early-bookings' ),
+			'late_bookings' => current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'late-bookings' ),
 			'date_onload' => $rtb_controller->settings->get_setting( 'date-onload' ),
 			'time_interval' => $rtb_controller->settings->get_setting( 'time-interval' ),
 		)
