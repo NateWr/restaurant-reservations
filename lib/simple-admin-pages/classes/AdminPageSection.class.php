@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSection_2_0_a_8 {
+class sapAdminPageSection_2_0_a_10 {
 
 	// Page defaults
 	public $id; // unique id for this section
@@ -63,10 +63,45 @@ class sapAdminPageSection_2_0_a_8 {
 	 * @since 1.0
 	 */
 	public function add_setting( $setting ) {
+
 		if ( !$setting ) {
 			return;
 		}
 
+		if ( method_exists( $setting, 'has_position' ) && $setting->has_position() ) {
+
+			// Top
+			if ( $setting->position[0] == 'top' ) {
+				$this->settings = array_merge( array( $setting->id => $setting ), $this->settings );
+				return;
+			}
+
+			// Position setting relative to another setting
+			if ( !empty( $setting->position[1] ) ) {
+
+				$new_settings = array();
+				foreach( $this->settings as $id => $current ) {
+
+					// Above
+					if ( $setting->position[1] == $id && $setting->position[0] == 'above' ) {
+						$new_settings[ $setting->id ] = $setting;
+					}
+
+					$new_settings[ $id ] = $current;
+
+					// Below
+					if ( $setting->position[1] == $id && $setting->position[0] == 'below' ) {
+						$new_settings[ $setting->id ] = $setting;
+					}
+				}
+
+				$this->settings = $new_settings;
+
+				return;
+			}
+		}
+
+		// Fallback to appending it at the end
 		$this->settings[ $setting->id ] = $setting;
 	}
 

@@ -1,5 +1,5 @@
 <?php
-if ( !class_exists( 'sapLibrary_2_0_a_8' ) ) {
+if ( !class_exists( 'sapLibrary_2_0_a_10' ) ) {
 /**
  * This library class loads and provides access to the correct version of the
  * Simple Admin Pages library.
@@ -7,10 +7,10 @@ if ( !class_exists( 'sapLibrary_2_0_a_8' ) ) {
  * @since 1.0
  * @package Simple Admin Pages
  */
-class sapLibrary_2_0_a_8 {
+class sapLibrary_2_0_a_10 {
 
 	// Version of the library
-	private $version = '2.0.a.8';
+	private $version = '2.0.a.10';
 
 	// A full URL to the library which is used to correctly link scripts and
 	// stylesheets.
@@ -383,7 +383,7 @@ class sapLibrary_2_0_a_8 {
 	public function enqueue_scripts() {
 
 		$screen = get_current_screen();
-		
+
 		foreach ( $this->pages as $page_id => $page ) {
 
 			// Only enqueue assets for the current page

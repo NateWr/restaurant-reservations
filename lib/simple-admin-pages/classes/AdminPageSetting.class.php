@@ -15,7 +15,7 @@
  * @package Simple Admin Pages
  */
 
-abstract class sapAdminPageSetting_2_0_a_8 {
+abstract class sapAdminPageSetting_2_0_a_10 {
 
 	// Page defaults
 	public $id; // used in form fields and database to track and store setting
@@ -26,7 +26,26 @@ abstract class sapAdminPageSetting_2_0_a_8 {
 	// Array to store errors
 	public $errors = array();
 
-	/*
+	/**
+	 * Position in section
+	 *
+	 * An array with two elements describing where this setting should
+	 * be placed in its section. The first element describes a position
+	 * and the second (optional) element identifies the id of an
+	 * existing setting. Examples:
+	 *
+	 * array( 'bottom' ) // Default. bottom of section
+	 * array( 'top' ) // top of section
+	 * array( 'before', 'my-setting' ) // before a specific setting
+	 * array( 'after', 'my-setting' ) // after a specific setting
+	 *
+	 * This setting is intended for use when you have to hook in after
+	 * the settings page has been defined, such as adding a new setting
+	 * from a third-party plugin.
+	 */
+	public $position;
+
+	/**
 	 * Function to use when sanitizing the data
 	 *
 	 * We set this to a strict sanitization function as a default, but a
@@ -285,5 +304,13 @@ abstract class sapAdminPageSetting_2_0_a_8 {
 				'backtrace'	=> debug_backtrace()
 			)
 		);
+	}
+
+	/**
+	 * Check if a setting has a position
+	 * @since 2.0.a.9
+	 */
+	public function has_position() {
+		return !empty( $this->position ) && is_array( $this->position ) && !empty( $this->position[0] );
 	}
 }

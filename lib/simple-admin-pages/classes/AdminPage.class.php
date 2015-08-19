@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPage_2_0_a_8 {
+class sapAdminPage_2_0_a_10 {
 
 	public $title;
 	public $menu_title;
@@ -29,6 +29,11 @@ class sapAdminPage_2_0_a_8 {
 		// Parse the values passed
 		$this->parse_args( $args );
 
+		// Modify capability required to save the settings if it's not
+		// the default `manage_options`
+		if ( !empty( $this->capability ) && $this->capability !== 'manage_options') {
+			add_filter( 'option_page_capability_' . $this->id, array( $this, 'modify_required_capability' ) );
+		}
 	}
 
 	/**
@@ -48,6 +53,14 @@ class sapAdminPage_2_0_a_8 {
 
 			}
 		}
+	}
+
+	/**
+	 * Modify the capability required to save settings on this page
+	 * @since 2.0
+	 */
+	public function modify_required_capability( $cap ) {
+		return $this->capability;
 	}
 
 	/**
@@ -156,6 +169,10 @@ class sapAdminPage_2_0_a_8 {
 			return;
 		}
 
+		if ( !current_user_can( $this->capability ) ) {
+			wp_die( __('You do not have sufficient permissions to access this page.') );
+		}
+
 		$current_page = $this->get_current_page( $_GET );
 
 		?>
@@ -208,7 +225,7 @@ class sapAdminPage_2_0_a_8 {
 			return;
 		}
 		?>
-			<h2><?php echo $this->title; ?></h2>
+			<h1><?php echo $this->title; ?></h1>
 		<?php
 	}
 

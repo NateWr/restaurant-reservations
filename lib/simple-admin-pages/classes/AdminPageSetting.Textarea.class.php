@@ -9,7 +9,7 @@
  * @todo textareas should have an option to swap new lines for <br>s
  */
 
-class sapAdminPageSettingTextarea_2_0_a_8 extends sapAdminPageSetting_2_0_a_8 {
+class sapAdminPageSettingTextarea_2_0_a_10 extends sapAdminPageSetting_2_0_a_10 {
 
 	/*
 	 * Size of this textarea

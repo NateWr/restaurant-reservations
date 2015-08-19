@@ -41,7 +41,7 @@ Here's a simple example of how you can use this library to create an admin page.
 	require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 	$sap = sap_initialize_library(
 		array(
-			'version'		=> '2.0.a.8', // Version of the library
+			'version'		=> '2.0.a.10', // Version of the library
 			'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 		)
 	);
@@ -130,7 +130,7 @@ The lib_url is used to print stylesheets or scripts attached to the library.
 require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 $sap = sap_initialize_library(
 	$args = array(
-		'version'		=> '2.0.a.8', // Version of the library
+		'version'		=> '2.0.a.10', // Version of the library
 		'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 	)
 );
@@ -371,11 +371,16 @@ $all_page_settings[ $my_setting_id ];
 
 ## Changelog
 
-- 2_0_a_8 - 2014-11-12
+- 2.0.a.10 - 2015-08-19
+	- Use h1 tags for page titles, in line with WP 4.3 changes
+	- Check for has_position before calling on a setting, in case of custom third-party settings being loaded
+	- Update pickadate.js lib
+
+- 2.0.a.9 - 2014-11-12
 	- SelectPost: Use WP_Query instead of get_posts() so that filters can effect the list
 	- Require translateable strings to be declared when adding the setting so the library can conform to the upcoming single textdomain best practice in the .org repos
 
-- 2_0_a_7 - 2014-08-20
+- 2.0.a.7 - 2014-08-20
 	- Only enqueue assets on appropriate admin pages to prevent version conflicts and be a good citizen
 	- Enforce stored date/time formats so date format is reliable
 

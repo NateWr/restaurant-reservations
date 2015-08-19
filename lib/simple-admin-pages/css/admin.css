@@ -189,6 +189,9 @@ input.sap-opening-hours-hours {
 .sap-scheduler-brief .date {
 	margin-right: 1em;
 }
+.sap-add-scheduler.disabled {
+	display: none;
+}
 @media (min-width: 783px) {
 	.sap-selector li {
 		font-size: 13px;
