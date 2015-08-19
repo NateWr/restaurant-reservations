@@ -248,7 +248,7 @@ jQuery(document).ready(function ($) {
 
 							if ( typeof rtb_pickadate.schedule_open[open_key].time.end !== 'undefined' ) {
 								rule_end_date = new Date( '1 January 2000 ' + rtb_pickadate.schedule_open[open_key].time.end );
-								rule_end_time = [ rule_end_date.getHours(), rule_end_date.getMinutes() ];
+								rule_end_time = rtb_booking_form.get_latest_viable_time( rule_end_date.getHours(), rule_end_date.getMinutes() );
 							} else {
 								rule_end_time = [ 24, 0 ]; // End of the day
 							}
@@ -282,7 +282,7 @@ jQuery(document).ready(function ($) {
 	 * Get the outer times to exclude based on the time interval
 	 *
 	 * This is a work-around for a bug in pickadate.js
-	 * https://github.com/amsul/pickadate.js/issues/614
+	 * See: https://github.com/amsul/pickadate.js/issues/614
 	 */
 	rtb_booking_form.get_outer_time_range = function() {
 
@@ -302,6 +302,25 @@ jQuery(document).ready(function ($) {
 
 		return { from: [0, 0], to: [ hour, interval ] };
 	};
+
+	/**
+	 * Get the latest working opening hour/minute value
+	 *
+	 * This is a workaround for a bug in pickadate.js. The end time of a valid
+	 * time value must NOT fall within the last timepicker interval and midnight
+	 * See: https://github.com/amsul/pickadate.js/issues/614
+	 */
+	rtb_booking_form.get_latest_viable_time = function( hour, minute ) {
+
+		var outer_time_range = this.get_outer_time_range();
+
+		if ( hour > outer_time_range.to[0] || minute > outer_time_range.to[1] ) {
+			return outer_time_range.to;
+		} else {
+			return [ hour, minute ];
+		}
+	};
+
 
 	rtb_booking_form.init();
 });
