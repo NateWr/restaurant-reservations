@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 4.2.2
+Tested Up To: 4.3
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.7
+Stable tag: 1.4.8
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,15 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.8 (2015-08-20) =
+* Add: WPML config file for improved multi-lingual compatibility
+* Add: Danish translation by Yusef Mubeen
+* Fix: Allow bookings managers to bypass early/late bookings restrictions
+* Fix: No times available when latest time falls between last interval and midnight
+* Updated: Improve bookings message view on small screens (adapt to 4.3 style)
+* Updated: Simple Admin Pages lib to v2.0.a.10
+* Updated: Dutch translation h/t Roy van den Houten and Clements Tolboom
 
 = 1.4.7 (2015-07-02) =
 * Add: Spanish translation from Joaqin Sanz Boixader
@@ -230,6 +239,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.8 =
+This update fixes a bug that prevented bookings managers from editing bookings within the early/late schedule restrictions. It also fixed a bug with late opening times, added a WPML config file for better multi-lingual compatibility, updated translations, and improved the mobile view of the bookings list.
 
 = 1.4.7 =
 This update fixes a bug that prevented bookings from being sorted by date or name in the admin panel. It also updates some translations and improves support for custom late bookings values.
