@@ -216,6 +216,7 @@ class rtbAddons {
 	public function add_subscribe_pompt() {
 
 		?>
+
 		<p>
 			<?php echo sprintf( esc_html_x( 'Find out when new addons are available by subscribing to the %smonthly newsletter%s or following %sTheme of the Crop%s on Twitter.', 'restaurant-reservations' ), '<a href="http://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations">', '</a>', '<a href="http://twitter.com/themeofthecrop">', '</a>' ); ?>
 		</p>
