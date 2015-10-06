@@ -35,8 +35,8 @@ class rtbAddons {
 			add_action( 'wp_ajax_nopriv_rtb-addons' , array( $this , 'ajax_nopriv_get_addons' ) );
 			add_action( 'wp_ajax_rtb-addons', array( $this, 'ajax_get_addons' ) );
 
-			// Add a newsletter subscription prompt below the addons
-			add_action( 'rtb_addons_post', array( $this, 'add_subscribe_pompt' ) );
+			// Add a newsletter subscription prompt above the addons
+			add_action( 'rtb_addons_pre', array( $this, 'add_subscribe_pompt' ) );
 
 		}
 	}
@@ -216,10 +216,6 @@ class rtbAddons {
 	public function add_subscribe_pompt() {
 
 		?>
-
-		<h3>
-			<?php esc_html_e( 'New Addons' ); ?>
-		</h3>
 		<p>
 			<?php echo sprintf( esc_html_x( 'Find out when new addons are available by subscribing to the %smonthly newsletter%s or following %sTheme of the Crop%s on Twitter.', 'restaurant-reservations' ), '<a href="http://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations">', '</a>', '<a href="http://twitter.com/themeofthecrop">', '</a>' ); ?>
 		</p>
