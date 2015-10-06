@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 4.3
+Tested Up To: 4.3.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.8
+Stable tag: 1.4.9
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,10 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.9 (2015-10-06) =
+* Fix: iOS 8 bug with date and time pickers
+* Add: newsletter signup prompt to addons page
 
 = 1.4.8 (2015-08-20) =
 * Add: WPML config file for improved multi-lingual compatibility
@@ -239,6 +243,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.9 =
+This update fixes a bug that made it difficult for iOS 8 users to select a date and time in their bookings. I strongly recommend you update.
 
 = 1.4.8 =
 This update fixes a bug that prevented bookings managers from editing bookings within the early/late schedule restrictions. It also fixed a bug with late opening times, added a WPML config file for better multi-lingual compatibility, updated translations, and improved the mobile view of the bookings list.
