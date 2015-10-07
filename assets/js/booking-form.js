@@ -75,7 +75,10 @@ jQuery(document).ready(function ($) {
 			rtb_booking_form.datepicker = date_input.pickadate( 'picker' );
 			rtb_booking_form.timepicker = time_input.pickatime( 'picker' );
 
-			if ( typeof rtb_booking_form.datepicker == 'undefined' ) {
+			// We need to check both to support different jQuery versions loaded
+			// by older versions of WordPress. In jQuery v1.10.2, the property
+			// is undefined. But in v1.11.3 it's set to null.
+			if ( rtb_booking_form.datepicker === null || typeof rtb_booking_form.datepicker == 'undefined' ) {
 				return;
 			}
 
