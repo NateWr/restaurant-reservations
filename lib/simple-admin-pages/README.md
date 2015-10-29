@@ -2,12 +2,9 @@ Simple Admin Pages for WordPress
 ================================
 
 Simple Admin Pages is a very small utility library to easily add new admin
-pages to the WordPress admin interface. It simply collects WordPress' useful
+pages to the WordPress admin interface. It collects WordPress' useful
 Settings API into reuseable classes and implements a set of simple controls.
 
-*Please note that Simple Admin Pages is still undergoing testing and development
-in the wild. I don't recommend you use it in your own plugins and themes just
-yet.*
 
 ## Settings Pages Supported
 
@@ -34,14 +31,14 @@ yet.*
 
 ## Usage
 
-Here's a simple example of how you can use this library to create an admin page.
+Here's an example of how you can use this library to create an admin page.
 
 ```
 	// Instantiate the Simple Admin Library
 	require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 	$sap = sap_initialize_library(
 		array(
-			'version'		=> '2.0.a.10', // Version of the library
+			'version'		=> '2.0', // Version of the library
 			'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 		)
 	);
@@ -130,7 +127,7 @@ The lib_url is used to print stylesheets or scripts attached to the library.
 require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 $sap = sap_initialize_library(
 	$args = array(
-		'version'		=> '2.0.a.10', // Version of the library
+		'version'		=> '2.0', // Version of the library
 		'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 	)
 );
@@ -370,6 +367,9 @@ $all_page_settings[ $my_setting_id ];
 ```
 
 ## Changelog
+
+- 2.0 - 2015-10-28
+	- Allow page capability to be modified after the page class is instantiated
 
 - 2.0.a.10 - 2015-08-19
 	- Use h1 tags for page titles, in line with WP 4.3 changes

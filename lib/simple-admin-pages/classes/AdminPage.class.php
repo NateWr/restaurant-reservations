@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPage_2_0_a_10 {
+class sapAdminPage_2_0 {
 
 	public $title;
 	public $menu_title;
@@ -28,12 +28,6 @@ class sapAdminPage_2_0_a_10 {
 
 		// Parse the values passed
 		$this->parse_args( $args );
-
-		// Modify capability required to save the settings if it's not
-		// the default `manage_options`
-		if ( !empty( $this->capability ) && $this->capability !== 'manage_options') {
-			add_filter( 'option_page_capability_' . $this->id, array( $this, 'modify_required_capability' ) );
-		}
 	}
 
 	/**
@@ -102,6 +96,12 @@ class sapAdminPage_2_0_a_10 {
 		}
 
 		register_setting( $this->id, $this->id, array( $this, 'sanitize_callback' ) );
+
+		// Modify capability required to save the settings if it's not
+		// the default `manage_options`
+		if ( !empty( $this->capability ) && $this->capability !== 'manage_options') {
+			add_filter( 'option_page_capability_' . $this->id, array( $this, 'modify_required_capability' ) );
+		}
 	}
 
 	/**
