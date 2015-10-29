@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.3.1
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.9
+Stable tag: 1.4.10
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,11 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.4.10 (2015-10-29) =
+* Fix: Allow settings page required capability to be filtered later
+* Fix: Compatibility issue with old versions of jQuery
+* Add: Spanish translation from Rafa dMC
 
 = 1.4.9 (2015-10-06) =
 * Fix: iOS 8 bug with date and time pickers
@@ -243,6 +248,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.4.10 =
+This update includes a new Spanish translation and a few minor fixes. Updating isn't necessary for most people.
 
 = 1.4.9 =
 This update fixes a bug that made it difficult for iOS 8 users to select a date and time in their bookings. I strongly recommend you update.
