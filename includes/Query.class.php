@@ -101,10 +101,9 @@ class rtbQuery {
 					$args['date_query'] = $date_query;
 				}
 			} elseif ( $args['date_range'] === 'today' ) {
-				$today = getdate();
-				$args['year'] = $today['year'];
-				$args['monthnum'] = $today['mon'];
-				$args['day'] = $today['mday'];
+				$args['year'] = date( 'Y', current_time( 'timestamp' ) );
+				$args['monthnum'] = date( 'm', current_time( 'timestamp' ) );
+				$args['day'] = date( 'd', current_time( 'timestamp' ) );
 
 			} elseif ( $args['date_range'] === 'upcoming' ) {
 				$args['date_query'] = array(

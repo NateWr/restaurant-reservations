@@ -583,7 +583,7 @@ class rtbBookingsTable extends WP_List_Table {
 		} elseif ( !empty( $_GET['date_range'] ) ) {
 
 			if ( $_GET['date_range'] ==  'today' ) {
-				$where .= " AND p.post_date >= '" . date( 'Y-m-d' ) . "' AND p.post_date <= '" . date( 'Y-m-d', current_time( 'timestamp' ) + 86400 ) . "'";
+				$where .= " AND p.post_date >= '" . date( 'Y-m-d', current_time( 'timestamp' ) ) . "' AND p.post_date < '" . date( 'Y-m-d', current_time( 'timestamp' ) + 86400 ) . "'";
 			}
 
 		// Default date setting is to show upcoming bookings
