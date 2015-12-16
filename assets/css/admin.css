@@ -50,9 +50,13 @@
 	color: #000;
 }
 
-#rtb-bookings-table .column-message .rtb-message-data,
-#rtb-bookings-table .message-row {
-	display: none;
+#rtb-bookings-table .tablenav .actions .button {
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+#rtb-bookings-table .tablenav .actions .button .dashicons {
+	line-height: 28px;
 }
 
 #rtb-bookings-table tr.closed {
@@ -64,8 +68,7 @@
 	filter: opacity(alpha=100);
 }
 
-#rtb-bookings-table tr.pending .check-column,
-#rtb-bookings-table tr.pending.message-row td {
+#rtb-bookings-table tr.pending .check-column {
 	border-left: 4px solid #dd3d36;
 }
 
@@ -81,8 +84,8 @@
 	width: 3em;
 }
 
-#rtb-bookings-table th#message {
-	width: 5em;
+#rtb-bookings-table th#details {
+	width: 4em;
 }
 
 #rtb-bookings-table td .actions {
@@ -144,6 +147,30 @@
 	background: #dd3d36;
 }
 
+.rtb-details-data {
+	display: none;
+}
+
+.rtb-details-data .details {
+	margin: 0;
+}
+
+.rtb-details-data .details > li {
+	margin-top: 2em;
+}
+
+.rtb-details-data .details > li:first-child {
+	margin-top: 0;
+}
+
+.rtb-details-data .details .label {
+	font-weight: 900;
+}
+
+#rtb-details-modal .rtb-details-data {
+	display: block;
+}
+
 @media screen and (max-width: 782px) {
 
 	/* Prevent date column from being hidden in WP versions < 4.3 */
@@ -151,12 +178,12 @@
 		display: table-cell;
 	}
 
-	/* Always display message data in mobile views */
-	#rtb-bookings-table .column-message .rtb-message-data {
+	/* Always display details data in mobile views */
+	#rtb-bookings-table .column-details .rtb-details-data {
 		display: block;
 	}
 
-	#rtb-bookings-table .column-message .rtb-show-message {
+	#rtb-bookings-table .column-details .rtb-show-details {
 		display: none;
 	}
 }
@@ -238,15 +265,9 @@
 	display: block;
 }
 
-#rtb-booking-modal button,
-#rtb-email-modal button {
+.rtb-admin-modal .button {
 	margin-top: 1em;
-	margin-right: 1em;
-}
-
-#rtb-booking-modal .button,
-#rtb-email-modal .button {
-	margin-top: 1em;
+	margin-right: 0.5em;
 }
 
 .rtb-admin-modal button,
@@ -339,6 +360,23 @@
 
 .rtb-description.is-visible {
 	max-height: 20em;
+}
+
+.rtb-column-form ul {
+	margin: 0;
+}
+
+.rtb-column-form label {
+	font-style: normal;
+	padding: 2px 0;
+}
+
+.rtb-column-form fieldset {
+	margin-bottom: 2em;
+}
+
+.rtb-column-form .action-status {
+	margin-top: 0;
 }
 
 #rtb-error-modal .rtb-error-msg {

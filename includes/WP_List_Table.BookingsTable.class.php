@@ -75,12 +75,20 @@ class rtbBookingsTable extends WP_List_Table {
 	public $action_result = array();
 
 	/**
-	 * Type of nulk or quick action last performed
+	 * Type of bulk or quick action last performed
 	 *
 	 * @var string
 	 * @since 1.4.6
 	 */
 	public $last_action = '';
+
+	/**
+	 * Stored reference to visible columns
+	 *
+	 * @var string
+	 * @since 1.5
+	 */
+	public $visible_columns = array();
 
 	/**
 	 * Initialize the table and perform any requested actions
@@ -118,6 +126,9 @@ class rtbBookingsTable extends WP_List_Table {
 		$this->bookings_data();
 
 		$this->base_url = admin_url( 'admin.php?page=' . RTB_BOOKING_POST_TYPE );
+
+		// Add default items to the details column if they've been hidden
+		add_filter( 'rtb_bookings_table_column_details', array( $this, 'add_details_column_items' ), 10, 2 );
 	}
 
 	/**
@@ -307,21 +318,70 @@ class rtbBookingsTable extends WP_List_Table {
 
 	/**
 	 * Retrieve the table columns
+	 *
 	 * @since 0.0.1
 	 */
 	public function get_columns() {
-		$columns = array(
+
+		// Prevent the lookup from running over and over again on a single
+		// page load
+		if ( !empty( $this->visible_columns ) ) {
+			return $this->visible_columns;
+		}
+
+		$all_default_columns = $this->get_all_default_columns();
+
+		global $rtb_controller;
+		$visible_columns = $rtb_controller->settings->get_setting( 'bookings-table-columns' );
+		if ( empty( $visible_columns ) ) {
+			$columns = $all_default_columns;
+		} else {
+			$columns = array();
+			$columns['cb'] = $all_default_columns['cb'];
+			$columns['date'] = $all_default_columns['date'];
+
+			foreach( $all_default_columns as $key => $column ) {
+				if ( in_array( $key, $visible_columns ) ) {
+					$columns[$key] = $all_default_columns[$key];
+				}
+			}
+			$columns['details'] = $all_default_columns['details'];
+		}
+
+		$this->visible_columns = apply_filters( 'rtb_bookings_table_columns', $columns );
+
+		return $this->visible_columns;
+	}
+
+	/**
+	 * Retrieve all default columns
+	 *
+	 * @since 1.5
+	 */
+	public function get_all_default_columns() {
+		return array(
 			'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
 			'date'     	=> __( 'Date', 'restaurant-reservations' ),
 			'party'  	=> __( 'Party', 'restaurant-reservations' ),
 			'name'  	=> __( 'Name', 'restaurant-reservations' ),
 			'email'  	=> __( 'Email', 'restaurant-reservations' ),
 			'phone'  	=> __( 'Phone', 'restaurant-reservations' ),
-			'message'  	=> __( 'Message', 'restaurant-reservations' ),
-			'status'  	=> __( 'Status', 'restaurant-reservations' )
+			'status'  	=> __( 'Status', 'restaurant-reservations' ),
+			'details'  	=> __( 'Details', 'restaurant-reservations' ),
 		);
+	}
 
-		return apply_filters( 'rtb_bookings_table_columns', $columns );
+	/**
+	 * Retrieve all available columns
+	 *
+	 * This is used to get all columns including those deactivated and filtered
+	 * out via get_columns().
+	 *
+	 * @since 1.5
+	 */
+	public function get_all_columns() {
+		$columns = $this->get_all_default_columns();
+		return apply_filters( 'rtb_bookings_all_table_columns', $columns );
 	}
 
 	/**
@@ -369,13 +429,6 @@ class rtbBookingsTable extends WP_List_Table {
 			case 'phone' :
 				$value = $booking->phone;
 				break;
-			case 'message' :
-				$value = '';
-				if ( trim( $booking->message ) ) {
-					$value = '<a href="#" class="rtb-show-message" data-id="message-' . esc_attr( $booking->ID ) . '"><span class="dashicons dashicons-testimonial"></span></a>';
-					$value .= '<div class="rtb-message-data">' . $booking->message . '</div>';
-				}
-				break;
 			case 'status' :
 				global $rtb_controller;
 				if ( !empty( $rtb_controller->cpts->booking_statuses[$booking->post_status] ) ) {
@@ -384,6 +437,28 @@ class rtbBookingsTable extends WP_List_Table {
 					$value = _x( 'Trash', 'Status label for bookings put in the trash', 'restaurant-reservations' );
 				} else {
 					$value = $booking->post_status;
+				}
+				break;
+			case 'details' :
+				$value = '';
+
+				$details = array();
+				if ( trim( $booking->message ) ) {
+					$details[] = array(
+						'label' => __( 'Message', 'restaurant-reservations' ),
+						'value' => $booking->message,
+					);
+				}
+
+				$details = apply_filters( 'rtb_bookings_table_column_details', $details, $booking );
+
+				if ( !empty( $details ) ) {
+					$value = '<a href="#" class="rtb-show-details" data-id="details-' . esc_attr( $booking->ID ) . '"><span class="dashicons dashicons-testimonial"></span></a>';
+					$value .= '<div class="rtb-details-data"><ul class="details">';
+					foreach( $details as $detail ) {
+						$value .= '<li><div class="label">' . $detail['label'] . '</div><div class="value">' . $detail['value'] . '</div></li>';
+					}
+					$value .= '</ul></div>';
 				}
 				break;
 			default:
@@ -405,6 +480,44 @@ class rtbBookingsTable extends WP_List_Table {
 			'bookings',
 			$booking->ID
 		);
+	}
+
+	/**
+	 * Add hidden columns values to the details column
+	 *
+	 * This only handles the default columns. Custom data needs to hook in and
+	 * add it's own items to the $details array.
+	 *
+	 * @since 1.5
+	 */
+	public function add_details_column_items( $details, $booking ) {
+		global $rtb_controller;
+		$visible_columns = $this->get_columns();
+		$default_columns = $this->get_all_default_columns();
+
+		// Columns which can't be hidden
+		unset( $default_columns['cb'] );
+		unset( $default_columns['details'] );
+		unset( $default_columns['date'] );
+
+		$detail_columns = array_diff( $default_columns, $visible_columns );
+
+		if ( !empty( $detail_columns ) ) {
+			foreach( $detail_columns as $key => $label ) {
+
+				$value = $this->column_default( $booking, $key );
+				if ( empty( $value ) ) {
+					continue;
+				}
+
+				$details[] = array(
+					'label' => $label,
+					'value' => $value,
+				);
+			}
+		}
+
+		return $details;
 	}
 
 	/**

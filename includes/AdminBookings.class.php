@@ -14,8 +14,8 @@ class rtbAdminBookings {
 		// Add the admin menu
 		add_action( 'admin_menu', array( $this, 'add_menu_page' ) );
 
-		// Print the booking form modal
-		add_action( 'admin_footer-toplevel_page_rtb-bookings', array( $this, 'print_booking_form_modal' ) );
+		// Print the modals
+		add_action( 'admin_footer-toplevel_page_rtb-bookings', array( $this, 'print_modals' ) );
 
 		// Receive Ajax requests
 		add_action( 'wp_ajax_nopriv_rtb-admin-booking-modal' , array( $this , 'nopriv_ajax' ) );
@@ -24,12 +24,17 @@ class rtbAdminBookings {
 		add_action( 'wp_ajax_rtb-admin-trash-booking', array( $this, 'trash_booking_ajax' ) );
 		add_action( 'wp_ajax_nopriv_rtb-admin-email-modal' , array( $this , 'nopriv_ajax' ) );
 		add_action( 'wp_ajax_rtb-admin-email-modal', array( $this, 'email_modal_ajax' ) );
+		add_action( 'wp_ajax_nopriv_rtb-admin-column-modal' , array( $this , 'nopriv_ajax' ) );
+		add_action( 'wp_ajax_rtb-admin-column-modal', array( $this, 'column_modal_ajax' ) );
 
 		// Validate post status and notification fields
 		add_action( 'rtb_validate_booking_submission', array( $this, 'validate_admin_fields' ) );
 
 		// Set post status when adding to the database
 		add_filter( 'rtb_insert_booking_data', array( $this, 'insert_booking_data' ), 10, 2 );
+
+		// Add the columns configuration button to the table
+		add_action( 'rtb_bookings_table_actions', array( $this, 'print_columns_config_button' ), 9 );
 
 	}
 
@@ -84,10 +89,35 @@ class rtbAdminBookings {
 	}
 
 	/**
-	 * Print the booking form modal container on the admin bookings page
+	 * Print button for configuring columns
+	 *
+	 * @param string pos Position of this tablenav: top|btm
+	 * @since 0.1
+	 */
+	public function print_columns_config_button( $pos ) {
+		if ( $pos != 'top' ) {
+			return;
+		}
+		?>
+
+		<div class="alignleft actions rtb-actions">
+			<a href="#" class="button rtb-columns-button">
+				<span class="dashicons dashicons-admin-settings"></span>
+				<?php esc_html_e( 'Columns', 'restaurant-reservations' ); ?>
+			</a>
+		</div>
+
+		<?php
+	}
+
+	/**
+	 * Print the modal containers
+	 *
+	 * New/edit bookings, send email, configure columns, errors.
+	 *
 	 * @since 0.0.1
 	 */
-	public function print_booking_form_modal() {
+	public function print_modals() {
 
 		global $rtb_controller;
 		?>
@@ -112,7 +142,7 @@ class rtbAdminBookings {
 						<?php echo $this->print_booking_form_fields(); ?>
 					</div>
 
-					<button type="submit" class="button-primary">
+					<button type="submit" class="button button-primary">
 						<?php _e( 'Add Booking', 'restaurant-reservations' ); ?>
 					</button>
 					<a href="#" class="button" id="rtb-cancel-booking-modal">
@@ -153,7 +183,7 @@ class rtbAdminBookings {
 						</div>
 					</fieldset>
 
-					<button type="submit" class="button-primary">
+					<button type="submit" class="button button-primary">
 						<?php _e( 'Send Email', 'restaurant-reservations' ); ?>
 					</button>
 					<a href="#" class="button" id="rtb-cancel-email-modal">
@@ -167,6 +197,64 @@ class rtbAdminBookings {
 				</form>
 			</div>
 		</div>
+
+		<!-- Restaurant Reservations column configuration modal -->
+		<div id="rtb-column-modal" class="rtb-admin-modal">
+			<div class="rtb-column-form rtb-container">
+				<form method="POST">
+					<input type="hidden" name="action" value="admin_column_config">
+
+					<fieldset>
+						<legend><?php esc_html_e( 'Columns', 'restaurant-reservations' ); ?></legend>
+						<ul>
+							<?php
+								$bookings_table = new rtbBookingsTable();
+								$columns = $bookings_table->get_all_columns();
+								$visible = $bookings_table->get_columns();
+								foreach( $columns as $column => $label ) :
+									// Don't allow these columns to be hidden
+									if ( $column == 'cb' || $column == 'details' || $column == 'date' ) {
+										continue;
+									}
+									?>
+										<li>
+											<label>
+												<input type="checkbox" name="rtb-columns-config" value="<?php esc_attr_e( $column ); ?>"<?php if ( array_key_exists( $column, $visible ) ) : ?> checked<?php endif; ?>>
+												<?php esc_html_e( $label ); ?>
+											</label>
+										</li>
+									<?php
+								endforeach;
+							?>
+						</ul>
+					</fieldset>
+
+
+					<button type="submit" class="button button-primary">
+						<?php _e( 'Update', 'restaurant-reservations' ); ?>
+					</button>
+					<a href="#" class="button" id="rtb-cancel-column-modal">
+						<?php _e( 'Cancel', 'restaurant-reservations' ); ?>
+					</a>
+					<div class="action-status">
+						<span class="spinner loading"></span>
+						<span class="dashicons dashicons-no-alt error"></span>
+						<span class="dashicons dashicons-yes success"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- Restaurant Reservations details modal -->
+		<div id="rtb-details-modal" class="rtb-admin-modal">
+			<div class="rtb-details-form rtb-container">
+				<div class="rtb-details-data"></div>
+				<a href="#" class="button" id="rtb-cancel-details-modal">
+					<?php _e( 'Close', 'restaurant-reservations' ); ?>
+				</a>
+			</div>
+		</div>
+
 		<!-- Restaurant Reservations error message modal -->
 		<div id="rtb-error-modal" class="rtb-admin-modal">
 			<div class="rtb-error rtb-container">
@@ -523,6 +611,35 @@ class rtbAdminBookings {
 		wp_send_json_success();
 	}
 
+	/**
+	 * Handle ajax requests to configure columns
+	 *
+	 * @since 1.3.1
+	 */
+	public function column_modal_ajax() {
+
+		global $rtb_controller;
+
+		// Authenticate request
+		if ( !check_ajax_referer( 'rtb-admin', 'nonce' ) || !current_user_can( 'manage_bookings' ) ) {
+			$this->nopriv_ajax();
+		}
+
+		if ( !isset( $_POST['columns'] ) || !is_array( $_POST['columns'] ) || empty( $_POST['columns'] ) ) {
+			wp_send_json_error(
+				array(
+					'error'		=> 'no_columns',
+					'msg'		=> __( 'You must select at least one column to display.', 'restaurant-reservations' ),
+				)
+			);
+		}
+
+		$settings = get_option( 'rtb-settings' );
+		$settings['bookings-table-columns'] = array_map( 'sanitize_key', $_POST['columns'] );
+		update_option( 'rtb-settings', $settings );
+
+		wp_send_json_success();
+	}
 
 	/**
 	 * Validate post status and notification fields

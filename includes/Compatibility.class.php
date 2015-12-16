@@ -24,6 +24,9 @@ class rtbCompatibility {
 		// Run a filter deprecrated in 1.4.3
 		add_filter( 'rtb_bookings_table_views_date_range', array( $this, 'rtn_bookings_table_views_schedule' ) );
 
+		// Make sure custom fields don't completely disappear in 1.5
+		add_action( 'admin_init', array( $this, 'maybe_bridge_cffrtb_to_1_5' ) );
+
 	}
 
 	/**
@@ -54,6 +57,56 @@ class rtbCompatibility {
 	 */
 	public function rtn_bookings_table_views_schedule( $views ) {
 		return apply_filters( 'rtn_bookings_table_views_schedule', $views );
+	}
+
+	/**
+	 * Check whether or not we need to run some compatibiilty code for older
+	 * versions of the Custom Fields addon.
+	 *
+	 * @since 0.1
+	 */
+	public function maybe_bridge_cffrtb_to_1_5() {
+		if ( !function_exists( 'cffrtbInit' ) || !function_exists( 'get_plugin_data' ) ) {
+			return;
+		}
+
+		$cffrtb = get_plugin_data( cffrtbInit::$plugin_dir . '/custom-fields-for-rtb.php', false );
+		if ( !isset( $cffrtb['Version'] ) || $cffrtb['Version'] >= 1.2 ) {
+			return;
+		}
+
+		add_filter( 'rtb_bookings_table_column_details', array( $this, 'add_cffrtb_fields_to_details' ), 11, 2 );
+	}
+
+	/**
+	 * Add custom fields output to details column
+	 *
+	 * This function eases the transition to v1.5 for users of the Custom Fields
+	 * addon. Some of the details around how the custom field data is added to
+	 * the bookings table was changed. If the user is using an outdated version
+	 * of Custom Fields, this function will ensure the data gets dropped into
+	 * the new details column. There is still some wonky behavior: the custom
+	 * fields appear as potential columns but adding them won't do anything.
+	 * But this will at least ensure that the data doesn't disappear and users
+	 * can then update to get the full functionality.
+	 *
+	 * @since 1.5
+	 */
+	public function add_cffrtb_fields_to_details( $details, $booking ) {
+
+		if ( !isset( $booking->custom_fields ) ) {
+			return $details;
+		}
+
+		$fields = cffrtbInit()->fields->get_booking_fields_display_array( $booking );
+		foreach( $fields as $field ) {
+			$details[] = array(
+				'label' => $field['title'],
+				'value' => $field['display_val'],
+			);
+		}
+
+		return $details;
 	}
 
 }
