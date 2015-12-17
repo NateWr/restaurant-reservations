@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.4
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.4.10
+Stable tag: 1.5
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,13 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.5 (2015-12-17) =
+* Fix: pickadate iOS bug
+* Fix: Bookings table's Today view didn't respect WordPress timezone setting
+* Add: Allow bookings table columns to be toggled on/off
+* Update: Convert message column/row drop-down to a details modal for all hidden columns
+* Update: Put focus into message field when expanded in booking form
 
 = 1.4.10 (2015-10-29) =
 * Fix: Allow settings page required capability to be filtered later
@@ -248,6 +255,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.5 =
+This update adds the ability to configure which columns are visible in the bookings table. It works with the Custom Fields addon. If you have added fields using custom code, please read the release notification at themeofthecrop.com before updating.
 
 = 1.4.10 =
 This update includes a new Spanish translation and a few minor fixes. Updating isn't necessary for most people.
