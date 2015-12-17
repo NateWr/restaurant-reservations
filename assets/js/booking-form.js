@@ -19,7 +19,8 @@ jQuery(document).ready(function ($) {
 		// Show the message field on the booking form
 		$( '.rtb-booking-form .add-message a' ).click( function() {
 			$(this).hide();
-			$(this).parent().siblings( '.message' ).addClass( 'message-open' );
+			$(this).parent().siblings( '.message' ).addClass( 'message-open' )
+				.find( 'label' ).focus();
 
 			return false;
 		});
