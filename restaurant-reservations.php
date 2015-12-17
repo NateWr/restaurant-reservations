@@ -297,4 +297,5 @@ class rtbInit {
 }
 } // endif;
 
+global $rtb_controller;
 $rtb_controller = new rtbInit();
