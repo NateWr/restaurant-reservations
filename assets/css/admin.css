@@ -147,6 +147,10 @@
 	background: #dd3d36;
 }
 
+#rtb-bookings-table tr ul {
+	margin: 0;
+}
+
 .rtb-details-data {
 	display: none;
 }
