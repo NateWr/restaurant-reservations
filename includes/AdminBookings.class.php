@@ -229,7 +229,6 @@ class rtbAdminBookings {
 						</ul>
 					</fieldset>
 
-
 					<button type="submit" class="button button-primary">
 						<?php _e( 'Update', 'restaurant-reservations' ); ?>
 					</button>
