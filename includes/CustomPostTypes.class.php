@@ -162,8 +162,15 @@ class rtbCustomPostTypes {
 	 */
 	public function delete_booking( $id ) {
 
-		if ( !current_user_can( 'manage_bookings' ) ) {
-			return;
+		$id = absint( $id );
+		if ( !current_user_can( 'manage_bookings' ) || !current_user_can( 'edit_posts', $id ) ) {
+			return false;
+		}
+
+		$booking = get_post( $id );
+
+		if ( !$this->is_valid_booking_post_object( $booking ) ) {
+			return false;
 		}
 
 		// If we're already looking at trashed posts, delete it for good.
@@ -190,17 +197,18 @@ class rtbCustomPostTypes {
 	 */
 	function update_booking_status( $id, $status ) {
 
-		if ( !current_user_can( 'manage_bookings' ) ) {
-			return;
+		$id = absint( $id );
+		if ( !current_user_can( 'manage_bookings' ) || !current_user_can( 'edit_posts', $id ) ) {
+			return false;
 		}
-		
+
 		if ( !$this->is_valid_booking_status( $status ) ) {
 			return false;
 		}
 
 		$booking = get_post( $id );
 
-		if ( is_wp_error( $booking ) || !is_object( $booking ) ) {
+		if ( !$this->is_valid_booking_post_object( $booking ) ) {
 			return false;
 		}
 
@@ -225,6 +233,14 @@ class rtbCustomPostTypes {
 	 */
 	public function is_valid_booking_status( $status ) {
 		return isset( $this->booking_statuses[$status] ) ? true : false;
+	}
+
+	/**
+	 * Check if booking is a valid Post object with the correct post type
+	 * @since 0.0.1
+	 */
+	public function is_valid_booking_post_object( $booking ) {
+		return !is_wp_error( $booking ) && is_object( $booking ) && $booking->post_type == RTB_BOOKING_POST_TYPE;
 	}
 
 }
