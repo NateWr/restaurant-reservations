@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 4.4
+Tested Up To: 4.4.2
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,10 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.5.1 (2016-02-19) =
+* Fix: increase security of the quicklink feature for confirming/rejecting bookings
+* Fix: Improve wp-cli compatibility
 
 = 1.5 (2015-12-17) =
 * Fix: pickadate iOS bug
@@ -255,6 +259,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+This update increases security for the quick link feature to confirm/reject bookings from the admin notification email.
 
 = 1.5 =
 This update adds the ability to configure which columns are visible in the bookings table. It works with the Custom Fields addon. If you have added fields using custom code, please read the release notification at themeofthecrop.com before updating.
