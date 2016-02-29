@@ -163,7 +163,7 @@ class rtbCustomPostTypes {
 	public function delete_booking( $id ) {
 
 		$id = absint( $id );
-		if ( !current_user_can( 'manage_bookings' ) || !current_user_can( 'edit_posts', $id ) ) {
+		if ( !current_user_can( 'manage_bookings' ) ) {
 			return false;
 		}
 
@@ -198,7 +198,7 @@ class rtbCustomPostTypes {
 	function update_booking_status( $id, $status ) {
 
 		$id = absint( $id );
-		if ( !current_user_can( 'manage_bookings' ) || !current_user_can( 'edit_posts', $id ) ) {
+		if ( !current_user_can( 'manage_bookings' ) ) {
 			return false;
 		}
 
