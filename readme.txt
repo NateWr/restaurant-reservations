@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
 Tested Up To: 4.4.2
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -105,6 +105,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.5.2 (2016-02-29) =
+* Fix: booking managers can not confirm/reject bookings
 
 = 1.5.1 (2016-02-19) =
 * Fix: increase security of the quicklink feature for confirming/rejecting bookings
@@ -259,6 +262,9 @@ The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.5.2 =
+This update fixes a bug introduced in the last version which prevented Booking Managers from approving/rejecting reservations.
 
 = 1.5.1 =
 This update increases security for the quick link feature to confirm/reject bookings from the admin notification email.
