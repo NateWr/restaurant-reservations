@@ -411,7 +411,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'early-bookings',
 				'title'         => __( 'Early Bookings', 'restaurant-reservations' ),
-				'description'   => __( 'Select how early customers can make their booking.', 'restaurant-reservations' ),
+				'description'   => __( 'Select how early customers can make their booking. (Administrators and Booking Managers are not restricted by this setting.)', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
 					''		=> __( 'Any time', 'restaurant-reservations' ),
@@ -431,7 +431,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			array(
 				'id'            => 'late-bookings',
 				'title'         => __( 'Late Bookings', 'restaurant-reservations' ),
-				'description'   => __( 'Select how late customers can make their booking.', 'restaurant-reservations' ),
+				'description'   => __( 'Select how late customers can make their booking. (Administrators and Booking Managers are not restricted by this setting.)', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
 					'' 		=> __( 'Up to the last minute', 'restaurant-reservations' ),

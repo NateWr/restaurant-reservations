@@ -87,6 +87,9 @@ Yes, everything in this plugin can be translated using the standard translation 
 
 If you make a translation, please help others out by adding it to the [GitHub repository](https://github.com/NateWr/restaurant-reservations) so that I can distribute it for others.
 
+= I set Early or Late Bookings restrictions, but I scan still book during that time =
+Users with the Administrator and Booking Manager roles are exempt from these restrictions. This is so that they can make last-minute changes to bookings as needed. If you want to test the Early or Late Bookings restrictions, try logging out and testing.
+
 = I want to add a field to the form. Can I do that? =
 
 The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
