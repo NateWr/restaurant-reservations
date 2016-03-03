@@ -94,7 +94,7 @@ class rtbQuery {
 				}
 
 				if ( !empty( $args['end_date'] ) ) {
-					$date_query['before'] = sanitize_text_field( $args['end_date'] );
+					$date_query['before'] = sanitize_text_field( $args['end_date'] ) . ' 23:59'; // end of day
 				}
 
 				if ( count( $date_query ) ) {
