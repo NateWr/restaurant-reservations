@@ -115,7 +115,7 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 
 == Changelog ==
 
-= 1.5.3 (2016-3-25) =
+= 1.5.3 (2016-03-25) =
 * Fix: no bookings found when searching by start and end dates that are the same
 * Add: clarify that early/late bookings restrictions don't apply to admins
 * Add: Brazilian and Norwegian translations
