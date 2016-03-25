@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.8
-Tested Up To: 4.4.2
+Tested Up To: 4.5
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -114,6 +114,14 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.5.3 (2016-3-25) =
+* Fix: no bookings found when searching by start and end dates that are the same
+* Add: clarify that early/late bookings restrictions don't apply to admins
+* Add: Brazilian and Norwegian translations
+* Update: Dutch translation
+* Update: link to new online documentation
+* Other: Tested for compatibility with WP 4.5
 
 = 1.5.2 (2016-02-29) =
 * Fix: booking managers can not confirm/reject bookings
@@ -271,6 +279,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.5.3 =
+This update fixes a minor bug when searching for bookings by date, updates compatibilty for WP v4.5, and adds links to the new online documentation.
 
 = 1.5.2 =
 This update fixes a bug introduced in the last version which prevented Booking Managers from approving/rejecting reservations.
