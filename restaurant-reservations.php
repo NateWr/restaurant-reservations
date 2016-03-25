@@ -287,7 +287,7 @@ class rtbInit {
 
 		if ( $plugin == RTB_PLUGIN_FNAME ) {
 
-			$links['help'] = '<a href="' . RTB_PLUGIN_URL . '/docs" title="' . __( 'View the help documentation for Restaurant Reservations', 'restaurant-reservations' ) . '">' . __( 'Help', 'restaurant-reservations' ) . '</a>';
+			$links['help'] = '<a href="http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations" title="' . __( 'View the help documentation for Restaurant Reservations', 'restaurant-reservations' ) . '">' . __( 'Help', 'restaurant-reservations' ) . '</a>';
 		}
 
 		return $links;

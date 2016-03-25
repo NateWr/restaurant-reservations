@@ -31,7 +31,7 @@ This plugin is part of a group of plugins for restaurants. Check out the [Food a
 
 = How to use =
 
-There is a short guide to using the plugin in the /docs/ folder. It can be accessed by following the Help link listed under the plugin on the Plugins page in your WordPress admin area. Not sure where that is? The last [screenshot](http://wordpress.org/plugins/restaurant-reservations/screenshots/) for this plugin will show you where to find it.
+Read the [User Guide](http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) for quicks tips on how to get started taking reservations.
 
 = Addons =
 [Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
@@ -42,7 +42,9 @@ There is a short guide to using the plugin in the /docs/ folder. It can be acces
 
 = Developers =
 
-This plugin is packed with hooks so you can extend it, customize it and rebrand it as needed. Development takes place on [GitHub](https://github.com/NateWr/restaurant-reservations), so fork it up.
+This plugin is packed with hooks so you can extend it, customize it and rebrand it as needed. Take a look at the [Developer Documentation](http://doc.themeofthecrop.com/plugins/restaurant-reservations/developer/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
+
+Development takes place on [GitHub](https://github.com/NateWr/restaurant-reservations), so fork it up.
 
 == Installation ==
 
@@ -93,6 +95,10 @@ Users with the Administrator and Booking Manager roles are exempt from these res
 = I want to add a field to the form. Can I do that? =
 
 The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
+
+= More questions and answers =
+
+Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/faq?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
 
 == Screenshots ==
 
