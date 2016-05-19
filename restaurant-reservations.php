@@ -72,6 +72,10 @@ class rtbInit {
 		require_once( RTB_PLUGIN_DIR . '/includes/CustomPostTypes.class.php' );
 		$this->cpts = new rtbCustomPostTypes();
 
+		// Load multiple location support
+		require_once( RTB_PLUGIN_DIR . '/includes/MultipleLocations.class.php' );
+		$this->locations = new rtbMultipleLocations();
+
 		// Flush the rewrite rules for the custom post types
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
 
