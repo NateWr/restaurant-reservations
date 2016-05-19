@@ -13,7 +13,7 @@ class rtbCustomPostTypes {
 	// @sa set_booking_statuses()
 	public $booking_statuses = array();
 
-	// Cached select fields for booking stasuses
+	// Cached select fields for booking statuses
 	public $status_select_html = array();
 
 	public function __construct() {
@@ -68,6 +68,8 @@ class rtbCustomPostTypes {
 
 		// Add an action so addons can hook in after the post type is registered
 		do_action( 'rtb_booking_post_register' );
+
+
 	}
 
 	/**
