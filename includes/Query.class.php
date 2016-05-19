@@ -18,6 +18,15 @@ if ( !class_exists( 'rtbQuery' ) ) {
 class rtbQuery {
 
 	/**
+	 * Bookings
+	 *
+	 * Array of bookings retrieved after get_bookings() is called
+	 *
+	 * @since 1.4.1
+	 */
+	public $bookings = array();
+
+	/**
 	 * Query args
 	 *
 	 * Passed to WP_Query
