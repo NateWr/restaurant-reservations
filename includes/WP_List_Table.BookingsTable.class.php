@@ -216,18 +216,21 @@ class rtbBookingsTable extends WP_List_Table {
 
 		$views = array(
 			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'date_range' ), $date_range_query_string ) ) ), $date_range === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
-			'today'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ) ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
+			'today'	    => sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ) ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
 			'all'		=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'all', 'paged' => FALSE ), $date_range_query_string ) ), $date_range == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
 		);
 
 		if ( $date_range == 'custom' ) {
-			$views['custom'] = '<span class="current">' . $this->get_current_date_range() . '</span>';
+			$views['date'] = '<span class="date-filter-range current">' . $this->get_current_date_range() . '</span>';
+			$views['date'] .= '<a id="rtb-date-filter-link" href="#"><span class="dashicons dashicons-calendar"></span> <span class="rtb-date-filter-label">Change date range</span></a>';
+		} else {
+			$views['date'] = '<a id="rtb-date-filter-link" href="#">' . esc_html__( 'Between dates', 'restaurant-reservations' ) . '</a>';
 		}
 
 		$views = apply_filters( 'rtb_bookings_table_views_date_range', $views );
 		?>
 
-		<div id="rtb-filters" class="clearfix">
+		<div id="rtb-filters">
 			<ul class="subsubsub rtb-views-date_range">
 				<li><?php echo join( ' | </li><li>', $views ); ?></li>
 			</ul>
@@ -237,30 +240,15 @@ class rtbBookingsTable extends WP_List_Table {
 				<input type="text" id="start-date" name="start_date" class="datepicker" value="<?php echo esc_attr( $this->filter_start_date ); ?>" placeholder="<?php _e( 'Start Date', 'restaurant-reservations' ); ?>" />
 				<label for="end-date" class="screen-reader-text"><?php _e( 'End Date:', 'restaurant-reservations' ); ?></label>
 				<input type="text" id="end-date" name="end_date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', 'restaurant-reservations' ); ?>" />
-				<input type="submit" class="button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
-				<?php if( !empty( $start_date ) || !empty( $end_date ) ) : ?>
-				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'clear_date_filters' ) ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
+				<input type="submit" class="button button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
+				<?php if( !empty( $this->filter_start_date ) || !empty( $this->filter_end_date ) ) : ?>
+				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'clear_date_filters' ) ) ); ?>" class="button button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
 				<?php endif; ?>
 			</div>
 
 			<?php if( !empty( $_GET['status'] ) ) : ?>
 				<input type="hidden" name="status" value="<?php echo esc_attr( sanitize_text_field( $_GET['status'] ) ); ?>"/>
 			<?php endif; ?>
-
-			<?php
-				// @todo Add support for the search box that uses more than just
-				// 	the 's' argument in WP_Query. I need to search at least the
-				// 	email post meta as well or this search box could be
-				//	misleading for people who expect to search across all
-				//	visible data
-				// $this->search_box( __( 'Search', 'restaurant-reservations' ), 'rtb-bookings' );
-			?>
-
-			<?php
-				// @todo use a datepicker. need to bring in styles for jquery ui or use pickadate
-				// wp_enqueue_script('jquery-ui-datepicker');
-			?>
-
 		</div>
 
 <?php

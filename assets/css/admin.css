@@ -10,9 +10,15 @@
 	clear: both;
 }
 
-/* Bookings Table */
+/* Bookings Admin List Table */
+#rtb-bookings-table .rtb-primary-controls {
+	margin-top: 2em;
+}
+
 #rtb-bookings-table .subsubsub {
-	float: right;
+	float: none;
+	margin: 0.5em 0 1em;
+	text-align: left;
 }
 
 #rtb-bookings-table  .subsubsub .trash a {
@@ -24,30 +30,96 @@
 }
 
 #rtb-filters {
-	float: left;
-}
-
-#rtb-filters  .subsubsub {
-	margin-bottom: 0.5em;
-	float: none;
+	position: relative;
 }
 
 #rtb-filters .date-filters {
-	clear: both;
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+	display: inline-block;
 	padding: 1em;
-	margin: 1em 0 2em;
 	background: #fff;
 	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
+#rtb-filters.date-filters-visible .date-filters {
+	position: relative;
+	top: auto;
+	left: 0;
 }
 
 #rtb-filters .date-filters .datepicker {
 	max-width: 10em;
 }
 
+#rtb-filters .date-filter-range {
+	padding: 0.25em;
+}
+
+#rtb-date-filter-link {
+	position: relative;
+}
+
+#rtb-date-filter-link .dashicons {
+	line-height: 1.5;
+}
+
+#rtb-filters .date-filter-range + #rtb-date-filter-link {
+	margin-left: 0.5em;
+}
+
+#rtb-date-filter-link .rtb-date-filter-label {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+#rtb-filters.date-filters-visible #rtb-date-filter-link {
+	color: #777;
+}
+
+#rtb-filters.date-filters-visible #rtb-date-filter-link:before {
+	content: '';
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	margin-left: -1em;
+	width: 0;
+	height: 0;
+	border: 1em solid transparent;
+	border-bottom: 1em solid #fff;
+}
+
 #rtb-filters .current {
 	font-weight: 600;
 	color: #000;
+}
+
+@media screen and (min-width: 930px) {
+
+	#rtb-bookings-table .rtb-primary-controls {
+		margin-top: 0;
+	}
+
+	#rtb-bookings-table .rtb-views {
+		float: right;
+		width: 50%;
+	}
+
+	#rtb-bookings-table .rtb-views .subsubsub {
+		text-align: right;
+	}
+
+	#rtb-filters {
+		float: left;
+		width: 50%;
+	}
+
+	#rtb-filters .date-filters {
+		margin-right: 2em;
+	}
 }
 
 #rtb-bookings-table .tablenav .actions .button {

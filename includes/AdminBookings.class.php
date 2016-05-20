@@ -78,8 +78,13 @@ class rtbAdminBookings {
 				<input type="hidden" name="post_type" value="<?php echo RTB_BOOKING_POST_TYPE; ?>" />
 				<input type="hidden" name="page" value="rtb-bookings">
 
-				<?php $bookings_table->views(); ?>
-				<?php $bookings_table->advanced_filters(); ?>
+				<div class="rtb-primary-controls clearfix">
+					<div class="rtb-views">
+						<?php $bookings_table->views(); ?>
+					</div>
+					<?php $bookings_table->advanced_filters(); ?>
+				</div>
+
 				<?php $bookings_table->display(); ?>
 			</form>
 			<?php do_action( 'rtb_bookings_table_btm' ); ?>

@@ -1,6 +1,11 @@
 /* Javascript for Restaurant Reservations admin */
 jQuery(document).ready(function ($) {
 
+	// Show/hide date filter in bookings list
+	$( '#rtb-date-filter-link' ).click( function() {
+		$( '#rtb-filters' ).toggleClass( 'date-filters-visible' );
+	});
+
 	// Add date picker to date filter in admin
 	$( '#start-date, #end-date' ).each( function() {
 		var input = $(this);
