@@ -193,7 +193,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		 *
 		 * @since 1.6
 		 */
-		public function add_location_field( $fields, $request = null ) {
+		public function add_location_field( $fields, $request = null, $args = array() ) {
 
 			if ( $request === null ) {
 				global $rtb_controller;
@@ -214,6 +214,12 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			// If we couldn't find any working fieldset, then something odd is
 			// going on. Just pretend we were never here.
 			if ( $placement === false ) {
+				return $fields;
+			}
+
+			// If the location is specified, don't add a field.
+			// A hidden field is added automatically in rtb_print_booking_form()
+			if ( !empty( $args['location'] ) && term_exists( $args['location'], $this->location_taxonomy ) ) {
 				return $fields;
 			}
 
