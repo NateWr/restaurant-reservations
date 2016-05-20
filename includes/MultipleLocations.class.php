@@ -73,6 +73,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_action( 'init', array( $this, 'register_taxonomy' ), 1000 ); // after custom post types declared (hopefully!)
 			add_action( 'save_post_' . $this->post_type, array( $this, 'save_location' ), 10, 3 );
 			add_action( 'before_delete_post', array( $this, 'delete_location' ) );
+			add_action( 'rtb_booking_form_fields', array( $this, 'add_location_field' ) );
 		}
 
 		/**
@@ -179,6 +180,75 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			}
 
 			wp_delete_term( $term_id, $this->location_taxonomy );
+		}
+
+		/**
+		 * Add the location selection field to the booking form
+		 *
+		 * @since 1.6
+		 */
+		public function add_location_field( $fields, $request = null ) {
+
+			if ( $request === null ) {
+				global $rtb_controller;
+				$request = $rtb_controller->request;
+			}
+
+			// Select a fieldset in which to place the field
+			$placement = false;
+			if ( isset( $fields['reservation'] ) && isset( $fields['reservation']['fields'] ) ) {
+				$placement = &$fields['reservation']['fields'];
+			} else {
+				$key = key( reset( $fields  ) );
+				if ( isset( $fields[$key]['fields'] ) ) {
+					$placement = &$fields[$key]['fields'];
+				}
+			}
+
+			// If we couldn't find any working fieldset, then something odd is
+			// going on. Just pretend we were never here.
+			if ( $placement === false ) {
+				return $fields;
+			}
+
+			$placement = array_merge(
+				array(
+					'location' => array(
+						'title'			=> __( 'Location', 'restaurant-reservations' ),
+						'request_input'	=> empty( $request->location ) ? '' : $request->location,
+						'callback'		=> 'rtb_print_form_select_field',
+						'callback_args'	=> array(
+							'options'	=> $this->get_location_options(),
+						),
+						'required'		=> true,
+					)
+				),
+				$placement
+			);
+
+			return $fields;
+		}
+
+		/**
+		 * Retrieve a key/value array of location terms and names
+		 *
+		 * @since 1.6
+		 */
+		public function get_location_options() {
+
+			$terms = get_terms(
+				array(
+					'taxonomy'   => $this->location_taxonomy,
+					'hide_empty' => false,
+				)
+			);
+
+			$options = array();
+			foreach( $terms as $term ) {
+				$options[$term->term_id] = $term->name;
+			}
+
+			return $options;
 		}
 	}
 }
