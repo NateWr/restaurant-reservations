@@ -70,10 +70,16 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		 * @since 1.6
 		 */
 		public function hooks() {
-			add_action( 'init', array( $this, 'register_taxonomy' ), 1000 ); // after custom post types declared (hopefully!)
-			add_action( 'save_post_' . $this->post_type, array( $this, 'save_location' ), 10, 3 );
-			add_action( 'before_delete_post', array( $this, 'delete_location' ) );
-			add_action( 'rtb_booking_form_fields', array( $this, 'add_location_field' ) );
+			add_action( 'init',                            array( $this, 'register_taxonomy' ), 1000 ); // after custom post types declared (hopefully!)
+			add_action( 'save_post_' . $this->post_type,   array( $this, 'save_location' ), 10, 3 );
+			add_action( 'before_delete_post',              array( $this, 'delete_location' ) );
+			add_action( 'rtb_booking_form_fields',         array( $this, 'add_location_field' ), 10, 3 );
+			add_action( 'rtb_validate_booking_submission', array( $this, 'validate_location' ) );
+			add_action( 'rtb_insert_booking',              array( $this, 'save_booking_location' ) );
+			add_action( 'rtb_update_booking',              array( $this, 'save_booking_location' ) );
+			add_action( 'rtb_booking_load_post_data',      array( $this, 'load_booking_location' ), 10, 2 );
+			add_filter( 'rtb_bookings_table_columns',      array( $this, 'add_location_column' ) );
+			add_filter( 'rtb_bookings_table_column',       array( $this, 'print_location_column' ), 10, 3 );
 		}
 
 		/**
@@ -249,6 +255,93 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			}
 
 			return $options;
+		}
+
+		/**
+		 * Validate location in post data
+		 *
+		 * @since 1.6
+		 */
+		public function validate_location( $booking ) {
+
+			$booking->location = empty( $_POST['rtb-location'] ) ? '' : absint( $_POST['rtb-location'] );
+			if ( empty( $booking->location ) ) {
+				$booking->validation_errors[] = array(
+					'field'			=> 'location',
+					'post_variable'	=> $booking->location,
+					'message'	=> __( 'Please select a location for your booking.', 'restaurant-reservations' ),
+				);
+
+			} elseif ( !term_exists( $booking->location, $this->location_taxonomy ) ) {
+				$booking->validation_errors[] = array(
+					'field'			=> 'location',
+					'post_variable'	=> $booking->location,
+					'message'	=> __( 'The location you selected is not valid. Please select another location.', 'restaurant-reservations' ),
+				);
+			}
+		}
+
+		/**
+		 * Save the booking location when the booking is created or updated.
+		 *
+		 * @since 1.6
+		 */
+		public function save_booking_location( $booking ) {
+
+			if ( !empty( $booking->location ) ) {
+				wp_set_object_terms( $booking->ID, $booking->location, $this->location_taxonomy );
+			}
+		}
+
+		/**
+		 * Load the booking location when teh booking is loaded
+		 *
+		 * @since 1.6
+		 */
+		public function load_booking_location( $booking, $post ) {
+
+			$terms = wp_get_object_terms( $booking->ID, $this->location_taxonomy, array( 'fields' => 'ids' ) );
+
+			if ( is_a( $terms, 'WP_Error' ) ) {
+				return;
+			}
+
+			$booking->location = current( $terms );
+		}
+
+		/**
+		 * Add location column to the list table
+		 *
+		 * @since 1.6
+		 */
+		public function add_location_column( $columns ) {
+
+			$first = array_splice( $columns, 0, 2 );
+			$first['location'] = __( 'Location', 'restaurant-reservations' );
+
+			return array_merge( $first, $columns );
+		}
+
+		/**
+		 * Print the value in the location column for the list table
+		 *
+		 * @since 1.6
+		 */
+		public function print_location_column( $value, $booking, $column_name ) {
+
+			if ( $column_name !== 'location' ) {
+				return $value;
+			}
+
+			$terms = wp_get_object_terms( $booking->ID, $this->location_taxonomy );
+
+			if ( is_a( $terms, 'WP_Error' ) ) {
+				return '';
+			}
+
+			$location = current( $terms );
+
+			return $location->name;
 		}
 	}
 }
