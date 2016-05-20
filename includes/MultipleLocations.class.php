@@ -341,7 +341,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 
 			$terms = wp_get_object_terms( $booking->ID, $this->location_taxonomy );
 
-			if ( is_a( $terms, 'WP_Error' ) ) {
+			if ( empty( $terms ) || is_a( $terms, 'WP_Error' ) ) {
 				return '';
 			}
 
