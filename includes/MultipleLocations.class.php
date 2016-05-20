@@ -97,7 +97,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			 */
 			$args = apply_filters( 'rtb_locations_args', $args );
 
-			register_taxonomy( $this->location_taxonomy, $args );
+			register_taxonomy( $this->location_taxonomy, RTB_BOOKING_POST_TYPE, $args );
 		}
 
 		/**
