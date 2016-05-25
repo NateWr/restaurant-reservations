@@ -3,7 +3,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 if ( !class_exists( 'rtbCompatibility' ) ) {
 /**
- * Class to handle backwards compatibilty issues for Restaurant Reservations
+ * Class to handle backwards compatibilty and cross-plugin compatibility issues
+ * for Restaurant Reservations
  *
  * @since 1.3
  */
@@ -26,6 +27,9 @@ class rtbCompatibility {
 
 		// Make sure custom fields don't completely disappear in 1.5
 		add_action( 'admin_init', array( $this, 'maybe_bridge_cffrtb_to_1_5' ) );
+
+		// WooCommerce: allow booking managers access to the backend
+		add_filter( 'woocommerce_prevent_admin_access', array( $this, 'woocommerce_allow_booking_managers_access' ) );
 
 	}
 
@@ -107,6 +111,23 @@ class rtbCompatibility {
 		}
 
 		return $details;
+	}
+
+	/**
+	 * Allow booking managers access to the backend when WooCommerce is
+	 * activated.
+	 *
+	 * @param bool $block Whether or not to block the user
+	 *  anything else to allow.
+	 * @since 1.6
+	 */
+	public function woocommerce_allow_booking_managers_access( $block ) {
+
+		if ( current_user_can( 'manage_bookings' ) ) {
+			return false;
+		}
+
+		return $block;
 	}
 
 }
