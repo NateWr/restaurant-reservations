@@ -31,6 +31,9 @@ class rtbCompatibility {
 		// WooCommerce: allow booking managers access to the backend
 		add_filter( 'woocommerce_prevent_admin_access', array( $this, 'woocommerce_allow_booking_managers_access' ) );
 
+		// Maybe enable multiple locations if Business Profile is active
+		add_action( 'rtb_set_locations_post_type', array( $this, 'maybe_enable_bp_locations' ) );
+
 	}
 
 	/**
@@ -130,6 +133,24 @@ class rtbCompatibility {
 		return $block;
 	}
 
+	/**
+	 * Maybe enable multiple locations if Business Profile is active
+	 *
+	 * @since 1.6
+	 */
+	public function maybe_enable_bp_locations( $post_type ) {
+
+		if ( $post_type ) {
+			return $post_type;
+		}
+
+		global $bpfwp_controller;
+		if ( isset( $bpfwp_controller ) && isset( $bpfwp_controller->cpts ) ) {
+			return $bpfwp_controller->cpts->location_cpt_slug;
+		}
+
+		return $post_type;
+	}
 }
 } // endif
 
