@@ -85,6 +85,9 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_action( 'edit_form_after_title',             array( $this, 'add_meta_nonce' ) );
 			add_action( 'add_meta_boxes',                    array( $this, 'add_meta_boxes' ) );
 			add_filter( 'the_content',                       array( $this, 'append_to_content' ) );
+			add_filter( 'rtb_notification_email_to_email',   array( $this, 'notification_to_email' ), 10, 2 );
+			add_filter( 'rtb_notification_email_from_email', array( $this, 'notification_from_email' ), 10, 2 );
+			add_filter( 'rtb_notification_email_from_name',  array( $this, 'notification_from_name' ), 10, 2 );
 		}
 
 		/**
@@ -595,6 +598,57 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			}
 
 			return $content . do_shortcode( '[booking-form location=' . absint( $term_id ) .']' );
+		}
+
+		/**
+		 * Modify the notification email recipient for each location
+		 *
+		 * @since 1.6
+		 */
+		public function notification_to_email( $email, $notification ) {
+
+			if ( $notification->target == 'user' || empty( $notification->booking->location ) ) {
+				return $email;
+			}
+
+			$val = get_term_meta( $notification->booking->location, 'rtb_admin_email_address', true );
+			$email = empty( $val ) ? $email : $val;
+
+			return $email;
+		}
+
+		/**
+		 * Modify the notification email sender address for each location
+		 *
+		 * @since 1.6
+		 */
+		public function notification_from_email( $email, $notification ) {
+
+			if ( $notification->target != 'user' || empty( $notification->booking->location ) ) {
+				return $email;
+			}
+
+			$val = get_term_meta( $notification->booking->location, 'rtb_reply_to_address', true );
+			$email = empty( $val ) ? $email : $val;
+
+			return $email;
+		}
+
+		/**
+		 * Modify the notification email sender name for each location
+		 *
+		 * @since 1.6
+		 */
+		public function notification_from_name( $name, $notification ) {
+
+			if ( $notification->target != 'user' || empty( $notification->booking->location ) ) {
+				return $name;
+			}
+
+			$val = get_term_meta( $notification->booking->location, 'rtb_reply_to_name', true );
+			$name = empty( $val ) ? $name : $val;
+
+			return $name;
 		}
 	}
 }
