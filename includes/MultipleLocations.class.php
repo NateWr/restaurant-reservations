@@ -82,6 +82,8 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_filter( 'rtb_bookings_all_table_columns',    array( $this, 'add_location_column' ) );
 			add_filter( 'rtb_bookings_table_column',         array( $this, 'print_location_column' ), 10, 3 );
 			add_filter( 'rtb_bookings_table_column_details', array( $this, 'add_details_column_items' ), 10, 2 );
+			add_action( 'edit_form_after_title',             array( $this, 'add_meta_nonce' ) );
+			add_action( 'add_meta_boxes',                    array( $this, 'add_meta_boxes' ) );
 		}
 
 		/**
@@ -138,6 +140,8 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 					update_post_meta( $post_id, $this->location_taxonomy, $term['term_id'] );
 				}
 
+				$term_id = $term->term_id;
+
 			// Update the term for this location
 			} else {
 				wp_update_term(
@@ -148,6 +152,24 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 						'slug' => sanitize_text_field( $post->post_name ),
 					)
 				);
+			}
+
+			// Save post and and term meta data
+			if ( !isset( $_POST['rtb_location_meta_nonce'] ) || !wp_verify_nonce( $_POST['rtb_location_meta_nonce'], 'rtb_location_meta' ) ) {
+				return $post_id;
+			}
+
+			if ( !empty( $_POST['rtb_admin_email_address'] ) ) {
+				$email = sanitize_email( $_POST['rtb_admin_email_address'] );
+				update_term_meta( $term_id, 'rtb_admin_email_address', $email );
+			} else {
+				delete_term_meta( $term_id, 'rtb_admin_email_address' );
+			}
+
+			if ( !empty( $_POST['rtb_append_booking_form'] ) ) {
+				update_post_meta( $post_id, 'rtb_append_booking_form', true );
+			} else {
+				delete_post_meta( $post_id, 'rtb_append_booking_form' );
 			}
 
 			return $post_id;
@@ -412,6 +434,101 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			}
 
 			return $args;
+		}
+
+		/**
+		 * Add meta box to the location post editing screen
+		 *
+		 * @since 1.6
+		 */
+		public function add_meta_boxes() {
+
+			$meta_boxes = array(
+
+				// Metabox to enter schema type
+				array(
+					'id'        => 'rtb_location',
+					'title'     => __( 'Reservations', 'restaurant-reservations' ),
+					'callback'  => array( $this, 'print_location_metabox' ),
+					'post_type' => $this->post_type,
+					'context'   => 'side',
+					'priority'  => 'default',
+				),
+			);
+
+			// Create filter so addons can modify the metaboxes
+			$meta_boxes = apply_filters( 'rtb_location_metaboxes', $meta_boxes );
+
+			// Create the metaboxes
+			foreach ( $meta_boxes as $meta_box ) {
+				add_meta_box(
+					$meta_box['id'],
+					$meta_box['title'],
+					$meta_box['callback'],
+					$meta_box['post_type'],
+					$meta_box['context'],
+					$meta_box['priority']
+				);
+			}
+		}
+
+		/**
+		 * Output a hidden nonce field to secure the saving of term meta
+		 *
+		 * @since 1.6
+		 */
+		public function add_meta_nonce() {
+			global $post;
+			if ( $post->post_type == $this->post_type ) {
+				wp_nonce_field( 'rtb_location_meta', 'rtb_location_meta_nonce' );
+			}
+		}
+
+		/**
+		 * Print metabox on location post editing screen
+		 *
+		 * @since 1.6
+		 */
+		public function print_location_metabox( $post ) {
+
+			global $rtb_controller;
+			$admin_email_option = $rtb_controller->settings->get_setting( 'admin-email-option' );
+			$admin_email_address = $rtb_controller->settings->get_setting( 'admin-email-address' );
+
+			$notification_email = '';
+			if ( $admin_email_option ) {
+				$term_id = get_post_meta( $post->ID, $this->location_taxonomy, true );
+
+				if ( $term_id ) {
+					$notification_email = get_term_meta( $term_id, 'rtb_admin_email_address', true );
+				}
+			}
+
+			$append_booking_form = get_post_meta( $post->ID, 'rtb_append_booking_form', true );
+
+			?>
+
+			<?php if ( $admin_email_option ) : ?>
+				<style type="text/css">.rtb-location-meta-input + .rtb-location-meta-input { margin-top: 2em; }</style>
+				<div class="rtb-location-meta-input rtb-location-meta-admin-email">
+						<label for="rtb_admin_email_address">
+							<?php esc_html_e( 'Admin Notification Email Address', 'restaurant-reservations' ); ?>
+						</label>
+						<input type="text" name="rtb_admin_email_address" id="rtb_admin_email_address" value="<?php esc_attr_e( $notification_email ); ?>" placeholder="<?php esc_attr_e( $admin_email_address ); ?>">
+						<p class="description" id="rtb-location-meta-admin-email-description">
+							<?php esc_html_e( 'The email address where admin notifications for bookings at this location should be sent.', 'restaurant-reservations' ); ?>
+						</p>
+				</div>
+			<?php endif; ?>
+
+			<div class="rtb-location-meta-input rtb-location-meta-append-form">
+				<label>
+					<input type="checkbox" name="rtb_append_booking_form" value="1"<?php if ( $append_booking_form ) : ?> checked="checked"<?php endif; ?>>
+					<?php esc_html_e( 'Append booking form to this location.', 'restaurant-reservations' ); ?>
+				</label>
+			</div>
+
+			<?php
 		}
 	}
 }
