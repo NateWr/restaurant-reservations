@@ -160,17 +160,31 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 				return $post_id;
 			}
 
+			if ( !empty( $_POST['rtb_append_booking_form'] ) ) {
+				update_post_meta( $post_id, 'rtb_append_booking_form', true );
+			} else {
+				delete_post_meta( $post_id, 'rtb_append_booking_form' );
+			}
+
+			if ( !empty( $_POST['rtb_reply_to_name'] ) ) {
+				$reply_to_name = sanitize_text_field( $_POST['rtb_reply_to_name'] );
+				update_term_meta( $term_id, 'rtb_reply_to_name', $reply_to_name );
+			} else {
+				delete_term_meta( $term_id, 'rtb_reply_to_name' );
+			}
+
+			if ( !empty( $_POST['rtb_reply_to_address'] ) ) {
+				$reply_to_address = sanitize_email( $_POST['rtb_reply_to_address'] );
+				update_term_meta( $term_id, 'rtb_reply_to_address', $reply_to_address );
+			} else {
+				delete_term_meta( $term_id, 'rtb_reply_to_address' );
+			}
+
 			if ( !empty( $_POST['rtb_admin_email_address'] ) ) {
 				$email = sanitize_email( $_POST['rtb_admin_email_address'] );
 				update_term_meta( $term_id, 'rtb_admin_email_address', $email );
 			} else {
 				delete_term_meta( $term_id, 'rtb_admin_email_address' );
-			}
-
-			if ( !empty( $_POST['rtb_append_booking_form'] ) ) {
-				update_post_meta( $post_id, 'rtb_append_booking_form', true );
-			} else {
-				delete_post_meta( $post_id, 'rtb_append_booking_form' );
 			}
 
 			return $post_id;
@@ -494,14 +508,17 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 
 			global $rtb_controller;
 			$admin_email_option = $rtb_controller->settings->get_setting( 'admin-email-option' );
-			$admin_email_address = $rtb_controller->settings->get_setting( 'admin-email-address' );
 
 			$notification_email = '';
+			$reply_to_name = '';
+			$reply_to_address = '';
 			if ( $admin_email_option ) {
 				$term_id = get_post_meta( $post->ID, $this->location_taxonomy, true );
 
 				if ( $term_id ) {
 					$notification_email = get_term_meta( $term_id, 'rtb_admin_email_address', true );
+					$reply_to_name = get_term_meta( $term_id, 'rtb_reply_to_name', true );
+					$reply_to_address = get_term_meta( $term_id, 'rtb_reply_to_address', true );
 				}
 			}
 
@@ -509,18 +526,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 
 			?>
 
-			<?php if ( $admin_email_option ) : ?>
-				<style type="text/css">.rtb-location-meta-input + .rtb-location-meta-input { margin-top: 2em; }</style>
-				<div class="rtb-location-meta-input rtb-location-meta-admin-email">
-						<label for="rtb_admin_email_address">
-							<?php esc_html_e( 'Admin Notification Email Address', 'restaurant-reservations' ); ?>
-						</label>
-						<input type="text" name="rtb_admin_email_address" id="rtb_admin_email_address" value="<?php esc_attr_e( $notification_email ); ?>" placeholder="<?php esc_attr_e( $admin_email_address ); ?>">
-						<p class="description" id="rtb-location-meta-admin-email-description">
-							<?php esc_html_e( 'The email address where admin notifications for bookings at this location should be sent.', 'restaurant-reservations' ); ?>
-						</p>
-				</div>
-			<?php endif; ?>
+			<style type="text/css">.rtb-location-meta-input + .rtb-location-meta-input { margin-top: 2em; }</style>
 
 			<div class="rtb-location-meta-input rtb-location-meta-append-form">
 				<label>
@@ -528,6 +534,38 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 					<?php esc_html_e( 'Append booking form to this location.', 'restaurant-reservations' ); ?>
 				</label>
 			</div>
+
+			<div class="rtb-location-meta-input rtb-location-meta-reply-to-name">
+					<label for="rtb_reply_to_name">
+						<?php esc_html_e( 'Reply-To Name', 'restaurant-reservations' ); ?>
+					</label>
+					<input type="text" name="rtb_reply_to_name" id="rtb_reply_to_name" value="<?php esc_attr_e( $reply_to_name ); ?>" placeholder="<?php esc_attr_e( $rtb_controller->settings->get_setting( 'reply-to-name' ) ); ?>">
+					<p class="description">
+						<?php esc_html_e( 'The name which should appear in the Reply-To field of a user notification email.', 'restaurant-reservations' ); ?>
+					</p>
+			</div>
+
+			<div class="rtb-location-meta-input rtb-location-meta-reply-to-address">
+					<label for="rtb_reply_to_address">
+						<?php esc_html_e( 'Reply-To Email Address', 'restaurant-reservations' ); ?>
+					</label>
+					<input type="text" name="rtb_reply_to_address" id="rtb_reply_to_address" value="<?php esc_attr_e( $reply_to_address ); ?>" placeholder="<?php esc_attr_e( $rtb_controller->settings->get_setting( 'reply-to-address' ) ); ?>">
+					<p class="description">
+						<?php esc_html_e( 'The email address which should appear in the Reply-To field of a user notification email.', 'restaurant-reservations' ); ?>
+					</p>
+			</div>
+
+			<?php if ( $admin_email_option ) : ?>
+				<div class="rtb-location-meta-input rtb-location-meta-admin-email">
+						<label for="rtb_admin_email_address">
+							<?php esc_html_e( 'Admin Notification Email Address', 'restaurant-reservations' ); ?>
+						</label>
+						<input type="text" name="rtb_admin_email_address" id="rtb_admin_email_address" value="<?php esc_attr_e( $notification_email ); ?>" placeholder="<?php esc_attr_e( $rtb_controller->settings->get_setting( 'admin-email-address' ) ); ?>">
+						<p class="description">
+							<?php esc_html_e( 'The email address where admin notifications for bookings at this location should be sent.', 'restaurant-reservations' ); ?>
+						</p>
+				</div>
+			<?php endif; ?>
 
 			<?php
 		}
