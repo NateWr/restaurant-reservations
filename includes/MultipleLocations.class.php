@@ -246,9 +246,12 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		/**
 		 * Retrieve a key/value array of location terms and names
 		 *
+		 * @param bool $active_only Whether or not to retrieve only currently
+		 *  active locations. Default: true - don't retrieve locations that
+		 *  have been removed
 		 * @since 1.6
 		 */
-		public function get_location_options() {
+		public function get_location_options( $active_only = true ) {
 
 			$terms = get_terms(
 				array(
@@ -259,7 +262,10 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 
 			$options = array();
 			foreach( $terms as $term ) {
-				$options[$term->term_id] = $term->name;
+				$archived = get_term_meta( $term->term_id, 'rtb_location_removed', true );
+				if ( !$active_only || !$archived ) {
+					$options[$term->term_id] = $term->name;
+				}
 			}
 
 			return $options;

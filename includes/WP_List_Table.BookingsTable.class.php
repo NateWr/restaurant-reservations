@@ -690,6 +690,8 @@ class rtbBookingsTable extends WP_List_Table {
 		}
 
 		$locations = $rtb_controller->locations->get_location_options();
+		$all_locations = $rtb_controller->locations->get_location_options( false );
+		$inactive_locations = array_diff( $all_locations, $locations );
 		?>
 
 		<div class="tablenav top rtb-top-actions-wrapper">
@@ -734,6 +736,15 @@ class rtbBookingsTable extends WP_List_Table {
 							<?php esc_attr_e( $name ); ?>
 						</option>
 					<?php endforeach; ?>
+					<?php if ( !empty( $inactive_locations ) ) : ?>
+						<optgroup label="<?php esc_attr_e( 'Inactive Locations' ); ?>">
+							<?php foreach( $inactive_locations as $term_id => $name ) : ?>
+								<option value="<?php esc_attr_e( $term_id ); ?>"<?php if ( $this->filter_location == $term_id ) : ?> selected="selected"<?php endif; ?>>
+									<?php esc_attr_e( $name ); ?>
+								</option>
+							<?php endforeach; ?>
+						</optgroup>
+					<?php endif; ?>
 				</select>
 				<input type="submit" class="button rtb-locations-button" value="<?php esc_attr_e( 'Switch', 'restaurant-reservations' ); ?>">
 			</div>
