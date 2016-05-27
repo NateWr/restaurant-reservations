@@ -84,6 +84,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_filter( 'rtb_bookings_table_column_details', array( $this, 'add_details_column_items' ), 10, 2 );
 			add_action( 'edit_form_after_title',             array( $this, 'add_meta_nonce' ) );
 			add_action( 'add_meta_boxes',                    array( $this, 'add_meta_boxes' ) );
+			add_filter( 'the_content',                       array( $this, 'append_to_content' ) );
 		}
 
 		/**
@@ -529,6 +530,33 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			</div>
 
 			<?php
+		}
+
+		/**
+		 * Append booking form to a location's `post_content`
+		 * @since 0.0.1
+		 */
+		public function append_to_content( $content ) {
+
+			if ( !is_main_query() || !in_the_loop() || post_password_required() ) {
+				return $content;
+			}
+
+			global $post;
+
+			$append_booking_form = get_post_meta( $post->ID, 'rtb_append_booking_form', true );
+
+			if ( !$append_booking_form ) {
+				return $content;
+			}
+
+			$term_id = get_post_meta( $post->ID, $this->location_taxonomy, true );
+
+			if ( empty( $term_id ) ) {
+				return $content;
+			}
+
+			return $content . do_shortcode( '[booking-form location=' . absint( $term_id ) .']' );
 		}
 	}
 }
