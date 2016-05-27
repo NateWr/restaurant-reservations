@@ -80,6 +80,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_action( 'rtb_booking_load_post_data',      array( $this, 'load_booking_location' ), 10, 2 );
 			add_filter( 'rtb_bookings_table_columns',      array( $this, 'add_location_column' ) );
 			add_filter( 'rtb_bookings_table_column',       array( $this, 'print_location_column' ), 10, 3 );
+			add_filter( 'rtb_query_args',                  array( $this, 'modify_query' ), 10, 2 );
 		}
 
 		/**
@@ -348,6 +349,35 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			$location = current( $terms );
 
 			return $location->name;
+		}
+
+		/**
+		 * Modify queries to add location taxonomy parameters
+		 *
+		 * @param array $args Array of arguments passed to rtbQuery
+		 * @since 1.6
+		 */
+		public function modify_query( $args, $context = '' ) {
+
+			global $rtb_controller;
+
+			if ( !empty( $args['location'] ) && !empty( $rtb_controller->locations->post_type ) ) {
+
+				if ( !is_array( $args['location'] ) ) {
+					$args['location'] = array( $args['location'] );
+				}
+
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => $rtb_controller->locations->location_taxonomy,
+						'field'    => 'term_id',
+						'terms'    => $args['location'],
+
+					)
+				);
+			}
+
+			return $args;
 		}
 	}
 }
