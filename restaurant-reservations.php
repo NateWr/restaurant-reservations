@@ -84,7 +84,7 @@ class rtbInit {
 
 		// Load the admin bookings page
 		require_once( RTB_PLUGIN_DIR . '/includes/AdminBookings.class.php' );
-		new rtbAdminBookings();
+		$this->bookings = new rtbAdminBookings();
 
 		// Load assets
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );

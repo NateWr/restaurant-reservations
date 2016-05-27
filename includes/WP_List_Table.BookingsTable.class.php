@@ -322,7 +322,7 @@ class rtbBookingsTable extends WP_List_Table {
 			return $this->visible_columns;
 		}
 
-		$all_default_columns = $this->get_all_default_columns();
+		$all_default_columns = $this->get_all_columns();
 
 		global $rtb_controller;
 		$visible_columns = $rtb_controller->settings->get_setting( 'bookings-table-columns' );
