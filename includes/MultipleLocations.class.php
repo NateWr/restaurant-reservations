@@ -180,9 +180,10 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			$query->get_bookings();
 
 			// Don't delete taxonomy terms if there are bookings assigned to
-			// this location. It may be important to keep the bookings grouped
-			// for historical data
+			// this location, so the booking associations can remain as
+			// historical data.
 			if ( count( $query->bookings ) ) {
+				add_term_meta( $term_id, 'rtb_location_removed', true );
 				return;
 			}
 
