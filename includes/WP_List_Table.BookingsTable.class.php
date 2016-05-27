@@ -827,9 +827,15 @@ class rtbBookingsTable extends WP_List_Table {
 			$where .= " AND p.post_date >= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) - 3600 ) . "'";
 		}
 
+		$join = '';
+		if ( $this->filter_location ) {
+			$join .= " LEFT JOIN $wpdb->term_relationships t ON (t.object_id=p.ID)";
+			$where .= " AND t.term_taxonomy_id=" . absint( $this->filter_location );
+		}
 
 		$query = "SELECT p.post_status,count( * ) AS num_posts
 			FROM $wpdb->posts p
+			$join
 			$where
 			GROUP BY p.post_status
 		";
