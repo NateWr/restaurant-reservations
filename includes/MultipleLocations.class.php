@@ -534,7 +534,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			<div class="rtb-location-meta-input rtb-location-meta-append-form">
 				<label>
 					<input type="checkbox" name="rtb_append_booking_form" value="1"<?php if ( $append_booking_form ) : ?> checked="checked"<?php endif; ?>>
-					<?php esc_html_e( 'Append booking form to this location.', 'restaurant-reservations' ); ?>
+					<?php esc_html_e( 'Show booking form with this location.', 'restaurant-reservations' ); ?>
 				</label>
 			</div>
 
