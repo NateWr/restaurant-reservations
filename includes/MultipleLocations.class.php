@@ -144,7 +144,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 					update_post_meta( $post_id, $this->location_taxonomy, $term['term_id'] );
 				}
 
-				$term_id = $term->term_id;
+				$term_id = $term['term_id'];
 
 			// Update the term for this location
 			} else {
