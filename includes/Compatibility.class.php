@@ -121,7 +121,6 @@ class rtbCompatibility {
 	 * activated.
 	 *
 	 * @param bool $block Whether or not to block the user
-	 *  anything else to allow.
 	 * @since 1.6
 	 */
 	public function woocommerce_allow_booking_managers_access( $block ) {
