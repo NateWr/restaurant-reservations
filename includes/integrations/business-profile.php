@@ -135,22 +135,59 @@ add_filter( 'bpfwp_widget_display_toggles', 'rtb_bp_add_booking_link_widget_opti
  * Only `FoodEstablishment` and child schemas of that type are allowed to use
  * the `acceptsReservations` parameter.
  *
- * @param string type Schema type. See: https://schema.org/docs/full.html
+ * @param string $type Schema type. See: https://schema.org/docs/full.html
  * @since 1.6
  */
 function rtb_bp_is_schema_type_compatible( $type ) {
 
-	$allowed_schema_types = array(
-		'FoodEstablishment',
-		'Baker',
-		'BarOrPub',
-		'Brewery',
-		'CafeOrCoffeeShop',
-		'FastFoodRestaurant',
-		'IceCreamShop',
-		'Restaurant',
-		'Winery',
-	);
+	$food_schema_types = rtb_bp_food_schema_types();
+
+	$allowed_schema_types = array_keys( $food_schema_types );
+	$allowed_schema_types[] = 'FoodEstablishment';
 
 	return in_array( $type, $allowed_schema_types );
+}
+
+/**
+ * Business Profile: Add all FoodEstablishment sub-types to the list of
+ * available schema
+ *
+ * @param array $schema_types Key/value with id/label of schema types
+ * @since 1.6
+ */
+function rtb_bp_schema_types( $schema_types ) {
+
+	$pos = array_search( 'FoodEstablishment', array_keys( $schema_types ) ) + 1;
+
+	// Do nothing if no Food Establishment has been found
+	if ( empty( $pos ) ) {
+		return $schema_types;
+	}
+
+	$a = array_slice( $schema_types, 0, $pos );
+	$b = array_slice( $schema_types, $pos );
+	$schema_types = array_merge( $a, rtb_bp_food_schema_types(), $b );
+
+	return $schema_types;
+}
+add_filter( 'bp_schema_types', 'rtb_bp_schema_types' );
+
+/**
+ * Business Profile: Get an array of all FoodEstablishment sub-types with
+ * labels
+ *
+ * @since 1.6
+ */
+function rtb_bp_food_schema_types() {
+
+	return array(
+		'Baker' => __( '--- Baker', 'restaurant-reservations' ),
+		'BarOrPub' => __( '--- Bar or Pub', 'restaurant-reservations' ),
+		'Brewery' => __( '--- Brewery', 'restaurant-reservations' ),
+		'CafeOrCoffeeShop' => __( '--- Cafe or Coffee Shop', 'restaurant-reservations' ),
+		'FastFoodRestaurant' => __( '--- FastFoodRestaurant', 'restaurant-reservations' ),
+		'IceCreamShop' => __( '--- Ice Cream Shop', 'restaurant-reservations' ),
+		'Restaurant' => __( '--- Restaurant', 'restaurant-reservations' ),
+		'Winery' => __( '--- Winery', 'restaurant-reservations' ),
+	);
 }
