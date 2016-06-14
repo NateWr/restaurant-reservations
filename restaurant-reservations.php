@@ -122,6 +122,10 @@ class rtbInit {
 			)
 		);
 
+		// Load integrations with other plugins
+		require_once( RTB_PLUGIN_DIR . '/includes/integrations/business-profile.php' );
+		require_once( RTB_PLUGIN_DIR . '/includes/integrations/woocommerce.php' );
+
 		// Load backwards compatibility functions
 		require_once( RTB_PLUGIN_DIR . '/includes/Compatibility.class.php' );
 		new rtbCompatibility();
