@@ -97,8 +97,11 @@ function rtb_bp_print_booking_link( $location = false ) {
 	if ( bpfwp_get_display( 'show_booking_link' ) ) :
 		?>
 		<div class="bp-booking">
-			<a href="<?php echo get_permalink( $booking_page ); ?>"<?php if ( rtb_bp_is_schema_type_compatible( $schema_type ) ) : ?> itemprop="acceptsReservations"<?php endif; ?>><?php _e( 'Book a table', 'business-profile' ); ?></a>
+			<a href="<?php echo esc_url( get_permalink( $booking_page ) ); ?>"<?php if ( rtb_bp_is_schema_type_compatible( $schema_type ) ) : ?> itemprop="acceptsReservations"<?php endif; ?>><?php _e( 'Book a table', 'business-profile' ); ?></a>
 		</div>
+
+	<?php elseif ( rtb_bp_is_schema_type_compatible( $schema_type ) ) : ?>
+		<meta itemprop="acceptsReservations" content="<?php echo esc_url( get_permalink( $booking_page ) ); ?>">
 		<?php
 	endif;
 }
