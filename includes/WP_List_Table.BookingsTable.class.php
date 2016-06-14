@@ -59,6 +59,14 @@ class rtbBookingsTable extends WP_List_Table {
 	public $filter_end_date = null;
 
 	/**
+	 * Current location filter
+	 *
+	 * @var int
+	 * @since 1.6
+	 */
+	public $filter_location = 0;
+
+	/**
 	 * Current query string
 	 *
 	 * @var string
@@ -191,6 +199,13 @@ class rtbBookingsTable extends WP_List_Table {
 			$this->query_string = add_query_arg( array( 'end_date' => $this->filter_end_date ), $this->query_string );
 		}
 
+		$this->filter_location = !isset( $_GET['location'] ) ? 0 : absint( $_GET['location'] );
+		$this->filter_location = !isset( $_POST['location'] ) ? $this->filter_location : absint( $_POST['location'] );
+		$this->query_string = remove_query_arg( 'location', $this->query_string );
+		if ( !empty( $this->filter_location ) ) {
+			$this->query_string = add_query_arg( array( 'location' => $this->filter_location ), $this->query_string );
+		}
+
 	}
 
 	/**
@@ -216,18 +231,21 @@ class rtbBookingsTable extends WP_List_Table {
 
 		$views = array(
 			'upcoming'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'paged' => FALSE ), remove_query_arg( array( 'date_range' ), $date_range_query_string ) ) ), $date_range === '' ? ' class="current"' : '', __( 'Upcoming', 'restaurant-reservations' ) ),
-			'today'	=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ) ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
+			'today'	    => sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'today', 'paged' => FALSE ), $date_range_query_string ) ), $date_range === 'today' ? ' class="current"' : '', __( 'Today', 'restaurant-reservations' ) ),
 			'all'		=> sprintf( '<a href="%s"%s>%s</a>', esc_url( add_query_arg( array( 'date_range' => 'all', 'paged' => FALSE ), $date_range_query_string ) ), $date_range == 'all' ? ' class="current"' : '', __( 'All', 'restaurant-reservations' ) ),
 		);
 
 		if ( $date_range == 'custom' ) {
-			$views['custom'] = '<span class="current">' . $this->get_current_date_range() . '</span>';
+			$views['date'] = '<span class="date-filter-range current">' . $this->get_current_date_range() . '</span>';
+			$views['date'] .= '<a id="rtb-date-filter-link" href="#"><span class="dashicons dashicons-calendar"></span> <span class="rtb-date-filter-label">Change date range</span></a>';
+		} else {
+			$views['date'] = '<a id="rtb-date-filter-link" href="#">' . esc_html__( 'Between dates', 'restaurant-reservations' ) . '</a>';
 		}
 
 		$views = apply_filters( 'rtb_bookings_table_views_date_range', $views );
 		?>
 
-		<div id="rtb-filters" class="clearfix">
+		<div id="rtb-filters">
 			<ul class="subsubsub rtb-views-date_range">
 				<li><?php echo join( ' | </li><li>', $views ); ?></li>
 			</ul>
@@ -237,30 +255,15 @@ class rtbBookingsTable extends WP_List_Table {
 				<input type="text" id="start-date" name="start_date" class="datepicker" value="<?php echo esc_attr( $this->filter_start_date ); ?>" placeholder="<?php _e( 'Start Date', 'restaurant-reservations' ); ?>" />
 				<label for="end-date" class="screen-reader-text"><?php _e( 'End Date:', 'restaurant-reservations' ); ?></label>
 				<input type="text" id="end-date" name="end_date" class="datepicker" value="<?php echo esc_attr( $this->filter_end_date ); ?>" placeholder="<?php _e( 'End Date', 'restaurant-reservations' ); ?>" />
-				<input type="submit" class="button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
-				<?php if( !empty( $start_date ) || !empty( $end_date ) ) : ?>
-				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'clear_date_filters' ) ) ); ?>" class="button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
+				<input type="submit" class="button button-secondary" value="<?php _e( 'Apply', 'restaurant-reservations' ); ?>"/>
+				<?php if( !empty( $this->filter_start_date ) || !empty( $this->filter_end_date ) ) : ?>
+				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'clear_date_filters' ) ) ); ?>" class="button button-secondary"><?php _e( 'Clear Filter', 'restaurant-reservations' ); ?></a>
 				<?php endif; ?>
 			</div>
 
 			<?php if( !empty( $_GET['status'] ) ) : ?>
 				<input type="hidden" name="status" value="<?php echo esc_attr( sanitize_text_field( $_GET['status'] ) ); ?>"/>
 			<?php endif; ?>
-
-			<?php
-				// @todo Add support for the search box that uses more than just
-				// 	the 's' argument in WP_Query. I need to search at least the
-				// 	email post meta as well or this search box could be
-				//	misleading for people who expect to search across all
-				//	visible data
-				// $this->search_box( __( 'Search', 'restaurant-reservations' ), 'rtb-bookings' );
-			?>
-
-			<?php
-				// @todo use a datepicker. need to bring in styles for jquery ui or use pickadate
-				// wp_enqueue_script('jquery-ui-datepicker');
-			?>
-
 		</div>
 
 <?php
@@ -283,16 +286,6 @@ class rtbBookingsTable extends WP_List_Table {
 		);
 
 		return apply_filters( 'rtb_bookings_table_views_status', $views );
-	}
-
-	/**
-	 * Extra controls to be displayed between bulk actions and pagination
-	 *
-	 * @param string pos Position of this tablenav: `top` or `btm`
-	 * @since 1.4.1
-	 */
-	public function extra_tablenav( $pos ) {
-		do_action( 'rtb_bookings_table_actions', $pos );
 	}
 
 	/**
@@ -329,7 +322,7 @@ class rtbBookingsTable extends WP_List_Table {
 			return $this->visible_columns;
 		}
 
-		$all_default_columns = $this->get_all_default_columns();
+		$all_default_columns = $this->get_all_columns();
 
 		global $rtb_controller;
 		$visible_columns = $rtb_controller->settings->get_setting( 'bookings-table-columns' );
@@ -672,6 +665,147 @@ class rtbBookingsTable extends WP_List_Table {
 	}
 
 	/**
+	 * Generate the table navigation above or below the table
+	 *
+	 * This outputs a separate set of options above and below the table, in
+	 * order to make room for the locations.
+	 *
+	 * @since 1.6
+	 */
+	public function display_tablenav( $which ) {
+
+		global $rtb_controller;
+
+		// Just call the parent method if locations aren't activated
+		if ( 'top' === $which && empty( $rtb_controller->locations->post_type ) ) {
+			$this->add_notification();
+			parent::display_tablenav( $which );
+			return;
+		}
+
+		// Just call the parent method for the bottom nav
+		if ( 'bottom' == $which ) {
+			parent::display_tablenav( $which );
+			return;
+		}
+
+		$locations = $rtb_controller->locations->get_location_options();
+		$all_locations = $rtb_controller->locations->get_location_options( false );
+		$inactive_locations = array_diff( $all_locations, $locations );
+		?>
+
+		<div class="tablenav top rtb-top-actions-wrapper">
+			<?php wp_nonce_field( 'bulk-' . $this->args['plural'] ); ?>
+			<?php $this->extra_tablenav( $which ); ?>
+		</div>
+
+		<?php $this->add_notification(); ?>
+
+		<div class="rtb-table-header-controls">
+			<?php if ( $this->has_items() ) : ?>
+				<div class="actions bulkactions">
+					<?php $this->bulk_actions( $which ); ?>
+				</div>
+			<?php endif; ?>
+			<ul class="rtb-locations">
+				<li<?php if ( empty( $this->filter_location ) ) : ?> class="current"<?php endif; ?>>
+					<a href="<?php echo esc_url( remove_query_arg( 'location', $this->query_string ) ); ?>"><?php esc_html_e( 'All Locations', 'restaurant-reservations' ); ?></a>
+				</li>
+				<?php
+					$i = 0;
+					foreach( $locations as $term_id => $name ) :
+						if ( $i > 15 ) {
+							break;
+						} else {
+							$i++;
+						}
+						?>
+
+						<li<?php if ( $this->filter_location == $term_id ) : ?> class="current"<?php endif; ?>>
+							<a href="<?php echo esc_url( add_query_arg( 'location', $term_id, $this->query_string ) ); ?>">
+								<?php esc_html_e( $name ); ?>
+							</a>
+						</li>
+				<?php endforeach; ?>
+			</ul>
+			<div class="rtb-location-switch">
+				<select name="location">
+					<option><?php esc_attr_e( 'All Locations', 'restaurant-reservations' ); ?></option>
+					<?php foreach( $locations as $term_id => $name ) : ?>
+						<option value="<?php esc_attr_e( $term_id ); ?>"<?php if ( $this->filter_location == $term_id ) : ?> selected="selected"<?php endif; ?>>
+							<?php esc_attr_e( $name ); ?>
+						</option>
+					<?php endforeach; ?>
+					<?php if ( !empty( $inactive_locations ) ) : ?>
+						<optgroup label="<?php esc_attr_e( 'Inactive Locations' ); ?>">
+							<?php foreach( $inactive_locations as $term_id => $name ) : ?>
+								<option value="<?php esc_attr_e( $term_id ); ?>"<?php if ( $this->filter_location == $term_id ) : ?> selected="selected"<?php endif; ?>>
+									<?php esc_attr_e( $name ); ?>
+								</option>
+							<?php endforeach; ?>
+						</optgroup>
+					<?php endif; ?>
+				</select>
+				<input type="submit" class="button rtb-locations-button" value="<?php esc_attr_e( 'Switch', 'restaurant-reservations' ); ?>">
+			</div>
+		</div>
+
+		<?php
+	}
+
+	/**
+	 * Extra controls to be displayed between bulk actions and pagination
+	 *
+	 * @param string pos Position of this tablenav: `top` or `btm`
+	 * @since 1.4.1
+	 */
+	public function extra_tablenav( $pos ) {
+		do_action( 'rtb_bookings_table_actions', $pos );
+	}
+
+	/**
+	 * Add notifications above the table to indicate which bookings are
+	 * being shown.
+	 * @since 1.3
+	 */
+	public function add_notification() {
+
+		global $rtb_controller;
+
+		$notifications = array();
+
+		$status = '';
+		if ( !empty( $_GET['status'] ) ) {
+			$status = $_GET['status'];
+			if ( $status == 'trash' ) {
+				$notifications['status'] = __( "You're viewing bookings that have been moved to the trash.", 'restaurant-reservations' );
+			} elseif ( !empty( $rtb_controller->cpts->booking_statuses[ $status ] ) ) {
+				$notifications['status'] = sprintf( _x( "You're viewing bookings that have been marked as %s.", 'Indicates which booking status is currently being filtered in the list of bookings.', 'restaurant-reservations' ), $rtb_controller->cpts->booking_statuses[ $_GET['status'] ]['label'] );
+			}
+		}
+
+		if ( !empty( $this->filter_start_date ) || !empty( $this->filter_end_date ) ) {
+			$notifications['date'] = sprintf( _x( 'Only bookings from %s are being shown.', 'Notification of booking date range, eg - bookings from 2014-12-02-2014-12-05', 'restaurant-reservations' ), $this->get_current_date_range() );
+		} elseif ( !empty( $_GET['date_range'] ) && $_GET['date_range'] == 'today' ) {
+			$notifications['date'] = __( "Only today's bookings are being shown.", 'restaurant-reservations' );
+		} elseif ( empty( $_GET['date_range'] ) ) {
+			$notifications['date'] = __( 'Only upcoming bookings are being shown.', 'restaurant-reservations' );
+		}
+
+		$notifications = apply_filters( 'rtb_admin_bookings_table_filter_notifications', $notifications );
+
+		if ( !empty( $notifications ) ) :
+		?>
+
+			<div class="rtb-notice <?php echo esc_attr( $status ); ?>">
+				<?php echo join( ' ', $notifications ); ?>
+			</div>
+
+		<?php
+		endif;
+	}
+
+	/**
 	 * Retrieve the counts of bookings
 	 * @since 0.0.1
 	 */
@@ -704,9 +838,15 @@ class rtbBookingsTable extends WP_List_Table {
 			$where .= " AND p.post_date >= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) - 3600 ) . "'";
 		}
 
+		$join = '';
+		if ( $this->filter_location ) {
+			$join .= " LEFT JOIN $wpdb->term_relationships t ON (t.object_id=p.ID)";
+			$where .= " AND t.term_taxonomy_id=" . absint( $this->filter_location );
+		}
 
 		$query = "SELECT p.post_status,count( * ) AS num_posts
 			FROM $wpdb->posts p
+			$join
 			$where
 			GROUP BY p.post_status
 		";
@@ -744,6 +884,10 @@ class rtbBookingsTable extends WP_List_Table {
 			$args['end_date'] = $this->filter_end_date;
 		}
 
+		if ( !empty( $this->filter_location ) ) {
+			$args['location'] = $this->filter_location;
+		}
+
 		$query = new rtbQuery( $args, 'bookings-table' );
 		$query->parse_request_args();
 		$query->prepare_args();
@@ -776,50 +920,5 @@ class rtbBookingsTable extends WP_List_Table {
 		);
 	}
 
-	/**
-	 * Add notifications above the table to indicate which bookings are
-	 * being shown.
-	 * @since 1.3
-	 */
-	public function display_rows_or_placeholder() {
-
-		global $rtb_controller;
-
-		$notifications = array();
-
-		$status = '';
-		if ( !empty( $_GET['status'] ) ) {
-			$status = $_GET['status'];
-			if ( $status == 'trash' ) {
-				$notifications['status'] = __( "You're viewing bookings that have been moved to the trash.", 'restaurant-reservations' );
-			} elseif ( !empty( $rtb_controller->cpts->booking_statuses[ $status ] ) ) {
-				$notifications['status'] = sprintf( _x( "You're viewing bookings that have been marked as %s.", 'Indicates which booking status is currently being filtered in the list of bookings.', 'restaurant-reservations' ), $rtb_controller->cpts->booking_statuses[ $_GET['status'] ]['label'] );
-			}
-		}
-
-		if ( !empty( $this->filter_start_date ) || !empty( $this->filter_end_date ) ) {
-			$notifications['date'] = sprintf( _x( 'Only bookings from %s are being shown.', 'Notification of booking date range, eg - bookings from 2014-12-02-2014-12-05', 'restaurant-reservations' ), $this->get_current_date_range() );
-		} elseif ( !empty( $_GET['date_range'] ) && $_GET['date_range'] == 'today' ) {
-			$notifications['date'] = __( "Only today's bookings are being shown.", 'restaurant-reservations' );
-		} elseif ( empty( $_GET['date_range'] ) ) {
-			$notifications['date'] = __( 'Only upcoming bookings are being shown.', 'restaurant-reservations' );
-		}
-
-		$notifications = apply_filters( 'rtb_admin_bookings_table_filter_notifications', $notifications );
-
-		if ( !empty( $notifications ) ) :
-		?>
-
-			<tr class="notice <?php echo esc_attr( $status ); ?>">
-				<td colspan="<?php echo count( $this->get_columns() ); ?>">
-					<?php echo join( ' ', $notifications ); ?>
-				</td>
-			</tr>
-
-		<?php
-		endif;
-
-		parent::display_rows_or_placeholder();
-	}
 }
 } // endif;

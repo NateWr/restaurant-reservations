@@ -9,6 +9,18 @@ if ( !class_exists( 'rtbAdminBookings' ) ) {
  */
 class rtbAdminBookings {
 
+	/**
+	 * The bookings table
+	 *
+	 * This is only instantiated on the bookings admin page at the moment when
+	 * it is generated.
+	 *
+	 * @see self::show_admin_bookings_page()
+	 * @see WP_List_table.BookingsTable.class.php
+	 * @since 1.6
+	 */
+	public $booking_table;
+
 	public function __construct() {
 
 		// Add the admin menu
@@ -63,8 +75,8 @@ class rtbAdminBookings {
 	public function show_admin_bookings_page() {
 
 		require_once( RTB_PLUGIN_DIR . '/includes/WP_List_Table.BookingsTable.class.php' );
-		$bookings_table = new rtbBookingsTable();
-		$bookings_table->prepare_items();
+		$this->bookings_table = new rtbBookingsTable();
+		$this->bookings_table->prepare_items();
 		?>
 
 		<div class="wrap">
@@ -78,9 +90,14 @@ class rtbAdminBookings {
 				<input type="hidden" name="post_type" value="<?php echo RTB_BOOKING_POST_TYPE; ?>" />
 				<input type="hidden" name="page" value="rtb-bookings">
 
-				<?php $bookings_table->views(); ?>
-				<?php $bookings_table->advanced_filters(); ?>
-				<?php $bookings_table->display(); ?>
+				<div class="rtb-primary-controls clearfix">
+					<div class="rtb-views">
+						<?php $this->bookings_table->views(); ?>
+					</div>
+					<?php $this->bookings_table->advanced_filters(); ?>
+				</div>
+
+				<?php $this->bookings_table->display(); ?>
 			</form>
 			<?php do_action( 'rtb_bookings_table_btm' ); ?>
 		</div>
@@ -208,9 +225,8 @@ class rtbAdminBookings {
 						<legend><?php esc_html_e( 'Columns', 'restaurant-reservations' ); ?></legend>
 						<ul>
 							<?php
-								$bookings_table = new rtbBookingsTable();
-								$columns = $bookings_table->get_all_columns();
-								$visible = $bookings_table->get_columns();
+								$columns = $this->bookings_table->get_all_columns();
+								$visible = $this->bookings_table->get_columns();
 								foreach( $columns as $column => $label ) :
 									// Don't allow these columns to be hidden
 									if ( $column == 'cb' || $column == 'details' || $column == 'date' ) {

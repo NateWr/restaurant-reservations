@@ -8,8 +8,17 @@
  * @since 0.0.1
  */
 if ( !function_exists( 'rtb_booking_form_shortcode' ) ) {
-function rtb_booking_form_shortcode() {
-	return rtb_print_booking_form();
+function rtb_booking_form_shortcode( $args = array() ) {
+
+	$args = shortcode_atts(
+		array(
+			'location' => 0,
+		),
+		$args,
+		'booking-form'
+	);
+
+	return rtb_print_booking_form( $args );
 }
 add_shortcode( 'booking-form', 'rtb_booking_form_shortcode' );
 } // endif;
@@ -20,7 +29,7 @@ add_shortcode( 'booking-form', 'rtb_booking_form_shortcode' );
  * @since 0.0.1
  */
 if ( !function_exists( 'rtb_print_booking_form' ) ) {
-function rtb_print_booking_form() {
+function rtb_print_booking_form( $args = array() ) {
 
 	global $rtb_controller;
 
@@ -29,6 +38,13 @@ function rtb_print_booking_form() {
 		return;
 	} else {
 		$rtb_controller->form_rendered = true;
+	}
+
+	// Sanitize incoming arguments
+	if ( isset( $args['location'] ) ) {
+		$args['location'] = absint( $args['location'] );
+	} else {
+		$args['location'] = 0;
 	}
 
 	// Enqueue assets for the form
@@ -58,7 +74,7 @@ function rtb_print_booking_form() {
 	}
 
 	// Retrieve the form fields
-	$fields = $rtb_controller->settings->get_booking_form_fields( $rtb_controller->request );
+	$fields = $rtb_controller->settings->get_booking_form_fields( $rtb_controller->request, $args );
 
 	ob_start();
 
@@ -72,6 +88,10 @@ function rtb_print_booking_form() {
 	<?php else : ?>
 	<form method="POST" action="<?php echo esc_attr( $booking_page ); ?>">
 		<input type="hidden" name="action" value="booking_request">
+
+		<?php if ( !empty( $args['location'] ) && term_exists( $args['location'], $rtb_controller->locations->location_taxonomy ) ) : ?>
+			<input type="hidden" name="rtb-location" value="<?php echo absint( $args['location'] ); ?>">
+		<?php endif; ?>
 
 		<?php do_action( 'rtb_booking_form_before_fields' ); ?>
 

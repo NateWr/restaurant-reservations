@@ -3,7 +3,7 @@
  * Plugin Name: Restaurant Reservations
  * Plugin URI: http://themeofthecrop.com
  * Description: Accept restaurant reservations and bookings online.
- * Version: 1.5.3
+ * Version: 1.6
  * Author: Theme of the Crop
  * Author URI: http://themeofthecrop.com
  * License:     GNU General Public License v2.0 or later
@@ -47,6 +47,7 @@ class rtbInit {
 	public function __construct() {
 
 		// Common strings
+		define( 'RTB_VERSION', '1.6' );
 		define( 'RTB_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'RTB_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 		define( 'RTB_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
@@ -72,6 +73,10 @@ class rtbInit {
 		require_once( RTB_PLUGIN_DIR . '/includes/CustomPostTypes.class.php' );
 		$this->cpts = new rtbCustomPostTypes();
 
+		// Load multiple location support
+		require_once( RTB_PLUGIN_DIR . '/includes/MultipleLocations.class.php' );
+		$this->locations = new rtbMultipleLocations();
+
 		// Flush the rewrite rules for the custom post types
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
 
@@ -80,7 +85,7 @@ class rtbInit {
 
 		// Load the admin bookings page
 		require_once( RTB_PLUGIN_DIR . '/includes/AdminBookings.class.php' );
-		new rtbAdminBookings();
+		$this->bookings = new rtbAdminBookings();
 
 		// Load assets
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
@@ -117,6 +122,10 @@ class rtbInit {
 				'plugin'	=> basename( plugin_dir_path( __FILE__ ) ),
 			)
 		);
+
+		// Load integrations with other plugins
+		require_once( RTB_PLUGIN_DIR . '/includes/integrations/business-profile.php' );
+		require_once( RTB_PLUGIN_DIR . '/includes/integrations/woocommerce.php' );
 
 		// Load backwards compatibility functions
 		require_once( RTB_PLUGIN_DIR . '/includes/Compatibility.class.php' );

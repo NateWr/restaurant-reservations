@@ -711,9 +711,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 	/**
 	 * Retrieve form fields
+	 *
+	 * @param $request rtbBooking Details of a booking request made
+	 * @param $args array Associative array of arguments to pass to the field:
+	 *  `location` int Location post id
 	 * @since 1.3
 	 */
-	public function get_booking_form_fields( $request = null ) {
+	public function get_booking_form_fields( $request = null, $args = array() ) {
 
 		// $request will represent a rtbBooking object with the request
 		// details when the form is being printed and $_POST data exists
@@ -831,7 +835,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			),
 		);
 
-		return apply_filters( 'rtb_booking_form_fields', $fields, $request );
+		return apply_filters( 'rtb_booking_form_fields', $fields, $request, $args );
 	}
 
 	/**
