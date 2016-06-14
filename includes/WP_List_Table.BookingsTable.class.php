@@ -884,10 +884,6 @@ class rtbBookingsTable extends WP_List_Table {
 			$args['end_date'] = $this->filter_end_date;
 		}
 
-		if ( !empty( $this->filter_location ) ) {
-			$args['location'] = $this->filter_location;
-		}
-
 		$query = new rtbQuery( $args, 'bookings-table' );
 		$query->parse_request_args();
 		$query->prepare_args();
