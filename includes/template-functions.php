@@ -182,6 +182,7 @@ function rtb_enqueue_assets() {
 			'late_bookings' => current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'late-bookings' ),
 			'date_onload' => $rtb_controller->settings->get_setting( 'date-onload' ),
 			'time_interval' => $rtb_controller->settings->get_setting( 'time-interval' ),
+			'first_day' => $rtb_controller->settings->get_setting( 'week-start' ),
 		)
 	);
 
@@ -198,16 +199,19 @@ function rtb_get_datepicker_rules() {
 
 	global $rtb_controller;
 
+	// First day of the week
+	$first_day = (int) $rtb_controller->settings->get_setting( 'week-start' );
+
 	$disable_rules = array();
 
 	$disabled_weekdays = array(
-		'sunday'	=> 1,
-		'monday'	=> 2,
-		'tuesday'	=> 3,
-		'wednesday'	=> 4,
-		'thursday'	=> 5,
-		'friday'	=> 6,
-		'saturday'	=> 7,
+		'sunday'	=> ( 1 - $first_day ) === 0 ? 7 : 1,
+		'monday'	=> 2 - $first_day,
+		'tuesday'	=> 3 - $first_day,
+		'wednesday'	=> 4 - $first_day,
+		'thursday'	=> 5 - $first_day,
+		'friday'	=> 6 - $first_day,
+		'saturday'	=> 7 - $first_day,
 	);
 
 	// Determine which weekdays should be disabled

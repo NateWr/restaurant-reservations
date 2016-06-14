@@ -480,6 +480,22 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-schedule',
+			'select',
+			array(
+				'id'            => 'week-start',
+				'title'         => __( 'Week Starts On', 'restaurant-reservations' ),
+				'description'	=> __( 'Select the first day of the week', 'restaurant-reservations' ),
+				'blank_option'	=> false,
+				'options'       => array(
+					'0' => __( 'Sunday', 'restaurant-reservations' ),
+					'1' => __( 'Monday', 'restaurant-reservations' ),
+				)
+			)
+		);
+
 		$sap->add_section(
 			'rtb-settings',
 			array(

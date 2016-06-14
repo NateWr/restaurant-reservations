@@ -42,6 +42,7 @@ jQuery(document).ready(function ($) {
 					hiddenName: true,
 					min: true,
 					container: 'body',
+					firstDay: rtb_pickadate.first_day,
 
 					// Select the value when loaded if a value has been set
 					onStart: function() {
