@@ -115,6 +115,13 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 
 == Changelog ==
 
+= 1.6 (2016-06-15) =
+* Fix: Currently visible notice in bookings list on mobile devices
+* Fix: Conflict with WooCommerce that prevented booking managers from viewing bookings
+* Add: Support multi-location bookings
+* Add: Add reservation schema.org markup when Business Profile used
+* Add: Allow custom first day of the week for date picker
+
 = 1.5.3 (2016-03-25) =
 * Fix: no bookings found when searching by start and end dates that are the same
 * Add: clarify that early/late bookings restrictions don't apply to admins
@@ -279,6 +286,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.6 =
+This is a major update that adds support for accepting bookings at multiple locations. View the online documentation for further details.
 
 = 1.5.3 =
 This update fixes a minor bug when searching for bookings by date, updates compatibilty for WP v4.5, and adds links to the new online documentation.
