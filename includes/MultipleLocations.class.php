@@ -510,18 +510,17 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		public function print_location_metabox( $post ) {
 
 			global $rtb_controller;
-			$admin_email_option = $rtb_controller->settings->get_setting( 'admin-email-option' );
 
 			$notification_email = '';
 			$reply_to_name = '';
 			$reply_to_address = '';
-			if ( $admin_email_option ) {
-				$term_id = get_post_meta( $post->ID, $this->location_taxonomy, true );
-
-				if ( $term_id ) {
+			$term_id = get_post_meta( $post->ID, $this->location_taxonomy, true );
+			$admin_email_option = $rtb_controller->settings->get_setting( 'admin-email-option' );
+			if ( $term_id ) {
+				$reply_to_name = get_term_meta( $term_id, 'rtb_reply_to_name', true );
+				$reply_to_address = get_term_meta( $term_id, 'rtb_reply_to_address', true );
+				if ( $admin_email_option ) {
 					$notification_email = get_term_meta( $term_id, 'rtb_admin_email_address', true );
-					$reply_to_name = get_term_meta( $term_id, 'rtb_reply_to_name', true );
-					$reply_to_address = get_term_meta( $term_id, 'rtb_reply_to_address', true );
 				}
 			}
 
