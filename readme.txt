@@ -115,7 +115,7 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 
 == Changelog ==
 
-= 1.6 (2016-06-15) =
+= 1.6 (2016-06-20) =
 * Fix: Currently visible notice in bookings list on mobile devices
 * Fix: Conflict with WooCommerce that prevented booking managers from viewing bookings
 * Add: Support multi-location bookings
