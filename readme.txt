@@ -2,7 +2,7 @@
 Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
-Requires at Least: 3.8
+Requires at Least: 4.4 
 Tested Up To: 4.6
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
 Stable tag: 1.6
