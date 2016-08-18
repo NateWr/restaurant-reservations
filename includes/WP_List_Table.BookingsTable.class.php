@@ -322,7 +322,7 @@ class rtbBookingsTable extends WP_List_Table {
 			return $this->visible_columns;
 		}
 
-		$all_default_columns = $this->get_all_columns();
+		$all_default_columns = $this->get_all_default_columns();
 
 		global $rtb_controller;
 		$visible_columns = $rtb_controller->settings->get_setting( 'bookings-table-columns' );
@@ -485,15 +485,15 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function add_details_column_items( $details, $booking ) {
 		global $rtb_controller;
-		$visible_columns = $this->get_columns();
+		$visible_columns = $this->get_all_columns();
 		$default_columns = $this->get_all_default_columns();
+
+		$detail_columns = array_diff( $visible_columns, $default_columns );
 
 		// Columns which can't be hidden
 		unset( $default_columns['cb'] );
 		unset( $default_columns['details'] );
 		unset( $default_columns['date'] );
-
-		$detail_columns = array_diff( $default_columns, $visible_columns );
 
 		if ( !empty( $detail_columns ) ) {
 			foreach( $detail_columns as $key => $label ) {
