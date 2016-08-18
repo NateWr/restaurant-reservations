@@ -70,24 +70,26 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		 * @since 1.6
 		 */
 		public function hooks() {
-			add_action( 'init',                              array( $this, 'register_taxonomy' ), 1000 ); // after custom post types declared (hopefully!)
-			add_action( 'save_post_' . $this->post_type,     array( $this, 'save_location' ), 10, 3 );
-			add_action( 'before_delete_post',                array( $this, 'delete_location' ) );
-			add_action( 'rtb_booking_form_fields',           array( $this, 'add_location_field' ), 10, 3 );
-			add_action( 'rtb_validate_booking_submission',   array( $this, 'validate_location' ) );
-			add_action( 'rtb_insert_booking',                array( $this, 'save_booking_location' ) );
-			add_action( 'rtb_update_booking',                array( $this, 'save_booking_location' ) );
-			add_action( 'rtb_booking_load_post_data',        array( $this, 'load_booking_location' ), 10, 2 );
-			add_filter( 'rtb_query_args',                    array( $this, 'modify_query' ), 10, 2 );
-			add_filter( 'rtb_bookings_all_table_columns',    array( $this, 'add_location_column' ) );
-			add_filter( 'rtb_bookings_table_column',         array( $this, 'print_location_column' ), 10, 3 );
-			add_filter( 'rtb_bookings_table_column_details', array( $this, 'add_details_column_items' ), 10, 2 );
-			add_action( 'edit_form_after_title',             array( $this, 'add_meta_nonce' ) );
-			add_action( 'add_meta_boxes',                    array( $this, 'add_meta_boxes' ) );
-			add_filter( 'the_content',                       array( $this, 'append_to_content' ) );
-			add_filter( 'rtb_notification_email_to_email',   array( $this, 'notification_to_email' ), 10, 2 );
-			add_filter( 'rtb_notification_email_from_email', array( $this, 'notification_from_email' ), 10, 2 );
-			add_filter( 'rtb_notification_email_from_name',  array( $this, 'notification_from_name' ), 10, 2 );
+			add_action( 'init',                                       array( $this, 'register_taxonomy' ), 1000 ); // after custom post types declared (hopefully!)
+			add_action( 'save_post_' . $this->post_type,              array( $this, 'save_location' ), 10, 3 );
+			add_action( 'before_delete_post',                         array( $this, 'delete_location' ) );
+			add_action( 'rtb_booking_form_fields',                    array( $this, 'add_location_field' ), 10, 3 );
+			add_action( 'rtb_validate_booking_submission',            array( $this, 'validate_location' ) );
+			add_action( 'rtb_insert_booking',                         array( $this, 'save_booking_location' ) );
+			add_action( 'rtb_update_booking',                         array( $this, 'save_booking_location' ) );
+			add_action( 'rtb_booking_load_post_data',                 array( $this, 'load_booking_location' ), 10, 2 );
+			add_filter( 'rtb_query_args',                             array( $this, 'modify_query' ), 10, 2 );
+			add_filter( 'rtb_bookings_all_table_columns',             array( $this, 'add_location_column' ) );
+			add_filter( 'rtb_bookings_table_column',                  array( $this, 'print_location_column' ), 10, 3 );
+			add_filter( 'rtb_bookings_table_column_details',          array( $this, 'add_details_column_items' ), 10, 2 );
+			add_action( 'edit_form_after_title',                      array( $this, 'add_meta_nonce' ) );
+			add_action( 'add_meta_boxes',                             array( $this, 'add_meta_boxes' ) );
+			add_filter( 'the_content',                                array( $this, 'append_to_content' ) );
+			add_filter( 'rtb_notification_email_to_email',            array( $this, 'notification_to_email' ), 10, 2 );
+			add_filter( 'rtb_notification_email_from_email',          array( $this, 'notification_from_email' ), 10, 2 );
+			add_filter( 'rtb_notification_email_from_name',           array( $this, 'notification_from_name' ), 10, 2 );
+			add_filter( 'rtb_notification_template_tags',             array( $this, 'notification_template_tags' ), 10, 2 );
+			add_filter( 'rtb_notification_template_tag_descriptions', array( $this, 'notification_template_tag_descriptions' ) );
 		}
 
 		/**
@@ -648,6 +650,34 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			$name = empty( $val ) ? $name : $val;
 
 			return $name;
+		}
+
+		/**
+		 * Add a location template tag for notifications
+		 *
+		 * @since 1.6.1
+		 */
+		public function notification_template_tags( $template_tags, $notification ) {
+
+			$term = empty( $notification->booking->location ) ? null : get_term( $notification->booking->location, $this->location_taxonomy );
+			$location_name = is_null( $term ) || is_wp_error( $term ) ? '' : $term->name;
+
+			return array_merge(
+				array( '{location}' => $location_name ),
+				$template_tags
+			);
+		}
+
+		/**
+		 * Add a description for the location template tag
+		 *
+		 * @since 1.6.1
+		 */
+		public function notification_template_tag_descriptions( $descriptions ) {
+			return array_merge(
+				array( '{location}' => __( 'Location for which this booking was made.', 'restaurant-reservations' ) ),
+				$descriptions
+			);
 		}
 	}
 }
