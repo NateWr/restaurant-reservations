@@ -34,47 +34,54 @@ jQuery(document).ready(function ($) {
 		if ( typeof rtb_pickadate !== 'undefined' ) {
 
 			// Declare datepicker
-			var date_input = $( '#rtb-date' ).pickadate({
-				format: rtb_pickadate.date_format,
-				formatSubmit: 'yyyy/mm/dd',
-				hiddenName: true,
-				min: true,
-				container: 'body',
+			var $date_input = $( '#rtb-date' );
+			if ( $date_input.length ) {
+				var date_input = $date_input.pickadate({
+					format: rtb_pickadate.date_format,
+					formatSubmit: 'yyyy/mm/dd',
+					hiddenName: true,
+					min: true,
+					container: 'body',
 
-				// Select the value when loaded if a value has been set
-				onStart: function() {
-					if ( $( '#rtb-date' ).val()	!== '' ) {
-						var date = new Date( $( '#rtb-date' ).val() );
-						if ( Object.prototype.toString.call( date ) === "[object Date]" ) {
-							this.set( 'select', date );
+					// Select the value when loaded if a value has been set
+					onStart: function() {
+						if ( $date_input.val()	!== '' ) {
+							var date = new Date( $date_input.val() );
+							if ( Object.prototype.toString.call( date ) === "[object Date]" ) {
+								this.set( 'select', date );
+							}
 						}
 					}
-				}
-			});
+				});
+
+				rtb_booking_form.datepicker = date_input.pickadate( 'picker' );
+			}
 
 			// Declare timepicker
-			var time_input = $( '#rtb-time' ).pickatime({
-				format: rtb_pickadate.time_format,
-				formatSubmit: 'h:i A',
-				hiddenName: true,
-				interval: parseInt( rtb_pickadate.time_interval, 10 ),
-				container: 'body',
+			var $time_input = $( '#rtb-time' );
+			if ( $time_input.lenth ) {
+				var time_input = $time_input.pickatime({
+					format: rtb_pickadate.time_format,
+					formatSubmit: 'h:i A',
+					hiddenName: true,
+					interval: parseInt( rtb_pickadate.time_interval, 10 ),
+					container: 'body',
 
-				// Select the value when loaded if a value has been set
-				onStart: function() {
-					if ( $( '#rtb-time' ).val()	!== '' ) {
-						var today = new Date();
-						var today_date = today.getFullYear() + '/' + ( today.getMonth() + 1 ) + '/' + today.getDate();
-						var time = new Date( today_date + ' ' + $( '#rtb-time' ).val() );
-						if ( Object.prototype.toString.call( time ) === "[object Date]" ) {
-							this.set( 'select', time );
+					// Select the value when loaded if a value has been set
+					onStart: function() {
+						if ( $time_input.val()	!== '' ) {
+							var today = new Date();
+							var today_date = today.getFullYear() + '/' + ( today.getMonth() + 1 ) + '/' + today.getDate();
+							var time = new Date( today_date + ' ' + $time_input.val() );
+							if ( Object.prototype.toString.call( time ) === "[object Date]" ) {
+								this.set( 'select', time );
+							}
 						}
 					}
-				}
-			});
+				});
 
-			rtb_booking_form.datepicker = date_input.pickadate( 'picker' );
-			rtb_booking_form.timepicker = time_input.pickatime( 'picker' );
+				rtb_booking_form.timepicker = time_input.pickatime( 'picker' );
+			}
 
 			// We need to check both to support different jQuery versions loaded
 			// by older versions of WordPress. In jQuery v1.10.2, the property
@@ -112,7 +119,7 @@ jQuery(document).ready(function ($) {
 
 			// If no date has been set, select today's date if it's a valid
 			// date. User may opt not to do this in the settings.
-			if ( $( '#rtb-date' ).val() === '' && !$( '.rtb-booking-form .date .rtb-error' ).length ) {
+			if ( $date_input.val() === '' && !$( '.rtb-booking-form .date .rtb-error' ).length ) {
 
 				if ( rtb_pickadate.date_onload == 'soonest' ) {
 					rtb_booking_form.datepicker.set( 'select', new Date() );
@@ -123,6 +130,10 @@ jQuery(document).ready(function ($) {
 						rtb_booking_form.datepicker.set( 'select', dateToVerify );
 					}
 				}
+			}
+
+			if ( rtb_booking_form.timepicker === null || typeof rtb_booking_form.timepicker == 'undefined' ) {
+				return;
 			}
 
 			// Update timepicker on pageload and whenever the datepicker is closed
