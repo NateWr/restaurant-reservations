@@ -234,11 +234,47 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		}
 
 		/**
+		 * Get location term id from location post id
+		 *
+		 * Transforms a location post id into its associated term id. If the
+		 * id doesn't match a location post, it will check if the received id
+		 * matches a term id and return it if so. Between versions 1.6 and
+		 * and 1.6.1, only term ids were accepted as shortcodes, and this
+		 * provides a backwards-compatible fallback.
+		 *
+		 * @param $location_id int The location id (post or term)
+		 * @return int The location term id. Default: 0
+		 */
+		public function get_location_term_id( $location_id ) {
+
+			$location_id = absint( $location_id );
+			$term_id = 0;
+
+			if ( get_post_type( $location_id ) === $this->post_type ) {
+				$term_id = get_post_meta( $location_id, $this->location_taxonomy, true );
+			} elseif ( term_exists( $location_id, $this->location_taxonomy ) ) {
+				$term_id = $location_id;
+			}
+
+			return $term_id;
+		}
+
+
+		/**
 		 * Add the location selection field to the booking form
 		 *
 		 * @since 1.6
 		 */
 		public function add_location_field( $fields, $request = null, $args = array() ) {
+
+			// If the location is specified, don't add a field.
+			// A hidden field is added automatically in rtb_print_booking_form()
+			if ( !empty( $args['location'] ) ) {
+				$args['location'] = $this->get_location_term_id( $args['location'] );
+				if ( !empty( $args['location'] ) ) {
+					return $fields;
+				}
+			}
 
 			if ( $request === null ) {
 				global $rtb_controller;
@@ -259,12 +295,6 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			// If we couldn't find any working fieldset, then something odd is
 			// going on. Just pretend we were never here.
 			if ( $placement === false ) {
-				return $fields;
-			}
-
-			// If the location is specified, don't add a field.
-			// A hidden field is added automatically in rtb_print_booking_form()
-			if ( !empty( $args['location'] ) && term_exists( $args['location'], $this->location_taxonomy ) ) {
 				return $fields;
 			}
 

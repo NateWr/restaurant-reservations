@@ -42,7 +42,7 @@ function rtb_print_booking_form( $args = array() ) {
 
 	// Sanitize incoming arguments
 	if ( isset( $args['location'] ) ) {
-		$args['location'] = absint( $args['location'] );
+		$args['location'] = $rtb_controller->locations->get_location_term_id( $args['location'] );
 	} else {
 		$args['location'] = 0;
 	}
@@ -89,7 +89,7 @@ function rtb_print_booking_form( $args = array() ) {
 	<form method="POST" action="<?php echo esc_attr( $booking_page ); ?>">
 		<input type="hidden" name="action" value="booking_request">
 
-		<?php if ( !empty( $args['location'] ) && term_exists( $args['location'], $rtb_controller->locations->location_taxonomy ) ) : ?>
+		<?php if ( !empty( $args['location'] ) ) : ?>
 			<input type="hidden" name="rtb-location" value="<?php echo absint( $args['location'] ); ?>">
 		<?php endif; ?>
 
