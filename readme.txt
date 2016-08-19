@@ -1,13 +1,13 @@
 === Restaurant Reservations ===
 Contributors: NateWr
 Author URI: https://github.com/NateWr
-Plugin URL: http://themeofthecrop.com
-Requires at Least: 4.4 
+Plugin URL: https://themeofthecrop.com
+Requires at Least: 4.4
 Tested Up To: 4.6
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.6
+Stable tag: 1.6.1
 License: GPLv2 or later
-Donate link: http://themeofthecrop.com
+Donate link: https://themeofthecrop.com
 
 Accept restaurant reservations and table bookings online. Quickly confirm or reject bookings, send email notifications, set booking times and more.
 
@@ -26,7 +26,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Take bookings for [multiple locations](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/locations)
 * Send customers an email about their booking from the admin panel
 
-Follow future developments at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
+Follow future developments at [Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) or read the Upgrade Notices when you see updates for this plugin in your WordPress admin panel.
 
 This plugin is part of a group of plugins for restaurants. Check out the [Food and Drink Menu](http://wordpress.org/plugins/food-and-drink-menu/), [Good Reviews for WordPress](http://wordpress.org/plugins/good-reviews-wp/) and [Business Profile](http://wordpress.org/plugins/business-profile/) plugins as well.
 
@@ -35,11 +35,11 @@ This plugin is part of a group of plugins for restaurants. Check out the [Food a
 Read the [User Guide](http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) for quicks tips on how to get started taking reservations.
 
 = Addons =
-[Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
+[Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
 
-[Export Bookings for Restaurant Reservations](http://themeofthecrop.com/plugin/export-bookings-for-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
+[Export Bookings for Restaurant Reservations](https://themeofthecrop.com/plugin/export-bookings-for-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
 
-[MailChimp for Restaurant Reservations](http://themeofthecrop.com/plugin/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
+[MailChimp for Restaurant Reservations](https://themeofthecrop.com/plugin/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
 
 = Developers =
 
@@ -82,7 +82,7 @@ This is almost always the result of issues with your server and can be caused by
 
 = Can I make the phone number required? =
 
-This is a common request so I have written a small addon to do this for you. [Learn more](http://themeofthecrop.com/2015/01/08/simple-phone-validation-restaurant-reservations/).
+This is a common request so I have written a small addon to do this for you. [Learn more](https://themeofthecrop.com/2015/01/08/simple-phone-validation-restaurant-reservations/).
 
 = Can I translate the booking form? =
 
@@ -95,7 +95,7 @@ Users with the Administrator and Booking Manager roles are exempt from these res
 
 = I want to add a field to the form. Can I do that? =
 
-The addon, [Custom Fields for Restaurant Reservations](http://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
+The addon, [Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
 
 = More questions and answers =
 
@@ -115,6 +115,14 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.6.1 (2016-08-19) =
+* Fix: Support location post ids in booking form shortcode
+* Fix: JavaScript error if the time field is hidden
+* Fix: Fix booking detail popup issue when used with custom fields addon
+* Add: Notification template tag for location: {location}
+* Add: Russian language translation. h/t Alexandra Kuksa
+* Update: Spanish language translation. h/t Matias Rodriguez
 
 = 1.6 (2016-06-20) =
 * Fix: Currently visible notice in bookings list on mobile devices
@@ -287,6 +295,10 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.6.1 =
+
+This maintenance update adds a {location} tag for notifications, improves the location argument in the booking form shortcode and fixes a few minor bugs.
 
 = 1.6 =
 This is a major update that adds support for accepting bookings at multiple locations. View the online documentation for further details.
