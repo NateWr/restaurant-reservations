@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.4
 Tested Up To: 4.6
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -115,6 +115,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 10. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
+
+= 1.6.2 (2016-08-20) =
+* Fix: Broken time picker introduced in 1.6.2
 
 = 1.6.1 (2016-08-19) =
 * Fix: Support location post ids in booking form shortcode
@@ -296,8 +299,10 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 
 == Upgrade Notice ==
 
-= 1.6.1 =
+= 1.6.2 =
+This update fixes a critical error introduced in v1.6.1 which broke the time picker.
 
+= 1.6.1 =
 This maintenance update adds a {location} tag for notifications, improves the location argument in the booking form shortcode and fixes a few minor bugs.
 
 = 1.6 =
