@@ -59,7 +59,7 @@ jQuery(document).ready(function ($) {
 
 			// Declare timepicker
 			var $time_input = $( '#rtb-time' );
-			if ( $time_input.lenth ) {
+			if ( $time_input.length ) {
 				var time_input = $time_input.pickatime({
 					format: rtb_pickadate.time_format,
 					formatSubmit: 'h:i A',
