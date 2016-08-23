@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Restaurant Reservations 1.2.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/restaurant-"
 "reservations\n"
-"POT-Creation-Date: 2016-06-20 15:58+0200\n"
-"PO-Revision-Date: 2016-06-20 16:13+0200\n"
+"POT-Creation-Date: 2016-08-20 13:00+0200\n"
+"PO-Revision-Date: 2016-08-20 13:00+0200\n"
 "Last-Translator: Roland Stumpp <support@mediaoffice.de>\n"
 "Language-Team: mediaOffice GbR <support@mediaoffice.de>\n"
 "Language: de\n"
@@ -371,7 +371,7 @@ msgstr ""
 #: includes/MultipleLocations.class.php:375
 #: includes/MultipleLocations.class.php:419
 msgid "Location"
-msgstr "Standort"
+msgstr "Ort"
 
 #: includes/MultipleLocations.class.php:327
 msgid "Please select a location for your booking."
@@ -954,7 +954,7 @@ msgstr "Alle"
 
 #: includes/WP_List_Table.BookingsTable.class.php:242
 msgid "Between dates"
-msgstr "Zwischen Daten:"
+msgstr "Lege ein Anfang und ein Enddatum fest:"
 
 #: includes/WP_List_Table.BookingsTable.class.php:254
 msgid "Start Date:"
@@ -1015,15 +1015,15 @@ msgstr "Löschen"
 
 #: includes/WP_List_Table.BookingsTable.class.php:523
 msgid "Set To Confirmed"
-msgstr "Auf \"Bestätigt\" gestellt"
+msgstr "Reservierung bestätigen"
 
 #: includes/WP_List_Table.BookingsTable.class.php:524
 msgid "Set To Pending Review"
-msgstr "Auf \"Unbestätigt\" gestellt"
+msgstr "Reservierung auf Unbestätigt setzen"
 
 #: includes/WP_List_Table.BookingsTable.class.php:525
 msgid "Set To Closed"
-msgstr "Auf \"Abgelehnt\" gestellt"
+msgstr "Reservierung absagen - ausgebucht!"
 
 #: includes/WP_List_Table.BookingsTable.class.php:639
 msgid "%d booking deleted successfully."
@@ -1079,7 +1079,7 @@ msgstr "Es werden nur Reservierungen von heute angezeigt."
 
 #: includes/WP_List_Table.BookingsTable.class.php:792
 msgid "Only upcoming bookings are being shown."
-msgstr "Es werden nur zukünfitige Reservierungen angezeigt."
+msgstr "Es werden nur zukünftige Reservierungen angezeigt."
 
 #: includes/WP_Widget.BookingFormWidget.class.php:25
 msgid "Booking Form"
@@ -1234,7 +1234,7 @@ msgid ""
 "newsletter%s or following %sTheme of the Crop%s on Twitter."
 msgstr ""
 "Sei informiert wenn neue ADDONS verfügbar sind und abonniere den "
-"%sMonatlichen Newsletter%S oder werde Follower von %sTheme of the Crop%s auf "
+"%sMonatlichen Newsletter%s oder werde Follower von %sTheme of the Crop%s auf "
 "Twitter."
 
 #: includes/Settings.class.php:92
@@ -1280,7 +1280,7 @@ msgstr "Abgelehnt"
 #: includes/MultipleLocations.class.php:101
 msgctxt "Name for grouping bookings"
 msgid "Location"
-msgstr "Standort"
+msgstr "Ort"
 
 #: includes/Settings.class.php:93
 msgctxt ""
