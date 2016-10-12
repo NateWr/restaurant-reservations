@@ -112,7 +112,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 7. Customize the notification email sent to a user when they make a new booking request.
 8. Customize the notification email sent to a user when their booking is confirmed. You can also customize the email sent when a booking is rejected.
 9. Add and edit bookings from an admin panel.
-10. Access a short guide from your Plugins list to help you get started quickly.
+10. Quickly find bookings before or after a date. You can also filter by status or view just Today's bookings.
+11. It also integrates with the Business Profile plugin to support booking for multiple locations.
+12. Access a short guide from your Plugins list to help you get started quickly.
 
 == Changelog ==
 
