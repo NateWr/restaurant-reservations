@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.4
 Tested Up To: 4.6
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -116,8 +116,12 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 
 == Changelog ==
 
+= 1.6.3 (2016-10-31) =
+* Fix: Exporting bookings by location (addon). Location query args are now support for rtbQuery objects.
+* Add: Option to select start of the week for the datepicker
+
 = 1.6.2 (2016-08-20) =
-* Fix: Broken time picker introduced in 1.6.2
+* Fix: Broken time picker introduced in 1.6.1
 
 = 1.6.1 (2016-08-19) =
 * Fix: Support location post ids in booking form shortcode
