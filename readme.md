@@ -41,11 +41,11 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 Read the [User Guide](http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) for quicks tips on how to get started taking reservations.
 
 ### Addons
-[Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
+[Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugins/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
 
-[Export Bookings for Restaurant Reservations](https://themeofthecrop.com/plugin/export-bookings-for-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
+[Export Bookings for Restaurant Reservations](https://themeofthecrop.com/plugins/export-bookings-for-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
 
-[MailChimp for Restaurant Reservations](https://themeofthecrop.com/plugin/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
+[MailChimp for Restaurant Reservations](https://themeofthecrop.com/plugins/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
 
 ### Developers
 
@@ -101,7 +101,7 @@ Users with the Administrator and Booking Manager roles are exempt from these res
 
 #### I want to add a field to the form. Can I do that?
 
-The addon, [Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugin/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
+The addon, [Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugins/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations), will allow you to add a field or modify some of the existing fields of the booking form. Developers who are comfortable coding up plugins for WordPress can add their own fields using the hooks provided. Developers can find a rough guide to coding a custom field in the answer to [this support request](https://wordpress.org/support/topic/edit-form-label-and-add-input-fields).
 
 #### More questions and answers
 
@@ -309,7 +309,7 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 #### 1.0 (2014-05-07)
 * Initial release
 
-## Upgrade Notice 
+## Upgrade Notice
 
 #### 1.6.2
 This update fixes a critical error introduced in v1.6.1 which broke the time picker.
