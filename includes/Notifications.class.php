@@ -171,7 +171,9 @@ class rtbNotifications {
 			if ( $event == $notification->event ) {
 				$notification->set_booking( $this->booking );
 				if ( $notification->prepare_notification() ) {
+					do_action( 'rtb_send_notification_before', $notification );
 					$notification->send_notification();
+					do_action( 'rtb_send_notification_after', $notification );
 				}
 			}
 		}
