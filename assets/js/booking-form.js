@@ -169,7 +169,7 @@ jQuery(document).ready(function ($) {
 		// Declaring the first element true inverts the timepicker settings. All
 		// times subsequently declared are valid. Any time that doesn't fall
 		// within those declarations is invalid.
-		// See: http://amsul.ca/pickadate.js/time.htm#disable-times-all
+		// See: http://amsul.ca/pickadate.js/time/#disable-times-all
 		var valid_times = [ rtb_booking_form.get_outer_time_range() ];
 
 		// Check if this date is an exception to the rules

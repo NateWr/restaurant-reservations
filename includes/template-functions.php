@@ -191,7 +191,7 @@ function rtb_enqueue_assets() {
 
 /**
  * Get rules for datepicker date ranges
- * See: http://amsul.ca/pickadate.js/date.htm#disable-dates
+ * See: http://amsul.ca/pickadate.js/date/#disable-dates
  * @since 0.0.1
  */
 if ( !function_exists( 'rtb_get_datepicker_rules' ) ) {
