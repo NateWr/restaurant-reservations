@@ -312,7 +312,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		);
 
 		// Add i8n setting for pickadate if the frontend assets are to be loaded
-		if ( RTB_LOAD_FRONTEND_ASSETS ) {
+		if ( apply_filters( 'rtb-load-frontend-assets', true ) ) {
 			$sap->add_setting(
 				'rtb-settings',
 				'rtb-general',

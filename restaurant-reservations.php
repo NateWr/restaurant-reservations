@@ -53,7 +53,6 @@ class rtbInit {
 		define( 'RTB_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
 		define( 'RTB_BOOKING_POST_TYPE', 'rtb-booking' );
 		define( 'RTB_BOOKING_POST_TYPE_SLUG', 'booking' );
-		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
 
 		// Initialize the plugin
 		add_action( 'init', array( $this, 'load_textdomain' ) );
@@ -253,7 +252,7 @@ class rtbInit {
 	 */
 	function register_assets() {
 
-		if ( !RTB_LOAD_FRONTEND_ASSETS ) {
+		if ( !apply_filters( 'rtb-load-frontend-assets', true ) ) {
 			return;
 		}
 

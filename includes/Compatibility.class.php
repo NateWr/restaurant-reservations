@@ -15,9 +15,10 @@ class rtbCompatibility {
 	 */
 	public function __construct() {
 
-		// Preserve this defined constant in case anyone relied on it
+		// Preserve defined constants in case anyone relied on them
 		// to check if the plugin was active
 		define( 'RTB_TEXTDOMAIN', 'rtbdomain' );
+		define( 'RTB_LOAD_FRONTEND_ASSETS', apply_filters( 'rtb-load-frontend-assets', true ) );
 
 		// Load a .mo file for an old textdomain if one exists
 		add_filter( 'load_textdomain_mofile', array( $this, 'load_old_textdomain' ), 10, 2 );
