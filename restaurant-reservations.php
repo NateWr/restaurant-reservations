@@ -212,6 +212,8 @@ class rtbInit {
 	 */
 	public function enqueue_admin_assets() {
 
+		global $rtb_controller;
+
 		// Use the page reference in $admin_page_hooks because
 		// it changes in SOME hooks when it is translated.
 		// https://core.trac.wordpress.org/ticket/18857
@@ -235,6 +237,8 @@ class rtbInit {
 						'edit_booking'		=> __( 'Edit Booking', 'restaurant-reservations' ),
 						'error_unspecified'	=> __( 'An unspecified error occurred. Please try again. If the problem persists, try logging out and logging back in.', 'restaurant-reservations' ),
 					),
+					'banned_emails' => preg_split( '/\r\n|\r|\n/', (string) $rtb_controller->settings->get_setting( 'ban-emails' ) ),
+					'banned_ips' => preg_split( '/\r\n|\r|\n/', (string) $rtb_controller->settings->get_setting( 'ban-ips' ) ),
 				)
 			);
 		}

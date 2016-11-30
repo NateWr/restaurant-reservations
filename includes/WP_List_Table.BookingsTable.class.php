@@ -323,6 +323,7 @@ class rtbBookingsTable extends WP_List_Table {
 		}
 
 		$all_default_columns = $this->get_all_default_columns();
+		$all_columns = $this->get_all_columns();
 
 		global $rtb_controller;
 		$visible_columns = $rtb_controller->settings->get_setting( 'bookings-table-columns' );
@@ -333,9 +334,9 @@ class rtbBookingsTable extends WP_List_Table {
 			$columns['cb'] = $all_default_columns['cb'];
 			$columns['date'] = $all_default_columns['date'];
 
-			foreach( $all_default_columns as $key => $column ) {
+			foreach( $all_columns as $key => $column ) {
 				if ( in_array( $key, $visible_columns ) ) {
-					$columns[$key] = $all_default_columns[$key];
+					$columns[$key] = $all_columns[$key];
 				}
 			}
 			$columns['details'] = $all_default_columns['details'];
@@ -374,6 +375,7 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function get_all_columns() {
 		$columns = $this->get_all_default_columns();
+		$columns['submitted-by'] = __( 'Submitted By', 'restaurant-reservations' );
 		return apply_filters( 'rtb_bookings_all_table_columns', $columns );
 	}
 
@@ -394,6 +396,7 @@ class rtbBookingsTable extends WP_List_Table {
 	 * @since 0.0.1
 	 */
 	public function column_default( $booking, $column_name ) {
+
 		switch ( $column_name ) {
 			case 'date' :
 				$value = $booking->format_date( $booking->date );
@@ -407,21 +410,26 @@ class rtbBookingsTable extends WP_List_Table {
 				}
 
 				break;
+
 			case 'party' :
 				$value = $booking->party;
 				break;
+
 			case 'name' :
 				$value = $booking->name;
 				break;
+
 			case 'email' :
 				$value = $booking->email;
 				$value .= '<div class="actions">';
 				$value .= '<a href="#" data-id="' . esc_attr( $booking->ID ) . '" data-action="email" data-email="' . esc_attr( $booking->email ) . '" data-name="' . $booking->name . '">' . __( 'Send Email', 'restaurant-reservations' ) . '</a>';
 				$value .= '</div>';
 				break;
+
 			case 'phone' :
 				$value = $booking->phone;
 				break;
+
 			case 'status' :
 				global $rtb_controller;
 				if ( !empty( $rtb_controller->cpts->booking_statuses[$booking->post_status] ) ) {
@@ -432,6 +440,7 @@ class rtbBookingsTable extends WP_List_Table {
 					$value = $booking->post_status;
 				}
 				break;
+
 			case 'details' :
 				$value = '';
 
@@ -454,6 +463,18 @@ class rtbBookingsTable extends WP_List_Table {
 					$value .= '</ul></div>';
 				}
 				break;
+
+			case 'submitted-by' :
+				$ip = !empty( $booking->ip ) ? $booking->ip : __( 'Unknown IP', 'restaurant-reservations' );
+				$date_submission = isset( $booking->date_submission ) ? $booking->format_date( $booking->date_submission ) : __( 'Unknown Date', 'restaurant-reservations' );
+				$value = sprintf( esc_html__( 'Request from %s on %s.', 'restaurant-reservations' ), $ip, $date_submission );
+				$value .= '<div class="actions">';
+				$value .= '<a href="#" data-action="ban" data-email="' . esc_attr( $booking->email ) . '" data-id="' . absint( $booking->ID ) . '" data-ip="' . $ip . '">';
+				$value .= __( 'Ban Customer', 'restaurant-reservations' );
+				$value .= '</a>';
+				$value .= '</div>';
+				break;
+
 			default:
 				$value = isset( $booking->$column_name ) ? $booking->$column_name : '';
 				break;
@@ -485,29 +506,22 @@ class rtbBookingsTable extends WP_List_Table {
 	 */
 	public function add_details_column_items( $details, $booking ) {
 		global $rtb_controller;
-		$visible_columns = $this->get_all_columns();
-		$default_columns = $this->get_all_default_columns();
+		$visible_columns = $this->get_columns();
+		$all_columns = $this->get_all_columns();
 
-		$detail_columns = array_diff( $visible_columns, $default_columns );
+		$detail_columns = array_diff( $all_columns, $visible_columns );
 
-		// Columns which can't be hidden
-		unset( $default_columns['cb'] );
-		unset( $default_columns['details'] );
-		unset( $default_columns['date'] );
+		foreach( $detail_columns as $key => $label ) {
 
-		if ( !empty( $detail_columns ) ) {
-			foreach( $detail_columns as $key => $label ) {
-
-				$value = $this->column_default( $booking, $key );
-				if ( empty( $value ) ) {
-					continue;
-				}
-
-				$details[] = array(
-					'label' => $label,
-					'value' => $value,
-				);
+			$value = $this->column_default( $booking, $key );
+			if ( empty( $value ) ) {
+				continue;
 			}
+
+			$details[] = array(
+				'label' => $label,
+				'value' => $value,
+			);
 		}
 
 		return $details;

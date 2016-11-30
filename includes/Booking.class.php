@@ -80,6 +80,7 @@ class rtbBooking {
 			'phone' => '',
 			'date_submission' => '',
 			'logs' => array(),
+			'ip' => '',
 		);
 
 		$meta_defaults = apply_filters( 'rtb_booking_metadata_defaults', $meta_defaults );
@@ -95,6 +96,7 @@ class rtbBooking {
 		$this->phone = $meta['phone'];
 		$this->date_submission = $meta['date_submission'];
 		$this->logs = $meta['logs'];
+		$this->ip = $meta['ip'];
 	}
 
 	/**
@@ -429,6 +431,22 @@ class rtbBooking {
 			}
 		}
 
+		// Check if the email or IP is banned
+		if ( !current_user_can( 'manage_bookings' ) ) {
+			$ip = $_SERVER['REMOTE_ADDR'];
+			if ( !$this->is_valid_ip( $ip ) || !$this->is_valid_email( $this->email ) ) {
+				$this->validation_errors[] = array(
+					'field'			=> 'date',
+					'post_variable'	=> $ip,
+					'message'	=> __( 'Your booking has been rejected. Please call us if you would like to make a booking.', 'restaurant-reservations' ),
+				);
+			} elseif ( empty( $this->ip ) ) {
+				$this->ip = sanitize_text_field( $ip );
+			}
+		} elseif ( empty( $this->ip ) ) {
+			$this->ip = sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+		}
+
 		do_action( 'rtb_validate_booking_submission', $this );
 
 	}
@@ -483,6 +501,64 @@ class rtbBooking {
 	}
 
 	/**
+	 * Check if an IP address has been banned
+	 *
+	 * @param string $ip
+	 * @return bool
+	 * @since 1.7
+	 */
+	public function is_valid_ip( $ip = null ) {
+
+		if ( is_null( $ip ) ) {
+			$ip = isset( $this->ip ) ? $this->ip : null;
+			if ( is_null( $ip ) ) {
+				return false;
+			}
+		}
+
+		global $rtb_controller;
+
+		$banned_ips = array_filter( explode( "\n", $rtb_controller->settings->get_setting( 'ban-ips' ) ) );
+
+		foreach( $banned_ips as $banned_ip ) {
+			if ( $ip == trim( $banned_ip ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if an email address has been banned
+	 *
+	 * @param string $email
+	 * @return bool
+	 * @since 1.7
+	 */
+	public function is_valid_email( $email = null ) {
+
+		if ( is_null( $email ) ) {
+			$email = isset( $this->email ) ? $this->email : null;
+			if ( is_null( $email ) ) {
+				return false;
+			}
+		}
+
+		global $rtb_controller;
+
+		$banned_emails = array_filter( explode( "\n", $rtb_controller->settings->get_setting( 'ban-emails' ) ) );
+
+		foreach( $banned_emails as $banned_email ) {
+			if ( $email == trim( $banned_email ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Add a log entry to the booking
 	 *
 	 * @since 1.3.1
@@ -534,6 +610,7 @@ class rtbBooking {
 			'email' 			=> $this->email,
 			'phone' 			=> $this->phone,
 			'date_submission' 	=> current_time( 'timestamp' ),
+			'ip'                => $this->ip,
 		);
 
 		if ( !empty( $this->logs ) ) {

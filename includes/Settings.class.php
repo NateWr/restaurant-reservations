@@ -326,6 +326,28 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			);
 		}
 
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-general',
+			'textarea',
+			array(
+				'id'			=> 'ban-emails',
+				'title'			=> __( 'Banned Email Addresses', 'restaurant-reservations' ),
+				'description'	=> __( 'You can block bookings from specific email addresses. Enter each email address on a separate line.', 'restaurant-reservations' ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-general',
+			'textarea',
+			array(
+				'id'			=> 'ban-ips',
+				'title'			=> __( 'Banned IP Addresses', 'restaurant-reservations' ),
+				'description'	=> __( 'You can block bookings from specific IP addresses. Enter each IP address on a separate line. Be aware that many internet providers rotate their IP address assignments, so an IP address may accidentally refer to a different user. Also, if you block an IP address used by a public connection, such as cafe WIFI, a public library, or a university network, you may inadvertantly block several people.', 'restaurant-reservations' ),
+			)
+		);
+
 		$sap->add_section(
 			'rtb-settings',
 			array(

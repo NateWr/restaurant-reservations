@@ -38,6 +38,8 @@ class rtbAdminBookings {
 		add_action( 'wp_ajax_rtb-admin-email-modal', array( $this, 'email_modal_ajax' ) );
 		add_action( 'wp_ajax_nopriv_rtb-admin-column-modal' , array( $this , 'nopriv_ajax' ) );
 		add_action( 'wp_ajax_rtb-admin-column-modal', array( $this, 'column_modal_ajax' ) );
+		add_action( 'wp_ajax_nopriv_rtb-admin-ban-modal' , array( $this , 'nopriv_ajax' ) );
+		add_action( 'wp_ajax_rtb-admin-ban-modal', array( $this, 'ban_modal_ajax' ) );
 
 		// Validate post status and notification fields
 		add_action( 'rtb_validate_booking_submission', array( $this, 'validate_admin_fields' ) );
@@ -267,6 +269,39 @@ class rtbAdminBookings {
 				<a href="#" class="button" id="rtb-cancel-details-modal">
 					<?php _e( 'Close', 'restaurant-reservations' ); ?>
 				</a>
+			</div>
+		</div>
+
+		<!-- Restaurant Reservations ban email/ip modal -->
+		<div id="rtb-ban-modal" class="rtb-admin-modal">
+			<div class="rtb-ban-form rtb-container">
+				<div class="rtb-ban-msg">
+					<p class="intro">
+						<?php
+							printf(
+								__( 'Ban future bookings from the email address %s or the IP address %s?', 'restaurant-reservations' ),
+								'<span id="rtb-ban-modal-email"></span>',
+								'<span id="rtb-ban-modal-ip"></span>'
+							);
+						?>
+					</p>
+					<p>
+						<?php
+							esc_html_e( 'It is recommended to ban by email address instead of IP. Only ban by IP address to block a malicious user who is using different email addresses to avoid a previous ban.', 'restaurant-reservations' );
+						?>
+					</p>
+				</div>
+				<button class="button button-primary" id="rtb-ban-modal-email-btn">Ban Email</button>
+				<button class="button button-primary" id="rtb-ban-modal-ip-btn">Ban IP</button>
+				<a href="#" id="rtb-cancel-ban-modal" class="button"><?php _e( 'Close', 'restaurant-reservations' ); ?></a>
+				<a class="button-link" href="<?php echo esc_url( admin_url( '/admin.php?page=rtb-settings' ) ); ?>" target="_blank">
+					<?php esc_html_e( 'View all bans', 'restaurant-reservations' ); ?>
+				</a>
+				<div class="action-status">
+					<span class="spinner loading"></span>
+					<span class="dashicons dashicons-no-alt error"></span>
+					<span class="dashicons dashicons-yes success"></span>
+				</div>
 			</div>
 		</div>
 
@@ -654,6 +689,55 @@ class rtbAdminBookings {
 		update_option( 'rtb-settings', $settings );
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Handle ajax requests to ban by IP or email address
+	 *
+	 * @since 1.3.1
+	 */
+	public function ban_modal_ajax() {
+
+		global $rtb_controller;
+
+		// Authenticate request
+		if ( !check_ajax_referer( 'rtb-admin', 'nonce' ) || !current_user_can( 'manage_bookings' ) ) {
+			$this->nopriv_ajax();
+		}
+
+		// Ban an email address
+		if ( isset( $_POST['email'] ) && !empty( $_POST['email'] ) ) {
+			$email = trim( sanitize_text_field( $_POST['email'] ) );
+			$banned_emails = preg_split( '/\r\n|\r|\n/', (string) $rtb_controller->settings->get_setting( 'ban-emails' ) );
+
+			if ( !in_array( $email, $banned_emails ) ) {
+				$banned_emails[] = $email;
+				$rtb_controller->settings->settings['ban-emails'] = join( "\n", $banned_emails );
+				update_option( 'rtb-settings', $rtb_controller->settings->settings );
+			}
+
+			wp_send_json_success();
+
+		// Ban an IP address
+		} elseif ( isset( $_POST['ip'] ) && !empty( $_POST['ip'] ) ) {
+			$ip = trim( sanitize_text_field( $_POST['ip'] ) );
+			$banned_ips = preg_split( '/\r\n|\r|\n/', (string) $rtb_controller->settings->get_setting( 'ban-ips' ) );
+
+			if ( !in_array( $ip, $banned_ips ) ) {
+				$banned_ips[] = $ip;
+				$rtb_controller->settings->settings['ban-ips'] = join( "\n", $banned_ips );
+				update_option( 'rtb-settings', $rtb_controller->settings->settings );
+			}
+
+			wp_send_json_success();
+		}
+
+		wp_send_json_error(
+			array(
+				'error'		=> 'no_data',
+				'msg'		=> __( 'No IP or email address could be found for this ban request.', 'restaurant-reservations' ),
+			)
+		);
 	}
 
 	/**

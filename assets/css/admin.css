@@ -355,7 +355,7 @@
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.8);
-	z-index: 3;
+	z-index: 9999;
 	overflow-y: auto;
 	cursor: pointer;
 	visibility: hidden;
@@ -443,6 +443,12 @@
 	transition: opacity .25s ease-in-out;
 	-moz-transition: opacity .25s ease-in-out;
 	-webkit-transition: opacity .25s ease-in-out;
+}
+
+.rtb-admin-modal .button-link {
+	display: inline-block;
+	margin-top: 1em;
+	line-height: 26px;
 }
 
 .rtb-admin-modal .action-status {
@@ -541,6 +547,23 @@
 #rtb-error-modal .rtb-error-msg {
 	margin-bottom: 1em;
 }
+
+.rtb-ban-form .intro {
+	margin-top: 0;
+	font-weight: bold;
+}
+
+.rtb-ban-form .intro span {
+	color: #a55;
+}
+
+.rtb-ban-form .button-primary {
+	display: block;
+	width: 100%;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
 /* Hide the outer scrollbar when the modal is open */
 .rtb-hide-body-scroll {
 	overflow: hidden !important;
