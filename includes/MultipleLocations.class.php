@@ -81,7 +81,6 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_filter( 'rtb_query_args',                             array( $this, 'modify_query' ), 10, 2 );
 			add_filter( 'rtb_bookings_all_table_columns',             array( $this, 'add_location_column' ) );
 			add_filter( 'rtb_bookings_table_column',                  array( $this, 'print_location_column' ), 10, 3 );
-			add_filter( 'rtb_bookings_table_column_details',          array( $this, 'add_details_column_items' ), 10, 2 );
 			add_action( 'edit_form_after_title',                      array( $this, 'add_meta_nonce' ) );
 			add_action( 'add_meta_boxes',                             array( $this, 'add_meta_boxes' ) );
 			add_filter( 'the_content',                                array( $this, 'append_to_content' ) );
@@ -429,32 +428,6 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			$location = current( $terms );
 
 			return $location->name;
-		}
-
-		/**
-		 * Add the location to the details column if the column has been
-		 * hidden
-		 *
-		 * @since 1.6
-		 */
-		public function add_details_column_items( $details, $booking ) {
-
-			global $rtb_controller;
-
-			$visible_columns = $rtb_controller->bookings->bookings_table->get_columns();
-			if ( !isset( $visible_columns['location'] ) ) {
-
-				$value = $rtb_controller->bookings->bookings_table->column_default( $booking, 'location' );
-
-				if ( !empty( $value ) ) {
-					$details[] = array(
-						'label' => __( 'Location', 'restaurant-reservations' ),
-						'value' => $value,
-					);
-				}
-			}
-
-			return $details;
 		}
 
 		/**
