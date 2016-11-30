@@ -887,6 +887,12 @@ class rtbBookingsTable extends WP_List_Table {
 		$query = new rtbQuery( $args, 'bookings-table' );
 		$query->parse_request_args();
 		$query->prepare_args();
+
+		// Sort all bookings by newest first if no specific orderby is in play
+		if ( $query->args['date_range'] == 'all' && !isset( $_REQUEST['orderby'] ) ) {
+			$query->args['order'] = 'DESC';
+		}
+
 		$query->args = apply_filters( 'rtb_bookings_table_query_args', $query->args );
 
 		$this->bookings = $query->get_bookings();
