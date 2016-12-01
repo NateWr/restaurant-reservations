@@ -176,18 +176,21 @@ function rtb_enqueue_assets() {
 	wp_localize_script(
 		'rtb-booking-form',
 		'rtb_pickadate',
-		array(
-			'date_format' => $rtb_controller->settings->get_setting( 'date-format' ),
-			'time_format'  => $rtb_controller->settings->get_setting( 'time-format' ),
-			'disable_dates'	=> rtb_get_datepicker_rules(),
-			'schedule_open' => $rtb_controller->settings->get_setting( 'schedule-open' ),
-			'schedule_closed' => $rtb_controller->settings->get_setting( 'schedule-closed' ),
-			'early_bookings' => is_admin() && current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'early-bookings' ),
-			'late_bookings' => is_admin() && current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'late-bookings' ),
-			'date_onload' => $rtb_controller->settings->get_setting( 'date-onload' ),
-			'time_interval' => $rtb_controller->settings->get_setting( 'time-interval' ),
-			'first_day' => $rtb_controller->settings->get_setting( 'week-start' ),
-			'allow_past' => is_admin() && current_user_can( 'manage_bookings' ),
+		apply_filters(
+			'rtb_pickadate_args',
+			array(
+				'date_format' => $rtb_controller->settings->get_setting( 'date-format' ),
+				'time_format'  => $rtb_controller->settings->get_setting( 'time-format' ),
+				'disable_dates'	=> rtb_get_datepicker_rules(),
+				'schedule_open' => $rtb_controller->settings->get_setting( 'schedule-open' ),
+				'schedule_closed' => $rtb_controller->settings->get_setting( 'schedule-closed' ),
+				'early_bookings' => is_admin() && current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'early-bookings' ),
+				'late_bookings' => is_admin() && current_user_can( 'manage_bookings' ) ? '' : $rtb_controller->settings->get_setting( 'late-bookings' ),
+				'date_onload' => $rtb_controller->settings->get_setting( 'date-onload' ),
+				'time_interval' => $rtb_controller->settings->get_setting( 'time-interval' ),
+				'first_day' => $rtb_controller->settings->get_setting( 'week-start' ),
+				'allow_past' => is_admin() && current_user_can( 'manage_bookings' ),
+			)
 		)
 	);
 
