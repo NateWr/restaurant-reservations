@@ -267,6 +267,19 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			'rtb-general',
 			'select',
 			array(
+				'id'            => 'party-size-min',
+				'title'         => __( 'Min Party Size', 'restaurant-reservations' ),
+				'description'   => __( 'Set a minimum allowed party size for bookings.', 'restaurant-reservations' ),
+				'blank_option'	=> false,
+				'options'       => $this->get_party_size_setting_options( false ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-general',
+			'select',
+			array(
 				'id'            => 'party-size',
 				'title'         => __( 'Max Party Size', 'restaurant-reservations' ),
 				'description'   => __( 'Set a maximum allowed party size for bookings.', 'restaurant-reservations' ),
@@ -716,11 +729,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	 * Get options for the party size setting
 	 * @since 1.3
 	 */
-	public function get_party_size_setting_options() {
+	public function get_party_size_setting_options( $max = true ) {
 
-		$options = array(
-			'' 		=> __( 'Any size', 'restaurant-reservations' ),
-		);
+		$options = array();
+
+		if ( $max ) {
+			$options[''] = __( 'Any size', 'restaurant-reservations' );
+		}
 
 		$max = apply_filters( 'rtb_party_size_upper_limit', 100 );
 
@@ -738,10 +753,12 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	public function get_form_party_options() {
 
 		$party_size = (int) $this->get_setting( 'party-size' );
+		$party_size_min = (int) $this->get_setting( 'party-size-min' );
 
+		$min = empty( $party_size_min ) ? 0 : (int) $this->get_setting( 'party-size-min' );
 		$max = empty( $party_size ) ? apply_filters( 'rtb_party_size_upper_limit', 100 ) : (int) $this->get_setting( 'party-size' );
 
-		for ( $i = 1; $i <= $max; $i++ ) {
+		for ( $i = $min; $i <= $max; $i++ ) {
 			$options[$i] = $i;
 		}
 

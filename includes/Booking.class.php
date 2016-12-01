@@ -405,6 +405,14 @@ class rtbBooking {
 					'message'	=> sprintf( __( 'We only accept bookings for parties of up to %d people.', 'restaurant-reservations' ), $party_size ),
 				);
 			}
+			$party_size_min = $rtb_controller->settings->get_setting( 'party-size-min' );
+			if ( !empty( $party_size_min ) && $party_size_min > $this->party ) {
+				$this->validation_errors[] = array(
+					'field'			=> 'party',
+					'post_variable'	=> $this->party,
+					'message'	=> sprintf( __( 'We only accept bookings for parties of more than %d people.', 'restaurant-reservations' ), $party_size_min ),
+				);
+			}
 		}
 
 		// Email/Phone
