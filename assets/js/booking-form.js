@@ -40,7 +40,7 @@ jQuery(document).ready(function ($) {
 					format: rtb_pickadate.date_format,
 					formatSubmit: 'yyyy/mm/dd',
 					hiddenName: true,
-					min: true,
+					min: !rtb_pickadate.allow_past,
 					container: 'body',
 					firstDay: rtb_pickadate.first_day,
 

@@ -266,7 +266,7 @@ class rtbBooking {
 
 			// Check against scheduling exception rules
 			$exceptions = $rtb_controller->settings->get_setting( 'schedule-closed' );
-			if ( empty( $this->validation_errors ) && !empty( $exceptions ) ) {
+			if ( empty( $this->validation_errors ) && !empty( $exceptions ) && !current_user_can( 'manage_bookings' ) ) {
 				$exception_is_active = false;
 				$datetime_is_valid = false;
 				foreach( $exceptions as $exception ) {
@@ -300,7 +300,7 @@ class rtbBooking {
 
 			// Check against weekly scheduling rules
 			$rules = $rtb_controller->settings->get_setting( 'schedule-open' );
-			if ( empty( $exception_is_active ) && empty( $this->validation_errors ) && !empty( $rules ) ) {
+			if ( empty( $exception_is_active ) && empty( $this->validation_errors ) && !empty( $rules ) && !current_user_can( 'manage_bookings' ) ) {
 				$request_weekday = strtolower( $request->format( 'l' ) );
 				$time_is_valid = null;
 				$day_is_valid = null;
