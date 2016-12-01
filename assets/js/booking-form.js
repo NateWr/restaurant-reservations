@@ -161,10 +161,11 @@ jQuery(document).ready(function ($) {
 			return;
 		}
 
-		selected_date = new Date( rtb_booking_form.datepicker.get( 'select', 'yyyy/mm/dd' ) );
-		var selected_date_year = selected_date.getFullYear();
-		var selected_date_month = selected_date.getMonth();
-		var selected_date_date = selected_date.getDate();
+		var selected_date = new Date( rtb_booking_form.datepicker.get( 'select', 'yyyy/mm/dd' ) ),
+			selected_date_year = selected_date.getFullYear(),
+			selected_date_month = selected_date.getMonth(),
+			selected_date_date = selected_date.getDate(),
+			current_date = new Date();
 
 		// Declaring the first element true inverts the timepicker settings. All
 		// times subsequently declared are valid. Any time that doesn't fall
@@ -208,6 +209,8 @@ jQuery(document).ready(function ($) {
 					} else {
 						excp_end_time = [ 24, 0 ]; // End of the day
 					}
+
+					excp_start_time = rtb_booking_form.get_earliest_time( excp_start_time, selected_date, current_date );
 
 					valid_times.push( { from: excp_start_time, to: excp_end_time, inverted: true } );
 				}
@@ -268,6 +271,8 @@ jQuery(document).ready(function ($) {
 							} else {
 								rule_end_time = [ 24, 0 ]; // End of the day
 							}
+
+							rule_start_time = rtb_booking_form.get_earliest_time( rule_start_time, selected_date, current_date );
 
 							valid_times.push( { from: rule_start_time, to: rule_end_time, inverted: true } );
 
@@ -335,6 +340,43 @@ jQuery(document).ready(function ($) {
 		} else {
 			return [ hour, minute ];
 		}
+	};
+
+	/**
+	 * Get the earliest valid time
+	 *
+	 * This checks the valid time for the day and, if a current day, applies
+	 * any late booking restrictions. It also ensures that times in the past
+	 * are not availabe.
+	 *
+	 * @param array start_time
+	 * @param array selected_date
+	 * @param array current_date
+	 */
+	rtb_booking_form.get_earliest_time = function( start_time, selected_date, current_date ) {
+
+		// Only make adjustments for current day selections
+		if ( selected_date.getDate() !== current_date.getDate() ) {
+			return start_time;
+		}
+
+		// Get the number of minutes after midnight to compare
+		var start_minutes = ( start_time[0] * 60 ) + start_time[1],
+			current_minutes = ( current_date.getHours() * 60 ) + current_date.getMinutes(),
+			late_booking_minutes;
+
+		start_minutes = start_minutes > current_minutes ? start_minutes : current_minutes;
+
+		if ( typeof rtb_pickadate.late_bookings === 'number' && rtb_pickadate.late_bookings % 1 === 0 ) {
+			late_booking_minutes = current_minutes + rtb_pickadate.late_bookings;
+			if ( late_booking_minutes > start_minutes ) {
+				start_minutes = late_booking_minutes;
+			}
+		}
+
+		start_time = [ Math.floor( start_minutes / 60 ), start_minutes % 60 ];
+
+		return start_time;
 	};
 
 
