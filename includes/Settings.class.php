@@ -456,13 +456,14 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'description'   => __( 'Select how late customers can make their booking. (Administrators and Booking Managers are not restricted by this setting.)', 'restaurant-reservations' ),
 				'blank_option'	=> false,
 				'options'       => array(
-					'' 		=> __( 'Up to the last minute', 'restaurant-reservations' ),
-					'15' 	=> __( 'At least 15 minutes in advance', 'restaurant-reservations' ),
-					'30' 	=> __( 'At least 30 minutes in advance', 'restaurant-reservations' ),
-					'45' 	=> __( 'At least 45 minutes in advance', 'restaurant-reservations' ),
-					'60' 	=> __( 'At least 1 hour in advance', 'restaurant-reservations' ),
-					'240' 	=> __( 'At least 4 hours in advance', 'restaurant-reservations' ),
-					'1440' 	=> __( 'At least 1 day in advance', 'restaurant-reservations' ),
+					'' 	       => __( 'Up to the last minute', 'restaurant-reservations' ),
+					'15'       => __( 'At least 15 minutes in advance', 'restaurant-reservations' ),
+					'30'       => __( 'At least 30 minutes in advance', 'restaurant-reservations' ),
+					'45'       => __( 'At least 45 minutes in advance', 'restaurant-reservations' ),
+					'60'       => __( 'At least 1 hour in advance', 'restaurant-reservations' ),
+					'240'      => __( 'At least 4 hours in advance', 'restaurant-reservations' ),
+					'1440'     => __( 'At least 24 hours in advance', 'restaurant-reservations' ),
+					'same_day' => __( 'Block same-day bookings', 'restaurant-reservations' ),
 				)
 			)
 		);

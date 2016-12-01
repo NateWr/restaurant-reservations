@@ -245,6 +245,15 @@ class rtbBooking {
 						);
 					}
 
+				} elseif ( $late_bookings === 'same_day' ) {
+					if ( $request->format( 'Y-m-d' ) == current_time( 'Y-m-d' ) ) {
+						$this->validation_errors[] = array(
+							'field'		=> 'time',
+							'error_msg'	=> 'Booking request made on same day',
+							'message'	=> __( 'Sorry, bookings can not be made for the same day.', 'restaurant-reservations' ),
+						);
+					}
+
 				} else {
 					$late_bookings_seconds = $late_bookings * 60; // Late bookings allowance in seconds
 					if ( $request->format( 'U' ) < ( current_time( 'timestamp' ) + $late_bookings_seconds ) ) {
