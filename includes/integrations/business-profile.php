@@ -14,7 +14,7 @@ function rtb_bp_maybe_enable_bp_locations( $post_type ) {
 	}
 
 	global $bpfwp_controller;
-	if ( isset( $bpfwp_controller ) && isset( $bpfwp_controller->cpts ) ) {
+	if ( isset( $bpfwp_controller ) && isset( $bpfwp_controller->cpts ) && $bpfwp_controller->settings->get_setting( 'multiple-locations' ) ) {
 		return $bpfwp_controller->cpts->location_cpt_slug;
 	}
 
