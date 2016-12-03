@@ -651,7 +651,9 @@ class rtbAdminBookings {
 		$email->message = $message;
 		$email->set_booking( $booking );
 		if ( $email->prepare_notification() ) {
+			do_action( 'rtb_send_notification_before', $email );
 			$email->send_notification();
+			do_action( 'rtb_send_notification_after', $email );
 		}
 
 		// Store email in postmeta for log
