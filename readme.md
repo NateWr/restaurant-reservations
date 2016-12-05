@@ -11,7 +11,7 @@ Tested Up To: 4.6
 <br/>
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
 <br/>
-Stable tag: 1.6.3
+Stable tag: 1.7
 <br/>
 License: GPLv2 or later
 <br/>
@@ -34,7 +34,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Take bookings for [multiple locations](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/locations)
 * Send customers an email about their booking from the admin panel
 
-[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) builds the [best WordPress restaurant themes](https://themeofthecrop.com/themes/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) and plugins that help restaurants manage [responsive online menus](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
+[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) builds <a href="https://themeofthecrop.com/themes/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations" rel="friend">great WordPress restaurant themes</a> and plugins that help restaurants manage [responsive online menus](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
 
 ## How to use
 
@@ -123,6 +123,17 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7 (2016-12-05)
+* Add: Allow customer banning by email and IP address
+* Add: HTML5 required and aria-required attributes where appropriate
+* Add: Disable times in the time picker blocked by late bookings restrictions
+* Add: Option to block same-day bookings
+* Add: Option for minimum party size
+* Fix: Location printed twice in booking details
+* Fix: Allow Bookings Managers to edit bookings in the past
+* Update: Deprecated RTB_LOAD_FRONTEND_ASSETS moved `rtb-load-frontend-assets` filter
+* Update: Sort bookings by latest date first when viewing All bookings
 
 #### 1.6.3 (2016-10-31)
 * Fix: Exporting bookings by location (addon). Location query args are now support for rtbQuery objects.
@@ -310,6 +321,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.7
+This update adds new features for banning bookings from no-shows and preventing blocked times from appearing in the time picker. New options for min party size and same-day bookings have been added. Bookings Managers can now edit bookings in the past.
 
 #### 1.6.2
 This update fixes a critical error introduced in v1.6.1 which broke the time picker.
