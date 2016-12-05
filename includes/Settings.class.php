@@ -755,7 +755,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		$party_size = (int) $this->get_setting( 'party-size' );
 		$party_size_min = (int) $this->get_setting( 'party-size-min' );
 
-		$min = empty( $party_size_min ) ? 0 : (int) $this->get_setting( 'party-size-min' );
+		$min = empty( $party_size_min ) ? 1 : (int) $this->get_setting( 'party-size-min' );
 		$max = empty( $party_size ) ? apply_filters( 'rtb_party_size_upper_limit', 100 ) : (int) $this->get_setting( 'party-size' );
 
 		for ( $i = $min; $i <= $max; $i++ ) {
