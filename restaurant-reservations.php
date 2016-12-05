@@ -115,12 +115,7 @@ class rtbInit {
 
 		// Add the addons page
 		require_once( RTB_PLUGIN_DIR . '/includes/Addons.class.php' );
-		new rtbAddons(
-			array(
-				'api_url'	=> 'http://api.themeofthecrop.com/addons/',
-				'plugin'	=> basename( plugin_dir_path( __FILE__ ) ),
-			)
-		);
+		new rtbAddons();
 
 		// Load integrations with other plugins
 		require_once( RTB_PLUGIN_DIR . '/includes/integrations/business-profile.php' );

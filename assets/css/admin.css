@@ -584,60 +584,35 @@
 }
 
 /* Addons Page */
-#rtb-addons {
+.rtb-addons {
 	margin-top: 2em;
 }
 
-#rtb-addons .rtb-loading {
-	line-height: 10em;
-	font-size: 2em;
-	text-align: center;
-	text-transform: uppercase;
-	font-weight: bold;
-	background: #eee;
-	background: rgba(0,0,0,0.1);
-	color: #777;
-	color: rgba(0,0,0,0.54);
-}
-
-#rtb-addons .rtb-loading .spinner {
-	float: none;
-	visibility: visible;
+.rtb-addons .addon {
 	display: inline-block;
-}
-
-#rtb-addons .error {
-	padding: 0.25em 0.5em;
-	background: #f50;
-	color: #fff;
-}
-
-#rtb-addons .error a {
-	color: #fff;
-}
-
-#rtb-addons .addon {
 	margin-bottom: 20px;
 	padding: 20px;
 	background: #fff;
-	min-height: 128px;
+	min-height: 150px;
 	border-radius: 3px;
-	display: none;
+	max-width: 40em;
+	margin-right: 20px;
+	vertical-align: top;
 }
 
-#rtb-addons img {
+.rtb-addons img {
 	float: left;
-	width: 128px;
-	height: 128px;
+	width: 150px;
+	height: 150px;
 	margin: 0 20px 20px 0;
 }
 
-#rtb-addons .action {
+.rtb-addons .action {
 	margin-top: 2em;
 }
 
-#rtb-addons .soon,
-#rtb-addons .installed {
+.rtb-addons .soon,
+.rtb-addons .installed {
 	line-height: 28px;
 	display: inline-block;
 	padding: 0 0.75em;
@@ -645,25 +620,38 @@
 	box-shadow: 0 1px 0 #ccc;
 }
 
-#rtb-addons .soon {
+.rtb-addons .soon {
 	background: #F0F05E;
 }
 
-#rtb-addons .installed {
+.rtb-addons .installed {
 	background: #81F05E;
+}
+
+.rtb-addons .addon-themes .action .button {
+	background: #D24C2B;
+	color: #fff;
+	border-color: #a53216;
+	box-shadow: 0 1px 0 #cc3712;
+}
+
+.rtb-addons .addon-themes .action .button:hover,
+.rtb-addons .addon-themes .action .button:focus {
+	background: #ff5126;
 }
 
 @media screen and (max-width: 600px) {
 
-	#rtb-addons .addon {
+	.rtb-addons .addon {
 		text-align: center;
 	}
 
-	#rtb-addons img {
+	.rtb-addons img {
 		float: none;
 		margin: 0;
 	}
 }
+
 
 /* License page */
 .rtb-license-setting .status {
