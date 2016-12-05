@@ -32,7 +32,8 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Customize all [notification messages](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/config/email-notifications#understanding-the-template-tags), and date and time formats
 * Add and edit bookings from the admin panel
 * Take bookings for [multiple locations](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/locations)
-* Send customers an email about their booking from the admin panel
+* Send customers [an email](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/send-emails) about their booking from the admin panel
+* [Ban abusive customers](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/ban-customers) to save money on no-shows
 
 [Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) builds <a href="https://themeofthecrop.com/themes/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations" rel="friend">great WordPress restaurant themes</a> and plugins that help restaurants manage [responsive online menus](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
 
