@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Restaurant Reservations 1.7\n"
+"Project-Id-Version: Restaurant Reservations 1.7.1\n"
 "Report-Msgid-Bugs-To: https://themeofthecrop.com\n"
-"POT-Creation-Date: 2016-12-05 13:47:46+00:00\n"
+"POT-Creation-Date: 2016-12-14 16:51:35+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -139,87 +139,87 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
-#: includes/Booking.class.php:182
+#: includes/Booking.class.php:192
 msgid "Please enter the date you would like to book."
 msgstr ""
 
-#: includes/Booking.class.php:192
+#: includes/Booking.class.php:202
 msgid ""
 "The date you entered is not valid. Please select from one of the dates in "
 "the calendar."
 msgstr ""
 
-#: includes/Booking.class.php:203
+#: includes/Booking.class.php:213
 msgid "Please enter the time you would like to book."
 msgstr ""
 
-#: includes/Booking.class.php:213
+#: includes/Booking.class.php:223
 msgid ""
 "The time you entered is not valid. Please select from one of the times "
 "provided."
 msgstr ""
 
-#: includes/Booking.class.php:233
+#: includes/Booking.class.php:243
 msgid "Sorry, bookings can not be made more than %s days in advance."
 msgstr ""
 
-#: includes/Booking.class.php:244
+#: includes/Booking.class.php:254
 msgid "Sorry, bookings can not be made in the past."
 msgstr ""
 
-#: includes/Booking.class.php:253
+#: includes/Booking.class.php:263
 msgid "Sorry, bookings can not be made for the same day."
 msgstr ""
 
-#: includes/Booking.class.php:261
+#: includes/Booking.class.php:271
 msgid "Sorry, bookings must be made more than %s days in advance."
 msgstr ""
 
-#: includes/Booking.class.php:263
+#: includes/Booking.class.php:273
 msgid "Sorry, bookings must be made more than %s hours in advance."
 msgstr ""
 
-#: includes/Booking.class.php:265
+#: includes/Booking.class.php:275
 msgid "Sorry, bookings must be made more than %s minutes in advance."
 msgstr ""
 
-#: includes/Booking.class.php:305
+#: includes/Booking.class.php:315
 msgid "Sorry, no bookings are being accepted then."
 msgstr ""
 
-#: includes/Booking.class.php:357
+#: includes/Booking.class.php:367
 msgid "Sorry, no bookings are being accepted on that date."
 msgstr ""
 
-#: includes/Booking.class.php:363
+#: includes/Booking.class.php:373
 msgid "Sorry, no bookings are being accepted at that time."
 msgstr ""
 
-#: includes/Booking.class.php:385
+#: includes/Booking.class.php:395
 msgid "Please enter a name for this booking."
 msgstr ""
 
-#: includes/Booking.class.php:395
+#: includes/Booking.class.php:405
 msgid "Please let us know how many people will be in your party."
 msgstr ""
 
-#: includes/Booking.class.php:405
+#: includes/Booking.class.php:415
 msgid "We only accept bookings for parties of up to %d people."
 msgstr ""
 
-#: includes/Booking.class.php:413
+#: includes/Booking.class.php:423
 msgid "We only accept bookings for parties of more than %d people."
 msgstr ""
 
-#: includes/Booking.class.php:424
+#: includes/Booking.class.php:434
 msgid "Please enter an email address so we can confirm your booking."
 msgstr ""
 
-#: includes/Booking.class.php:446
+#: includes/Booking.class.php:456
 msgid "Please complete this field to request a booking."
 msgstr ""
 
-#: includes/Booking.class.php:458
+#: includes/Booking.class.php:468
 msgid ""
 "Your booking has been rejected. Please call us if you would like to make a "
 "booking."
@@ -309,58 +309,58 @@ msgid ""
 "and try again."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:303
-#: includes/MultipleLocations.class.php:406
+#: includes/MultipleLocations.class.php:304
+#: includes/MultipleLocations.class.php:407
 msgid "Location"
 msgstr ""
 
-#: includes/MultipleLocations.class.php:358
+#: includes/MultipleLocations.class.php:359
 msgid "Please select a location for your booking."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:365
+#: includes/MultipleLocations.class.php:366
 msgid "The location you selected is not valid. Please select another location."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:474
+#: includes/MultipleLocations.class.php:475
 msgid "Reservations"
 msgstr ""
 
-#: includes/MultipleLocations.class.php:541
+#: includes/MultipleLocations.class.php:542
 msgid "Show booking form with this location."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:547 includes/Settings.class.php:550
+#: includes/MultipleLocations.class.php:548 includes/Settings.class.php:550
 msgid "Reply-To Name"
 msgstr ""
 
-#: includes/MultipleLocations.class.php:551
+#: includes/MultipleLocations.class.php:552
 msgid ""
 "The name which should appear in the Reply-To field of a user notification "
 "email."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:557 includes/Settings.class.php:562
+#: includes/MultipleLocations.class.php:558 includes/Settings.class.php:562
 msgid "Reply-To Email Address"
 msgstr ""
 
-#: includes/MultipleLocations.class.php:561 includes/Settings.class.php:563
+#: includes/MultipleLocations.class.php:562 includes/Settings.class.php:563
 msgid ""
 "The email address which should appear in the Reply-To field of a user "
 "notification email."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:568
+#: includes/MultipleLocations.class.php:569
 msgid "Admin Notification Email Address"
 msgstr ""
 
-#: includes/MultipleLocations.class.php:572
+#: includes/MultipleLocations.class.php:573
 msgid ""
 "The email address where admin notifications for bookings at this location "
 "should be sent."
 msgstr ""
 
-#: includes/MultipleLocations.class.php:681
+#: includes/MultipleLocations.class.php:682
 msgid "Location for which this booking was made."
 msgstr ""
 
@@ -1180,7 +1180,7 @@ msgctxt "Booking status for a closed booking"
 msgid "Closed"
 msgstr ""
 
-#: includes/MultipleLocations.class.php:102
+#: includes/MultipleLocations.class.php:103
 msgctxt "Name for grouping bookings"
 msgid "Location"
 msgstr ""
