@@ -89,6 +89,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			add_filter( 'rtb_notification_email_from_name',           array( $this, 'notification_from_name' ), 10, 2 );
 			add_filter( 'rtb_notification_template_tags',             array( $this, 'notification_template_tags' ), 10, 2 );
 			add_filter( 'rtb_notification_template_tag_descriptions', array( $this, 'notification_template_tag_descriptions' ) );
+			add_action( 'admin_init',                                 array( $this, 'fix_autodraft_term_error' ) );
 		}
 
 		/**
@@ -206,7 +207,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		public function delete_location( $post_id ) {
 
 			if ( !current_user_can( 'delete_posts' ) ) {
-				return;
+				return $post_id;
 			}
 
 			$term_id = get_post_meta( $post_id, $this->location_taxonomy, true );
@@ -226,10 +227,10 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 			// historical data.
 			if ( count( $query->bookings ) ) {
 				add_term_meta( $term_id, 'rtb_location_removed', true );
-				return;
+			} else {
+				wp_delete_term( $term_id, $this->location_taxonomy );
 			}
 
-			wp_delete_term( $term_id, $this->location_taxonomy );
 		}
 
 		/**
@@ -681,6 +682,74 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 				array( '{location}' => __( 'Location for which this booking was made.', 'restaurant-reservations' ) ),
 				$descriptions
 			);
+		}
+
+		/**
+		 * Removes Auto-Draft locations that were added due to a bug in v1.7
+		 *
+		 * Version 1.7 introduced a bug which caused a location term to be
+		 * created if the location Add New page was loaded. This term
+		 * corresponded to an auto-draft post object and will be removed when
+		 * that object is removed. This provides a one-time fix in v1.7.1
+		 *
+		 * @see https://github.com/NateWr/restaurant-reservations/issues/91
+		 * @see https://developer.wordpress.org/reference/functions/wp_delete_auto_drafts/
+		 * @since 1.7.1
+		 */
+		public function fix_autodraft_term_error() {
+
+			if ( get_option( 'rtb_autodraft_terms_fixed', false ) ) {
+				return;
+			}
+
+			global $wpdb;
+
+			if ( !$wpdb ) {
+				return;
+			}
+
+			$old_posts = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE post_status = 'auto-draft' AND post_type = '$this->post_type';" );
+			foreach ( (array) $old_posts as $delete ) {
+				// Force delete.
+				wp_delete_post( $delete, true );
+			}
+
+			// Set the `rtb_location_removed` term meta on any terms that are
+			// no longer attached to posts
+			global $wp_version;
+			if ( version_compare( $wp_version, '3.9', '>=' ) ) {
+				$live_terms = $wpdb->get_col( "SELECT meta_value FROM $wpdb->postmeta WHERE meta_key='$this->location_taxonomy';" );
+				$all_terms = get_terms( array(
+					'taxonomy' => $this->location_taxonomy,
+					'hide_empty' => false,
+					'meta_query' => array(
+						array(
+							'compare' => 'NOT EXISTS',
+							'key' => 'rtb_location_removed',
+						)
+					)
+				) );
+				if ( is_array( $all_terms ) ) {
+					foreach( $all_terms as $term ) {
+						if ( !in_array( $term->term_id, $live_terms ) ) {
+							$query = new rtbQuery( array( 'location' => $term->term_id ), 'delete-location-term-check' );
+							$query->prepare_args();
+							$query->get_bookings();
+
+							// Don't delete taxonomy terms if there are bookings assigned to
+							// this location, so the booking associations can remain as
+							// historical data.
+							if ( count( $query->bookings ) ) {
+								add_term_meta( $term->term_id, 'rtb_location_removed', true );
+							} else {
+								wp_delete_term( $term->term_id, $this->location_taxonomy );
+							}
+						}
+					}
+				}
+			}
+
+			update_option( 'rtb_autodraft_terms_fixed', true );
 		}
 	}
 }

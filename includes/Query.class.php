@@ -227,6 +227,8 @@ class rtbQuery {
 
 		$this->bookings = $bookings;
 
+		wp_reset_query();
+
 		return $this->bookings;
 	}
 
