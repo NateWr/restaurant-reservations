@@ -466,7 +466,7 @@ class rtbBookingsTable extends WP_List_Table {
 
 			case 'submitted-by' :
 				$ip = !empty( $booking->ip ) ? $booking->ip : __( 'Unknown IP', 'restaurant-reservations' );
-				$date_submission = isset( $booking->date_submission ) ? $booking->format_date( $booking->date_submission ) : __( 'Unknown Date', 'restaurant-reservations' );
+				$date_submission = isset( $booking->date_submission ) ? $booking->format_timestamp( $booking->date_submission ) : __( 'Unknown Date', 'restaurant-reservations' );
 				$value = sprintf( esc_html__( 'Request from %s on %s.', 'restaurant-reservations' ), $ip, $date_submission );
 				$value .= '<div class="actions">';
 				$value .= '<a href="#" data-action="ban" data-email="' . esc_attr( $booking->email ) . '" data-id="' . absint( $booking->ID ) . '" data-ip="' . $ip . '">';

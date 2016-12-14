@@ -125,6 +125,16 @@ class rtbBooking {
 	}
 
 	/**
+	 * Format a timestamp into a human-readable date
+	 *
+	 * @since 1.7.1
+	 */
+	public function format_timestamp( $timestamp ) {
+		$time = date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $timestamp );
+		return $time;
+	}
+
+	/**
 	 * Insert a new booking submission into the database
 	 *
 	 * Validates the data, adds it to the database and executes notifications
