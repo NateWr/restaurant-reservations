@@ -124,12 +124,13 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 		 */
 		public function save_location( $post_id, $post, $update ) {
 
-
-			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-				return $post_id;
-			}
-
-			if ( !current_user_can( 'edit_post', $post_id ) ) {
+			if (
+					$post->post_status === 'auto-draft' ||
+					( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ||
+					!current_user_can( 'edit_post', $post_id ) ||
+					!isset( $_POST['rtb_location_meta_nonce'] ) ||
+					!wp_verify_nonce( $_POST['rtb_location_meta_nonce'], 'rtb_location_meta' )
+				) {
 				return $post_id;
 			}
 
@@ -137,15 +138,16 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 
 			// Create a new term for this location
 			if ( !$term_id ) {
+
 				$term = wp_insert_term(
 					sanitize_text_field( $post->post_title ),
 					$this->location_taxonomy
 				);
+
 				if ( !is_a( $term, 'WP_Error' ) ) {
 					update_post_meta( $post_id, $this->location_taxonomy, $term['term_id'] );
+					$term_id = $term['term_id'];
 				}
-
-				$term_id = $term['term_id'];
 
 			// Update the term for this location
 			} else {
@@ -159,36 +161,34 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 				);
 			}
 
-			// Save post and and term meta data
-			if ( !isset( $_POST['rtb_location_meta_nonce'] ) || !wp_verify_nonce( $_POST['rtb_location_meta_nonce'], 'rtb_location_meta' ) ) {
-				return $post_id;
-			}
-
 			if ( !empty( $_POST['rtb_append_booking_form'] ) ) {
 				update_post_meta( $post_id, 'rtb_append_booking_form', true );
 			} else {
 				delete_post_meta( $post_id, 'rtb_append_booking_form' );
 			}
 
-			if ( !empty( $_POST['rtb_reply_to_name'] ) ) {
-				$reply_to_name = sanitize_text_field( $_POST['rtb_reply_to_name'] );
-				update_term_meta( $term_id, 'rtb_reply_to_name', $reply_to_name );
-			} else {
-				delete_term_meta( $term_id, 'rtb_reply_to_name' );
-			}
+			if ( $term_id ) {
 
-			if ( !empty( $_POST['rtb_reply_to_address'] ) ) {
-				$reply_to_address = sanitize_email( $_POST['rtb_reply_to_address'] );
-				update_term_meta( $term_id, 'rtb_reply_to_address', $reply_to_address );
-			} else {
-				delete_term_meta( $term_id, 'rtb_reply_to_address' );
-			}
+				if ( !empty( $_POST['rtb_reply_to_name'] ) ) {
+					$reply_to_name = sanitize_text_field( $_POST['rtb_reply_to_name'] );
+					update_term_meta( $term_id, 'rtb_reply_to_name', $reply_to_name );
+				} else {
+					delete_term_meta( $term_id, 'rtb_reply_to_name' );
+				}
 
-			if ( !empty( $_POST['rtb_admin_email_address'] ) ) {
-				$email = sanitize_email( $_POST['rtb_admin_email_address'] );
-				update_term_meta( $term_id, 'rtb_admin_email_address', $email );
-			} else {
-				delete_term_meta( $term_id, 'rtb_admin_email_address' );
+				if ( !empty( $_POST['rtb_reply_to_address'] ) ) {
+					$reply_to_address = sanitize_email( $_POST['rtb_reply_to_address'] );
+					update_term_meta( $term_id, 'rtb_reply_to_address', $reply_to_address );
+				} else {
+					delete_term_meta( $term_id, 'rtb_reply_to_address' );
+				}
+
+				if ( !empty( $_POST['rtb_admin_email_address'] ) ) {
+					$email = sanitize_email( $_POST['rtb_admin_email_address'] );
+					update_term_meta( $term_id, 'rtb_admin_email_address', $email );
+				} else {
+					delete_term_meta( $term_id, 'rtb_admin_email_address' );
+				}
 			}
 
 			return $post_id;
