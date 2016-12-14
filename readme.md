@@ -7,11 +7,11 @@ Plugin URL: https://themeofthecrop.com
 <br/>
 Requires at Least: 4.4
 <br/>
-Tested Up To: 4.6
+Tested Up To: 4.7
 <br/>
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
 <br/>
-Stable tag: 1.7
+Stable tag: 1.7.1
 <br/>
 License: GPLv2 or later
 <br/>
@@ -39,7 +39,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 
 ## How to use
 
-Read the [User Guide](http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) for quicks tips on how to get started taking reservations.
+Read the [User Guide](http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) for quick tips on how to get started taking reservations.
 
 ### Addons
 [Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugins/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
@@ -124,6 +124,11 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.1 (2016-12-14)
+* Fix: Submitted by date and time in the bookings list
+* Fix: Fatal error when creating a new location with the Business Profile plugin
+* Fix: Remove or archive unexpected "Auto Draft" that was created in some circumstances
 
 #### 1.7 (2016-12-05)
 * Add: Allow customer banning by email and IP address
@@ -322,6 +327,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.7.1
+This update fixes a critical bug introduced in v1.7 if you use bookings with the multi-location features of Business Profile. You are encouraged to update as soon as possible.
 
 #### 1.7
 This update adds new features for banning bookings from no-shows and preventing blocked times from appearing in the time picker. New options for min party size and same-day bookings have been added. Bookings Managers can now edit bookings in the past.
