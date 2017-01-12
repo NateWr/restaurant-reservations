@@ -11,7 +11,7 @@ Tested Up To: 4.7
 <br/>
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
 <br/>
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 <br/>
 License: GPLv2 or later
 <br/>
@@ -124,6 +124,10 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.2 (2017-01-12)
+* Fix: acceptsReservations schema property sometimes didn't appear in Business Profile integration
+* Update: improve early bookings options language. Changed "Up to X days in advance" to "From X days in advance".
 
 #### 1.7.1 (2016-12-14)
 * Fix: Submitted by date and time in the bookings list
@@ -327,6 +331,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.7.2
+This minor maintenance update fixes a bug with the integration with the Business Profile plugin. It also adds the new Email Templates addon to the list of available addons.
 
 #### 1.7.1
 This update fixes a critical bug introduced in v1.7 if you use bookings with the multi-location features of Business Profile. You are encouraged to update as soon as possible.
