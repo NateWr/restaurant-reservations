@@ -1,20 +1,80 @@
-# Copyright (C) 2016 Theme of the Crop
+# Copyright (C) 2017 Theme of the Crop
 # This file is distributed under the GNU General Public License v2.0 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Restaurant Reservations 1.7.1\n"
 "Report-Msgid-Bugs-To: https://themeofthecrop.com\n"
-"POT-Creation-Date: 2016-12-14 16:51:35+00:00\n"
+"POT-Creation-Date: 2017-01-12 19:54:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.4\n"
 
 #: includes/Addons.class.php:47
 msgid "Addons for Restaurant Reservations"
+msgstr ""
+
+#: includes/Addons.class.php:54
+msgid "Custom Fields"
+msgstr ""
+
+#: includes/Addons.class.php:57
+msgid ""
+"Plan your dinner service better by asking for special seating requests, "
+"dietary needs and more when customers book online."
+msgstr ""
+
+#: includes/Addons.class.php:61 includes/Addons.class.php:77
+#: includes/Addons.class.php:93 includes/Addons.class.php:109
+msgid "Learn More"
+msgstr ""
+
+#: includes/Addons.class.php:70
+msgid "Export Bookings"
+msgstr ""
+
+#: includes/Addons.class.php:73
+msgid ""
+"Easily print your bookings in a PDF or export them to an Excel/CSV file so "
+"you can analyze patterns, cull customer data and import bookings into other "
+"services."
+msgstr ""
+
+#: includes/Addons.class.php:86 includes/Settings.class.php:595
+msgid "Email Templates"
+msgstr ""
+
+#: includes/Addons.class.php:89
+msgid ""
+"Send beautiful email notifications with your own logo and brand colors when "
+"your customers make a reservation."
+msgstr ""
+
+#: includes/Addons.class.php:102
+msgid "MailChimp"
+msgstr ""
+
+#: includes/Addons.class.php:105
+msgid ""
+"Subscribe requests to your MailChimp mailing list and watch your "
+"subscription rates grow effortlessly."
+msgstr ""
+
+#: includes/Addons.class.php:118
+msgid "Restaurant WordPress Themes"
+msgstr ""
+
+#: includes/Addons.class.php:121
+msgid ""
+"Find the best WordPress restaurant themes that integrate beautifully with "
+"your reservations plugin."
+msgstr ""
+
+#: includes/Addons.class.php:125
+msgid "View Themes"
 msgstr ""
 
 #: includes/AdminBookings.class.php:86
@@ -519,23 +579,23 @@ msgid "Any time"
 msgstr ""
 
 #: includes/Settings.class.php:453
-msgid "Up to 1 day in advance"
+msgid "From 1 day in advance"
 msgstr ""
 
 #: includes/Settings.class.php:454
-msgid "Up to 1 week in advance"
+msgid "From 1 week in advance"
 msgstr ""
 
 #: includes/Settings.class.php:455
-msgid "Up to 2 weeks in advance"
+msgid "From 2 weeks in advance"
 msgstr ""
 
 #: includes/Settings.class.php:456
-msgid "Up to 30 days in advance"
+msgid "From 30 days in advance"
 msgstr ""
 
 #: includes/Settings.class.php:457
-msgid "Up to 90 days in advance"
+msgid "From 90 days in advance"
 msgstr ""
 
 #: includes/Settings.class.php:468
@@ -668,10 +728,6 @@ msgstr ""
 
 #: includes/Settings.class.php:586
 msgid "The email address where admin notifications should be sent."
-msgstr ""
-
-#: includes/Settings.class.php:595
-msgid "Email Templates"
 msgstr ""
 
 #: includes/Settings.class.php:597
@@ -1046,40 +1102,40 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: includes/integrations/business-profile.php:124
-#: includes/integrations/business-profile.php:127
+#: includes/integrations/business-profile.php:126
+#: includes/integrations/business-profile.php:129
 msgid "Show book a table link"
 msgstr ""
 
-#: includes/integrations/business-profile.php:187
+#: includes/integrations/business-profile.php:189
 msgid "--- Baker"
 msgstr ""
 
-#: includes/integrations/business-profile.php:188
+#: includes/integrations/business-profile.php:190
 msgid "--- Bar or Pub"
 msgstr ""
 
-#: includes/integrations/business-profile.php:189
+#: includes/integrations/business-profile.php:191
 msgid "--- Brewery"
 msgstr ""
 
-#: includes/integrations/business-profile.php:190
+#: includes/integrations/business-profile.php:192
 msgid "--- Cafe or Coffee Shop"
 msgstr ""
 
-#: includes/integrations/business-profile.php:191
+#: includes/integrations/business-profile.php:193
 msgid "--- FastFoodRestaurant"
 msgstr ""
 
-#: includes/integrations/business-profile.php:192
+#: includes/integrations/business-profile.php:194
 msgid "--- Ice Cream Shop"
 msgstr ""
 
-#: includes/integrations/business-profile.php:193
+#: includes/integrations/business-profile.php:195
 msgid "--- Restaurant"
 msgstr ""
 
-#: includes/integrations/business-profile.php:194
+#: includes/integrations/business-profile.php:196
 msgid "--- Winery"
 msgstr ""
 
@@ -1135,7 +1191,7 @@ msgctxt "Title of addons page in the admin menu"
 msgid "Addons"
 msgstr ""
 
-#: includes/Addons.class.php:134
+#: includes/Addons.class.php:150
 msgctxt "restaurant-reservations"
 msgid ""
 "Find out when new addons are available by subscribing to the %smonthly "
