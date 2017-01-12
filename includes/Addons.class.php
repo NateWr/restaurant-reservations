@@ -51,14 +51,14 @@ class rtbAddons {
 					<a href="https://themeofthecrop.com/plugins/restaurant-reservations/custom-fields/<?php echo $url_params; ?>">
 						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/custom-fields.png'; ?>">
 					</a>
-					<h3><?php echo esc_html( 'Custom Fields', 'restaurant-reservations' ); ?></h3>
+					<h3><?php esc_html_e( 'Custom Fields', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php echo esc_html( 'Plan your dinner service better by asking for special seating requests, dietary needs and more when customers book online.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'Plan your dinner service better by asking for special seating requests, dietary needs and more when customers book online.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/plugins/restaurant-reservations/custom-fields/<?php echo $url_params; ?>" class="button button-primary" target="_blank">
-								<?php echo esc_html( 'Learn More', 'restaurant-reservations' ); ?>
+								<?php esc_html_e( 'Learn More', 'restaurant-reservations' ); ?>
 							</a>
 						</div>
 					</div>
@@ -67,14 +67,30 @@ class rtbAddons {
 					<a href="https://themeofthecrop.com/plugins/restaurant-reservations/export-bookings/<?php echo $url_params; ?>">
 						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/export-bookings.png'; ?>">
 					</a>
-					<h3><?php echo esc_html( 'Export Bookings', 'restaurant-reservations' ); ?></h3>
+					<h3><?php esc_html_e( 'Export Bookings', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php echo esc_html( 'Easily print your bookings in a PDF or export them to an Excel/CSV file so you can analyze patterns, cull customer data and import bookings into other services.' ); ?>
+							<?php esc_html_e( 'Easily print your bookings in a PDF or export them to an Excel/CSV file so you can analyze patterns, cull customer data and import bookings into other services.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/plugins/restaurant-reservations/export-bookings/<?php echo $url_params; ?>" class="button button-primary" target="_blank">
-								<?php echo esc_html( 'Learn More', 'restaurant-reservations' ); ?>
+								<?php esc_html_e( 'Learn More', 'restaurant-reservations' ); ?>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-email-templates">
+					<a href="https://themeofthecrop.com/plugins/restaurant-reservations/email-templates/<?php echo $url_params; ?>">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/email-templates.png'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Email Templates', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'Send beautiful email notifications with your own logo and brand colors when your customers make a reservation.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://themeofthecrop.com/plugins/restaurant-reservations/email-templates/<?php echo $url_params; ?>" class="button button-primary" target="_blank">
+								<?php esc_html_e( 'Learn More', 'restaurant-reservations' ); ?>
 							</a>
 						</div>
 					</div>
@@ -83,14 +99,14 @@ class rtbAddons {
 					<a href="https://themeofthecrop.com/plugins/restaurant-reservations/mailchimp/<?php echo $url_params; ?>">
 						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/mailchimp.png'; ?>">
 					</a>
-					<h3><?php echo esc_html( 'MailChimp', 'restaurant-reservations' ); ?></h3>
+					<h3><?php esc_html_e( 'MailChimp', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php echo esc_html( 'Subscribe requests to your MailChimp mailing list and watch your subscription rates grow effortlessly.' ); ?>
+							<?php esc_html_e( 'Subscribe requests to your MailChimp mailing list and watch your subscription rates grow effortlessly.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/plugins/restaurant-reservations/mailchimp/<?php echo $url_params; ?>" class="button button-primary" target="_blank">
-								<?php echo esc_html( 'Learn More', 'restaurant-reservations' ); ?>
+								<?php esc_html_e( 'Learn More', 'restaurant-reservations' ); ?>
 							</a>
 						</div>
 					</div>
@@ -99,14 +115,14 @@ class rtbAddons {
 					<a href="https://themeofthecrop.com/themes/<?php echo $url_params; ?>">
 						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/themes.png'; ?>">
 					</a>
-					<h3><?php echo esc_html( 'Restaurant WordPress Themes', 'restaurant-reservations' ); ?></h3>
+					<h3><?php esc_html_e( 'Restaurant WordPress Themes', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php echo esc_html( 'Find the best WordPress restaurant themes that integrate beautifully with your reservations plugin.' ); ?>
+							<?php esc_html_e( 'Find the best WordPress restaurant themes that integrate beautifully with your reservations plugin.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/themes/<?php echo $url_params; ?>" class="button" target="_blank">
-								<?php echo esc_html( 'View Themes', 'restaurant-reservations' ); ?>
+								<?php esc_html_e( 'View Themes', 'restaurant-reservations' ); ?>
 							</a>
 						</div>
 					</div>
