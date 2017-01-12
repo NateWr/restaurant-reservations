@@ -450,11 +450,11 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'blank_option'	=> false,
 				'options'       => array(
 					''		=> __( 'Any time', 'restaurant-reservations' ),
-					'1' 	=> __( 'Up to 1 day in advance', 'restaurant-reservations' ),
-					'7' 	=> __( 'Up to 1 week in advance', 'restaurant-reservations' ),
-					'14' 	=> __( 'Up to 2 weeks in advance', 'restaurant-reservations' ),
-					'30' 	=> __( 'Up to 30 days in advance', 'restaurant-reservations' ),
-					'90' 	=> __( 'Up to 90 days in advance', 'restaurant-reservations' ),
+					'1' 	=> __( 'From 1 day in advance', 'restaurant-reservations' ),
+					'7' 	=> __( 'From 1 week in advance', 'restaurant-reservations' ),
+					'14' 	=> __( 'From 2 weeks in advance', 'restaurant-reservations' ),
+					'30' 	=> __( 'From 30 days in advance', 'restaurant-reservations' ),
+					'90' 	=> __( 'From 90 days in advance', 'restaurant-reservations' ),
 				)
 			)
 		);
