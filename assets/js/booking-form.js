@@ -112,13 +112,15 @@ jQuery(document).ready(function ($) {
 				rtb_booking_form.datepicker.set( 'disable', disable_dates );
 			}
 
-			if ( typeof rtb_pickadate.late_bookings === 'string' && rtb_pickadate.late_bookings == 'same_day' ) {
-				rtb_booking_form.datepicker.set( 'min', 1 );
-			} else if ( typeof rtb_pickadate.late_bookings === 'number' && rtb_pickadate.late_bookings % 1 === 0 ) {
-				rtb_pickadate.late_bookings = parseInt( rtb_pickadate.late_bookings, 10 );
-				if ( rtb_pickadate.late_bookings >= 1440 ) {
-					var min = Math.floor( rtb_pickadate.late_bookings / 1440 );
-					rtb_booking_form.datepicker.set( 'min', min );
+			if ( typeof rtb_pickadate.late_bookings === 'string' ) {
+				if ( rtb_pickadate.late_bookings == 'same_day' ) {
+					rtb_booking_form.datepicker.set( 'min', 1 );
+				} else if ( rtb_pickadate.late_bookings != '' ) {
+					rtb_pickadate.late_bookings = parseInt( rtb_pickadate.late_bookings, 10 );
+					if ( rtb_pickadate.late_bookings % 1 === 0 && rtb_pickadate.late_bookings >= 1440 ) {
+						var min = Math.floor( rtb_pickadate.late_bookings / 1440 );
+						rtb_booking_form.datepicker.set( 'min', min );
+					}
 				}
 			}
 
