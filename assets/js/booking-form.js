@@ -44,8 +44,14 @@ jQuery(document).ready(function ($) {
 					container: 'body',
 					firstDay: rtb_pickadate.first_day,
 
-					// Select the value when loaded if a value has been set
 					onStart: function() {
+
+						// Block dates beyond early bookings window
+						if ( rtb_pickadate.early_bookings != '' ) {
+							this.set( 'max', parseInt( rtb_pickadate.early_bookings, 10 ) );
+						}
+
+						// Select the value when loaded if a value has been set
 						if ( $date_input.val()	!== '' ) {
 							var date = new Date( $date_input.val() );
 							if ( Object.prototype.toString.call( date ) === "[object Date]" ) {
