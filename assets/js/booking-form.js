@@ -47,7 +47,7 @@ jQuery(document).ready(function ($) {
 					onStart: function() {
 
 						// Block dates beyond early bookings window
-						if ( rtb_pickadate.early_bookings != '' ) {
+						if ( rtb_pickadate.early_bookings !== '' ) {
 							this.set( 'max', parseInt( rtb_pickadate.early_bookings, 10 ) );
 						}
 
