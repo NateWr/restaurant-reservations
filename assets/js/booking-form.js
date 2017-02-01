@@ -121,7 +121,7 @@ jQuery(document).ready(function ($) {
 			if ( typeof rtb_pickadate.late_bookings === 'string' ) {
 				if ( rtb_pickadate.late_bookings == 'same_day' ) {
 					rtb_booking_form.datepicker.set( 'min', 1 );
-				} else if ( rtb_pickadate.late_bookings != '' ) {
+				} else if ( rtb_pickadate.late_bookings !== '' ) {
 					rtb_pickadate.late_bookings = parseInt( rtb_pickadate.late_bookings, 10 );
 					if ( rtb_pickadate.late_bookings % 1 === 0 && rtb_pickadate.late_bookings >= 1440 ) {
 						var min = Math.floor( rtb_pickadate.late_bookings / 1440 );
@@ -186,7 +186,7 @@ jQuery(document).ready(function ($) {
 		var valid_times = [ rtb_booking_form.get_outer_time_range() ];
 
 		// Check if this date is an exception to the rules
-		if ( typeof rtb_pickadate.schedule_closed != 'undefined' ) {
+		if ( typeof rtb_pickadate.schedule_closed !== 'undefined' ) {
 
 			var excp_date = [];
 			var excp_start_date = [];
