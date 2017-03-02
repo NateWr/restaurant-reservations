@@ -11,7 +11,7 @@ Tested Up To: 4.7
 <br/>
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
 <br/>
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 <br/>
 License: GPLv2 or later
 <br/>
@@ -42,11 +42,13 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 Read the [User Guide](http://doc.themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) for quick tips on how to get started taking reservations.
 
 ### Addons
-[Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugins/custom-fields-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
+[Custom Fields for Restaurant Reservations](https://themeofthecrop.com/plugins/restaurant-reservations/custom-fields/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Add custom fields and edit your booking form with ease.
 
-[Export Bookings for Restaurant Reservations](https://themeofthecrop.com/plugins/export-bookings-for-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
+[Email Templates for Restaurant Reservations](https://themeofthecrop.com/plugins/restaurant-reservations/email-templates/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
 
-[MailChimp for Restaurant Reservations](https://themeofthecrop.com/plugins/mailchimp-restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
+[Export Bookings for Restaurant Reservations](https://themeofthecrop.com/plugins/restaurant-reservations/export-bookings/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Export your restaurant reservations to PDF and Excel/CSV files.
+
+[MailChimp for Restaurant Reservations](https://themeofthecrop.com/plugins/restaurant-reservations/mailchimp/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) - Subscribe emails from new restaurant reservations to your MailChimp mailing list.
 
 ### Developers
 
@@ -124,6 +126,12 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.3 (2017-03-02)
+* Fix: Apply late bookings restrictions more than 1 day to date picker
+* Fix: Allow multiple email addresses for location-specific admin notifications
+* Fix: Translation textdomain used for Business Profile integration
+* Add: Apply early bookings restrictions to the date picker
 
 #### 1.7.2 (2017-01-12)
 * Fix: acceptsReservations schema property sometimes didn't appear in Business Profile integration
@@ -331,6 +339,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.7.3
+This minor maintenance update ensures scheduling restrictions are reflected in the date and time pickers. It also allows multiple email addresses to be used in location-specific admin notifications.
 
 #### 1.7.2
 This minor maintenance update fixes a bug with the integration with the Business Profile plugin. It also adds the new Email Templates addon to the list of available addons.
