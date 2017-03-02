@@ -185,7 +185,7 @@ if ( ! class_exists( 'rtbMultipleLocations', false ) ) {
 				}
 
 				if ( !empty( $_POST['rtb_admin_email_address'] ) ) {
-					$email = sanitize_email( $_POST['rtb_admin_email_address'] );
+					$email = sanitize_text_field( $_POST['rtb_admin_email_address'] );
 					update_term_meta( $term_id, 'rtb_admin_email_address', $email );
 				} else {
 					delete_term_meta( $term_id, 'rtb_admin_email_address' );
