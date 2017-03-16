@@ -1,20 +1,12 @@
 # Restaurant Reservations
-Contributors: NateWr
-<br/>
-Author URI: https://github.com/NateWr
-<br/>
-Plugin URL: https://themeofthecrop.com
-<br/>
-Requires at Least: 4.4
-<br/>
-Tested Up To: 4.7
-<br/>
-Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
-<br/>
-Stable tag: 1.7.3
-<br/>
-License: GPLv2 or later
-<br/>
+Contributors: NateWr  
+Author URI: https://github.com/NateWr  
+Plugin URL: https://themeofthecrop.com  
+Requires at Least: 4.4  
+Tested Up To: 4.7.3  
+Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
+Stable tag: 1.7.3  
+License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
 Accept restaurant reservations and table bookings online. Quickly confirm or reject bookings, send email notifications, set booking times and more.
