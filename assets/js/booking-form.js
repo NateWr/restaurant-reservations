@@ -368,7 +368,7 @@ jQuery(document).ready(function ($) {
 	rtb_booking_form.get_earliest_time = function( start_time, selected_date, current_date ) {
 
 		// Only make adjustments for current day selections
-		if ( selected_date.getDate() !== current_date.getDate() ) {
+		if ( selected_date.toDateString() !== current_date.toDateString() ) {
 			return start_time;
 		}
 
