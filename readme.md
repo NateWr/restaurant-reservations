@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.4  
 Tested Up To: 4.7.3  
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.7.3  
+Stable tag: 1.7.4  
 License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
@@ -118,6 +118,11 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.4 (2017-03-21)
+* Fix: Wrong time restrictions for day one month in advance. See #102
+* Add: Disable button when submitted to prevent duplicate submissions
+* Add: Polish translation. h/t Wojciech Sadowski
 
 #### 1.7.3 (2017-03-02)
 * Fix: Apply late bookings restrictions more than 1 day to date picker
