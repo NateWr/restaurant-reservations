@@ -30,6 +30,12 @@ jQuery(document).ready(function ($) {
 			$( '.rtb-booking-form .add-message a' ).trigger( 'click' );
 		}
 
+		// Disable the submit button when the booking form is submitted
+		$( '.rtb-booking-form form' ).submit( function() {
+			$(this).find( 'button[type="submit"]' ).prop( 'disabled', 'disabled' );
+			return true;
+		} );
+
 		// Enable datepickers on load
 		if ( typeof rtb_pickadate !== 'undefined' ) {
 
