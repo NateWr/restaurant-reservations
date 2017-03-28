@@ -604,11 +604,15 @@
 	float: left;
 	width: 150px;
 	height: 150px;
-	margin: 0 20px 20px 0;
+	margin-right: 20px;
 }
 
 .rtb-addons .action {
 	margin-top: 2em;
+}
+
+.rtb-addons .action .button {
+	margin-right: 0.5em;
 }
 
 .rtb-addons .soon,
@@ -628,16 +632,16 @@
 	background: #81F05E;
 }
 
-.rtb-addons .addon-themes .action .button {
-	background: #D24C2B;
-	color: #fff;
-	border-color: #a53216;
-	box-shadow: 0 1px 0 #cc3712;
+.rtb-addons .rtb-by {
+	display: inline-block;
+	font-style: italic;
+	line-height: 28px;
+	color: #777;
 }
 
-.rtb-addons .addon-themes .action .button:hover,
-.rtb-addons .addon-themes .action .button:focus {
-	background: #ff5126;
+.rtb-addons .rtb-by a {
+	margin-left: 0.25em;
+	font-style: normal;
 }
 
 @media screen and (max-width: 600px) {

@@ -111,19 +111,102 @@ class rtbAddons {
 						</div>
 					</div>
 				</div>
+			</div>
+			<h2>Recommended Themes</h2>
+			<p>The following restaurant themes integrate beautifully with Restaurant Reservations, providing a clean, stylized booking form that matches your site's design.</p>
+			<div class="rtb-addons">
 				<div class="addon addon-themes">
-					<a href="https://themeofthecrop.com/themes/<?php echo $url_params; ?>">
-						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/themes.png'; ?>">
+					<a href="https://themeofthecrop.com/themes/augustan<?php echo $url_params; ?>">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-augustan.jpg'; ?>">
 					</a>
-					<h3><?php esc_html_e( 'Restaurant WordPress Themes', 'restaurant-reservations' ); ?></h3>
+					<h3><?php esc_html_e( 'Augustan', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'Find the best WordPress restaurant themes that integrate beautifully with your reservations plugin.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A traditionally elegant WordPress theme for high-class restaurants, with simple setup and powerful features.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
-							<a href="https://themeofthecrop.com/themes/<?php echo $url_params; ?>" class="button" target="_blank">
-								<?php esc_html_e( 'View Themes', 'restaurant-reservations' ); ?>
+							<a href="https://themeofthecrop.com/themes/augustan<?php echo $url_params; ?>" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
 							</a>
+							<span class="rtb-by">
+								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
+					<a href="https://themeofthecrop.com/themes/luigi<?php echo $url_params; ?>">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-luigi.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Luigi', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A smart WordPress theme for upscale bistros and fine Italian restaurants. Quick and easy setup.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://themeofthecrop.com/themes/luigi<?php echo $url_params; ?>" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
+					<a href="https://themeofthecrop.com/themes/the-spot<?php echo $url_params; ?>">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-the-spot.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'The Spot', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A vibrant WordPress theme for bars, pubs and destination restaurants with an attention-grabbing homepage.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://themeofthecrop.com/themes/the-spot<?php echo $url_params; ?>" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
+					<a href="https://themeofthecrop.com/themes/plate-up<?php echo $url_params; ?>">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-plate-up.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Plate Up', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A refined WordPress theme for sophisticated, modern restaurants to drive customers to your booking form.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://themeofthecrop.com/themes/plate-up<?php echo $url_params; ?>" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
+					<a href="https://wordpress.org/themes/auberge/">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-auberge.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Auberge', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'Display a menu of your restaurant, café or bar stylishly with this free mobile-friendly WordPress theme.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://wordpress.org/themes/auberge/" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="https://www.webmandesign.eu/">Webman Design</a>
+							</span>
 						</div>
 					</div>
 				</div>
