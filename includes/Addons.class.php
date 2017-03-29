@@ -210,6 +210,25 @@ class rtbAddons {
 						</div>
 					</div>
 				</div>
+				<div class="addon addon-themes">
+					<a href="http://www.anarieldesign.com/themes/restaurant-bar-wordpress-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-liber.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Liber', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A responsive theme optimized for restaurants and bars supporting features these websites need.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="http://www.anarieldesign.com/themes/restaurant-bar-wordpress-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="http://www.anarieldesign.com/">Anariel Design</a>
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
 			<?php do_action( 'rtb_addons_post' ); ?>
 		</div>
