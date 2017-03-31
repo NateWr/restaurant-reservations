@@ -24,6 +24,14 @@ class rtbCustomPostTypes {
 		// Set up $booking_statuses array and register new post statuses
 		add_action( 'init', array( $this, 'set_booking_statuses' ) );
 
+		// Display the count of pending bookings
+		add_action( 'admin_footer', array( $this, 'show_pending_count' ) );
+
+		// Maintain the count of pending bookings
+		add_action( 'rtb_insert_booking', array( $this, 'update_pending_count' ) );
+		add_action( 'rtb_update_booking', array( $this, 'update_pending_count' ) );
+		add_action( 'transition_post_status', array( $this, 'maybe_update_pending_count' ), 999, 3 );
+
 	}
 
 	/**
@@ -243,6 +251,83 @@ class rtbCustomPostTypes {
 	 */
 	public function is_valid_booking_post_object( $booking ) {
 		return !is_wp_error( $booking ) && is_object( $booking ) && $booking->post_type == RTB_BOOKING_POST_TYPE;
+	}
+
+	/**
+	 * Show the count of upcoming pending bookings in admin nav menu
+	 *
+	 * This is hooked to admin_footer to ensure that any actions on the page
+	 * which might effect booking statuses have already fired, such as the
+	 * bulk actions on the bookings page, which are processed after the nav
+	 * menu has been loaded.
+	 *
+	 * @since 1.7.5
+	 */
+	public function show_pending_count() {
+
+		$pending_count = get_option( 'rtb_pending_count' );
+
+		if ( $pending_count === false ) {
+			global $rtb_controller;
+			$rtb_controller->cpts->update_pending_count();
+			$pending_count = get_option( 'rtb_pending_count', 0 );
+		}
+
+		if ( !$pending_count ) {
+			return;
+		}
+
+		$pending_bubble = ' <span class="update-plugins count-' . (int) $pending_count . '">' .
+				'<span class="plugin-count" aria-hidden="true">' . (int) $pending_count . '</span></span>';
+
+		?>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function ($) {
+				$( '#toplevel_page_rtb-bookings > a .wp-menu-name' ).append( '<?php echo $pending_bubble; ?>' );
+			});
+		</script>
+
+		<?php
+	}
+
+	/**
+	 * Update the count of upcoming pending bookings
+	 *
+	 * This is hooked to fire whenever a booking is added or updated. But it can
+	 * also be called directly once to set the initial option.
+	 *
+	 * @param rtbBooking $booking Optional. The booking being added or updated.
+	 * @since 1.7.5
+	 */
+	public function update_pending_count( $booking = null ) {
+
+		global $wpdb;
+		$current_date_time = date( 'Y-m-d H:i:s', current_time( 'timestamp' ) - HOUR_IN_SECONDS );
+		$count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$wpdb->prefix}posts WHERE post_type=%s AND post_status='pending' AND post_date>=%s;",
+				RTB_BOOKING_POST_TYPE,
+				$current_date_time
+			)
+		);
+
+		update_option( 'rtb_pending_count', (int) $count );
+	}
+
+	/**
+	 * Update the count of upcoming pending bookings whenever a booking status
+	 * is modified
+	 *
+	 * @param string $new_status The status being transitioned to
+	 * @param string $old_status The status the post used to have
+	 * @param WP_Post $post The post being transitioned
+	 * @since 1.7.5
+	 */
+	public function maybe_update_pending_count( $new_status, $old_status, $post ) {
+		if ( $post->post_type === RTB_BOOKING_POST_TYPE ) {
+			$this->update_pending_count();
+		}
 	}
 
 }
