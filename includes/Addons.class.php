@@ -122,7 +122,7 @@ class rtbAddons {
 					<h3><?php esc_html_e( 'Augustan', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'A traditionally elegant WordPress theme for high-class restaurants, with simple setup and powerful features.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A traditionally elegant theme for high-class restaurants, with simple setup and powerful features.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/themes/augustan<?php echo $url_params; ?>" class="button" target="_blank">
@@ -141,7 +141,7 @@ class rtbAddons {
 					<h3><?php esc_html_e( 'Luigi', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'A smart WordPress theme for upscale bistros and fine Italian restaurants. Quick and easy setup.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A smart theme for upscale bistros and fine Italian restaurants. Quick and easy setup.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/themes/luigi<?php echo $url_params; ?>" class="button" target="_blank">
@@ -160,7 +160,7 @@ class rtbAddons {
 					<h3><?php esc_html_e( 'The Spot', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'A vibrant WordPress theme for bars, pubs and destination restaurants with an attention-grabbing homepage.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A vibrant theme for bars, pubs and destination restaurants with an attention-grabbing homepage.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/themes/the-spot<?php echo $url_params; ?>" class="button" target="_blank">
@@ -179,7 +179,7 @@ class rtbAddons {
 					<h3><?php esc_html_e( 'Plate Up', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'A refined WordPress theme for sophisticated, modern restaurants to drive customers to your booking form.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A refined theme for sophisticated, modern restaurants to drive customers to your booking form.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/themes/plate-up<?php echo $url_params; ?>" class="button" target="_blank">
