@@ -433,6 +433,12 @@ class rtbBooking {
 				'post_variable'	=> $this->email,
 				'message'	=> __( 'Please enter an email address so we can confirm your booking.', 'restaurant-reservations' ),
 			);
+		} elseif ( !is_email( $this->email ) && apply_filters( 'rtb_require_valid_email', true ) ) {
+			$this->validation_errors[] = array(
+				'field'			=> 'email',
+				'post_variable'	=> $this->email,
+				'message'	=> __( 'Please enter a valid email address so we can confirm your booking.', 'restaurant-reservations' ),
+			);
 		}
 
 		// Phone/Message
