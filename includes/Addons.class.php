@@ -141,7 +141,7 @@ class rtbAddons {
 					<h3><?php esc_html_e( 'Luigi', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'A smart theme for upscale bistros and fine Italian restaurants. Quick and easy setup.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A smart theme for upscale bistros and fine Italian restaurants. Get up and running quickly.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themeofthecrop.com/themes/luigi<?php echo $url_params; ?>" class="button" target="_blank">
@@ -244,6 +244,25 @@ class rtbAddons {
 							</a>
 							<span class="rtb-by">
 								by <a href="https://www.templateexpress.com/">Template Express</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
+					<a href="http://www.anarieldesign.com/themes/food-blog-wordpress-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-veggie.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Veggie', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A food blogging and restaurant theme with modern, easy-to-read typography and minimalist design.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="http://www.anarieldesign.com/themes/food-blog-wordpress-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="http://www.anarieldesign.com/">Anariel Design</a>
 							</span>
 						</div>
 					</div>
