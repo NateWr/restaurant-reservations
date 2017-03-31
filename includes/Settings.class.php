@@ -291,6 +291,22 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		$sap->add_setting(
 			'rtb-settings',
 			'rtb-general',
+			'select',
+			array(
+				'id'            => 'require-phone',
+				'title'         => __( 'Require Phone', 'restaurant-reservations' ),
+				'description'   => __( "Don't accept booking requests without a phone number.", 'restaurant-reservations' ),
+				'blank_option'	=> false,
+				'options'       => array(
+					'' => __( 'No', 'restaurant-reservations' ),
+					'1' => __( 'Yes', 'restaurant-reservations' ),
+				),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-general',
 			'textarea',
 			array(
 				'id'			=> 'success-message',

@@ -425,7 +425,7 @@ class rtbBooking {
 			}
 		}
 
-		// Email/Phone
+		// Email
 		$this->email = empty( $_POST['rtb-email'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-email'] ) ); // @todo email validation? send notification back to form on bad email address.
 		if ( empty( $this->email ) ) {
 			$this->validation_errors[] = array(
@@ -441,8 +441,18 @@ class rtbBooking {
 			);
 		}
 
-		// Phone/Message
+		// Phone
 		$this->phone = empty( $_POST['rtb-phone'] ) ? '' : sanitize_text_field( stripslashes_deep( $_POST['rtb-phone'] ) );
+		$phone_required = $rtb_controller->settings->get_setting( 'require-phone' );
+		if ( $phone_required && empty( $this->phone ) ) {
+			$this->validation_errors[] = array(
+				'field'			=> 'phone',
+				'post_variable'	=> $this->phone,
+				'message'	=> __( 'Please provide a phone number so we can confirm your booking.', 'restaurant-reservations' ),
+			);
+		}
+
+		// Message
 		$this->message = empty( $_POST['rtb-message'] ) ? '' : nl2br( wp_kses_post( stripslashes_deep( $_POST['rtb-message'] ) ) );
 
 		// Post Status (define a default post status is none passed)
