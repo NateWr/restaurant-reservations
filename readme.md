@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.4  
 Tested Up To: 4.7.3  
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.7.4  
+Stable tag: 1.7.5  
 License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
@@ -118,6 +118,12 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.5 (2017-03-31)
+* Add: #104 Show count of upcoming pending bookings in admin nav menu
+* Add: #44 Reject invalid email addresses in booking requests
+* Add: Setting to require a phone number
+* Add: Recommended themes with booking form styles listed in the Addons page
 
 #### 1.7.4 (2017-03-21)
 * Fix: Wrong time restrictions for day one month in advance. See #102
@@ -336,6 +342,12 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.7.5
+This update adds an option to require a phone, email address validation and a notification bubble showing the number of upcoming pending bookings in the admin area.
+
+#### 1.7.4
+This update fixes an issue with time restrictions when applied to the same day one month in advance. It also adds a technique to attempt to prevent duplicate submissions. Adds Polish translation.
 
 #### 1.7.3
 This minor maintenance update ensures scheduling restrictions are reflected in the date and time pickers. It also allows multiple email addresses to be used in location-specific admin notifications.
