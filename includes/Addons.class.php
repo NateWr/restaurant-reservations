@@ -229,6 +229,25 @@ class rtbAddons {
 						</div>
 					</div>
 				</div>
+				<div class="addon addon-themes">
+					<a href="https://wordpress.org/themes/brasserie/">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-brasserie.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Brasserie', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A delightfully simple to use and beautifully crafted free theme for any food establishment.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://wordpress.org/themes/brasserie/" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="https://www.templateexpress.com/">Template Express</a>
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
 			<?php do_action( 'rtb_addons_post' ); ?>
 		</div>
