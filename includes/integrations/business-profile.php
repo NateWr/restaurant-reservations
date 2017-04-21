@@ -186,7 +186,7 @@ add_filter( 'bp_schema_types', 'rtb_bp_schema_types' );
 function rtb_bp_food_schema_types() {
 
 	return array(
-		'Baker' => __( '--- Baker', 'restaurant-reservations' ),
+		'Bakery' => __( '--- Bakery', 'restaurant-reservations' ),
 		'BarOrPub' => __( '--- Bar or Pub', 'restaurant-reservations' ),
 		'Brewery' => __( '--- Brewery', 'restaurant-reservations' ),
 		'CafeOrCoffeeShop' => __( '--- Cafe or Coffee Shop', 'restaurant-reservations' ),
