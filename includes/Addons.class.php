@@ -192,6 +192,25 @@ class rtbAddons {
 					</div>
 				</div>
 				<div class="addon addon-themes">
+					<a href="https://themebeans.com/themes/plate?utm_source=totc_addons_plate&utm_medium=banner&utm_campaign=TOTC%20Addons%20Link%2C%20Plate">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-plate.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Plate', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'Display a menu of your restaurant, café or bar stylishly with this free mobile-friendly WordPress theme.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="https://themebeans.com/themes/plate?utm_source=totc_addons_plate&utm_medium=banner&utm_campaign=TOTC%20Addons%20Link%2C%20Plate" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="https://themebeans.com?utm_source=totc_addons_plate&utm_medium=banner&utm_campaign=TOTC%20Addons%20Link%2C%20Plate">ThemeBeans</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
 					<a href="https://wordpress.org/themes/auberge/">
 						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-auberge.jpg'; ?>">
 					</a>
