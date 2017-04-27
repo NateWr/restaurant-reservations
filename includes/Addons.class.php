@@ -198,7 +198,7 @@ class rtbAddons {
 					<h3><?php esc_html_e( 'Plate', 'restaurant-reservations' ); ?></h3>
 					<div class="details">
 						<div class="description">
-							<?php esc_html_e( 'Display a menu of your restaurant, café or bar stylishly with this free mobile-friendly WordPress theme.', 'restaurant-reservations' ); ?>
+							<?php esc_html_e( 'A delightfully beautiful WordPress theme designed to help you build a stunning restaurant website.', 'restaurant-reservations' ); ?>
 						</div>
 						<div class="action">
 							<a href="https://themebeans.com/themes/plate?utm_source=totc_addons_plate&utm_medium=banner&utm_campaign=TOTC%20Addons%20Link%2C%20Plate" class="button" target="_blank">
