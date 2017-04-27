@@ -129,7 +129,7 @@ class rtbAddons {
 								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
 							</a>
 							<span class="rtb-by">
-								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+								by <a href="https://themeofthecrop.com/<?php echo $url_params; ?>">Theme of the Crop</a>
 							</span>
 						</div>
 					</div>
@@ -148,7 +148,7 @@ class rtbAddons {
 								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
 							</a>
 							<span class="rtb-by">
-								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+								by <a href="https://themeofthecrop.com/<?php echo $url_params; ?>">Theme of the Crop</a>
 							</span>
 						</div>
 					</div>
@@ -167,7 +167,7 @@ class rtbAddons {
 								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
 							</a>
 							<span class="rtb-by">
-								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+								by <a href="https://themeofthecrop.com/<?php echo $url_params; ?>">Theme of the Crop</a>
 							</span>
 						</div>
 					</div>
@@ -186,7 +186,7 @@ class rtbAddons {
 								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
 							</a>
 							<span class="rtb-by">
-								by <a href="https://themeofthecrop.com/">Theme of the Crop</a>
+								by <a href="https://themeofthecrop.com/<?php echo $url_params; ?>">Theme of the Crop</a>
 							</span>
 						</div>
 					</div>
