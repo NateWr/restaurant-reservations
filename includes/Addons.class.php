@@ -286,6 +286,44 @@ class rtbAddons {
 						</div>
 					</div>
 				</div>
+				<div class="addon addon-themes">
+					<a href="http://www.anarieldesign.com/themes/wine-and-winery-wordpress-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-good-ol-wine.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( "Good Ol' Wine", 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A beautiful responsive theme that is suitable for wine enthusiasts, wineries and wine bars.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="http://www.anarieldesign.com/themes/wine-and-winery-wordpress-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="http://www.anarieldesign.com/">Anariel Design</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="addon addon-themes">
+					<a href="http://www.anarieldesign.com/themes/simple-and-fresh-blogging-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations">
+						<img src="<?php echo RTB_PLUGIN_URL . '/assets/img/theme-healthy-living.jpg'; ?>">
+					</a>
+					<h3><?php esc_html_e( 'Healthy Living', 'restaurant-reservations' ); ?></h3>
+					<div class="details">
+						<div class="description">
+							<?php esc_html_e( 'A modern, clean healthy food blogging theme that can be used for a restaurant as well.', 'restaurant-reservations' ); ?>
+						</div>
+						<div class="action">
+							<a href="http://www.anarieldesign.com/themes/simple-and-fresh-blogging-theme/?utm_source=Theme%20of%20the%20Crop&utm_medium=Addon%20List&utm_campaign=Restaurant%20Reservations" class="button" target="_blank">
+								<?php esc_html_e( 'View Theme', 'restaurant-reservations' ); ?>
+							</a>
+							<span class="rtb-by">
+								by <a href="http://www.anarieldesign.com/">Anariel Design</a>
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
 			<?php do_action( 'rtb_addons_post' ); ?>
 		</div>
