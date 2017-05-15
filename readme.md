@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.4  
 Tested Up To: 4.7.3  
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.7.5  
+Stable tag: 1.7.6  
 License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
@@ -118,6 +118,10 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.6 (2017-05-15)
+* Fix: Prevent IP address from being modified after initial submission
+* Fix: Schema type for Bakery used when integrating with Business Profile
 
 #### 1.7.5 (2017-03-31)
 * Add: #104 Show count of upcoming pending bookings in admin nav menu
