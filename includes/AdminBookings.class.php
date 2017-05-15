@@ -19,7 +19,7 @@ class rtbAdminBookings {
 	 * @see WP_List_table.BookingsTable.class.php
 	 * @since 1.6
 	 */
-	public $booking_table;
+	public $bookings_table;
 
 	public function __construct() {
 
