@@ -759,6 +759,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			$options[$i] = $i;
 		}
 
+
 		return apply_filters( 'rtb_party_size_setting_options', $options );
 	}
 
@@ -768,6 +769,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	 */
 	public function get_form_party_options() {
 
+		$options=array();
 		$party_size = (int) $this->get_setting( 'party-size' );
 		$party_size_min = (int) $this->get_setting( 'party-size-min' );
 
@@ -777,7 +779,6 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		for ( $i = $min; $i <= $max; $i++ ) {
 			$options[$i] = $i;
 		}
-		$options=isset($options)?$options:'';
 
 		return apply_filters( 'rtb_form_party_options', $options );
 	}
