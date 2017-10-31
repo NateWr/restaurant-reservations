@@ -777,6 +777,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 		for ( $i = $min; $i <= $max; $i++ ) {
 			$options[$i] = $i;
 		}
+		$options=isset($options)?$options:'';
 
 		return apply_filters( 'rtb_form_party_options', $options );
 	}
