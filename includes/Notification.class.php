@@ -90,7 +90,7 @@ abstract class rtbNotification {
 			'{close_link}'		=> '<a href="' . admin_url( 'admin.php?page=rtb-bookings&rtb-quicklink=close&booking=' . esc_attr( $this->booking->ID ) ) . '">' . __( 'Reject this booking', 'restaurant-reservations' ) . '</a>',
 			'{site_name}'		=> get_bloginfo( 'name' ),
 			'{site_link}'		=> '<a href="' . home_url( '/' ) . '">' . get_bloginfo( 'name' ) . '</a>',
-			'{current_time}'	=> date( get_option( 'date_format' ), current_time( 'timestamp' ) ) . ' ' . date( get_option( 'time_format' ), current_time( 'timestamp' ) ),
+			'{current_time}'	=> date_i18n( get_option( 'date_format' ), current_time( 'timestamp' ) ) . ' ' . date_i18n( get_option( 'time_format' ), current_time( 'timestamp' ) ),
 		);
 
 		$template_tags = apply_filters( 'rtb_notification_template_tags', $template_tags, $this );
