@@ -59,6 +59,9 @@ jQuery(document).ready(function ($) {
 
 		} else if ( target.data( 'action' ) == 'ban') {
 			rtb_toggle_ban_modal( true, target.data( 'id'), target.data( 'email' ), target.data( 'ip' ) );
+
+		} else if ( target.data( 'action' ) == 'delete') {
+			rtb_toggle_delete_modal( true, target.data( 'id'), target.data( 'email' ) );
 		}
 
 		e.preventDefault();
@@ -113,6 +116,13 @@ jQuery(document).ready(function ($) {
 		rtb_ban_modal_submit_ip = rtb_ban_modal.find( '#rtb-ban-modal-ip-btn' ),
 		rtb_ban_modal_cancel = rtb_ban_modal.find( '#rtb-cancel-ban-modal' ),
 		rtb_ban_modal_action_status = rtb_ban_modal.find( '.action-status' );
+		rtb_delete_modal = $( '#rtb-delete-modal' ),
+		rtb_delete_modal_submit_btn = rtb_delete_modal.find( '#rtb-delete-modal-btn' ),
+		rtb_delete_modal_cancel = rtb_delete_modal.find( '#rtb-cancel-delete-modal' ),
+		rtb_delete_modal_action_status = rtb_delete_modal.find( '.action-status' );
+		rtb_delete_modal_status = rtb_delete_modal.find( '#rtb-delete-status' );
+		rtb_delete_modal_progress = rtb_delete_modal_status.find( '#rtb-delete-status-progress' );
+		rtb_delete_modal_deleted = rtb_delete_modal_status.find( '#rtb-delete-status-deleted' );
 
 	/**
 	 * Show or hide the booking form modal
@@ -222,6 +232,8 @@ jQuery(document).ready(function ($) {
 					rtb_toggle_email_modal( true, target.data( 'id'), target.data( 'email' ), target.data( 'name' ) );
 				} else if ( target.data( 'action' ) == 'ban') {
 					rtb_toggle_ban_modal( true, target.data( 'id'), target.data( 'email' ), target.data( 'ip' ) );
+				} else if ( target.data( 'action' ) == 'delete') {
+					rtb_toggle_delete_modal( true, target.data( 'id'), target.data( 'email' ) );
 				}
 			});
 
@@ -260,6 +272,23 @@ jQuery(document).ready(function ($) {
 			rtb_ban_modal_submit_ip.prop( 'disabled', false );
 			rtb_ban_modal_cancel.prop( 'disabled', false );
 
+			$( 'body' ).removeClass( 'rtb-hide-body-scroll' );
+		}
+	}
+
+	/**
+	 * Show or hide the delete customer form modal
+	 */
+	function rtb_toggle_delete_modal( show, id, email ) {
+
+		if ( show ) {
+			rtb_delete_modal.scrollTop( 0 ).addClass( 'is-visible' );
+			rtb_delete_modal.find( '#rtb-delete-modal-email' ).text( email );
+			$( 'body' ).addClass( 'rtb-hide-body-scroll' );
+
+		} else {
+			rtb_delete_modal.removeClass( 'is-visible' );
+			rtb_delete_modal.find( '#rtb-ban-modal-email' ).text( '' );
 			$( 'body' ).removeClass( 'rtb-hide-body-scroll' );
 		}
 	}
@@ -444,6 +473,17 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	// Close delete modal when background or cancel button is clicked
+	rtb_delete_modal.click( function(e) {
+		if ( $(e.target).is( rtb_delete_modal ) ) {
+			rtb_toggle_delete_modal( false );
+		}
+
+		if ( $(e.target).is( rtb_delete_modal_cancel ) && rtb_delete_modal_cancel.prop( 'disabled' ) !== true ) {
+			rtb_toggle_delete_modal( false );
+		}
+	});
+
 	// Close modals when ESC is keyed
 	$(document).keyup( function(e) {
 		if ( e.which == '27' ) {
@@ -453,6 +493,7 @@ jQuery(document).ready(function ($) {
 			rtb_toggle_details_modal( false );
 			rtb_toggle_booking_form_error_modal( false );
 			rtb_toggle_ban_modal( false );
+			rtb_toggle_delete_modal( false );
 		}
 	});
 
@@ -713,6 +754,77 @@ jQuery(document).ready(function ($) {
 	// Submit ban ip form modal
 	rtb_ban_modal_submit_ip.click( function(e) {
 		rtb_ban_modal_submit( e, 'ip' );
+	});
+
+	// Delete customers by email
+	function rtb_delete_modal_submit( e ) {
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		// Loading
+		rtb_delete_modal_submit_btn.prop( 'disabled', true );
+		rtb_delete_modal_cancel.prop( 'disabled', true );
+		rtb_delete_modal_action_status.addClass( 'is-visible' );
+		rtb_delete_modal_status.addClass('is-visible');
+		rtb_show_action_status( rtb_delete_modal_action_status, 'loading' );
+
+		function delete_page( params ) {
+
+			var jqhxr = $.post( ajaxurl, $.param( params ), function( r ) {
+
+				if ( r.success ) {
+
+					processed = processed + r.data.processed;
+					deleted = deleted + r.data.deleted;
+					var percent = Math.ceil( ( processed / r.data.total ) * 100 );
+					rtb_delete_modal_progress.css( 'width', percent + '%' );
+					rtb_delete_modal_deleted.text( deleted + ' bookings deleted' );
+
+					if ( processed < r.data.total ) {
+						params.page++;
+						delete_page( params );
+					} else {
+						rtb_delete_modal_cancel.click(function(e) {
+							window.location.reload();
+						});
+						rtb_delete_modal_deleted.text( 'Finished! ' + deleted + ' bookings deleted' );
+						rtb_delete_modal_cancel.prop( 'disabled', false );
+						rtb_delete_modal_submit_btn.css('display', 'none');
+						rtb_delete_modal_action_status.removeClass( 'is-visible' );
+						rtb_show_action_status( rtb_delete_modal_action_status, false );
+					}
+
+				} else {
+
+					if ( typeof r.data == 'undefined' || typeof r.data.error == 'undefined' ) {
+						rtb_toggle_booking_form_error_modal( true, rtb_admin.strings.error_unspecified );
+					} else {
+						rtb_toggle_booking_form_error_modal( true, r.data.msg );
+					}
+
+					rtb_delete_modal_submit_btn.prop( 'disabled', false );
+					rtb_delete_modal_cancel.prop( 'disabled', false );
+					rtb_delete_modal_action_status.removeClass( 'is-visible' );
+					rtb_delete_modal_status.removeClass( 'is-visible' );
+					rtb_show_action_status( rtb_delete_modal_action_status, false );
+				}
+			});
+		}
+
+		var processed = 0;
+		var deleted = 0;
+		delete_page({
+			action: 'rtb-admin-delete-modal',
+			nonce: rtb_admin.nonce,
+			email: rtb_delete_modal.find( '#rtb-delete-modal-email' ).text(),
+			page: 1,
+		});
+	}
+
+	// Submit ban email form modal
+	rtb_delete_modal_submit_btn.click( function(e) {
+		rtb_delete_modal_submit( e );
 	});
 
 });

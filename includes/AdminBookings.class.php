@@ -40,6 +40,8 @@ class rtbAdminBookings {
 		add_action( 'wp_ajax_rtb-admin-column-modal', array( $this, 'column_modal_ajax' ) );
 		add_action( 'wp_ajax_nopriv_rtb-admin-ban-modal' , array( $this , 'nopriv_ajax' ) );
 		add_action( 'wp_ajax_rtb-admin-ban-modal', array( $this, 'ban_modal_ajax' ) );
+		add_action( 'wp_ajax_nopriv_rtb-admin-delete-modal' , array( $this , 'nopriv_ajax' ) );
+		add_action( 'wp_ajax_rtb-admin-delete-modal', array( $this, 'delete_modal_ajax' ) );
 
 		// Validate post status and notification fields
 		add_action( 'rtb_validate_booking_submission', array( $this, 'validate_admin_fields' ) );
@@ -297,6 +299,33 @@ class rtbAdminBookings {
 				<a class="button-link" href="<?php echo esc_url( admin_url( '/admin.php?page=rtb-settings' ) ); ?>" target="_blank">
 					<?php esc_html_e( 'View all bans', 'restaurant-reservations' ); ?>
 				</a>
+				<div class="action-status">
+					<span class="spinner loading"></span>
+					<span class="dashicons dashicons-no-alt error"></span>
+					<span class="dashicons dashicons-yes success"></span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Restaurant Reservations delete customer modal -->
+		<div id="rtb-delete-modal" class="rtb-admin-modal">
+			<div class="rtb-delete-form rtb-container">
+				<div class="rtb-delete-msg">
+					<?php
+						printf(
+							__( 'Delete all booking records related to email address %s? This action can not be undone.', 'restaurant-reservations' ),
+							'<span id="rtb-delete-modal-email"></span>'
+						);
+					?>
+				</div>
+				<div id="rtb-delete-status">
+					<span class="rtb-delete-status-total">
+						<span id="rtb-delete-status-progress" class="rtb-delete-status-progress"></span>
+					</span>
+					<div id="rtb-delete-status-deleted"></div>
+				</div>
+				<button class="button button-primary" id="rtb-delete-modal-btn">Delete Bookings</button>
+				<button id="rtb-cancel-delete-modal" class="button"><?php _e( 'Close', 'restaurant-reservations' ); ?></button>
 				<div class="action-status">
 					<span class="spinner loading"></span>
 					<span class="dashicons dashicons-no-alt error"></span>
@@ -747,6 +776,67 @@ class rtbAdminBookings {
 			array(
 				'error'		=> 'no_data',
 				'msg'		=> __( 'No IP or email address could be found for this ban request.', 'restaurant-reservations' ),
+			)
+		);
+	}
+
+	/**
+	 * Handle ajax requests to delete bookings by email
+	 *
+	 * @since 1.7.7
+	 */
+	public function delete_modal_ajax() {
+
+		global $rtb_controller;
+
+		// Authenticate request
+		if ( !check_ajax_referer( 'rtb-admin', 'nonce' ) || !current_user_can( 'manage_bookings' ) ) {
+			$this->nopriv_ajax();
+		}
+
+		if ( !empty( $_POST['email'] ) ) {
+			$email = sanitize_email( $_POST['email'] );
+
+			$args = array(
+				'date_range' => null,
+				'posts_per_page'	=> 100,
+				'paged' => !empty( $_POST['page'] ) ? (int) $_POST['page'] : 1,
+			);
+
+			$query = new rtbQuery( $args, 'delete-by-email' );
+			$query->prepare_args();
+
+			$bookings = $query->get_bookings();
+			$deleted = 0;
+			foreach( $bookings as $booking ) {
+				if ( isset( $booking->email ) && $booking->email === $email) {
+					wp_delete_post( $booking->ID, true );
+					$deleted++;
+				}
+			}
+
+			// Get count of all bookings
+			global $wpdb;
+			$where = "WHERE p.post_type = '" . RTB_BOOKING_POST_TYPE . "'";
+			$query = "SELECT count( * ) AS num_posts
+				FROM $wpdb->posts p
+				$where
+			";
+
+			$count = $wpdb->get_results( $query );
+			$count = (int) $count[0]->num_posts;
+
+			wp_send_json_success(array(
+				'processed' => count($bookings),
+				'deleted' => $deleted,
+				'total' => $count,
+			));
+		}
+
+		wp_send_json_error(
+			array(
+			'error'		=> 'no_data',
+			'msg'		=> __( 'No email address could be found for this delete request.', 'restaurant-reservations' ),
 			)
 		);
 	}

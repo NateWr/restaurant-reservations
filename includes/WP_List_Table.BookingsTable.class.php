@@ -478,7 +478,10 @@ class rtbBookingsTable extends WP_List_Table {
 				}
 				$value .= '<div class="actions">';
 				$value .= '<a href="#" data-action="ban" data-email="' . esc_attr( $booking->email ) . '" data-id="' . absint( $booking->ID ) . '" data-ip="' . $ip . '">';
-				$value .= __( 'Ban Customer', 'restaurant-reservations' );
+				$value .= __( 'Ban', 'restaurant-reservations' );
+				$value .= '</a>';
+				$value .= ' | <a href="#" data-action="delete" data-email="' . esc_attr( $booking->email ) . '" data-id="' . absint( $booking->ID ) . '">';
+				$value .= __( 'Delete Customer', 'restaurant-reservations' );
 				$value .= '</a>';
 				$value .= '</div>';
 				break;
