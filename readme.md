@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr  
 Plugin URL: https://themeofthecrop.com  
 Requires at Least: 4.4  
-Tested Up To: 4.8  
+Tested Up To: 4.9.5
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.7.6  
+Stable tag: 1.7.7
 License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
@@ -118,6 +118,11 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.7 (2018-04-27)
+* Add: #135 Option to collect consent to store data (GDPR)
+* Add: #135 Ability to delete all bookings related to an email address (GDPR)
+* Fix: Some data not updated in confirm/reject emails when changed
 
 #### 1.7.6 (2017-05-15)
 * Fix: Prevent IP address from being modified after initial submission
@@ -346,6 +351,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.7.8
+This update adds two features to help you comply with GDPR privacy regulations in Europe: a confirmation field can be added to the booking form to collect a customer's consent to store their data. And you can delete all bookings related to an email address.
 
 #### 1.7.5
 This update adds an option to require a phone, email address validation and a notification bubble showing the number of upcoming pending bookings in the admin area.
