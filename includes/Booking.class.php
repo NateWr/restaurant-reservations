@@ -639,22 +639,42 @@ class rtbBooking {
 
 		$args = apply_filters( 'rtb_insert_booking_data', $args, $this );
 
-		$id = wp_insert_post( $args );
-
-		if ( is_wp_error( $id ) || $id === false ) {
-			$this->insert_post_error = $id;
-			return false;
+		// When updating a booking, we need to update the metadata first, so that
+		// notifications hooked to the status changes go out with the new metadata.
+		// If we're inserting a new booking, we have to insert it before we can
+		// add metadata, and the default notifications don't fire until it's all done.
+		if ( !empty( $this->ID ) ) {
+			$this->insert_post_meta();
+			$id = wp_insert_post( $args );
 		} else {
-			$this->ID = $id;
+			$id = wp_insert_post( $args );
+			if ( $id && !is_wp_error( $id ) ) {
+				$this->ID = $id;
+				$this->insert_post_meta();
+			}
 		}
 
+		return !is_wp_error( $id ) && $id !== false;
+	}
+
+	/**
+	 * Insert the post metadata for a new booking or when updating a booking
+	 * @since 1.7.7
+	 */
+	public function insert_post_meta() {
+
 		$meta = array(
-			'party' 			=> $this->party,
-			'email' 			=> $this->email,
-			'phone' 			=> $this->phone,
-			'date_submission' 	=> current_time( 'timestamp' ),
-			'ip'                => $this->ip,
+			'party' => $this->party,
+			'email' => $this->email,
+			'phone' => $this->phone,
+			'ip'  => $this->ip,
 		);
+
+		if ( empty( $this->date_submission ) ) {
+			$meta['date_submission'] = current_time( 'timestamp' );
+		} else {
+			$meta['date_submission'] = $this->date_submission;
+		}
 
 		if ( !empty( $this->logs ) ) {
 			$meta['logs'] = $this->logs;
@@ -663,7 +683,6 @@ class rtbBooking {
 		$meta = apply_filters( 'rtb_insert_booking_metadata', $meta, $this );
 
 		return update_post_meta( $this->ID, 'rtb', $meta );
-
 	}
 
 }
