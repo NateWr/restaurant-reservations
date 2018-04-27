@@ -115,13 +115,13 @@ jQuery(document).ready(function ($) {
 		rtb_ban_modal_submit_email = rtb_ban_modal.find( '#rtb-ban-modal-email-btn' ),
 		rtb_ban_modal_submit_ip = rtb_ban_modal.find( '#rtb-ban-modal-ip-btn' ),
 		rtb_ban_modal_cancel = rtb_ban_modal.find( '#rtb-cancel-ban-modal' ),
-		rtb_ban_modal_action_status = rtb_ban_modal.find( '.action-status' );
+		rtb_ban_modal_action_status = rtb_ban_modal.find( '.action-status' ),
 		rtb_delete_modal = $( '#rtb-delete-modal' ),
 		rtb_delete_modal_submit_btn = rtb_delete_modal.find( '#rtb-delete-modal-btn' ),
 		rtb_delete_modal_cancel = rtb_delete_modal.find( '#rtb-cancel-delete-modal' ),
-		rtb_delete_modal_action_status = rtb_delete_modal.find( '.action-status' );
-		rtb_delete_modal_status = rtb_delete_modal.find( '#rtb-delete-status' );
-		rtb_delete_modal_progress = rtb_delete_modal_status.find( '#rtb-delete-status-progress' );
+		rtb_delete_modal_action_status = rtb_delete_modal.find( '.action-status' ),
+		rtb_delete_modal_status = rtb_delete_modal.find( '#rtb-delete-status' ),
+		rtb_delete_modal_progress = rtb_delete_modal_status.find( '#rtb-delete-status-progress' ),
 		rtb_delete_modal_deleted = rtb_delete_modal_status.find( '#rtb-delete-status-deleted' );
 
 	/**
