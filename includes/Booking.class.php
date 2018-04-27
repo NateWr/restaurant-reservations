@@ -81,6 +81,7 @@ class rtbBooking {
 			'date_submission' => '',
 			'logs' => array(),
 			'ip' => '',
+			'consent_acquired' => '',
 		);
 
 		$meta_defaults = apply_filters( 'rtb_booking_metadata_defaults', $meta_defaults );
@@ -97,6 +98,7 @@ class rtbBooking {
 		$this->date_submission = $meta['date_submission'];
 		$this->logs = $meta['logs'];
 		$this->ip = $meta['ip'];
+		$this->consent_acquired = $meta['consent_acquired'];
 	}
 
 	/**
@@ -462,6 +464,13 @@ class rtbBooking {
 			$this->post_status = 'pending';
 		}
 
+		// Consent
+		$require_consent = $rtb_controller->settings->get_setting( 'require-consent' );
+		$consent_statement = $rtb_controller->settings->get_setting( 'consent-statement' );
+		if ( $require_consent && $consent_statement ) {
+			$this->consent_acquired = !empty( $_POST['rtb-consent-statement'] );
+		}
+
 		// Check if any required fields are empty
 		$required_fields = $rtb_controller->settings->get_required_fields();
 		foreach( $required_fields as $slug => $field ) {
@@ -674,6 +683,10 @@ class rtbBooking {
 			$meta['date_submission'] = current_time( 'timestamp' );
 		} else {
 			$meta['date_submission'] = $this->date_submission;
+		}
+
+		if ( !empty( $this->consent_acquired ) ) {
+			$meta['consent_acquired'] = $this->consent_acquired;
 		}
 
 		if ( !empty( $this->logs ) ) {

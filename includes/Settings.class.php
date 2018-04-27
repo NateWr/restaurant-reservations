@@ -316,9 +316,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			)
 		);
 
+		$sap->add_section(
+			'rtb-settings',
+			array(
+				'id'            => 'rtb-booking-form',
+				'title'         => __( 'Booking Form', 'restaurant-reservations' ),
+				'tab'	          => 'rtb-general',
+			)
+		);
+
 		$sap->add_setting(
 			'rtb-settings',
-			'rtb-general',
+			'rtb-booking-form',
 			'text',
 			array(
 				'id'            => 'date-format',
@@ -330,7 +339,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 		$sap->add_setting(
 			'rtb-settings',
-			'rtb-general',
+			'rtb-booking-form',
 			'text',
 			array(
 				'id'            => 'time-format',
@@ -355,9 +364,18 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 			);
 		}
 
+		$sap->add_section(
+			'rtb-settings',
+			array(
+				'id'            => 'rtb-security',
+				'title'         => __( 'Security', 'restaurant-reservations' ),
+				'tab'	          => 'rtb-general',
+			)
+		);
+
 		$sap->add_setting(
 			'rtb-settings',
-			'rtb-general',
+			'rtb-security',
 			'textarea',
 			array(
 				'id'			=> 'ban-emails',
@@ -368,12 +386,60 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 		$sap->add_setting(
 			'rtb-settings',
-			'rtb-general',
+			'rtb-security',
 			'textarea',
 			array(
 				'id'			=> 'ban-ips',
 				'title'			=> __( 'Banned IP Addresses', 'restaurant-reservations' ),
 				'description'	=> __( 'You can block bookings from specific IP addresses. Enter each IP address on a separate line. Be aware that many internet providers rotate their IP address assignments, so an IP address may accidentally refer to a different user. Also, if you block an IP address used by a public connection, such as cafe WIFI, a public library, or a university network, you may inadvertantly block several people.', 'restaurant-reservations' ),
+			)
+		);
+
+		$sap->add_section(
+			'rtb-settings',
+			array(
+				'id'            => 'rtb-privacy',
+				'title'         => __( 'Privacy', 'restaurant-reservations' ),
+				'tab'	          => 'rtb-general',
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-privacy',
+			'toggle',
+			array(
+				'id'			=> 'require-consent',
+				'title'			=> __( 'Require Consent', 'restaurant-reservations' ),
+				'label'			=> __( 'Require customers to consent to the collection of their details when making a booking. This may be required to comply with privacy laws in your country.', 'restaurant-reservations' )
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-privacy',
+			'textarea',
+			array(
+				'id'			=> 'consent-statement',
+				'title'			=> __( 'Consent Statement', 'restaurant-reservations' ),
+				'description'	=> __( 'Enter the statement you would like customers to confirm when making a booking.', 'restaurant-reservations' ),
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-privacy',
+			'post',
+			array(
+				'id'            => 'privacy-page',
+				'title'         => __( 'Privacy Statement Page', 'restaurant-reservations' ),
+				'description'   => __( 'Select a page on your site which contains a privacy statement. If selected, it will be linked to in your consent statement.', 'restaurant-reservations' ),
+				'blank_option'	=> true,
+				'args'			=> array(
+					'post_type' 		=> 'page',
+					'posts_per_page'	=> -1,
+					'post_status'		=> 'publish',
+				),
 			)
 		);
 
@@ -769,7 +835,7 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	public function get_form_party_options() {
 
 		$options = array();
-		
+
 		$party_size = (int) $this->get_setting( 'party-size' );
 		$party_size_min = (int) $this->get_setting( 'party-size-min' );
 
@@ -793,12 +859,13 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 	 */
 	public function get_booking_form_fields( $request = null, $args = array() ) {
 
+		global $rtb_controller;
+
 		// $request will represent a rtbBooking object with the request
 		// details when the form is being printed and $_POST data exists
 		// to populate the request. All other times $request will just
 		// be an empty object
 		if ( $request === null ) {
-			global $rtb_controller;
 			$request = $rtb_controller->request;
 		}
 
@@ -908,6 +975,29 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				),
 			),
 		);
+
+		// Add a consent request if setting is selected and it's not the admin page
+		$require_consent = $rtb_controller->settings->get_setting( 'require-consent' );
+		$consent_statement = $rtb_controller->settings->get_setting( 'consent-statement' );
+		$privacy_page = $rtb_controller->settings->get_setting( 'privacy-page' );
+		if ( !is_admin() && $require_consent && $consent_statement ) {
+
+			if ( $privacy_page && get_post_status( $privacy_page ) !== false ) {
+				$consent_statement .= sprintf(' <a href="%s">%s</a>', get_permalink( $privacy_page ), get_the_title( $privacy_page ) );
+			}
+
+			$fields['consent'] = array(
+				'fields' => array(
+					'consent-statement' => array(
+						'title' => $consent_statement,
+						'request_input' => empty( $request->consent_statement ) ? '' : $request->consent_statement,
+						'callback' => 'rtb_print_form_confirm_field',
+						'required' => true,
+					),
+				),
+				'order' => 900,
+			);
+		}
 
 		return apply_filters( 'rtb_booking_form_fields', $fields, $request, $args );
 	}

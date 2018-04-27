@@ -258,6 +258,10 @@
 	margin: 0;
 }
 
+#rtb-bookings-table .consent {
+	margin-top: 0.5em;
+}
+
 .rtb-details-data {
 	display: none;
 }
