@@ -224,7 +224,7 @@ class rtbNotificationEmail extends rtbNotification {
 	 * @since 0.0.1
 	 */
 	public function send_notification() {
-		wp_mail( $this->to_email, $this->subject, $this->message, $this->headers );
+		wp_mail( $this->to_email, $this->subject, $this->message, $this->headers, apply_filters( 'rtb_notification_email_attachments', array(), $this ) );
 	}
 }
 } // endif;
