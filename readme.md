@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr  
 Plugin URL: https://themeofthecrop.com  
 Requires at Least: 4.4  
-Tested Up To: 4.9.5
+Tested Up To: 4.9.8
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.7.7
+Stable tag: 1.7.8
 License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
@@ -118,6 +118,11 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.7.8 (2018-09-13)
+- Add: #126 Setting to override the FROM header's email address
+- Fix: #136 Preserve consent acquired state when booking is edited
+- Update: German, French and Dutch translations
 
 #### 1.7.7 (2018-04-27)
 * Add: #135 Option to collect consent to store data (GDPR)
@@ -353,6 +358,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 ## Upgrade Notice
 
 #### 1.7.8
+This update fixes a bug which removed the GDPR consent status for a booking when the booking was edited. It also adds an option to modify the FROM email header address and updates some translations.
+
+#### 1.7.7
 This update adds two features to help you comply with GDPR privacy regulations in Europe: a confirmation field can be added to the booking form to collect a customer's consent to store their data. And you can delete all bookings related to an email address.
 
 #### 1.7.5
