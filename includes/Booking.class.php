@@ -468,7 +468,10 @@ class rtbBooking {
 		$require_consent = $rtb_controller->settings->get_setting( 'require-consent' );
 		$consent_statement = $rtb_controller->settings->get_setting( 'consent-statement' );
 		if ( $require_consent && $consent_statement ) {
-			$this->consent_acquired = !empty( $_POST['rtb-consent-statement'] );
+			// Don't change consent status once initial consent has been collected
+			if ( empty( $this->consent_acquired ) ) {
+				$this->consent_acquired = !empty( $_POST['rtb-consent-statement'] );
+			}
 		}
 
 		// Check if any required fields are empty
