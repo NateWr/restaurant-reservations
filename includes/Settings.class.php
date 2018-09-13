@@ -177,6 +177,9 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 
 			// Email sent to a user with a custom update notice from the admin
 			'subject-admin-notice'			=> sprintf( _x( 'Update regarding your booking at %s', 'Default email subject sent to users when the admin sends a custom notice email from the bookings panel.', 'restaurant-reservations' ), get_bloginfo( 'name' ) ),
+
+			// Email address used in the FROM header of all emails
+			'from-email-address' => get_option( 'admin_email' ),
 		);
 
 		$i8n = str_replace( '-', '_', get_bloginfo( 'language' ) );
@@ -798,6 +801,28 @@ Sorry, we could not accomodate your booking request. We\'re full or not open at 
 				'title'			=> __( 'Admin Update Subject', 'restaurant-reservations' ),
 				'description'	=> sprintf( __( 'The email subject a user should receive when an admin sends them a custom email message from the %sbookings panel%s.', 'restaurant-reservations' ), '<a href="' . admin_url( '?page=rtb-bookings' ) . '">', '</a>' ),
 				'placeholder'	=> $this->defaults['subject-admin-notice'],
+			)
+		);
+
+		$sap->add_section(
+			'rtb-settings',
+			array(
+				'id' => 'rtb-notifications-advanced',
+				'title' => __( 'Advanced', 'restaurant-reservations' ),
+				'description' => __( "Modifying the settings below can prevent your emails from being delivered. Do not make changes unless you know what you're doing.", 'restaurant-reservations' ),
+				'tab' => 'rtb-notifications',
+			)
+		);
+
+		$sap->add_setting(
+			'rtb-settings',
+			'rtb-notifications-advanced',
+			'text',
+			array(
+				'id'			=> 'from-email-address',
+				'title'			=> __( 'FROM Email Address Header', 'restaurant-reservations' ),
+				'description'	=> sprintf( __( "Change the email address used in the FROM header of all emails sent by this plugin. In most cases you should not change this. Modifying this can prevent your emails from being delivered. %sLearn more%s.", 'restaurant-reservations' ), '<a href="http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/faq#no-emails-from-header">', '</a>' ),
+				'placeholder'	=> $this->defaults['from-email-address'],
 			)
 		);
 
