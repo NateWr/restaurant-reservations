@@ -110,13 +110,13 @@ function rtb_print_booking_form( $args = array() ) {
 			<?php
 				foreach( $contents['fields'] as $slug => $field ) {
 
-					$args = empty( $field['callback_args'] ) ? array() : $field['callback_args'];
+					$callback_args = empty( $field['callback_args'] ) ? array() : $field['callback_args'];
 
 					if ( !empty( $field['required'] ) ) {
-						$args = array_merge( $args, array( 'required' => $field['required'] ) );
+						$callback_args = array_merge( $callback_args, array( 'required' => $field['required'] ) );
 					}
 
-					call_user_func( $field['callback'], $slug, $field['title'], $field['request_input'], $args );
+					call_user_func( $field['callback'], $slug, $field['title'], $field['request_input'], $callback_args );
 				}
 			?>
 		</fieldset>

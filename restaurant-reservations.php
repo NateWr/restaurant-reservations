@@ -121,6 +121,10 @@ class rtbInit {
 		require_once( RTB_PLUGIN_DIR . '/includes/integrations/business-profile.php' );
 		require_once( RTB_PLUGIN_DIR . '/includes/integrations/woocommerce.php' );
 
+		// Load gutenberg blocks
+		require_once( RTB_PLUGIN_DIR . '/includes/Blocks.class.php' );
+		new rtbBlocks();
+
 		// Load backwards compatibility functions
 		require_once( RTB_PLUGIN_DIR . '/includes/Compatibility.class.php' );
 		new rtbCompatibility();
