@@ -76,9 +76,9 @@ class rtbBlocks {
 
 		$locations_enabled = !!$rtb_controller->locations->post_type;
 
+		$location_options = array( array( 'value' => 0, 'label' => __('Ask the user to select a location', 'restaurant-reservations' ) ) );
 		if ($locations_enabled) {
 			$locations = $rtb_controller->locations->get_location_options();
-			$location_options = array( array( 'value' => 0, 'label' => __('Ask the user to select a location', 'restaurant-reservations' ) ) );
 			foreach ( $locations as $id => $name ) {
 				$location_options[] = array( 'value' => $id, 'label' => $name);
 			}
