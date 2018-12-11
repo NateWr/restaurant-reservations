@@ -1,8 +1,8 @@
 const { __ } = wp.i18n;
-const {	registerBlockType } = wp.blocks;
-const { SelectControl, PanelBody } = wp.components;
-const {	InspectorControls } = wp.editor;
-const {	formOutline, locationsEnabled, locations } = rtb_blocks;
+const { registerBlockType } = wp.blocks;
+const { SelectControl, PanelBody, ServerSideRender, Disabled } = wp.components;
+const { InspectorControls } = wp.editor;
+const { locationsEnabled, locations } = rtb_blocks;
 
 registerBlockType( 'restaurant-reservations/booking-form', {
 	title: __( 'Booking Form', 'restaurant-reservations' ),
@@ -22,41 +22,23 @@ registerBlockType( 'restaurant-reservations/booking-form', {
 	edit( { attributes, setAttributes } ) {
 		const { location } = attributes;
 
-		function setLocation( location ) {
-			setAttributes( { location: location } );
-		}
-
 		return (
-			<div class="rtb-block-outline">
+			<div>
 				{locationsEnabled ? (
 					<InspectorControls>
 						 <PanelBody>
 							<SelectControl
 								label={ __( 'Location' ) }
 								value={ location }
-								onChange={ setLocation }
+								onChange={ ( location ) => setAttributes( { location } ) }
 								options={ locations }
 							/>
 						</PanelBody>
 					</InspectorControls>
 				) : '' }
-				{formOutline.map( (fields) => {
-					return (
-						<div className="rtb-block-outline-fieldset">
-							{fields.map( (field) => {
-								return (
-									<div className={'rtb-block-outline-field ' + field}>
-										<div className="rtb-block-outline-label"></div>
-										<div className="rtb-block-outline-input"></div>
-									</div>
-								)
-							})}
-						</div>
-					)
-				})}
-				<div class="rtb-block-outline-button">
-					{ __('Request Booking', 'restaurant-reservations') }
-				</div>
+				<Disabled>
+					<ServerSideRender block="restaurant-reservations/booking-form" attributes={ attributes } />
+				</Disabled>
 			</div>
 		);
 	},

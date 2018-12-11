@@ -25,22 +25,26 @@ class rtbBlocks {
 			return;
 		}
 
+		global $rtb_controller;
+
+		$rtb_controller->register_assets();
+
 		wp_register_script(
 			'restaurant-reservations-blocks',
 			RTB_PLUGIN_URL . '/assets/js/blocks.build.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' )
 		);
 
-		wp_register_style(
-			'restaurant-reservations-blocks',
-			RTB_PLUGIN_URL . '/assets/css/block-booking-form.css',
-			array()
-		);
-
 		register_block_type( 'restaurant-reservations/booking-form', array(
 			'editor_script' => 'restaurant-reservations-blocks',
-			'editor_style' => 'restaurant-reservations-blocks',
-			'render_callback' => array( $this, 'render' )
+			'editor_style' => 'rtb-booking-form',
+			'render_callback' => 'rtb_print_booking_form',
+			'attributes' => array(
+				'location' => array(
+					'type' => 'number',
+					'default' => 0,
+				),
+			),
 		) );
 
 		add_action( 'admin_init', array( $this, 'register_admin' ) );
@@ -53,30 +57,9 @@ class rtbBlocks {
 
 		global $rtb_controller;
 
-		$fields = $rtb_controller->settings->get_booking_form_fields();
-		$form_outline = array();
-		foreach ( $fields as $fieldset ) {
-			if ( !isset( $fieldset['fields'] ) ) {
-				continue;
-			}
-			$fieldset_outline = array();
-			foreach ( $fieldset['fields'] as $field_name => $field ) {
-				if ( $field_name === 'party' ) {
-					$fieldset_outline[] = $field['callback'] . ' rtb-block-outline-field-party';
-				} elseif ( $field_name === 'message' ) {
-					$fieldset_outline[] = $field['callback'] . ' rtb-block-outline-field-message';
-				} elseif ( $field_name === 'consent-statement' ) {
-					$fieldset_outline[] = $field['callback'] . ' rtb-block-outline-field-consent-statement';
-				} else {
-					$fieldset_outline[] = $field['callback'];
-				}
-			}
-			$form_outline[] = $fieldset_outline;
-		}
-
 		$locations_enabled = !!$rtb_controller->locations->post_type;
 
-		$location_options = array( array( 'value' => 0, 'label' => __('Ask the user to select a location', 'restaurant-reservations' ) ) );
+		$location_options = array( array( 'value' => 0, 'label' => __('Ask the customer to select a location', 'restaurant-reservations' ) ) );
 		if ($locations_enabled) {
 			$locations = $rtb_controller->locations->get_location_options();
 			foreach ( $locations as $id => $name ) {
@@ -89,23 +72,12 @@ class rtbBlocks {
 			sprintf(
 				'var rtb_blocks = %s;',
 				json_encode( array(
-					'formOutline' => $form_outline,
 					'locationsEnabled' => $locations_enabled,
 					'locations' => $location_options,
 				) )
 			),
 			'before'
 		);
-	}
-
-	/**
-	 * Render the booking form
-	 *
-	 * @param array $attributes The block attributes
-	 * @return string
-	 */
-	public function render( $attributes ) {
-		return rtb_print_booking_form( $attributes );
 	}
 }
 } // endif
