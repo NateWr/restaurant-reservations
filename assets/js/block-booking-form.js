@@ -30,7 +30,7 @@ registerBlockType( 'restaurant-reservations/booking-form', {
 							<SelectControl
 								label={ __( 'Location' ) }
 								value={ location }
-								onChange={ ( location ) => setAttributes( { location } ) }
+								onChange={ ( location ) => setAttributes( { location: parseInt( location, 10 ) } ) }
 								options={ locations }
 							/>
 						</PanelBody>
