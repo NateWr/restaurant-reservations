@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr  
 Plugin URL: https://themeofthecrop.com  
 Requires at Least: 4.4  
-Tested Up To: 4.9.8
+Tested Up To: 5.0
 Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.7.8
+Stable tag: 1.8.1
 License: GPLv2 or later  
 Donate link: https://themeofthecrop.com
 
@@ -27,7 +27,7 @@ Accept restaurant reservations and table bookings online. Quickly confirm or rej
 * Send customers [an email](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/send-emails) about their booking from the admin panel
 * [Ban abusive customers](http://doc.themeofthecrop.com/plugins/restaurant-reservations/user/manage/ban-customers) to save money on no-shows
 
-[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) builds <a href="https://themeofthecrop.com/themes/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations" rel="friend">great WordPress restaurant themes</a> and plugins that help restaurants manage [responsive online menus](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
+[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) builds plugins that help restaurants manage [responsive online menus](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Restaurant%20Reservations).
 
 ## How to use
 
@@ -118,6 +118,12 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.8.1 (2018-12-12)
+- Fix: Booking form block loads without correct location in editor
+
+#### 1.8 (2018-12-11)
+- Add: Gutenberg block for the booking form
 
 #### 1.7.8 (2018-09-13)
 - Add: #126 Setting to override the FROM header's email address
@@ -356,6 +362,12 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.8.1
+This update fixes a bug in the booking form block where the location would not be reloaded correctly after saving.
+
+#### 1.8
+This update adds a block to the new Gutenberg editor for the booking form.
 
 #### 1.7.8
 This update fixes a bug which removed the GDPR consent status for a booking when the booking was edited. It also adds an option to modify the FROM email header address and updates some translations.

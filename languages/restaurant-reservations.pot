@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Restaurant Reservations 1.7.8\n"
+"Project-Id-Version: Restaurant Reservations 1.8.1\n"
 "Report-Msgid-Bugs-To: https://themeofthecrop.com\n"
-"POT-Creation-Date: 2018-09-13 10:09:44+00:00\n"
+"POT-Creation-Date: 2018-12-12 14:51:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
-#: includes/AdminBookings.class.php:167 restaurant-reservations.php:231
+#: includes/AdminBookings.class.php:167 restaurant-reservations.php:235
 msgid "Add Booking"
 msgstr ""
 
@@ -314,6 +314,10 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
+#: includes/Blocks.class.php:62
+msgid "Ask the customer to select a location"
+msgstr ""
+
 #: includes/Booking.class.php:194
 msgid "Please enter the date you would like to book."
 msgstr ""
@@ -423,7 +427,7 @@ msgstr ""
 msgid "Add New Booking"
 msgstr ""
 
-#: includes/CustomPostTypes.class.php:52 restaurant-reservations.php:232
+#: includes/CustomPostTypes.class.php:52 restaurant-reservations.php:236
 msgid "Edit Booking"
 msgstr ""
 
@@ -510,7 +514,7 @@ msgid "Reservations"
 msgstr ""
 
 #: includes/MultipleLocations.class.php:542
-msgid "Show booking form with this location."
+msgid "Automatically add the booking form to this page."
 msgstr ""
 
 #: includes/MultipleLocations.class.php:548 includes/Settings.class.php:635
@@ -1358,21 +1362,21 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: restaurant-reservations.php:160
+#: restaurant-reservations.php:164
 msgid "Booking Manager"
 msgstr ""
 
-#: restaurant-reservations.php:233
+#: restaurant-reservations.php:237
 msgid ""
 "An unspecified error occurred. Please try again. If the problem persists, "
 "try logging out and logging back in."
 msgstr ""
 
-#: restaurant-reservations.php:297
+#: restaurant-reservations.php:301
 msgid "View the help documentation for Restaurant Reservations"
 msgstr ""
 
-#: restaurant-reservations.php:297
+#: restaurant-reservations.php:301
 msgid "Help"
 msgstr ""
 

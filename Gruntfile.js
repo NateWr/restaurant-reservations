@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		// Configure JSHint
 		jshint: {
 			test: {
-				src: 'assets/js/*.js'
+				src: ['assets/js/*.js', '!assets/js/block-booking-form.js', '!assets/js/blocks.build.js']
 			}
 		},
 
@@ -66,6 +66,6 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('build', ['jshint']);
-	grunt.registerTask('package', ['build', 'compress']);
+	grunt.registerTask('package', ['build', 'makepot', 'compress']);
 
 };
