@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingAddress_2_0 extends sapAdminPageSetting_2_0 {
+class sapAdminPageSettingAddress_2_1_2 extends sapAdminPageSetting_2_1_2 {
 
 	/*
 	 * Size of this textarea
@@ -18,6 +18,17 @@ class sapAdminPageSettingAddress_2_0 extends sapAdminPageSetting_2_0 {
 	 */
 	public $size = 'small';
 
+	/*
+	 * A Google Maps API key for geolocating addresses
+	 */
+	public $api_key = '';
+
+	/*
+	 * A jQuery selector pointing to the input element where the Google Maps API
+	 * key can be retrieved.
+	 */
+	public $api_key_selector = '';
+
 	/**
 	 * Scripts that must be loaded for this component
 	 * @since 2.0.a.5
@@ -26,7 +37,7 @@ class sapAdminPageSettingAddress_2_0 extends sapAdminPageSetting_2_0 {
 		'sap-address' => array(
 			'path'			=> 'js/address.js',
 			'dependencies'	=> array( 'jquery' ),
-			'version'		=> '2.0.a.5',
+			'version'		=> '2.1.1',
 			'footer'		=> true,
 		),
 	);
@@ -104,11 +115,13 @@ class sapAdminPageSettingAddress_2_0 extends sapAdminPageSetting_2_0 {
 			'sap_address',
 			array(
 				'strings' => $this->strings,
+				'api_key' => $this->api_key,
+				'api_key_selector' => $this->api_key_selector,
 			)
 		);
 
 		$this->display_description();
-	
+
 		?>
 
 		<div class="sap-address" id="<?php echo $this->id; ?>">

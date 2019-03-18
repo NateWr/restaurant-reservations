@@ -25,10 +25,10 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingOpeningHours_2_0 extends sapAdminPageSetting_2_0 {
+class sapAdminPageSettingOpeningHours_2_1_2 extends sapAdminPageSetting_2_1_2 {
 
 	public $sanitize_callback = 'sanitize_text_field';
-	
+
 	/**
 	 * Scripts that must be loaded for this component
 	 * @since 2.0.a.4
@@ -82,7 +82,7 @@ class sapAdminPageSettingOpeningHours_2_0 extends sapAdminPageSetting_2_0 {
 	 * @since 1.0
 	 */
 	public function esc_value( $val ) {
-	
+
 		$value = array();
 
 		// Loop over the values and sanitize them
@@ -90,7 +90,7 @@ class sapAdminPageSettingOpeningHours_2_0 extends sapAdminPageSetting_2_0 {
 			$value[$i]['day'] = isset( $val[$i] ) && isset( $val[$i]['day'] ) ? esc_attr( $val[$i]['day'] ) : '';
 			$value[$i]['hours'] = isset( $val[$i] ) && isset( $val[$i]['hours'] ) ? esc_attr( $val[$i]['hours'] ) : '';
 		}
-		
+
 		return $value;
 	}
 

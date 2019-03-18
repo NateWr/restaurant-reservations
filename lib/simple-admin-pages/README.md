@@ -16,6 +16,7 @@ Settings API into reuseable classes and implements a set of simple controls.
 
 - Text field
 - Textarea field
+- Image field
 - Toggle (checkbox to enable/disable setting)
 - Select dropdown with custom options
 - Select dropdown of any post type
@@ -38,7 +39,7 @@ Here's an example of how you can use this library to create an admin page.
 	require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 	$sap = sap_initialize_library(
 		array(
-			'version'		=> '2.0', // Version of the library
+			'version'		=> '2.1.2', // Version of the library
 			'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 		)
 	);
@@ -127,7 +128,7 @@ The lib_url is used to print stylesheets or scripts attached to the library.
 require_once( 'path/to/simple-admin-pages/simple-admin-pages.php' );
 $sap = sap_initialize_library(
 	$args = array(
-		'version'		=> '2.0', // Version of the library
+		'version'		=> '2.1.2', // Version of the library
 		'lib_url'		=> PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 	)
 );
@@ -367,6 +368,20 @@ $all_page_settings[ $my_setting_id ];
 ```
 
 ## Changelog
+
+- 2.1.2 - 2019-03-18
+	- Update pickadate.js to 3.6.1 to fix regression in Chromium
+		https://github.com/amsul/pickadate.js/issues/1138
+
+- 2.1.1 - 2018-09-26
+	- Allow address geolookup field to receive a Google Maps API key
+	- Use https when requesting google maps lookup
+
+- 2.1 - 2017-04-21
+	- Add an Image setting type
+
+- 2.0.1 - 2017-03-14
+	- Allow settings to receive $args passed to add_settings_field
 
 - 2.0 - 2015-10-28
 	- Allow page capability to be modified after the page class is instantiated

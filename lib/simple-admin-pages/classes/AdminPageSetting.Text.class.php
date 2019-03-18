@@ -7,7 +7,7 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingText_2_0 extends sapAdminPageSetting_2_0 {
+class sapAdminPageSettingText_2_1_2 extends sapAdminPageSetting_2_1_2 {
 
 	public $sanitize_callback = 'sanitize_text_field';
 
@@ -27,9 +27,9 @@ class sapAdminPageSettingText_2_0 extends sapAdminPageSetting_2_0 {
 		<input name="<?php echo $this->get_input_name(); ?>" type="text" id="<?php echo $this->get_input_name(); ?>" value="<?php echo $this->value; ?>"<?php echo !empty( $this->placeholder ) ? ' placeholder="' . esc_attr( $this->placeholder ) . '"' : ''; ?> class="regular-text" />
 
 		<?php
-		
+
 		$this->display_description();
-		
+
 	}
 
 }

@@ -8,10 +8,10 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSubmenu_2_0 extends sapAdminPage_2_0 {
-	
+class sapAdminPageSubmenu_2_1_2 extends sapAdminPage_2_1_2 {
+
 	public $setup_function = 'add_submenu_page'; // WP function to register the page
-	
+
 	public $parent_menu = null; // Which menu to attach this submenu page to
 
 	/**
@@ -19,19 +19,19 @@ class sapAdminPageSubmenu_2_0 extends sapAdminPage_2_0 {
 	 * @since 1.0
 	 */
 	public function add_admin_menu() {
-		
+
 		// Don't register if no parent menu is specified
 		if ( !$this->parent_menu ) {
 			return;
 		}
-		
-		call_user_func( 
-			$this->setup_function, 
-			$this->parent_menu, 
+
+		call_user_func(
+			$this->setup_function,
+			$this->parent_menu,
 			$this->title,
-			$this->menu_title, 
-			$this->capability, 
-			$this->id, 
+			$this->menu_title,
+			$this->capability,
+			$this->id,
 			array( $this, 'display_admin_menu' )
 		);
 	}

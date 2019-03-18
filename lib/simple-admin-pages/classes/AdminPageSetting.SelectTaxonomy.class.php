@@ -19,16 +19,16 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingSelectTaxonomy_2_0 extends sapAdminPageSetting_2_0 {
+class sapAdminPageSettingSelectTaxonomy_2_1_2 extends sapAdminPageSetting_2_1_2 {
 
 	public $sanitize_callback = 'intval';
-	
+
 	// Whether or not to display a blank option
 	public $blank_option = true;
 
 	// Arrays of taxonomies to fetch (required)
 	public $taxonomies;
-	
+
 	/**
 	 * Array of options accepted by get_terms()
 	 * See: http://codex.wordpress.org/Function_Reference/get_terms
@@ -42,19 +42,19 @@ class sapAdminPageSettingSelectTaxonomy_2_0 extends sapAdminPageSetting_2_0 {
 	public function display_setting() {
 
 		$terms = get_terms( $this->taxonomies, $this->args );
-		
+
 		?>
 
 			<select name="<?php echo $this->get_input_name(); ?>" id="<?php echo $this->get_input_name(); ?>">
-			
+
 				<?php if ( $this->blank_option === true ) : ?>
 					<option></option>
 				<?php endif; ?>
-				
+
 				<?php foreach ( $terms as $term  ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"<?php if( $this->value == $term->term_id ) : ?> selected="selected"<?php endif; ?>><?php echo esc_html( $term->name ); ?></option>
 				<?php endforeach; ?>
-				
+
 			</select>
 
 		<?php

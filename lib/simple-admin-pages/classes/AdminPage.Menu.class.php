@@ -8,8 +8,8 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageMenu_2_0 extends sapAdminPage_2_0 {
-	
+class sapAdminPageMenu_2_1_2 extends sapAdminPage_2_1_2 {
+
 	public $setup_function = 'add_menu_page'; // WP function to register the page
 
 	/**
@@ -17,13 +17,13 @@ class sapAdminPageMenu_2_0 extends sapAdminPage_2_0 {
 	 * @since 1.0
 	 */
 	public function add_admin_menu() {
-		
-		call_user_func( 
-			$this->setup_function, 
+
+		call_user_func(
+			$this->setup_function,
 			$this->title,
-			$this->menu_title, 
-			$this->capability, 
-			$this->id, 
+			$this->menu_title,
+			$this->capability,
+			$this->id,
 			array( $this, 'display_admin_menu' ),
 			$this->icon,
 			$this->position

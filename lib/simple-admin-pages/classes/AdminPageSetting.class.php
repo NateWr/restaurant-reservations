@@ -9,19 +9,26 @@
  *		'id'			=> 'setting_id', 	// Unique id
  *		'title'			=> 'My Setting', 	// Title or label for the setting
  *		'description'	=> 'Description' 	// Help text description
+ * 		'args'			=> array();			// Arguments to pass to WordPress's add_settings_field() function
  * );
  *
  * @since 1.0
  * @package Simple Admin Pages
  */
 
-abstract class sapAdminPageSetting_2_0 {
+abstract class sapAdminPageSetting_2_1_2 {
 
 	// Page defaults
 	public $id; // used in form fields and database to track and store setting
 	public $title; // setting label
 	public $description; // optional description of the setting
 	public $value; // value of the setting, if a value exists
+
+	/**
+	 * An array of arguments accepted by add_settings_field.
+	 * See: https://codex.wordpress.org/Function_Reference/add_settings_field
+	 */
+	public $args = array();
 
 	// Array to store errors
 	public $errors = array();
@@ -54,7 +61,7 @@ abstract class sapAdminPageSetting_2_0 {
 	 * @since 1.0
 	 */
 	public $sanitize_callback = 'sanitize_text_field';
-	
+
 	/**
 	 * Scripts that must be loaded for this component
 	 * @since 2.0.a.4
@@ -72,7 +79,7 @@ abstract class sapAdminPageSetting_2_0 {
 		),
 		 */
 	);
-	
+
 	/**
 	 * Styles that must be loaded for this component
 	 * @since 2.0.a.4
@@ -97,7 +104,7 @@ abstract class sapAdminPageSetting_2_0 {
 	 * Settings classes which require translateable strings should be
 	 * defined with string id's pointing to null values. The actual
 	 * strings should be passed with the $sap->add_setting() call.
-	 * 
+	 *
 	 * @since 2.0.a.8
 	 */
 	public $strings = array(
@@ -274,7 +281,8 @@ abstract class sapAdminPageSetting_2_0 {
 			$this->title,
 			array( $this, 'display_setting' ),
 			$this->tab,
-			$section_id
+			$section_id,
+			$this->args
 		);
 
 	}

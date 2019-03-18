@@ -1,5 +1,5 @@
 <?php
-if ( !class_exists( 'sapLibrary_2_0' ) ) {
+if ( !class_exists( 'sapLibrary_2_1_2' ) ) {
 /**
  * This library class loads and provides access to the correct version of the
  * Simple Admin Pages library.
@@ -7,10 +7,10 @@ if ( !class_exists( 'sapLibrary_2_0' ) ) {
  * @since 1.0
  * @package Simple Admin Pages
  */
-class sapLibrary_2_0 {
+class sapLibrary_2_1_2 {
 
 	// Version of the library
-	private $version = '2.0';
+	private $version = '2.1.2';
 
 	// A full URL to the library which is used to correctly link scripts and
 	// stylesheets.
@@ -136,6 +136,10 @@ class sapLibrary_2_0 {
 			case 'toggle' :
 				require_once('AdminPageSetting.Toggle.class.php');
 				return $this->get_versioned_classname( 'sapAdminPageSettingToggle' );
+
+			case 'image' :
+				require_once('AdminPageSetting.Image.class.php');
+				return $this->get_versioned_classname( 'sapAdminPageSettingImage' );
 
 			case 'post' :
 				require_once('AdminPageSetting.SelectPost.class.php');
@@ -389,6 +393,7 @@ class sapLibrary_2_0 {
 			// Only enqueue assets for the current page
 			if ( strpos( $screen->base, $page_id ) !== false ) {
 				wp_enqueue_style( 'sap-admin-style-' . $this->version, $this->lib_url . 'css/admin.css' );
+				wp_enqueue_media();
 
 				foreach ( $page->sections as $section ) {
 					foreach ( $section->settings as $setting ) {
