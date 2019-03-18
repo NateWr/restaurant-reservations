@@ -1,12 +1,12 @@
 # Restaurant Reservations
-Contributors: NateWr  
-Author URI: https://github.com/NateWr  
-Plugin URL: https://themeofthecrop.com  
-Requires at Least: 4.4  
-Tested Up To: 5.0
-Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation  
-Stable tag: 1.8.1
-License: GPLv2 or later  
+Contributors: NateWr
+Author URI: https://github.com/NateWr
+Plugin URL: https://themeofthecrop.com
+Requires at Least: 4.4
+Tested Up To: 5.1
+Tags: restaurant, reservations, bookings, table bookings, restaurant reservation, table reservation
+Stable tag: 1.8.2
+License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
 Accept restaurant reservations and table bookings online. Quickly confirm or reject bookings, send email notifications, set booking times and more.
@@ -118,6 +118,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 12. Access a short guide from your Plugins list to help you get started quickly.
 
 ## Changelog
+
+#### 1.8.2 (2019-03-18)
+- Fix: Date and time picker in latest Chromium version
 
 #### 1.8.1 (2018-12-12)
 - Fix: Booking form block loads without correct location in editor
@@ -362,6 +365,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 * Initial release
 
 ## Upgrade Notice
+
+#### 1.8.2
+This update fixes an issue with the date and time pickers that occurs with the latest version of the Chrome browser.
 
 #### 1.8.1
 This update fixes a bug in the booking form block where the location would not be reloaded correctly after saving.
